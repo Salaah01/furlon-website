@@ -31,9 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # 'stores.contrib.StoresConfig',
-    # 'accounts.contrib.AccountsConfig',
-    # 'products.contrib.ProductsConfig',
+    'stores.apps.StoresConfig',
+    'accounts.apps.AccountsConfig',
+    'products.apps.ProductsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -124,8 +124,8 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATICFILES_DIRS [
-    pos.path.join(BASE_DIR, 'furlon/static'),
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'furlon/static'),
 ]
 
 # Media Folder Settings
