@@ -1,10 +1,40 @@
-from django.db import models
+"""
+=======================================================================================================================
+Date Created:   16/09/2019
+Created By:     Salaah Amin
+Last Update:   17/09/2019
+=======================================================================================================================
+SCRIPT FUNCTION
+
+Script manages the database structure for the databases mentioned below.
+Models primarily include that which involve products which are sold on Furlon.
+=======================================================================================================================
+"""
+
+# IMPORTS
+# Python Core Library
 from datetime import datetime
+
+# Third Party Imports
+from django.db import models
+
+# Local Imports
 from stores.models import Stores
 from django.contrib.auth.models import User
 
 
 class Colours(models.Model):
+    """
+    PURPOSE:
+    Contains the name and hex code of each available colour.
+
+    DEPENDENCIES:
+    None
+
+    TABLES DEPENDENT ON MODEL:
+    - products_products: colour
+    """
+
     name = models.CharField(max_length=50, unique=True)
     hex_val = models.CharField(max_length=9)
 
@@ -13,6 +43,17 @@ class Colours(models.Model):
 
 
 class Rooms(models.Model):
+    """
+    PURPOSE:
+    Contains the name of each available room.
+
+    DEPENDENCIES:
+    None
+
+    TABLES DEPENDENT ON MODEL:
+    - products_products: room
+    """
+
     name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
@@ -20,6 +61,17 @@ class Rooms(models.Model):
 
 
 class Categories(models.Model):
+    """
+    PURPOSE:
+    Contains the name of each available category.
+
+    DEPENDENCIES:
+    None
+
+    TABLES DEPENDENT ON MODEL:
+    - products_products: category
+    """
+
     cat_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128)
 
@@ -28,6 +80,17 @@ class Categories(models.Model):
 
 
 class Features(models.Model):
+    """
+    PURPOSE:
+    Contains the name of each available product feature.
+
+    DEPENDENCIES:
+    None
+
+    TABLES DEPENDENT ON MODEL:
+    - products_products: features
+    """
+
     feature_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, unique=True)
 
@@ -36,15 +99,32 @@ class Features(models.Model):
 
 
 """
-The Following are shown as CharFields where their relationship is actually one-to-many as defined:
-features: Features
-related: Products
-variations_with_alt_colours: Products
-variations_with_alt_sizes: Products
+
 """
 class Products(models.Model):
+    """
+    PURPOSE:
+    Table contains each product whether or not they are available.
+
+    DEPENDENCIES:
+    - stores_stores: store
+    - products_categories: category
+    - products_colours: colours
+    - products_rooms: room
+
+    DEPENDENCY WITHOUT RELATIONSHIP:
+    The Following are shown as CharFields where their relationship is actually one-to-many
+    - products_features: features
+    - products_products: related
+    - products_products: variations_with_alt_colours
+    - products_products: variations_with_alt_sizes
+
+    TABLES DEPENDENT ON MODEL:
+    - products_productreviews: product
+    """
+
     product_id = models.BigAutoField(primary_key=True)
-    store_id = models.ForeignKey(Stores, on_delete = models.CASCADE)
+    store = models.ForeignKey(Stores, on_delete = models.CASCADE)
     name = models.CharField(max_length=50)
     room = models.ForeignKey(Rooms, on_delete=models.DO_NOTHING)
     category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING)
@@ -77,9 +157,22 @@ class Products(models.Model):
 
 
 class ProductReviews(models.Model):
-    product_id = models.ForeignKey(Products, on_delete=models.CASCADE)
-    store_id = models.ForeignKey(Stores, on_delete=models.CASCADE)
-    user = models.CharField(max_length=50, blank=True)
+    """
+    PURPOSE:
+    Table contains the product reviews.
+
+    DEPENDENCIES:
+    - products_products: product
+    - stores_stores: store
+    - auth_users: user
+
+    TABLES DEPENDENT ON MODEL:
+    - None
+    """
+
+    product = models.ForeignKey(Products, on_delete=models.CASCADE)
+    store = models.ForeignKey(Stores, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     rating = models.FloatField()
     comments = models.CharField(max_length=2048, blank=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
