@@ -7,7 +7,7 @@ Last Update:   17/09/2019
 SCRIPT FUNCTION
 
 Script manages the database structure for the databases mentioned below.
-Models primarily include that which involve products which are sold on Furlon.
+Models primarily date on the products sold on Furlon.
 =======================================================================================================================
 """
 
@@ -137,13 +137,13 @@ class Products(models.Model):
     related = models.CharField(max_length=100, blank=True)
     variations_with_alt_colours = models.CharField(max_length=100, blank=True)
     variations_with_alt_sizes = models.CharField(max_length=100, blank=True)
-    showcase_image = models.ImageField(upload_to=f'{store_id}/{product_id}/')
-    image_1 = models.ImageField(upload_to=f'{store_id}/{product_id}/', blank=True)
-    image_2 = models.ImageField(upload_to=f'{store_id}/{product_id}/', blank=True)
-    image_3 = models.ImageField(upload_to=f'{store_id}/{product_id}/', blank=True)
-    image_4 = models.ImageField(upload_to=f'{store_id}/{product_id}/', blank=True)
-    image_5 = models.ImageField(upload_to=f'{store_id}/{product_id}/', blank=True)
-    image_6 = models.ImageField(upload_to=f'{store_id}/{product_id}/', blank=True)
+    showcase_image = models.ImageField(upload_to=f'{store}/{product_id}/')
+    image_1 = models.ImageField(upload_to=f'{store}/{product_id}/', blank=True)
+    image_2 = models.ImageField(upload_to=f'{store}/{product_id}/', blank=True)
+    image_3 = models.ImageField(upload_to=f'{store}/{product_id}/', blank=True)
+    image_4 = models.ImageField(upload_to=f'{store}/{product_id}/', blank=True)
+    image_5 = models.ImageField(upload_to=f'{store}/{product_id}/', blank=True)
+    image_6 = models.ImageField(upload_to=f'{store}/{product_id}/', blank=True)
     description = models.CharField(max_length=2048, default='', blank=True)
     price = models.FloatField()
     rating = models.FloatField(blank=True)

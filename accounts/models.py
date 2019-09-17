@@ -66,7 +66,7 @@ class StoreUsers(models.Model):
 
 
 class CustomerDetails(models.Model):
-     """
+    """
     PURPOSE:
     An extension of the Django user's table which includes additional information on customers who have signed up.
     
