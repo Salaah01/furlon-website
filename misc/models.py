@@ -33,8 +33,8 @@ class Countries(models.Model):
     - stores_stores: country_code
     """
 
-    country_code = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128, unique=True)
+    country_code = models.CharField(max_length=3, primary_key=True, unique=True)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
