@@ -14,4 +14,8 @@ index:      /
 
 from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    """ Loads the Index Page """
+    context = {}
+    return render(request, 'pages/index.html', context)
