@@ -150,6 +150,8 @@ class Products(models.Model):
     upload_date = models.DateTimeField(default=datetime.now, blank=True)
     last_purchase_date = models.DateTimeField(blank=True)
     inventory = models.IntegerField()
+    delivery_available = models.BooleanField()
+    delivery_price = models.FloatField(blank=True)
     status = models.CharField(max_length=10, default='Active')
 
     def __str__(self):
