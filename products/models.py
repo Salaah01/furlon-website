@@ -2,7 +2,7 @@
 =======================================================================================================================
 Date Created:   16/09/2019
 Created By:     Salaah Amin
-Last Update:   17/09/2019
+Last Update:    17/09/2019
 =======================================================================================================================
 SCRIPT FUNCTION
 
@@ -112,7 +112,7 @@ class Products(models.Model):
     - products_colours: colours
     - products_rooms: room
 
-    DEPENDENCY WITHOUT RELATIONSHIP:
+    DEPENDENCIES WITHOUT EXPLICIT RELATIONSHIP FIELD:
     The Following are shown as CharFields where their relationship is actually one-to-many
     - products_features: features
     - products_products: related
