@@ -37,6 +37,9 @@ class ColourFamilies(models.Model):
     """
     name = models.CharField(max_length=50, unique=True, primary_key=True)
 
+    def __str__(self):
+        return self.name
+
 
 class Colours(models.Model):
     """
@@ -90,6 +93,7 @@ class Categories(models.Model):
 
     cat_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=128, unique=True)
+    valid_features = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
