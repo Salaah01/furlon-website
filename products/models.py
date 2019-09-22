@@ -89,6 +89,7 @@ class Categories(models.Model):
 
     TABLES DEPENDENT ON MODEL:
     - products_products: category
+    - products_features: category
     """
 
     cat_id = models.AutoField(primary_key=True)
@@ -128,7 +129,8 @@ class Features(models.Model):
     """
 
     feature_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
