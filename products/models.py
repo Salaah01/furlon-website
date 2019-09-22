@@ -151,6 +151,7 @@ class Products(models.Model):
     - products_products: related
     - products_products: variations_with_alt_colours
     - products_products: variations_with_alt_sizes
+    - products_subcategories: subcategories
 
     TABLES DEPENDENT ON MODEL:
     - products_productreviews: product
@@ -161,6 +162,7 @@ class Products(models.Model):
     name = models.CharField(max_length=50)
     room = models.ForeignKey(Rooms, on_delete=models.DO_NOTHING)
     category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING)
+    sub_categories = models.CharField(max_length=128, blank=True)
     colour = models.ForeignKey(Colours, on_delete=models.DO_NOTHING)
     height = models.FloatField(blank=True)
     length = models.FloatField(blank=True)
