@@ -85,14 +85,14 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',
-        'NAME': 'furlon',
+        'NAME': 'furlon_dummy',
     },
 
-    'backup' : {
+    'main' : {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',
-        'NAME': 'furlon_backup',
+        'NAME': 'furlon',
     }
 }
 

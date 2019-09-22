@@ -23,18 +23,34 @@ from stores.models import Stores
 from django.contrib.auth.models import User
 
 
+class ColourFamilies(models.Model):
+    """
+    PURPOSE:
+    Contains the top level/family name for each colour in the Colours table.
+    This will allow users to filter colours.
+
+    DEPENDENCIES:
+    None
+
+    TABLES DEPENDENT ON MODEL:
+    products_colours: family
+    """
+    name = models.CharField(max_length=50, unique=True)
+
+
 class Colours(models.Model):
     """
     PURPOSE:
     Contains the name and hex code of each available colour.
 
     DEPENDENCIES:
-    None
+    - ColourFamilies: family
 
     TABLES DEPENDENT ON MODEL:
     - products_products: colour
     """
 
+    family = models.ForeignKey(ColourFamilies, on_delete=models.DO_NOTHING)
     name = models.CharField(max_length=50, unique=True)
     hex_val = models.CharField(max_length=9)
 
@@ -73,7 +89,7 @@ class Categories(models.Model):
     """
 
     cat_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, unique=True)
 
     def __str__(self):
         return self.name
@@ -98,9 +114,6 @@ class Features(models.Model):
         return self.name
 
 
-"""
-
-"""
 class Products(models.Model):
     """
     PURPOSE:
