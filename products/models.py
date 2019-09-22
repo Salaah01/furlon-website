@@ -99,7 +99,7 @@ class Categories(models.Model):
         return self.name
 
 
-class SubCateogires(models.Model):
+class SubCategories(models.Model):
     """
     PURPOSE:
     Table contains sub-categories for further refinement of search.
