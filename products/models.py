@@ -35,7 +35,7 @@ class ColourFamilies(models.Model):
     TABLES DEPENDENT ON MODEL:
     products_colours: family
     """
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=True, primary_key=True)
 
 
 class Colours(models.Model):
