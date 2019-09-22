@@ -51,7 +51,7 @@ class Stores(models.Model):
     rating = models.FloatField(blank=True)
     longitude = models.FloatField(blank=True)
     latitude = models.FloatField(blank=True)
-    nax_delivery_distance = models.CharField(max_length=64, default='5')
+    max_delivery_distance = models.CharField(max_length=64, default='5')
     std_delivery_price = models.FloatField(default=0.00)
     description = models.CharField(max_length=2048, blank=True)
     established = models.DateField(blank=True)
