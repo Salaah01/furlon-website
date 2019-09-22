@@ -99,6 +99,22 @@ class Categories(models.Model):
         return self.name
 
 
+class SubCateogires(models.Model):
+    """
+    PURPOSE:
+    Table contains sub-categories for further refinement of search.
+
+    DEPENDENCIES:
+    product_categories: category
+
+    TABLES DEPENDENT ON MODEL:
+    products_products: sub_category
+    """
+
+    name = models.CharField(max_length=50)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+
+
 class Features(models.Model):
     """
     PURPOSE:
