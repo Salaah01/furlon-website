@@ -46,11 +46,11 @@ class Colours(models.Model):
     DEPENDENCIES:
     - ColourFamilies: family
 
-    TABLES DEPENDENT ON MODEL:
+    DEPENDENCIES WITHOUT EXPLICIT RELATIONSHIP FIELD:
     - products_products: colour
     """
 
-    family = models.ForeignKey(ColourFamilies, on_delete=models.DO_NOTHING)
+    col_families = models.CharField(max_length=50)
     name = models.CharField(max_length=50, unique=True)
     hex_val = models.CharField(max_length=9)
 
