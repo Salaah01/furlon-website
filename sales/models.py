@@ -76,6 +76,12 @@ class Invoices(models.Model):
     vat = models.FloatField()
     grand_total = models.FloatField()
 
+    def __str__(self):
+        return self.invoice_id
+
+    class Meta:
+        verbose_name_plural = "Invoices"
+
 
 class Sales(models.Model):
     """
@@ -104,3 +110,9 @@ class Sales(models.Model):
     exVat = models.FloatField(default=0)
     vat = models.FloatField(default=0)
     total = models.FloatField(default=0)
+
+    def __str__(self):
+        return sale_id
+
+    class Meta:
+        verbose_name_plural = "Sales"

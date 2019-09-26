@@ -48,7 +48,7 @@ class Stores(models.Model):
     telephone = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
     website = models.URLField(blank=True)
-    rating = models.FloatField(blank=True, default=0),
+    rating = models.FloatField(blank=True, default=0.00)
     ratings = models.IntegerField(default=0)
     longitude = models.FloatField(blank=True)
     latitude = models.FloatField(blank=True)
@@ -62,6 +62,9 @@ class Stores(models.Model):
 
     def __str__(self):
         return self.name + " " + self.address_line_1
+
+    class Meta:
+        verbose_name_plural = "Stores"
 
 
 class Deliveries(models.Model):
@@ -84,6 +87,12 @@ class Deliveries(models.Model):
     max_total = models.FloatField()
     price = models.FloatField()
 
+    def __str__(self):
+        return f"{store}: {label}"
+
+    class Meta:
+        verbose_name_plural = "Deliveries"
+
 
 class StoreReviews(models.Model):
     """
@@ -103,3 +112,9 @@ class StoreReviews(models.Model):
     rating = models.FloatField()
     comments = models.CharField(max_length=2048, blank=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return f"{store}: {rating}, {review_date}"
+    
+    class Meta:
+        verbose_name_plural = "Store Reviews"

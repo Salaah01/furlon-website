@@ -9,7 +9,7 @@ SCRIPT FUNCTION
 Script manages the database structure for the databases mentioned below.
 Models include an extension of Django's user table.
 Models primarily include that which involve store user and customer details where
-the user table has been extended to include additional date,
+the user table has been extended to include additional date.
 =======================================================================================================================
 """
 
@@ -42,6 +42,9 @@ class StoreRights(models.Model):
     def __str__(self):
         return self.rights
 
+    class Meta:
+        verbose_name_plural = "Store Rights"
+
 
 class StoreUsers(models.Model):
     """
@@ -64,6 +67,8 @@ class StoreUsers(models.Model):
     rights = models.ForeignKey(StoreRights, on_delete=models.DO_NOTHING)
     status = models.CharField(max_length=20, default='Active')
 
+    class Meta:
+        verbose_name_plural = "Store Users"
 
 class CustomerDetails(models.Model):
     """
@@ -89,3 +94,6 @@ class CustomerDetails(models.Model):
     status = models.CharField(max_length=20, default='Active')
     verified = models.BooleanField(default=False)
     opt_in = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Customer Details"

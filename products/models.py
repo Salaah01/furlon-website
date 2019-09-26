@@ -40,6 +40,9 @@ class ColourFamilies(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Colour Families"
+
 
 class Colours(models.Model):
     """
@@ -58,7 +61,10 @@ class Colours(models.Model):
     hex_val = models.CharField(max_length=9)
 
     def __str__(self):
-        return self.name + ' ' + self.hex_
+        return self.name + ' ' + self.hex_val
+
+    class Meta:
+        verbose_name_plural = "Colours"
 
 
 class Rooms(models.Model):
@@ -77,6 +83,9 @@ class Rooms(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Rooms"
 
 
 class Categories(models.Model):
@@ -98,6 +107,9 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name_plural = "Categories"
+
 
 class SubCategories(models.Model):
     """
@@ -113,6 +125,9 @@ class SubCategories(models.Model):
 
     name = models.CharField(max_length=50)
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "Sub Categories"
 
 
 class Features(models.Model):
@@ -133,6 +148,9 @@ class Features(models.Model):
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        verbose_name_plural = "Features"
 
 
 class Products(models.Model):
@@ -193,6 +211,9 @@ class Products(models.Model):
     def __str__(self):
         return self.name + " " + self.price
 
+    class Meta:
+        verbose_name_plural = "Products"
+
 
 class RelatedProductVars(models.Model):
     """
@@ -217,6 +238,9 @@ class RelatedProductVars(models.Model):
     def __str__(self):
         return self.product
 
+    class Meta:
+        verbose_name_plural = "Related Product Variations"
+
 
 class ProductColourVars(models.Model):
     """
@@ -240,6 +264,9 @@ class ProductColourVars(models.Model):
     def __str__(self):
         return self.product
 
+    class Meta:
+        verbose_name_plural = "Related Colour Variations"
+
 
 class ProductReviews(models.Model):
     """
@@ -261,3 +288,6 @@ class ProductReviews(models.Model):
     rating = models.FloatField()
     comments = models.CharField(max_length=2048, blank=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Product Reviews"
