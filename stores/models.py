@@ -48,7 +48,8 @@ class Stores(models.Model):
     telephone = models.CharField(max_length=20, blank=True)
     email = models.EmailField(blank=True)
     website = models.URLField(blank=True)
-    rating = models.FloatField(blank=True)
+    rating = models.FloatField(blank=True, default=0),
+    ratings = models.IntegerField(default=0)
     longitude = models.FloatField(blank=True)
     latitude = models.FloatField(blank=True)
     max_delivery_distance = models.CharField(max_length=64, default='5')
