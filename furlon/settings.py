@@ -93,6 +93,13 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',
         'NAME': 'furlon',
+    },
+
+    'test': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'Rasel121ne',
+        'NAME': 'furlon',
     }
 }
 
