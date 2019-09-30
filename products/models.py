@@ -180,7 +180,7 @@ class Products(models.Model):
     product_id = models.BigAutoField(primary_key=True)
     store = models.ForeignKey(Stores, on_delete = models.CASCADE)
     name = models.CharField(max_length=50)
-    main_color = models.BooleanField(default=True)
+    main_colour = models.BooleanField(default=True)
     room = models.ForeignKey(Rooms, on_delete=models.DO_NOTHING)
     category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING)
     sub_categories = models.CharField(max_length=128, blank=True)
