@@ -58,7 +58,7 @@ class Colours(models.Model):
 
     col_families = models.CharField(max_length=50)
     name = models.CharField(max_length=50, unique=True)
-    hex_val = models.CharField(max_length=9)
+    hex_val = models.CharField(max_length=7)
 
     def __str__(self):
         return self.name + ' ' + self.hex_val
