@@ -58,7 +58,7 @@ class Colours(models.Model):
 
     col_families = models.CharField(max_length=50)
     name = models.CharField(max_length=50, unique=True)
-    hex_val = models.CharField(max_length=7)
+    hex_val = models.CharField(max_length=7, unique=True)
 
     def __str__(self):
         return self.name + ' ' + self.hex_val
@@ -165,7 +165,8 @@ class Products(models.Model):
     - products_rooms: room
 
     DEPENDENCIES WITHOUT EXPLICIT RELATIONSHIP FIELD:
-    The Following are shown as CharFields where their relationship is actually one-to-many
+    The Following are shown as CharFields where their relationship is actually
+    one-to-many
     - products_features: features
     - products_subcategories: subcategories
 
@@ -178,7 +179,7 @@ class Products(models.Model):
     """
 
     product_id = models.BigAutoField(primary_key=True)
-    store = models.ForeignKey(Stores, on_delete = models.CASCADE)
+    store = models.ForeignKey(Stores, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
     main_colour = models.BooleanField(default=True)
     room = models.ForeignKey(Rooms, on_delete=models.DO_NOTHING)
@@ -191,17 +192,21 @@ class Products(models.Model):
     weight = models.FloatField(blank=True, null=True)
     features = models.CharField(max_length=100, blank=True)
     related = models.CharField(max_length=100, blank=True)
-    showcase_image = models.ImageField(upload_to= 'products/')
-    image_1 = models.ImageField(upload_to= 'products/', blank=True, null=True)
-    image_2 = models.ImageField(upload_to= 'products/', blank=True, null=True)
-    image_3 = models.ImageField(upload_to= 'products/', blank=True, null=True)
-    image_4 = models.ImageField(upload_to= 'products/', blank=True, null=True)
-    image_5 = models.ImageField(upload_to= 'products/', blank=True, null=True)
-    image_6 = models.ImageField(upload_to= 'products/', blank=True, null=True)
+    showcase_image = models.ImageField(upload_to='products/')
+    image_1 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_2 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_3 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_4 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_5 = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_6 = models.ImageField(upload_to='products/', blank=True, null=True)
     description = models.CharField(max_length=2048, default='', blank=True)
     price = models.FloatField()
     rating = models.FloatField(blank=True, null=True)
-    upload_date = models.DateTimeField(default=datetime.now, blank=True, null=True)
+    upload_date = models.DateTimeField(
+        default=datetime.now,
+        blank=True,
+        null=True
+        )
     last_purchase_date = models.DateTimeField(blank=True, null=True)
     inventory = models.IntegerField()
     delivery_available = models.BooleanField()
@@ -219,9 +224,11 @@ class RelatedProductVars(models.Model):
     """
     PURPOSE:
     Table contains related products.
-    In the main products table (product_products) can have various other items to it.
+    In the main products table (product_products) can have various other items
+    to it.
     This table will allow a related items be produced for each product.
-    For each item which has a related item will have a seperate row for that related item.
+    For each item which has a related item will have a seperate row for that
+    related item.
     This will act as an one-to-many relationship.
 
     DEPENDENCIES:
@@ -232,8 +239,16 @@ class RelatedProductVars(models.Model):
     - None
     """
 
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='main_item')
-    linked = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='related_product')
+    product = models.ForeignKey(
+        Products,
+        on_delete=models.CASCADE,
+        related_name='main_item'
+        )
+    linked = models.ForeignKey(
+        Products,
+        on_delete=models.CASCADE,
+        related_name='related_product'
+        )
 
     def __str__(self):
         return self.product
@@ -245,8 +260,10 @@ class RelatedProductVars(models.Model):
 class ProductColourVars(models.Model):
     """
     PURPOSE:
-    Table contains products linked to other products which are the same but of a different colour.
-    This table will allow the user to select different colours at the front end.
+    Table contains products linked to other products which are the same but of
+    a different colour.
+    This table will allow the user to select different colours at the
+    front end.
     This will act as an one-to-many relationship.
 
     DEPENDENCIES:
@@ -257,9 +274,16 @@ class ProductColourVars(models.Model):
     - None
     """
 
-    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='main_col_prod')
-    linked = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='related_colour_prod')
-
+    product = models.ForeignKey(
+        Products,
+        on_delete=models.CASCADE,
+        related_name='main_col_prod'
+        )
+    linked = models.ForeignKey(
+        Products,
+        on_delete=models.CASCADE,
+        related_name='related_colour_prod'
+        )
 
     def __str__(self):
         return self.product
@@ -289,5 +313,6 @@ class ProductReviews(models.Model):
     comments = models.CharField(max_length=2048, blank=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
 
+# --------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Product Reviews"

@@ -23,6 +23,7 @@ from django.contrib.auth.models import User
 from misc.models import Countries, Cities
 
 
+###############################################################################
 class Stores(models.Model):
     """
     PURPOSE:
@@ -60,13 +61,16 @@ class Stores(models.Model):
     last_activity = models.DateTimeField(blank=True)
     status = models.CharField(max_length=16, default='Active')
 
+# --------------------------------------------------------------------------- #
     def __str__(self):
         return self.name + " " + self.address_line_1
 
+# --------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Stores"
 
 
+###############################################################################
 class Deliveries(models.Model):
     """
     PURPOSE:
@@ -87,13 +91,16 @@ class Deliveries(models.Model):
     max_total = models.FloatField()
     price = models.FloatField()
 
+# --------------------------------------------------------------------------- #
     def __str__(self):
         return f"{store}: {label}"
 
+# --------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Deliveries"
 
 
+###############################################################################
 class StoreReviews(models.Model):
     """
     PURPOSE:
@@ -106,15 +113,17 @@ class StoreReviews(models.Model):
     TABLES DEPENDENT ON MODEL:
     None
     """
-    
+
     store = models.ForeignKey(Stores, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     rating = models.FloatField()
     comments = models.CharField(max_length=2048, blank=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
 
+# --------------------------------------------------------------------------- #
     def __str__(self):
         return f"{store}: {rating}, {review_date}"
-    
+
+# --------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Store Reviews"

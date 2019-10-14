@@ -15,6 +15,7 @@ index:      /
 from django.shortcuts import render
 
 
+# --------------------------------------------------------------------------- #
 def index(request):
     """ Loads the Index Page """
     context = {}

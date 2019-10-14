@@ -88,7 +88,7 @@ DATABASES = {
         'NAME': 'furlon_dummy',
     },
 
-    'main' : {
+    'main': {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',

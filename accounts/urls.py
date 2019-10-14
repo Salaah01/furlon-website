@@ -26,6 +26,3 @@ urlpatterns = [
     path('acount', views.account, name='account'),
     path('help', views.help, name='help'),
 ]
-
-
-

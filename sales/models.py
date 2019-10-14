@@ -25,14 +25,16 @@ from stores.models import Stores
 from products.models import Products
 
 
+###############################################################################
 class Invoices(models.Model):
     """
     PURPOSE:
-    Contains the top level data on invoices. The sales_sales table will contain the breakdown of each item
-    in the invoice.
+    Contains the top level data on invoices. The sales_sales table will
+    contain the breakdown of each item in the invoice.
 
-    This table along with the sales_sales will be used to replicate a dictionary with models_invoices being the key
-    and sales_sales being the items of the dictionary.
+    This table along with the sales_sales will be used to replicate a
+    dictionary with models_invoices being the key and sales_sales being the
+    items of the dictionary.
 
     This table contains the sale_ids for rows of data in sales_sales.
 
@@ -41,18 +43,19 @@ class Invoices(models.Model):
     - misc_cities: cities
 
     DEPENDENCIES WITHOUT EXPLICIT RELATIONSHIP FIELD:
-    The Following are shown as CharFields where their relationship is actually one-to-many
+    The Following are shown as CharFields where their relationship is actually
+    one-to-many
     - products_products: products
-    - user_id: user (This in incase of guest login) 
+    - user_id: user (This in incase of guest login)
 
     TABLES DEPENDENT ON MODEL:
     - models_sales: invoice
     """
-    
+
     invoice_id = models.BigAutoField(primary_key=True)
     sale_IDs = models.CharField(max_length=500)
     order_date = models.DateTimeField(default=datetime.now)
-    
+
     user = models.CharField(max_length=100, default='guest')
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -63,7 +66,7 @@ class Invoices(models.Model):
     country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
     telephone = models.CharField(max_length=20, blank=True)
     email = models.EmailField()
-    
+
     expected_delivery = models.DateField()
     actual_delivery = models.DateTimeField(blank=True)
     delivered = models.BooleanField(default=False)
@@ -83,11 +86,13 @@ class Invoices(models.Model):
         verbose_name_plural = "Invoices"
 
 
+###############################################################################
 class Sales(models.Model):
     """
     PURPOSE:
-    Contains the detailed information on each item on a given invoice. This table works alongside
-    with sales_invoices in a dictionary kind of relationship with sales_invoices containing the keys
+    Contains the detailed information on each item on a given invoice.
+    This table works alongside with sales_invoices in a dictionary kind of
+    relationship with sales_invoices containing the keys
     and this take containing the items.
 
     Contains details for each item sold.
@@ -104,15 +109,17 @@ class Sales(models.Model):
     sale_id = models.BigAutoField(primary_key=True)
     store = models.ForeignKey(Stores, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
-    
+
     delivery = models.FloatField(default=0)
     asembly = models.FloatField(default=0)
     exVat = models.FloatField(default=0)
     vat = models.FloatField(default=0)
     total = models.FloatField(default=0)
 
+# --------------------------------------------------------------------------- #
     def __str__(self):
         return sale_id
 
+# --------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Sales"
