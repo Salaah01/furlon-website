@@ -82,19 +82,17 @@ class FeaturesAdmin(admin.ModelAdmin):
     search_fields = ('name', 'category__name',)
 
 
-###############################################################################
+##################################################################################################################################
 class ProductsAdmin(admin.ModelAdmin):
     """ Registers Products (products_products) table to the admin page """
-    list_display = ('name', 'store', 'price', 'rating', 'room', 'category',
-                    'sub_categories', 'colour', 'inventory', 'status',
+    list_display = ('name', 'store', 'price', 'rating', 'room', 'category', 'sub_categories', 'colour', 'inventory', 'status',
                     'upload_date', 'last_purchase_date',)
     list_display_links = ('name',)
     list_filter = ('category', 'status', 'room',)
-    search_fields = ('name', 'store__name', 'store__postcode',
-                     'room__name', 'category__name',)
+    search_fields = ('name', 'store__name', 'store__postcode', 'room__name', 'category__name',)
 
 
-###############################################################################
+##################################################################################################################################
 class RelatedProductVarsAdmin(admin.ModelAdmin):
     """ Registers Related Product Variations (products_relatedproductvars)
     table to the admin page """
@@ -103,7 +101,7 @@ class RelatedProductVarsAdmin(admin.ModelAdmin):
     search_fields = ('product__name', 'linked__name',)
 
 
-###############################################################################
+##################################################################################################################################
 class ProductColourVarsAdmin(admin.ModelAdmin):
     """ Registers Product Colour Variations (products_productcolourvars) table
     to the admin page """
@@ -112,14 +110,13 @@ class ProductColourVarsAdmin(admin.ModelAdmin):
     search_fields = ('product__name', 'linked__name',)
 
 
-###############################################################################
+##################################################################################################################################
 class ProductReviewsAdmin(admin.ModelAdmin):
     """ Registers Product Reviews (products_productreviews) table
     to the admin page """
     list_display = ('product', 'store', 'user', 'rating', 'review_date')
     list_display_links = ('product', )
-    search_fields = ('product__name', 'store__name', 'store__name',
-                     'user__first_name', 'user__last_name', 'user__email',
+    search_fields = ('product__name', 'store__name', 'store__name', 'user__first_name', 'user__last_name', 'user__email',
                      'user__username',)
 
 
