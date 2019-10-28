@@ -209,7 +209,7 @@ class Products(models.Model):
     width = models.FloatField(blank=True, null=True)
     weight = models.FloatField(blank=True, null=True)
     features = models.CharField(max_length=100, blank=True)
-    related = models.CharField(max_length=100, blank=True)
+    related = models.CharField(max_length=100, blank=True, null=True)
     showcase_image = models.ImageField(upload_to='products/')
     image_1 = models.ImageField(upload_to='products/', blank=True, null=True)
     image_2 = models.ImageField(upload_to='products/', blank=True, null=True)
@@ -219,7 +219,8 @@ class Products(models.Model):
     image_6 = models.ImageField(upload_to='products/', blank=True, null=True)
     description = models.CharField(max_length=2048, default='', blank=True)
     price = models.FloatField()
-    rating = models.FloatField(blank=True, null=True)
+    rating = models.FloatField(default=99)
+    ratings = models.IntegerField(default=0)
     upload_date = models.DateTimeField(
         default=datetime.now,
         blank=True,
@@ -228,7 +229,7 @@ class Products(models.Model):
     last_purchase_date = models.DateTimeField(blank=True, null=True)
     inventory = models.IntegerField()
     delivery_available = models.BooleanField()
-    delivery_price = models.FloatField(blank=True, null=True)
+    delivery_price = models.FloatField(default=-1)
     status = models.CharField(max_length=10, default='Active')
 
     # -------------------------------------------------------------------------------------------------------------------------- #
