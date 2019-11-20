@@ -1,0 +1,78 @@
+// =============================================================================
+// Date Created:   20/11/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// Contains the styling for the navigiation on the page.
+//
+// Navigation has the main div class "nav" with three children classes
+// "nav__section" which represent the left side, middle and right side of the
+// navigation bar.
+//
+// EMMET CODE: nav.nav>nav__section*3
+
+// LHS of the navigation (first .nav__section) contains a tags which are drop
+// downs revealing additional options.
+// 
+// Middle of the navigation is the search bar.
+// 
+// RHS of the navigation is the accounts/basket options.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+.nav {
+    // Navigation top level parent
+    width: 100vw;
+    height: 5rem;
+    background-color: $colour-primary;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    // Represents each of the navigation sections which are split into LHS,
+    // middle and right
+    &__section {
+
+    }
+
+// -----------------------------------------------------------------------------
+    &__option {
+        // The left hand side of the navigation. div.nav__option is a element
+        // which contains a button (button.nav__option__btn) which when pressed
+        // opens a drop down containing additional options to choose from
+        // (div.nav__option__opts) 
+
+        &__btn {
+
+        }
+
+        &__opts {
+
+        }
+    }
+
+// -----------------------------------------------------------------------------
+    &__search {
+        // Search bar
+        &__btn {
+
+        }
+
+        &__icon {
+
+        }
+
+    }
+
+// -----------------------------------------------------------------------------
+    &__icon {
+        // Places on the RHS containing options related to user's account and
+        // basket.
+    }
+
+    &__active {
+        // State when a page related to the navigation is active
+
+    }
+
+
+}
