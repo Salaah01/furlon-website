@@ -4,88 +4,84 @@
     <div class="nav__section" id="nav-left">
         <div class="nav__option">
             <!-- Products Button -->
-            <button class="nav__option__btn">Products</button>
+            <button class="nav__option__btn btn-inline">Products <span class="nav__icon"> <i class="fas fa-chevron-down"></i></span></button>
             <div class="nav__option__dropdown-opts" id='nav-product-opts'>
-                <a href="#" id="nav-wardrobes">Wardrobes</a>
-                <a href="#" id="nav-beds">Beds</a>
-                <a href="#" id="nav-tables">Tables</a>
-                <a href="#" id="nav-sofas">Sofas</a>
-                <a href="#" id="nav-bookcases-and-units">Bookcases and Shelving Units</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-wardrobes">Wardrobes</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-beds">Beds</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-tables">Tables</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-sofas">Sofas</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-bookcases-and-units">Bookcases and Shelving Units</a>
             </div>
         </div>
 
         <!--Rooms Button -->
         <div class="nav__option">
-            <button class="nav__option__btn">Rooms</button>
-            <div class="nav__option__opts" id="nav-room-opts">
-                <a href="#" id="nav-bedroom">Bedroom</a>
-                <a href="#" id="nav-living-room">Living Room</a>
-                <a href="#" id="nav-kitchen">Kitchen</a>
-                <a href="#" id="nav-dining-room">Dining Room</a>
-                <a href="#" id="nav-bathroom">Bathroom</a>
-                <a href="#" id="nav-office">Office</a>
-                <a href="#" id="nav-outdoors">Outdoors</a>
+            <button class="nav__option__btn btn-inline">Rooms <span class="nav__icon"> <i class="fas fa-chevron-down"></i></span></button>
+            <div class="nav__option__dropdown-opts" id="nav-room-opts">
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-bedroom">Bedroom</a>
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-living-room">Living Room</a>
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-kitchen">Kitchen</a>
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-dining-room">Dining Room</a>
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-bathroom">Bathroom</a>
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-office">Office</a>
+                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-outdoors">Outdoors</a>
             </div>
         </div>
     </div>
 
     <!-- Search Bar -->
     <div class="nav__section" id="nav-mid">
-        <div class="nav__search">
-            <form action="#" class="search">
-                {% csrf_token %}
-                <input type="text" placeholder="Search" class="search_input">
-                <button class="search__btn">
-                    <svg class="search__icon">
-                        <use xlink:href="{% static 'img/sprite.svg#icon-magnifying-glass' %}"></use>
-                    </svg>
-                </button>
-            </form>
-        </div>
+        <form action="#" class="nav__search">
+            {% csrf_token %}
+            <input type="text" placeholder="Search" class="nav__search__input">
+            <button class="nav__search__btn"><span class="nav__search__icon"><i class="fas fa-search"></i></span></button>
+        </form>
     </div>
 
     <!-- Account and Basket Options -->
     <div class="nav__section" id="nav-right">
 
-        <!-- Basket -->
-        {% if 'profile' in request.path %}
-            <a href="#" class="nav__icon nav__active" id="nav-basket"> Basket</a>
-        {% else %}
-            <a href="#" class="nav__icon" id="nav-basket"> Basket</a>
-        {% endif %}
-
-        {% if user.is_authenticated %}
-            
-            <!-- Profile -->
+        <div class="nav__account-basket">
+            <!-- Basket -->
             {% if 'profile' in request.path %}
-                <a href="#" class="nav__icon nav__active" id="nav-profile">Welcome {{ user.first_name }} (Profile)</a>    
+                <a href="#" class="nav__account-basket__opt nav__active" id="nav-basket">Basket <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span></a>
             {% else %}
-                <a href="#" class="nav__icon" id="nav-profile">Welcome {{ user.first_name }} (Profile)</a>  
+                <a href="#" class="nav__account-basket__opt" id="nav-basket"> Basket <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span></a>
             {% endif %}
 
-            <!-- Logout -->
-            <a href="javascript:{document.getElementById('logout').submit()}" class="nav__icon" id="nav-logout"> Logout</a>
-            <form action="{% url 'logout' %}" method="POST" id='logout'>
-                {% csrf_token %}
-                <input type="hidden">
-            </form>
+            {% if user.is_authenticated %}
+                
+                <!-- Profile -->
+                {% if 'profile' in request.path %}
+                    <a href="#" class="nav__account-basket__opt nav__active" id="nav-profile">Welcome {{ user.first_name }} <span class="nav__icon"><i class="fas fa-user"></i></span></a>    
+                {% else %}
+                    <a href="#" class="nav__account-basket__opt" id="nav-profile">Welcome {{ user.first_name }} <span class="nav__icon"><i class="fas fa-user"></i></span></a>  
+                {% endif %}
 
-        {% else %}
-            
-            <!-- Register -->
-            {% if 'register' in request.path %}
-                <a href="#" class="nav__icon nav__active" id="nav-register"> Register</a>
-            {% else %}
-                <a href="#" class="nav__icon" id="nav-register"> Register</a>
-            {% endif %}
-            
-            <!-- Login -->
-            {% if 'login' in request.path %}
-                <a href="#" class="nav__icon nav__active" id="nav-login"> Login</a>
-            {% else %}
-                <a href="#" class="nav__icon" id="nav-login"> Login</a>
-            {% endif %}
+                <!-- Logout -->
+                <a href="javascript:{document.getElementById('logout').submit()}" class="nav__icon" id="nav-logout">Logout <span class="nav__icon"><i class="fas fa-sign-out-alt"></i></span></a>
+                <form action="{% url 'logout' %}" method="POST" id='logout'>
+                    {% csrf_token %}
+                    <input type="hidden">
+                </form>
 
-        {% endif %}
+            {% else %}
+                
+                <!-- Register -->
+                {% if 'register' in request.path %}
+                    <a href="#" class="nav__account-basket__opt nav__active" id="nav-register">Register <span class="nav__icon"><i class="fas fa-user-plus"></i></span></a>
+                {% else %}
+                    <a href="#" class="nav__account-basket__opt" id="nav-register">Register <span class="nav__icon"><i class="fas fa-user-plus"></i></span></a>
+                {% endif %}
+                
+                <!-- Login -->
+                {% if 'login' in request.path %}
+                    <a href="#" class="nav__account-basket__opt nav__active" id="nav-login">Login <span class="nav__icon"><i class="fas fa-sign-in-alt"></i></span></a>
+                {% else %}
+                    <a href="#" class="nav__account-basket__opt" id="nav-login">Login <span class="nav__icon"><i class="fas fa-sign-in-alt"></i></span></a>
+                {% endif %}
+
+            {% endif %}
+        </div>
     </div>
 </nav>

@@ -19,42 +19,156 @@
 // =============================================================================
 
 // -----------------------------------------------------------------------------
+// Navigation top level class
 .nav {
-    // Navigation top level parent
     width: 100vw;
-    height: 5rem;
-    background-color: $colour-primary;
+    height: 7rem;
+    background-color: $colour-white-1;
     display: flex;
     align-items: center;
     justify-content: space-around;
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1);
+    
+    @include mediaQuery(800) {
+        flex-wrap: wrap;   
+    }
 
     // Represents each of the navigation sections which are split into LHS,
     // middle and right
     &__section {
-
+        display: flex;
+        
+        @include mediaQuery(800) {
+            flex: 0 0 50%;           
+        }
+        
     }
 
 // -----------------------------------------------------------------------------
+// Left Hand Side of the Navigation.
+// Contains options with a drop down on active
+
+    #nav-left {
+        align-items: flex-start;
+
+        @include mediaQuery(1100) {
+            justify-content: space-evenly;    
+        }
+    }
     &__option {
         // The left hand side of the navigation. div.nav__option is a element
         // which contains a button (button.nav__option__btn) which when pressed
         // opens a drop down containing additional options to choose from
-        // (div.nav__option__opts) 
+        // (div.nav__option__opts)
+        display: flex;
+        flex-direction: column;
+        font-size: 1.6rem;
+        align-items: center;
+        position: relative;
 
         &__btn {
-
+    
         }
 
-        &__opts {
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
 
+        &__dropdown-opts {
+            // Naivgation drop down options
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 20%;
+            background-color: rgba($colour-grey-dark-1, .88);
+            padding: 1.5rem 3rem;
+
+            &__opt:link,
+            &__opt:visited {
+                text-decoration: none;
+                color: $colour-white-1;
+                font-weight: 300;
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            &__opt:hover,
+            &__opt:active {
+
+            }
         }
     }
 
 // -----------------------------------------------------------------------------
-    &__search {
-        // Search bar
-        &__btn {
+    // Search bar
+    #nav-mid {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 40%;
+        text-align: center;
 
+        @include mediaQuery(1100) {
+            flex: 0 0 50%;
+        }
+
+        @include mediaQuery(800) {
+            order: 1;
+            float: 0 0 100%;            
+        }
+    }
+    &__search {
+        // Main Container
+        width: 100%;
+        position: relative;
+
+        &__input {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            background-color: $colour-grey-light-1;
+            border: none;
+            padding: .7rem 2rem;
+            border-radius: 100px;
+            width: 90%;
+            transition: all .2s;
+            margin-right: -3.5rem;
+            transition: all .2s;
+
+            @include mediaQuery(1450) {
+                width: 95%;
+            }
+
+            @include mediaQuery(1100) {
+                width: 100%;
+                margin-right: 0;
+            }
+            
+            &:focus {
+                outline: none;
+                width: 100%;
+                color: $colour-grey-dark-1;
+                background-color: $colour-grey-light-2;
+            }
+
+        }
+
+        &__btn {
+            outline: none;
+            border: none;
+            background: transparent;
+            color: $colour-grey-dark-1;
+            font-weight: 300;
+
+            @include mediaQuery(1100) {
+                position: absolute;
+                top: 50%;
+                right: 2.5%;
+                transform: translateY(-50%);
+            }
         }
 
         &__icon {
@@ -64,9 +178,58 @@
     }
 
 // -----------------------------------------------------------------------------
+    // The Accounts and Basket Section of the Navigation
+    #nav-right {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    &__account-basket {
+        @include mediaQuery(800) {
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        }
+
+        &__opt {
+            // Styling is similar to btn-inline in base/base.
+            padding: 1rem 2rem;
+
+            @include mediaQuery(1100) {
+                padding: 1rem;            
+            }
+
+            @include mediaQuery(800) {
+                padding: 1rem 0;           
+            }
+
+            font-family: inherit;
+            font-weight: inherit;
+            text-decoration: none;
+
+            &:link,
+            &:visited {
+                color: currentColor;
+                transition: all .2s;
+                border-bottom: 1px solid transparent;
+            }
+
+            &:hover {
+                color: $colour-primary;
+                border-bottom: 1px solid $colour-primary;
+            }
+        }
+    }
+
+// -----------------------------------------------------------------------------
+    // Miscellaneous Navigation Clsses
     &__icon {
-        // Places on the RHS containing options related to user's account and
-        // basket.
+        // Navigation icons
+        padding-left: .25rem;
+
+        @include mediaQuery(1100) {
+            display: none;
+        }
     }
 
     &__active {
@@ -74,5 +237,17 @@
 
     }
 
+    .btn-inline {
+        // Overwrite the class defined in base/base.
+        padding: 1rem 2rem;
+
+        @include mediaQuery(1100) {
+            padding: 1rem;            
+        }
+
+        @include mediaQuery(800) {
+            padding: 1rem 0;           
+        }
+    }
 
 }
