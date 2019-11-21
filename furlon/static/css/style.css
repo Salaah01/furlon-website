@@ -56,8 +56,13 @@ svg {
   display: inline-block;
   transition: all .2s; }
   .btn-inline:hover {
-    color: #F16C54;
-    border-bottom: 1px solid #F16C54; }
+    color: #f47c4a;
+    border-bottom: 1px solid #f47c4a; }
+
+.logo__img {
+  background-size: cover;
+  max-width: 100%;
+  max-height: 100%; }
 
 .nav {
   width: 100vw;
@@ -67,25 +72,98 @@ svg {
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1); }
-  @media only screen and (max-width: 50em) {
+  @media only screen and (max-width: 56.25em) {
     .nav {
       flex-wrap: wrap; } }
+  @media only screen and (max-width: 37.5em) {
+    .nav {
+      height: auto;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      padding: 2rem 3rem; } }
+  .nav__toggle {
+    display: none; }
+    @media only screen and (max-width: 37.5em) {
+      .nav__toggle {
+        display: inline-block; } }
+    .nav__toggle__checkbox {
+      display: none; }
+    .nav__toggle__btn {
+      background-color: #fbfbfb;
+      height: 7rem;
+      width: 7rem;
+      position: fixed;
+      top: 0;
+      left: 1rem;
+      border-radius: 50%;
+      z-index: 2000;
+      text-align: center;
+      cursor: pointer; }
+    .nav__toggle__icon {
+      position: relative;
+      margin-top: 3.5rem; }
+      .nav__toggle__icon, .nav__toggle__icon::before, .nav__toggle__icon::after {
+        width: 3rem;
+        height: 2px;
+        background-color: #5A5F6A;
+        display: inline-block; }
+      .nav__toggle__icon::before, .nav__toggle__icon::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        transition: all .2s; }
+      .nav__toggle__icon::before {
+        top: -.8rem; }
+      .nav__toggle__icon::after {
+        top: .8rem; }
+    .nav__toggle__btn:hover .nav__toggle__icon::before {
+      top: -1rem; }
+    .nav__toggle__btn:hover .nav__toggle__icon::after {
+      top: 1rem; }
+    .nav__toggle__checkbox:checked + .nav__toggle__btn .nav__toggle__icon {
+      background-color: transparent; }
+    .nav__toggle__checkbox:checked + .nav__toggle__btn .nav__toggle__icon::before {
+      transform: rotate(135deg);
+      top: 0; }
+    .nav__toggle__checkbox:checked + .nav__toggle__btn .nav__toggle__icon::after {
+      transform: rotate(-135deg);
+      top: 0; }
   .nav__section {
-    display: flex; }
-    @media only screen and (max-width: 50em) {
+    display: flex;
+    align-items: center; }
+    @media only screen and (max-width: 37.5em) {
       .nav__section {
-        flex: 0 0 50%; } }
+        flex-direction: column; } }
+  .nav__logo {
+    width: 10rem;
+    margin: 1.5rem 2.5rem; }
+    @media only screen and (max-width: 37.5em) {
+      .nav__logo {
+        margin: 0 auto; } }
   .nav #nav-left {
-    align-items: flex-start; }
+    align-items: center; }
     @media only screen and (max-width: 68.75em) {
       .nav #nav-left {
         justify-content: space-evenly; } }
+    @media only screen and (max-width: 56.25em) {
+      .nav #nav-left {
+        flex: 0 0 50%;
+        justify-content: space-around; } }
+    @media only screen and (max-width: 37.5em) {
+      .nav #nav-left {
+        flex: 0 0 50%;
+        align-items: flex-start;
+        width: 100%; } }
   .nav__option {
     display: flex;
     flex-direction: column;
     font-size: 1.6rem;
     align-items: center;
     position: relative; }
+    @media only screen and (max-width: 37.5em) {
+      .nav__option {
+        display: none; } }
     .nav__option:not(:last-child) {
       margin-right: 1rem; }
     .nav__option__dropdown-opts {
@@ -95,7 +173,11 @@ svg {
       top: 100%;
       left: 20%;
       background-color: rgba(90, 95, 106, 0.88);
-      padding: 1.5rem 3rem; }
+      padding: 1.5rem 3rem;
+      z-index: 10; }
+      @media only screen and (max-width: 56.25em) {
+        .nav__option__dropdown-opts {
+          display: none; } }
       .nav__option__dropdown-opts__opt:link, .nav__option__dropdown-opts__opt:visited {
         text-decoration: none;
         color: #fbfbfb;
@@ -110,11 +192,12 @@ svg {
     text-align: center; }
     @media only screen and (max-width: 68.75em) {
       .nav #nav-mid {
-        flex: 0 0 50%; } }
-    @media only screen and (max-width: 50em) {
+        flex: 0 0 35%; } }
+    @media only screen and (max-width: 56.25em) {
       .nav #nav-mid {
         order: 1;
-        float: 0 0 100%; } }
+        flex: 0 0 100%;
+        margin-top: .75rem; } }
   .nav__search {
     width: 100%;
     position: relative; }
@@ -136,7 +219,11 @@ svg {
       @media only screen and (max-width: 68.75em) {
         .nav__search__input {
           width: 100%;
-          margin-right: 0; } }
+          margin-right: 0;
+          justify-content: space-between; } }
+      @media only screen and (max-width: 56.25em) {
+        .nav__search__input {
+          border-radius: 0; } }
       .nav__search__input:focus {
         outline: none;
         width: 100%;
@@ -157,11 +244,20 @@ svg {
   .nav #nav-right {
     display: flex;
     justify-content: space-evenly; }
-  @media only screen and (max-width: 50em) {
+    @media only screen and (max-width: 56.25em) {
+      .nav #nav-right {
+        flex: 0 0 50%; } }
+    @media only screen and (max-width: 37.5em) {
+      .nav #nav-right {
+        display: none; } }
+  @media only screen and (max-width: 56.25em) {
     .nav__account-basket {
       display: flex;
       justify-content: space-evenly;
       width: 100%; } }
+  @media only screen and (max-width: 37.5em) {
+    .nav__account-basket {
+      flex-direction: column; } }
   .nav__account-basket__opt {
     padding: 1rem 2rem;
     font-family: inherit;
@@ -170,7 +266,7 @@ svg {
     @media only screen and (max-width: 68.75em) {
       .nav__account-basket__opt {
         padding: 1rem; } }
-    @media only screen and (max-width: 50em) {
+    @media only screen and (max-width: 56.25em) {
       .nav__account-basket__opt {
         padding: 1rem 0; } }
     .nav__account-basket__opt:link, .nav__account-basket__opt:visited {
@@ -178,11 +274,11 @@ svg {
       transition: all .2s;
       border-bottom: 1px solid transparent; }
     .nav__account-basket__opt:hover {
-      color: #F16C54;
-      border-bottom: 1px solid #F16C54; }
+      color: #f47c4a;
+      border-bottom: 1px solid #f47c4a; }
   .nav__icon {
     padding-left: .25rem; }
-    @media only screen and (max-width: 68.75em) {
+    @media only screen and (max-width: 76.25em) {
       .nav__icon {
         display: none; } }
   .nav .btn-inline {
@@ -190,6 +286,6 @@ svg {
     @media only screen and (max-width: 68.75em) {
       .nav .btn-inline {
         padding: 1rem; } }
-    @media only screen and (max-width: 50em) {
+    @media only screen and (max-width: 56.25em) {
       .nav .btn-inline {
         padding: 1rem 0; } }

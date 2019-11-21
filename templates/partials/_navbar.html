@@ -1,9 +1,23 @@
 {% load static %}
 <nav class="nav">
+    <!-- Navigation Toggle Button -->
+    <div class="nav__toggle">
+        <input type="checkbox" class="nav__toggle__checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="nav__toggle__btn">
+            <span class="nav__toggle__icon">&nbsp;</span>
+        </label>
+    </div>
     <!-- LHS of Navigation -->
     <div class="nav__section" id="nav-left">
+
+        <!-- Logo -->
+        <div class="nav__logo logo" id="nav-logo">
+            <a href="{% url 'index' %}">
+                <img class='logo__img' src="{% static 'img/logo/logo_long_colour.png' %}" alt="Furlon Logo">
+            </a>
+        </div>
+        <!-- Products Button -->
         <div class="nav__option">
-            <!-- Products Button -->
             <button class="nav__option__btn btn-inline">Products <span class="nav__icon"> <i class="fas fa-chevron-down"></i></span></button>
             <div class="nav__option__dropdown-opts" id='nav-product-opts'>
                 <a href="#" class="nav__option__dropdown-opts__opt" id="nav-wardrobes">Wardrobes</a>
@@ -18,13 +32,13 @@
         <div class="nav__option">
             <button class="nav__option__btn btn-inline">Rooms <span class="nav__icon"> <i class="fas fa-chevron-down"></i></span></button>
             <div class="nav__option__dropdown-opts" id="nav-room-opts">
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-bedroom">Bedroom</a>
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-living-room">Living Room</a>
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-kitchen">Kitchen</a>
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-dining-room">Dining Room</a>
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-bathroom">Bathroom</a>
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-office">Office</a>
-                <a href="#" class="nav__option__dropdown-opts__opt nav__icon" id="nav-outdoors">Outdoors</a>
+                <a href="#" class="nav__option__dropdown-opts__opt hide" id="nav-bedroom">Bedroom</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-living-room">Living Room</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-kitchen">Kitchen</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-dining-room">Dining Room</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-bathroom">Bathroom</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-office">Office</a>
+                <a href="#" class="nav__option__dropdown-opts__opt" id="nav-outdoors">Outdoors</a>
             </div>
         </div>
     </div>
