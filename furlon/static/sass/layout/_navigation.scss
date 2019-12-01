@@ -70,12 +70,11 @@
 
         &__btn {
             background-color: $colour-white-1;
-            height: 7rem;
-            width: 7rem;
+            height: auto;
+            width: 8rem;
             position: fixed;
-            top: 0;
-            left: 1rem;
-            border-radius: 50%;
+            top: .5rem;
+            right: 1rem;
             z-index: 2000;
             text-align: center;
             cursor: pointer;
@@ -150,7 +149,7 @@
         margin: 1.5rem 2.5rem;
 
         @include mediaQuery(600) {
-            margin: 0 auto;
+            margin: 0;
         }
     }
 
@@ -208,8 +207,19 @@
             top: 100%;
             left: 20%;
             background-color: rgba($colour-grey-dark-1, .88);
-            padding: 1.5rem 3rem;
+            text-align: center;
             z-index: 10;
+            transition: all .2s;
+
+            &--expand {
+                // Expands sub-menu options
+                height: auto;
+            }
+
+            &--collapse {
+                // Closes sub-menu options
+                height: 0%;
+            }
 
             ///////// TESTING ///////////
             @include mediaQuery(900) {
@@ -221,6 +231,8 @@
                 text-decoration: none;
                 color: $colour-white-1;
                 font-weight: 300;
+                padding: 1.5rem 3rem;
+                width: max-content;
 
                 &:not(:last-child) {
                     margin-bottom: 1rem;
@@ -229,10 +241,15 @@
                 
             }
 
-            &__opt:hover,
-            &__opt:active {
-
+            &__opt:hover {
+                background-color: rgba($colour-grey-dark-1, .95);
             }
+
+            &__opt:active {
+                background-color: rgba($colour-grey-dark-1, .98);
+                transform: translateY(-.1rem);
+            }
+
         }
     }
 
@@ -255,6 +272,15 @@
             order: 1;
             flex: 0 0 100%;
             margin-top: .75rem;
+        }
+
+        @include mediaQuery(600) {
+            // width = calc(100% + nav padding left + nav padding right)
+            width: calc(100% + 6rem);
+            // margin-left = nav padding left
+            margin-left: -3rem;
+            // margin-bottom = nav padding bottom
+            margin-bottom: -2rem;
         }
     }
     &__search {

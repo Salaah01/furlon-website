@@ -91,12 +91,11 @@ svg {
       display: none; }
     .nav__toggle__btn {
       background-color: #fbfbfb;
-      height: 7rem;
-      width: 7rem;
+      height: auto;
+      width: 8rem;
       position: fixed;
-      top: 0;
-      left: 1rem;
-      border-radius: 50%;
+      top: .5rem;
+      right: 1rem;
       z-index: 2000;
       text-align: center;
       cursor: pointer; }
@@ -140,7 +139,7 @@ svg {
     margin: 1.5rem 2.5rem; }
     @media only screen and (max-width: 37.5em) {
       .nav__logo {
-        margin: 0 auto; } }
+        margin: 0; } }
   .nav #nav-left {
     align-items: center; }
     @media only screen and (max-width: 68.75em) {
@@ -173,17 +172,29 @@ svg {
       top: 100%;
       left: 20%;
       background-color: rgba(90, 95, 106, 0.88);
-      padding: 1.5rem 3rem;
-      z-index: 10; }
+      text-align: center;
+      z-index: 10;
+      transition: all .2s; }
+      .nav__option__dropdown-opts--expand {
+        height: auto; }
+      .nav__option__dropdown-opts--collapse {
+        height: 0%; }
       @media only screen and (max-width: 56.25em) {
         .nav__option__dropdown-opts {
           display: none; } }
       .nav__option__dropdown-opts__opt:link, .nav__option__dropdown-opts__opt:visited {
         text-decoration: none;
         color: #fbfbfb;
-        font-weight: 300; }
+        font-weight: 300;
+        padding: 1.5rem 3rem;
+        width: max-content; }
         .nav__option__dropdown-opts__opt:link:not(:last-child), .nav__option__dropdown-opts__opt:visited:not(:last-child) {
           margin-bottom: 1rem; }
+      .nav__option__dropdown-opts__opt:hover {
+        background-color: rgba(90, 95, 106, 0.95); }
+      .nav__option__dropdown-opts__opt:active {
+        background-color: rgba(90, 95, 106, 0.98);
+        transform: translateY(-0.1rem); }
   .nav #nav-mid {
     display: flex;
     align-items: center;
@@ -198,6 +209,11 @@ svg {
         order: 1;
         flex: 0 0 100%;
         margin-top: .75rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .nav #nav-mid {
+        width: calc(100% + 6rem);
+        margin-left: -3rem;
+        margin-bottom: -2rem; } }
   .nav__search {
     width: 100%;
     position: relative; }
