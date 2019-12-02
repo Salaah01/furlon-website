@@ -206,6 +206,7 @@
             position: absolute;
             top: 100%;
             left: 20%;
+            width: max-content;
             background-color: rgba($colour-grey-dark-1, .88);
             text-align: center;
             z-index: 10;
@@ -214,25 +215,29 @@
             &--expand {
                 // Expands sub-menu options
                 height: auto;
+                opacity: 100%;
             }
 
             &--collapse {
                 // Closes sub-menu options
-                height: 0%;
+                height: 0;
+                opacity: 0;
+
+                .nav__option__dropdown-opts__opt:link,
+                .nav__option__dropdown-opts__opt:visited {
+                    height: 0;
+                    padding: 0;
+                }
+
             }
 
-            ///////// TESTING ///////////
-            @include mediaQuery(900) {
-                display: none;
-            }
-            ////////////////////////////
             &__opt:link,
             &__opt:visited {
                 text-decoration: none;
                 color: $colour-white-1;
                 font-weight: 300;
                 padding: 1.5rem 3rem;
-                width: max-content;
+                width: 100%;
 
                 &:not(:last-child) {
                     margin-bottom: 1rem;

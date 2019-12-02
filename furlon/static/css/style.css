@@ -171,23 +171,27 @@ svg {
       position: absolute;
       top: 100%;
       left: 20%;
+      width: max-content;
       background-color: rgba(90, 95, 106, 0.88);
       text-align: center;
       z-index: 10;
       transition: all .2s; }
       .nav__option__dropdown-opts--expand {
-        height: auto; }
+        height: auto;
+        opacity: 100%; }
       .nav__option__dropdown-opts--collapse {
-        height: 0%; }
-      @media only screen and (max-width: 56.25em) {
-        .nav__option__dropdown-opts {
-          display: none; } }
+        height: 0;
+        opacity: 0; }
+        .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:link,
+        .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:visited {
+          height: 0;
+          padding: 0; }
       .nav__option__dropdown-opts__opt:link, .nav__option__dropdown-opts__opt:visited {
         text-decoration: none;
         color: #fbfbfb;
         font-weight: 300;
         padding: 1.5rem 3rem;
-        width: max-content; }
+        width: 100%; }
         .nav__option__dropdown-opts__opt:link:not(:last-child), .nav__option__dropdown-opts__opt:visited:not(:last-child) {
           margin-bottom: 1rem; }
       .nav__option__dropdown-opts__opt:hover {
