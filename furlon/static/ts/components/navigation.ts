@@ -33,7 +33,6 @@ window.addEventListener("mouseup", event => {
         console.log(1)
         navSubMenu.classList.add("nav__option__dropdown-opts--collapse");
         navSubMenu.classList.remove("nav__option__dropdown-opts--expanded");
-        // console.log(navSubMenu.classList.contains('nav__option__dropdown-opts--collapsed'))
     } else if (target.classList.contains('nav__option__btn') && navSubMenu.classList.contains('nav__option__dropdown-opts--collapse')) {
         console.log(2)
         navSubMenu.classList.remove("nav__option__dropdown-opts--collapse");
