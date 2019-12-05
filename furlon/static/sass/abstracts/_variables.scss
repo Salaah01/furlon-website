@@ -4,6 +4,7 @@ $colour-white-2: #F2F5F6;
 
 $colour-grey-light-1: rgb(240, 240, 240);
 $colour-grey-light-2: rgb(235, 235, 235);
+$colour-grey-light-3: #c1c1c1;
 $colour-grey-dark-1: #5A5F6A;
 
 $colour-primary-light-1: #FFAFA1;
@@ -16,3 +17,15 @@ $colour-secondary-dark-1: #315B8A;
 $colour-tertiary: #E9AD79;
 
 // FONTS
+.heading-1 {
+    font-size: 6rem;
+    font-weight: 300;
+    letter-spacing: 1.5px;
+    color: $colour-secondary-dark-1;
+}
+
+.heading-2 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    color: $colour-grey-dark-1;
+}

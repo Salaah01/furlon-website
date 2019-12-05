@@ -1,0 +1,43 @@
+.showcase {
+  background-image: linear-gradient(
+      105deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      #fff 35%,
+      transparent 50%
+    ),
+    url("../img/pages/index/showcase-cropped.jpg");
+    background-size: cover;
+    background-position: center;
+    box-shadow: $colour-grey-light-3 0px 5px 10px;
+
+    &__heading {
+        width: 50%;
+        padding: 10rem;
+
+        &__text {
+
+            &:not(:last-child) {
+                margin-bottom: 3rem;
+            }
+        }
+
+        &__btn {
+            font-size: 1.5rem;
+        }
+
+        &__btn:hover > &__btn-icon {
+            margin-left: 4px;
+            // transform: translateX(4px) translateY(.5px);
+            opacity: 100%;
+        }
+
+        &__btn-icon {
+            position: absolute;
+            opacity: 0;
+            transition: all .25s;
+            // transform: translateX(-500%) translateY(.5px);
+            margin-left: -2px;
+            padding-top: .5px;
+        }
+    }
+}

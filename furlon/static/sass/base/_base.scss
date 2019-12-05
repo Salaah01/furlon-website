@@ -58,3 +58,23 @@ svg { width: 10px; height: 10px; fill: black;}
     max-width: 100%;
     max-height: 100%;
 }
+
+// -----------------------------------------------------------------------------
+// BUTTONS
+.btn {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    font-size: inherit;
+    font-family: inherit;
+    position: relative;
+    cursor: pointer;
+    transition: all .2s;
+
+    &--primary {
+        background-color: $colour-primary;
+        color: white;
+        padding: 1rem;
+        border-radius: 5px;
+    }
+}
