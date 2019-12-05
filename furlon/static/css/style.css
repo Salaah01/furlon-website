@@ -89,6 +89,8 @@ svg {
     color: white;
     padding: 1rem;
     border-radius: 5px; }
+    .btn--primary:hover {
+      background-color: #f56020; }
 
 .nav {
   width: 100vw;
@@ -336,6 +338,62 @@ svg {
       .nav .btn-inline {
         padding: 1rem 0; } }
 
+.index-grid {
+  display: grid;
+  grid-template-rows: 1fr repeat(2, 35rem);
+  grid-template-columns: repeat(2, [col-start] minmax(min-content, 1fr) [col-end]);
+  gap: 1.5rem 1.5rem;
+  padding: 5.5rem 15rem;
+  background-color: #f0f0f0; }
+  .index-grid__description {
+    grid-column: 1 / -1; }
+  .index-grid__container {
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: #f9f9f9 0 5px 20px 1px; }
+    .index-grid__container__header {
+      position: absolute;
+      z-index: 10;
+      padding: 2rem;
+      transform: translateX(-50%);
+      padding-left: calc(50% + 2rem);
+      color: #fbfbfb;
+      transition: transform .75s; }
+      .index-grid__container__header::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 6rem;
+        left: -3rem;
+        top: 1.5rem;
+        background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.23), transparent);
+        z-index: -5; }
+    .index-grid__container__img {
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      top: 0;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: all .75s ease-out; }
+    .index-grid__container:hover > a > .index-grid__container__img {
+      transform: scale(1.05);
+      filter: brightness(0.85) blur(4px); }
+    .index-grid__container:hover > a > .index-grid__container__header {
+      padding: 2rem;
+      font-size: 5rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%; }
+      .index-grid__container:hover > a > .index-grid__container__header::before {
+        background-image: none; }
+
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");
   background-size: cover;
@@ -349,11 +407,13 @@ svg {
     .showcase__heading__btn {
       font-size: 1.5rem; }
     .showcase__heading__btn:hover > .showcase__heading__btn-icon {
-      margin-left: 4px;
-      opacity: 100%; }
+      transform: translateX(4px) translateY(0.5px);
+      opacity: 100%;
+      display: inline-block;
+      width: max-content; }
     .showcase__heading__btn-icon {
-      position: absolute;
       opacity: 0;
+      width: 0%;
       transition: all .25s;
-      margin-left: -2px;
-      padding-top: .5px; }
+      transform: translateX(-500%) translateY(0.5px);
+      margin-left: -2px; }
