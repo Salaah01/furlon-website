@@ -1,0 +1,174 @@
+// =============================================================================
+// Date Created:   05/12/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// Contains the styling for componenets on the home page (index).
+//
+// RESPONSIVENES
+// -------------
+// -
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+.index-grid {
+    // Section containing of 4 images in the index page.
+    // Section is split into 5 sub-section.
+    // The first sub-section sits at the top and spans the entire length of
+    // the div. This is the title sub-section.
+    // The remainging 4 sections are split 2 x 2 with a text overlay.
+    display: grid;
+    grid-template-rows: 1fr repeat(2, 35rem);
+    grid-template-columns: repeat(2, [col-start] minmax(min-content, 1fr) [col-end]);
+    gap: 1.5rem 1.5rem;
+    padding: 9.5rem 15rem;
+    background-color: $colour-grey-light-1;
+
+    &__description {
+        // Situated at the top of as the title/description of the section.
+        grid-column: 1 / -1;
+
+        &__heading {
+            margin-bottom: 2rem;
+            color: $colour-primary;
+        }
+
+        &__detail {
+            font-size: 2rem;
+        }
+    }
+
+    &__container {
+        // index-grid__container contins an image and text as overlay.
+        // There are 4 containers arranged into a 2 x 2 grid (wide screen).
+        overflow: hidden;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: $colour-grey-light-4 0 5px 20px 1px;
+        
+        &__header {
+            // Text overlay in a container - goes over the images.
+            position: absolute;
+            z-index: 10;
+            padding: 2rem;
+            transform: translateX(-50%);
+            padding-left: calc(50% + 2rem);
+            color: $colour-white-1;
+            transition: transform .75s;
+
+            &::before {
+                // Faint grey background to make the text more visible.
+                content: "";
+                position: absolute;
+                width: 200%;
+                height: 6rem;
+                left: -3rem;
+                top: 1.5rem;
+                background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.23), transparent);
+                z-index: -5;
+                
+            }
+
+        }
+
+        &__img {
+            // Main image in a container.
+            position: absolute;
+            z-index: 5;
+            left: 0;
+            top: 0;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all .75s ease-out;
+        }
+
+        &:hover > a > &__img {
+            transform: scale(1.05);
+            filter: brightness(0.85) blur(4px);
+        }
+
+        &:hover > a > &__header {
+            padding: 2rem;
+            font-size: 5rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+
+            &::before {
+                // When the images are hovered, the faint grey background will
+                // disappear. This is implemented as the text enlarges and moves
+                // to the center of the page and the grey background is not
+                // needed as the image loses brightness.
+                background-image: none;
+            } 
+        }
+
+    }
+}
+
+// -----------------------------------------------------------------------------
+.how-it-works {
+    // Section split into two sub-sections.
+    // .how-it-works__imgs shows a image stacked on top of one another.
+    // .how-it-works__info describes the images. 
+    display: flex;
+    flex-direction: row;
+    
+    padding: 5.5rem 5rem;
+    
+    &__imgs {
+        position: relative;
+        width: 50%;
+        // Height = height of .how-it-works__imgs__bottom
+        height: 55rem;
+        padding: 5rem 2.5rem;
+
+        & > * {
+            background-size: cover;
+            position: absolute;
+        }
+
+        &__bottom {
+            width: 75%;
+            z-index: 10;
+            filter: saturate(0.45) contrast(.9) blur(1px);
+            border-radius: 7px;
+        }
+
+        &__top {
+            width: 50%;
+            z-index: 20;
+            transform: translate(85%, 15%);
+            filter: hue-rotate(20deg) saturate(1.85) brightness(1.2);
+            border-radius: 10px;
+            box-shadow: $box-shadow-faint-r;
+        }
+    }
+
+    &__info {
+       padding: 5rem 2.5rem;
+       width: 50%;
+
+        &__heading {
+            margin-bottom: 4rem;
+            color: $colour-primary;
+        }
+
+        &__content {
+            & > * {
+                margin-bottom: 1rem;
+            }
+        }
+
+        &__btn {
+            align-self: flex-start;
+            margin-top: 1.25rem;
+            font-weight: 600;
+        }
+
+    }
+}

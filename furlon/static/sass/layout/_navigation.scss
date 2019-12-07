@@ -190,9 +190,21 @@
             display: none;
         }
 
-
         &__btn {
-    
+            padding: 1rem 2rem;
+
+            &:hover {
+                color: $colour-primary;
+                border-bottom: 1px solid $colour-primary;
+            }
+
+            @include mediaQuery(1100) {
+                padding: 1rem;            
+            }
+
+            @include mediaQuery(900) {
+                padding: 1rem 0;           
+            }
         }
 
         &:not(:last-child) {
@@ -342,10 +354,15 @@
                 right: 2.5%;
                 transform: translateY(-50%);
             }
+
         }
 
         &__icon {
+            padding-left: .25rem;
 
+            @include mediaQuery(1220) {
+                display: none;
+        }
         }
     }
 
@@ -407,30 +424,5 @@
 
 // -----------------------------------------------------------------------------
     // Miscellaneous Navigation Clsses
-    &__icon {
-        // Navigation icons
-        padding-left: .25rem;
 
-        @include mediaQuery(1220) {
-            display: none;
-        }
-    }
-
-    &__active {
-        // State when a page related to the navigation is active
-
-    }
-
-    .btn-inline {
-        // Overwrite the class defined in base/base.
-        padding: 1rem 2rem;
-
-        @include mediaQuery(1100) {
-            padding: 1rem;            
-        }
-
-        @include mediaQuery(900) {
-            padding: 1rem 0;           
-        }
-    }
 }

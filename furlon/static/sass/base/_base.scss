@@ -30,26 +30,7 @@ body {
 
 svg { width: 10px; height: 10px; fill: black;}
 
-// -----------------------------------------------------------------------------
-// BUTTON
-.btn-inline {
-    border: none;
-    border-bottom: 1px solid transparent;
-    outline: none;
-    font-family: inherit;
-    font-weight: inherit;
-    color: currentColor;
-    background-color: transparent;
-    font-size: inherit;
-    cursor: pointer;
-    display: inline-block;
-    transition: all .2s;
-
-    &:hover {
-        color: $colour-primary;
-        border-bottom: 1px solid $colour-primary;
-    }
-}
+p { color: $colour-grey-dark-1;}
 
 // -----------------------------------------------------------------------------
 // LOGO
@@ -61,15 +42,21 @@ svg { width: 10px; height: 10px; fill: black;}
 
 // -----------------------------------------------------------------------------
 // BUTTONS
-.btn {
+.btn,
+.btn-inline {
     outline: none;
     background-color: transparent;
     border: none;
     font-size: inherit;
     font-family: inherit;
-    position: relative;
+    font-weight: inherit;
+    text-decoration: none;
     cursor: pointer;
     transition: all .2s;
+}
+
+.btn {
+    position: relative;
 
     &--primary {
         background-color: $colour-primary;
@@ -81,4 +68,71 @@ svg { width: 10px; height: 10px; fill: black;}
             background-color: $colour-primary-bright-1;
         }
     }
+}
+
+.btn-inline {
+    text-transform: uppercase;
+    color: currentColor;
+    display: inline-block;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid transparent;
+    padding-left: .25rem;
+    padding-right: .25rem;
+    transition: color .3s ease, background-color .3s ease, border .3s ease;
+
+    &--primary,
+    &--primary:link,
+    &--primary:visited,
+    &--primary-b,
+    &--primary-b:link,
+    &--primary-b:visited {
+        color: $colour-primary;
+        border-bottom: 1px solid $colour-primary;
+    }
+
+    &--primary-b:active,
+    &--secondary-b:active {
+        transform: translate(2px, 2px);
+    }
+
+    &--primary {
+        &:hover {
+            color: $colour-primary-dark-1;
+        }
+    }
+
+    &--secondary,
+    &--secondary:link,
+    &--secondary:visited,
+    &--secondary-b,
+    &--secondary-b:link,
+    &--secondary-b:visited {
+        color: $colour-secondary-high-sat;
+        border-bottom: 1px solid $colour-secondary-high-sat;
+    }
+
+    &--secondary {
+        &:hover {
+            color: $colour-secondary-light-1;
+            border-bottom: 1px solid $colour-secondary-light-1;
+        }
+    }
+
+    &--secondary-b {
+        padding: 1rem;
+
+        &:hover {
+            color: $colour-white-1;
+            background-color: $colour-secondary-light-1;
+            border-bottom: 1px solid transparent;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+
+        &:active {
+            background-color: $colour-secondary;
+        }
+    }
+
+    
 }
