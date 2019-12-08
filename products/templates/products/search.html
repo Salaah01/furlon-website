@@ -1,1 +1,141 @@
-<h1>Search</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Search {% endblock %}
+
+{% block content %}
+
+{% if userValues.search %}
+    <header class="search-summary">
+        <div class="search-summary__text">
+            <p class="search-summary__text__num-results">{{ products|length }} results found for:</p>
+            <h2 class="search-summary__text__search-str heading-2">&quot;{{ userValues.search }}&quot;</h2>
+        </div>
+    </header>
+{% endif %}
+
+<main class="search-main-content">
+    <section class="search-filters">
+        <form action="{% url 'search' %}" method="GET">
+            <!-- Prices Group-->
+            <div class="search-filters__group">
+                <!-- Min Price -->
+                <div class="search-filters__group__item">
+                    <label class="search-filters__label" for="min-price">Min Price</label>
+                    <select class="search-filters__options" name="minPrice" id="min-price">
+                        <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Min Price</option>
+                        {% for key, price in minPrice.items %}
+                            <option
+                                class="search-filters__options__item"
+                                value= "{{ key }}"
+                                {% if key == userValues.minPrice %}
+                                    selected
+                                {% endif %}
+                            >
+                                    {{ price }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- Max Price -->
+                <div class="search-filters__group__item">
+                    <label class="search-filters__label" for="max-price">Max Price</label>
+                    <select class="search-filters__options" name="maxPrice" id="max-price">
+                        <option class="search-filters__options__item" value="-99" selected="selected" disabled="disabled">Max Price</option>
+                        {% for key, price in maxPrice.items %}
+                            <option
+                                class="search-filters__options__item"
+                                value="{{ price }}"
+                                {% if key == userValues.maxPrice %}
+                                    selected
+                                {% endif %}
+                            >
+                                    {{ price }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <!-- Categories Group-->
+            <div class="search-filters__group">
+                <div class="search-filters__group__item">
+                    <label class="search-filters__label" for="categories">Categories</label>
+                    <select class="search-filters__options" name="category" id="categories">
+                        <option class="search-filters__options__item" value="99" selected="selected" disabled="disabled">Category</option>
+                        {% for category in categories %}
+                            <option
+                                class="search-filters__options__item"
+                                value="{{ category.cat_id }}"
+                                {% if category.cat_id|slugify == userValues.category %}
+                                    selected
+                                {% endif %}
+                            >
+                                    {{ category }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <!-- Colour Group -->
+            <div class="search-filters__group">
+                <!-- <div class="search-filters__group__item"> -->
+                    <!-- <label class="search-filters__label" for="colour">Colour</label>
+                    <select class="search-filters__options" name="colour" id="colour">
+                        <option class="search-filters__options__item" value="99" selected="selected" disabled="disabled">Colour</option>
+                        {% for colourFamily in colourFamilies %}
+                            <option
+                                class="search-filters__options__item"
+                                value="{{ colourFamily }}"
+                                {% if colourFamily.name == userValues.colour %}
+                                    selected
+                                {% endif %}
+                            >
+                                    {{ colourFamily }}
+                            </option>
+                        {% endfor %}
+                    </select> -->
+                <!-- </div> -->
+                <div class="select-box">
+                <div class="search-filters__options">
+                    {% for colourFamily in colourFamilies %}
+                        <div class="search-filters__value">
+                            <input
+                                type="radio"
+                                class="search-filters__input"
+                                id="{{ colourFamily }}"
+                                value="{{ colourFamily }}"
+                                name="colour"
+                            >
+                            <p class="search-filters__input-text">{{ colourFamily }}</p>
+                        </div>
+                        <ul class="search-filters__list">
+                            {% for colourFamily in courFamilies %}
+                                <label for="{{ colourFamily }}" class="search-filters__option" aria-hidden="aria-hidden">{{ colourFamily }}</label>
+                            {% endfor %}
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+            </div>
+            <!-- Search Query Copy -->
+            <input type="hidden" name="search" id="search-copy">
+            <!-- Submit -->
+            <button type="submit" class="search-filters__submit-btn" id="filters-submit">Apply Filters</button>
+        </form> 
+    </section>
+    <section class="search-results">
+        
+    </section>
+</main>
+{% for product in products %}
+<h2>{{product.name}}</h2>
+{% endfor %}
+{% endblock %}
+
+<header class="search-summary">
+
+</header>
+
+{% block footer %}
+
+{% endblock %}

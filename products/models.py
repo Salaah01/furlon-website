@@ -85,7 +85,6 @@ class Rooms(models.Model):
     TABLES DEPENDENT ON MODEL:
     - products_products: room
     """
-    # name = models.CharField(max_length=50, unique=True)
     name = models.CharField(max_length=50, unique=True, primary_key=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
@@ -111,8 +110,8 @@ class Categories(models.Model):
     - products_features: category
     """
 
-    # cat_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=128, unique=True, primary_key=True)
+    cat_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=128, unique=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
@@ -137,7 +136,7 @@ class SubCategories(models.Model):
     """
 
     name = models.CharField(max_length=50)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
@@ -157,9 +156,9 @@ class Features(models.Model):
     - products_products: features
     """
 
-    # feature_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, primary_key=True)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    feature_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):

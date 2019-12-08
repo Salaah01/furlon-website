@@ -45,9 +45,13 @@
 
     <!-- Search Bar -->
     <div class="nav__section" id="nav-mid">
-        <form action="#" class="nav__search">
+        <form action="{% url 'search' %}" method='GET' class="nav__search">
             {% csrf_token %}
-            <input type="text" placeholder="Search" class="nav__search__input">
+            <input type="text" placeholder="Search" class="nav__search__input" name='search' id="search"
+                {% if userValues.search %}
+                    value="{{ userValues.search }}"
+                {% endif %}
+            >
             <button class="nav__search__btn"><span class="nav__search__icon"><i class="fas fa-search"></i></span></button>
         </form>
     </div>

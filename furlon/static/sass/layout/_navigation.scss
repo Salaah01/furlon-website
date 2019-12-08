@@ -147,6 +147,11 @@
     &__logo {
         width: 10rem;
         margin: 1.5rem 2.5rem;
+        transition: filter .5s ease;
+
+        &:hover {
+            filter: brightness(1.1);
+        }
 
         @include mediaQuery(600) {
             margin: 0;
