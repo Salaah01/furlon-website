@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %} | Welcome {% endblock %}
 
 {% block content %}
@@ -28,7 +29,7 @@
             </div>
             <div class="index-grid__container">
                 <a href="#">
-                    <h3 class="index-grid__container__header">What Makes for a Great Chillout?</h3>
+                    <h3 class="index-grid__container__header">What Makes for a Great Chill ut?</h3>
                     <img src="{% static 'img/pages/index/showcase-outdoors.jpg' %}" alt="Image of friends sitting in the garden" class="index-grid__container__img">
                 </a>
             </div>
@@ -45,6 +46,34 @@
                 </a>
             </div>
         </section>
+
+        {% if latest_products %}
+            <section class="latest-products">
+                <div class="latest-products__heading">
+                    <h2 class="latest-products__heading__title heading-2">
+                        Latest Furniture
+                    </h2>
+                    <p class="latest-products__heading__info">
+                        Be the first to check out the newest and in fashion products available today&#33;
+                    </p>
+                </div>
+                {% for latest_product in latest_products %}
+                    <div class="latest-products__product card">
+                        <div class="card__side card__side--front">
+                            <img class="latest-products__product__img" src="{{ latest_product.showcase_image }}" alt="Image of {{ latest_product.name }}" class="latest-products__product__img">
+                            <p class="latest-products__product__name">{{ latest_product.name }}</p>
+                        </div>
+                        <div class="card__side card__side--back">
+                            <div class="latest-products__product__price-box">
+                                <p class="latest-products__product__price-only">Only</p>
+                                <p class="latest-products__product__price-value">&pound;{{ latest_product.price |floatformat:2|intcomma }}</p>
+                                <a href="#" class="latest-products__product__info-btn btn btn--white">Find Out More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </section>
+        {% endif %}
 
         <section class="how-it-works">
             <div class="how-it-works__imgs">

@@ -2,11 +2,7 @@
 // Date Created:   05/12/2019
 // Created By:     Salaah Amin
 // =============================================================================
-// Contains the styling for componenets on the home page (index).
-//
-// RESPONSIVENES
-// -------------
-// -
+// Contains the styling for components on the home page (index).
 // =============================================================================
 
 // -----------------------------------------------------------------------------
@@ -15,12 +11,12 @@
     // Section is split into 5 sub-section.
     // The first sub-section sits at the top and spans the entire length of
     // the div. This is the title sub-section.
-    // The remainging 4 sections are split 2 x 2 with a text overlay.
+    // The remaining 4 sections are split 2 x 2 with a text overlay.
     display: grid;
     grid-template-rows: 1fr repeat(2, 35rem);
     grid-template-columns: repeat(2, [col-start] minmax(min-content, 1fr) [col-end]);
     gap: 1.5rem 1.5rem;
-    padding: 9.5rem 15rem;
+    @include padSection;
     background-color: $colour-grey-light-1;
 
     &__description {
@@ -28,7 +24,7 @@
         grid-column: 1 / -1;
 
         &__heading {
-            margin-bottom: 2rem;
+            @include margHeadSubHead;
             color: $colour-primary;
         }
 
@@ -38,12 +34,12 @@
     }
 
     &__container {
-        // index-grid__container contins an image and text as overlay.
+        // index-grid__container contains an image and text as overlay.
         // There are 4 containers arranged into a 2 x 2 grid (wide screen).
         overflow: hidden;
         position: relative;
         border-radius: 10px;
-        box-shadow: $colour-grey-light-4 0 5px 20px 1px;
+        box-shadow: $box-shadow-faint-br;
         
         &__header {
             // Text overlay in a container - goes over the images.
@@ -111,14 +107,131 @@
 }
 
 // -----------------------------------------------------------------------------
+.latest-products {
+    // Section will contain the last 5 latest products.
+    // Will consist of a header row which spans the length of all columns
+    // and will include 5 images with overlay name and price.
+    display: grid;
+    grid-template-rows: [head-start] min-content [head-end]
+                        repeat(2, [content-row-start-] 15vw [content-row-end-]);
+    grid-template-columns: repeat(3, 15vw);
+    justify-content: center;
+    gap: 4rem;
+    overflow: hidden;
+    border-radius: 10px;
+    @include padSection;
+
+    &:hover > &__product__name::before {
+        opacity: 0;
+    }
+
+    &__heading {
+        // Heading will consist of a main heading and a sub-heading.
+        grid-column: 1 / -1;
+
+        &__title {
+            @include margHeadSubHead;
+            color: $colour-primary;
+        }
+
+        &__info {
+            margin-bottom: -2rem;
+        }
+    }
+
+    &__product {
+        // Works alongside the card component.
+        // On the front size there is the image and name, and on hover the card
+        // will rotate in the y-axis to hide the front-side and review the rear
+        // side which consists of the price and cta button.
+        overflow: hidden;
+        box-shadow: $box-shadow-faint-br-2;
+        background-color: $colour-grey-light-3;
+        border-radius: 1rem;
+
+        &__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        &__name {
+            text-transform: uppercase;
+            position: absolute;
+            top: .5rem;
+            left: 1rem;
+            font-size: 2rem;
+            padding: .5rem;
+            width: 100%;
+            color: #000;
+
+            &::before {
+                // Faint grey background to make the text more visible.
+                content: "";
+                position: absolute;
+                width: 200%;
+                height: -webkit-fill-available;
+                left: -3rem;
+                background-image: linear-gradient(
+                    45deg, 
+                    rgba(255, 172, 32, 0.40) 35%,
+                    transparent 50%
+                );
+                transition: all .7s ease;
+            }
+
+        }
+
+        &__price-box {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: linear-gradient(
+                180deg,
+                $colour-secondary-high-sat,
+                $colour-secondary-high-sat-dark-1
+            );
+        }
+
+        &__price-only {
+            color: $colour-white-1;
+            text-transform: uppercase;
+        }
+
+        &__price-value {
+            color: $colour-white-1;
+            font-weight: 300;
+            font-size: 4rem;
+            margin-top: 1rem;
+        }
+
+        &__info-btn:link,
+        &__info-btn:visited {
+            margin-top: 1.5rem;
+            color: $colour-secondary;
+        }
+
+        &__info-btn:hover,
+        &__info-btn:active {
+            color: $colour-secondary-high-sat-dark-1;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
 .how-it-works {
     // Section split into two sub-sections.
     // .how-it-works__imgs shows a image stacked on top of one another.
     // .how-it-works__info describes the images. 
     display: flex;
     flex-direction: row;
-    
-    padding: 5.5rem 5rem;
+    @include padSection;
+    padding-top: 4.5rem;
+    background-color: $colour-grey-light-4;
     
     &__imgs {
         position: relative;
@@ -154,7 +267,7 @@
        width: 50%;
 
         &__heading {
-            margin-bottom: 4rem;
+            @include margHeadSubHead;
             color: $colour-primary;
         }
 

@@ -1,3 +1,6 @@
+p {
+  color: #5A5F6A; }
+
 .heading-1 {
   font-size: 6rem;
   font-weight: 300;
@@ -59,9 +62,6 @@ svg {
   height: 10px;
   fill: black; }
 
-p {
-  color: #5A5F6A; }
-
 .logo__img {
   background-size: cover;
   max-width: 100%;
@@ -80,14 +80,20 @@ p {
   transition: all .2s; }
 
 .btn {
-  position: relative; }
+  position: relative;
+  padding: 1rem;
+  border-radius: 5px; }
+  .btn:active {
+    transform: translate(2px, 2px); }
   .btn--primary {
     background-color: #f47c4a;
-    color: white;
-    padding: 1rem;
-    border-radius: 5px; }
+    color: white; }
     .btn--primary:hover {
       background-color: #f56020; }
+  .btn--white {
+    background-color: #F2F5F6; }
+    .btn--white:hover {
+      background-color: #fbfbfb; }
 
 .btn-inline {
   text-transform: uppercase;
@@ -389,7 +395,7 @@ p {
     overflow: hidden;
     position: relative;
     border-radius: 10px;
-    box-shadow: #f9f9f9 0 5px 20px 1px; }
+    box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15); }
     .index-grid__container__header {
       position: absolute;
       z-index: 10;
@@ -432,10 +438,79 @@ p {
       .index-grid__container:hover > a > .index-grid__container__header::before {
         background-image: none; }
 
+.latest-products {
+  display: grid;
+  grid-template-rows: [head-start] min-content [head-end] repeat(2, [content-row-start-] 15vw [content-row-end-]);
+  grid-template-columns: repeat(3, 15vw);
+  justify-content: center;
+  gap: 4rem;
+  overflow: hidden;
+  border-radius: 10px;
+  padding: 9.5rem 15rem; }
+  .latest-products:hover > .latest-products__product__name::before {
+    opacity: 0; }
+  .latest-products__heading {
+    grid-column: 1 / -1; }
+    .latest-products__heading__title {
+      margin-bottom: 2rem;
+      color: #f47c4a; }
+    .latest-products__heading__info {
+      margin-bottom: -2rem; }
+  .latest-products__product {
+    overflow: hidden;
+    box-shadow: #828282 5px 1px 11px -5px;
+    background-color: #c1c1c1;
+    border-radius: 1rem; }
+    .latest-products__product__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center; }
+    .latest-products__product__name {
+      text-transform: uppercase;
+      position: absolute;
+      top: .5rem;
+      left: 1rem;
+      font-size: 2rem;
+      padding: .5rem;
+      width: 100%;
+      color: #000; }
+      .latest-products__product__name::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: -webkit-fill-available;
+        left: -3rem;
+        background-image: linear-gradient(45deg, rgba(255, 172, 32, 0.4) 35%, transparent 50%);
+        transition: all .7s ease; }
+    .latest-products__product__price-box {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-image: linear-gradient(180deg, #0b73de, #09539e); }
+    .latest-products__product__price-only {
+      color: #fbfbfb;
+      text-transform: uppercase; }
+    .latest-products__product__price-value {
+      color: #fbfbfb;
+      font-weight: 300;
+      font-size: 4rem;
+      margin-top: 1rem; }
+    .latest-products__product__info-btn:link, .latest-products__product__info-btn:visited {
+      margin-top: 1.5rem;
+      color: #548FCC; }
+    .latest-products__product__info-btn:hover, .latest-products__product__info-btn:active {
+      color: #09539e; }
+
 .how-it-works {
   display: flex;
   flex-direction: row;
-  padding: 5.5rem 5rem; }
+  padding: 9.5rem 15rem;
+  padding-top: 4.5rem;
+  background-color: #f9f9f9; }
   .how-it-works__imgs {
     position: relative;
     width: 50%;
@@ -460,7 +535,7 @@ p {
     padding: 5rem 2.5rem;
     width: 50%; }
     .how-it-works__info__heading {
-      margin-bottom: 4rem;
+      margin-bottom: 2rem;
       color: #f47c4a; }
     .how-it-works__info__content > * {
       margin-bottom: 1rem; }
@@ -492,3 +567,21 @@ p {
       transition: all .25s;
       transform: translateX(-500%) translateY(0.5px);
       margin-left: -2px; }
+
+.card {
+  perspective: 150rem;
+  position: relative; }
+  .card__side {
+    transition: all .8s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; }
+    .card__side--back {
+      transform: rotateY(-180deg); }
+  .card:hover .card__side--front {
+    transform: rotateY(-180deg); }
+  .card:hover .card__side--back {
+    transform: rotateY(0); }

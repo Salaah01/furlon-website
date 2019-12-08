@@ -4,7 +4,7 @@
 // =============================================================================
 // Contains base style for the overall css.
 // Changes on this file should be restricted to colours only where possible as
-// changes on this file will afect most css properties.
+// changes on this file will afFect most css properties.
 // =============================================================================
 
 // -----------------------------------------------------------------------------
@@ -29,8 +29,6 @@ body {
 }
 
 svg { width: 10px; height: 10px; fill: black;}
-
-p { color: $colour-grey-dark-1;}
 
 // -----------------------------------------------------------------------------
 // LOGO
@@ -57,15 +55,27 @@ p { color: $colour-grey-dark-1;}
 
 .btn {
     position: relative;
+    padding: 1rem;
+    border-radius: 5px;
+
+    &:active {
+        transform: translate(2px, 2px);
+    }
 
     &--primary {
         background-color: $colour-primary;
         color: white;
-        padding: 1rem;
-        border-radius: 5px;
-
+        
         &:hover {
             background-color: $colour-primary-bright-1;
+        }
+    }
+
+    &--white {
+        background-color: $colour-white-2;
+
+        &:hover {
+            background-color: $colour-white-1;
         }
     }
 }
