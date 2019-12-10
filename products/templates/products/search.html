@@ -136,6 +136,19 @@
 
 </header>
 
+<script>
+    xhr = new XMLHttpRequest();
+    xhr.open("GET", "{% url 'search_results' %'}");
+    xhr.onload = function() {
+        if (xhr.status = 200) {
+            alert(xhr.responseText);
+        } else {
+            alert("req failed" + xhr.status);
+        }
+    };
+    xhr.send();
+</script>
+
 {% block footer %}
 
 {% endblock %}

@@ -611,7 +611,8 @@ svg {
   position: relative;
   display: block;
   width: 100%;
-  margin: 0 auto; }
+  margin: 0 auto;
+  color: #60666d; }
 
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");
