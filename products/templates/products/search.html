@@ -126,17 +126,37 @@
     <section class="search-results">
         
     </section>
+
+    <section class="results">
+        <div class="products">
+            {% if products %}
+                {% for product in products %}
+                <div
+                    class="product"
+                    id={{ product.product_id }}
+                    price={{ product.price }}
+                    category={{ product.category_id }}
+                >
+                    <div class="product__img">
+                        <img src="{{ product.showcase_image }}" alt="Showcase image for {{ product.name }}">
+                    </div>
+                </div>
+                
+                {% endfor %}
+
+            {% endif %}
+        </div>
+        
+    </section>
+    
+
 </main>
-{% for product in products %}
-<h2>{{product.name}}</h2>
-{% endfor %}
+
+
+
 {% endblock %}
 
-<header class="search-summary">
-
-</header>
-
-<script>
+<!-- <script>
     xhr = new XMLHttpRequest();
     xhr.open("GET", "{% url 'search_results' %'}");
     xhr.onload = function() {
@@ -147,7 +167,7 @@
         }
     };
     xhr.send();
-</script>
+</script> -->
 
 {% block footer %}
 

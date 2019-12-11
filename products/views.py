@@ -55,7 +55,7 @@ def search(request):
                         SELECT COUNT (*)
                         FROM products_categories pcat
                         WHERE pp.category_id = pcat.cat_id
-                        AND pcat.name like %s
+                        AND pcat.name like %(search)s
                     ) > 0
                     """,
                     {'search': '%' + searchTerm.lower() + '%'}
