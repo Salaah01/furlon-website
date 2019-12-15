@@ -96,26 +96,33 @@
                     </select> -->
                 <!-- </div> -->
                 <div class="select-box">
-                <div class="search-filters__options">
-                    {% for colourFamily in colourFamilies %}
-                        <div class="search-filters__value">
-                            <input
-                                type="radio"
-                                class="search-filters__input"
-                                id="{{ colourFamily }}"
-                                value="{{ colourFamily }}"
-                                name="colour"
-                            >
-                            <p class="search-filters__input-text">{{ colourFamily }}</p>
-                        </div>
-                        <ul class="search-filters__list">
-                            {% for colourFamily in courFamilies %}
-                                <label for="{{ colourFamily }}" class="search-filters__option" aria-hidden="aria-hidden">{{ colourFamily }}</label>
-                            {% endfor %}
-                        </ul>
-                    {% endfor %}
+                    <div class="search-filters__options select-box__current">
+                        {% for colourFamily in colourFamilies %}
+                            <div class="search-filters__value select-box__value">
+                                <input
+                                    type="radio"
+                                    class="search-filters__input select-box__input"
+                                    id="{{ colourFamily }}"
+                                    value="{{ colourFamily }}"
+                                    name="colour"
+                                >
+                                <p class="search-filters__input-text select-box__text">{{ colourFamily }}</p>
+                            </div>
+                            <ul class="search-filters__list select-box__list">
+                                {% for colourFamily in colourFamilies %}
+                                    <li>
+                                        <label
+                                            for="{{ colourFamily }}"
+                                            class="search-filters__option"
+                                            aria-hidden="aria-hidden"
+                                        >{{ colourFamily }}
+                                        </label>
+                                    </li>
+                                    {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </div>
                 </div>
-            </div>
             </div>
             <!-- Search Query Copy -->
             <input type="hidden" name="search" id="search-copy">

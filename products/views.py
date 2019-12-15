@@ -108,7 +108,7 @@ def search_results(request):
         searchSQL = 'AND ('
         searchBindVars = []
         for keyword in search:
-            searchBindVars += searchBindVars + [keyword] * 5
+            searchBindVars += searchBindVars + ['%' + keyword + '%'] * 5
             searchSQL += """
                 LOWER(name) like %s
                 OR  (
@@ -129,6 +129,7 @@ def search_results(request):
                     WHERE pp.category_id = pcat.cat_id
                     AND pcat.name like %s
                 ) > 0
+            )
             """
     else:
         searchBindVars = []
@@ -137,18 +138,19 @@ def search_results(request):
     # fullSQL consists of an sql build based on the filters and the searchSQL.
     # As a list of bindVars is used as supposed to a dictionary of bindVars, order matters.
     # This is done to prevent SQL injection when building the search query.
+    # Note: The fields selected are the same as the filters set in the search page.
     fullSQL = """
-        SELECT name, height, length
-        FROM products_products
-        WHERE price >= %s
-        AND price <= %s
+        SELECT pp.product_id, pp.price, pp.category_id
+        FROM products_products pp
+        WHERE pp.price >= %s
+        AND pp.price <= %s
         """
     if category:
         fullSQL += "AND category_id %s"
     if colour:
         fullSQL += "AND colour_id %s"
 
-    fullSQL += searchSQL + ';'
+    fullSQL += searchSQL
 
     bindVars = [float(minPrice), float(maxPrice)]
     if category:
@@ -161,9 +163,12 @@ def search_results(request):
     import json
     from django.http import HttpResponse
     cursor = connection.cursor()
+    print(fullSQL)
+    print(bindVars)
     cursor.execute(fullSQL, bindVars)
     dataRows = cursor.fetchall()
-    keys = ('name', 'height', 'length')
+    # Keys = taken from products_products. Only include the headers in the filter to reduce download speed.
+    keys = ('product_id', 'price', 'category_id')
     result = []
     for dataRow in dataRows:
         result.append(dict(zip(keys, dataRow)))
