@@ -58,70 +58,76 @@
             </div>
             <!-- Categories Group-->
             <div class="search-filters__group">
-                <div class="search-filters__group__item">
-                    <label class="search-filters__label" for="categories">Categories</label>
-                    <select class="search-filters__options" name="category" id="categories">
-                        <option class="search-filters__options__item" value="99" selected="selected" disabled="disabled">Category</option>
-                        {% for category in categories %}
-                            <option
-                                class="search-filters__options__item"
-                                value="{{ category.cat_id }}"
-                                {% if category.cat_id|slugify == userValues.category %}
-                                    selected
-                                {% endif %}
-                            >
-                                    {{ category }}
-                            </option>
+                <div class="select-box">
+                    <div class="select-box__current" tabindex="1">
+                        {% for category in colourFamilies %}
+                            <div class="select-box__value">
+                                <input
+                                    type="radio"
+                                    class="select-box__input"
+                                    id="{{ category.cat_id }}"
+                                    name="colour"
+                                    checked="checked"
+                                >
+                                <p class="select-box__input-text">{{ category }}</p>
+                            </div>
                         {% endfor %}
-                    </select>
+                        <img
+                            class="select-box__icon"
+                            src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+                            alt="Arrow Icon"
+                            aria-hidden="true"
+                        >
+                    </div>
+                    <ul class="select-box__list">
+                        {% for category in colourFamilies %}
+                            <li>
+                                <label
+                                    for="{{ category }}"
+                                    class="select-box__option"
+                                    aria-hidden="aria-hidden"
+                                >{{ category }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
             <!-- Colour Group -->
             <div class="search-filters__group">
-                <!-- <div class="search-filters__group__item"> -->
-                    <!-- <label class="search-filters__label" for="colour">Colour</label>
-                    <select class="search-filters__options" name="colour" id="colour">
-                        <option class="search-filters__options__item" value="99" selected="selected" disabled="disabled">Colour</option>
-                        {% for colourFamily in colourFamilies %}
-                            <option
-                                class="search-filters__options__item"
-                                value="{{ colourFamily }}"
-                                {% if colourFamily.name == userValues.colour %}
-                                    selected
-                                {% endif %}
-                            >
-                                    {{ colourFamily }}
-                            </option>
-                        {% endfor %}
-                    </select> -->
-                <!-- </div> -->
                 <div class="select-box">
-                    <div class="search-filters__options select-box__current">
+                    <div class="select-box__current" tabindex="1">
                         {% for colourFamily in colourFamilies %}
-                            <div class="search-filters__value select-box__value">
+                            <div class="select-box__value">
                                 <input
                                     type="radio"
-                                    class="search-filters__input select-box__input"
+                                    class="select-box__input"
                                     id="{{ colourFamily }}"
-                                    value="{{ colourFamily }}"
                                     name="colour"
+                                    checked="checked"
                                 >
-                                <p class="search-filters__input-text select-box__text">{{ colourFamily }}</p>
+                                <p class="select-box__input-text">{{ colourFamily }}</p>
                             </div>
-                            <ul class="search-filters__list select-box__list">
-                                {% for colourFamily in colourFamilies %}
-                                    <li>
-                                        <label
-                                            for="{{ colourFamily }}"
-                                            class="search-filters__option"
-                                            aria-hidden="aria-hidden"
-                                        >{{ colourFamily }}
-                                        </label>
-                                    </li>
-                                    {% endfor %}
-                            </ul>
                         {% endfor %}
+                        <img
+                            class="select-box__icon"
+                            src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
+                            alt="Arrow Icon"
+                            aria-hidden="true"
+                        >
                     </div>
+                    <ul class="select-box__list">
+                        {% for colourFamily in colourFamilies %}
+                            <li>
+                                <label
+                                    for="{{ colourFamily }}"
+                                    class="select-box__option"
+                                    aria-hidden="aria-hidden"
+                                >{{ colourFamily }}
+                                </label>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
             </div>
             <!-- Search Query Copy -->
