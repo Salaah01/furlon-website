@@ -560,6 +560,10 @@ svg {
 .search-filters {
   display: flex;
   justify-content: center; }
+  .search-filters__group {
+    border-radius: 1rem; }
+    .search-filters__group:not(:last-child) {
+      margin-right: 1rem; }
 
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");
@@ -603,77 +607,55 @@ svg {
   .card:hover .card__side--back {
     transform: rotateY(0); }
 
-.select-box {
+/* The container must be positioned relative: */
+.custom-select {
   position: relative;
-  display: block;
-  width: 100%;
-  margin: 0 auto;
-  font-family: inherit;
-  font-size: inherit;
-  color: #60666d; }
-  @media (min-width: 768px) {
-    .select-box {
-      width: 70%; } }
-  @media (min-width: 992px) {
-    .select-box {
-      width: 50%; } }
-  @media (min-width: 1200px) {
-    .select-box {
-      width: 30%; } }
-  .select-box__current {
-    position: relative;
-    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    outline: none; }
-    .select-box__current:focus + .select-box__list {
-      opacity: 1;
-      animation-name: none; }
-      .select-box__current:focus + .select-box__list .select-box__option {
-        cursor: pointer; }
-    .select-box__current:focus .select-box__icon {
-      transform: translateY(-50%) rotate(180deg); }
-  .select-box__icon {
-    position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 20px;
-    opacity: 0.3;
-    transition: 0.2s ease; }
-  .select-box__value {
-    display: flex; }
-  .select-box__input {
-    display: none; }
-    .select-box__input:checked + .select-box__input-text {
-      display: block; }
-  .select-box__input-text {
-    display: none;
-    width: 100%;
-    margin: 0;
-    padding: 15px;
-    background-color: #fff; }
-  .select-box__list {
-    position: absolute;
-    width: 100%;
-    padding: 0;
-    list-style: none;
-    opacity: 0;
-    animation-name: HideList;
-    animation-duration: 0.5s;
-    animation-delay: 0.5s;
-    animation-fill-mode: forwards;
-    animation-timing-function: step-start;
-    box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1); }
-  .select-box__option {
-    display: block;
-    padding: 15px;
-    background-color: #fff; }
-    .select-box__option:hover, .select-box__option:focus {
-      color: #546c84;
-      background-color: #fbfbfb; }
+  font-family: Arial; }
 
-@keyframes HideList {
-  from {
-    transform: scaleY(1); }
-  to {
-    transform: scaleY(0); } }
+.custom-select select {
+  display: none;
+  /*hide original SELECT element: */ }
+
+.select-selected {
+  background-color: #914652;
+  border-radius: 5px; }
+
+/* Style the arrow inside the select element: */
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent; }
+
+/* Point the arrow upwards when the select box is open (active): */
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px; }
+
+/* style the items (options), including the selected item: */
+.select-items div, .select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer; }
+
+/* Style items (options): */
+.select-items {
+  position: absolute;
+  background-color: #914652;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99; }
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+  display: none; }
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1); }

@@ -15,12 +15,12 @@
 {% endif %}
 
 <main class="search-main-content">
-    <section class="search-filters">
-        <form action="{% url 'search' %}" method="GET">
+    <section class="section-filters">
+        <form action="{% url 'search' %}" class="search-filters" method="GET">
             <!-- Prices Group-->
             <div class="search-filters__group">
                 <!-- Min Price -->
-                <div class="search-filters__group__item">
+                <div class="search-filters__group__item custom-select">
                     <label class="search-filters__label" for="min-price">Min Price</label>
                     <select class="search-filters__options" name="minPrice" id="min-price">
                         <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Min Price</option>
@@ -37,8 +37,10 @@
                         {% endfor %}
                     </select>
                 </div>
-                <!-- Max Price -->
-                <div class="search-filters__group__item">
+            </div>
+            <!-- Max Price -->
+            <div class="search-filters__group">
+                <div class="search-filters__group__item custom-select">
                     <label class="search-filters__label" for="max-price">Max Price</label>
                     <select class="search-filters__options" name="maxPrice" id="max-price">
                         <option class="search-filters__options__item" value="-99" selected="selected" disabled="disabled">Max Price</option>
@@ -58,78 +60,39 @@
             </div>
             <!-- Categories Group-->
             <div class="search-filters__group">
-                <div class="select-box">
-                    <div class="select-box__current" tabindex="1">
-                        {% for category in colourFamilies %}
-                            <div class="select-box__value">
-                                <input
-                                    type="radio"
-                                    class="select-box__input"
-                                    id="{{ category.cat_id }}"
-                                    name="colour"
-                                    checked="checked"
-                                >
-                                <p class="select-box__input-text">{{ category }}</p>
-                            </div>
+                <div class="search-filters__item custom-select">
+                    <label class="search-filters__label" for="category">Category</label>
+                    <select name="category" id="category" class="search-filters__options">
+                        <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Category</option>
+                        {% for category in categories %}
+                            <option
+                                value="{{ category.cat_id }}"
+                                class="search-filters__option__item"
+                            >
+                                {{ category }}
+                            </option>
                         {% endfor %}
-                        <img
-                            class="select-box__icon"
-                            src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
-                            alt="Arrow Icon"
-                            aria-hidden="true"
-                        >
-                    </div>
-                    <ul class="select-box__list">
-                        {% for category in colourFamilies %}
-                            <li>
-                                <label
-                                    for="{{ category }}"
-                                    class="select-box__option"
-                                    aria-hidden="aria-hidden"
-                                >{{ category }}
-                                </label>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    </select>
                 </div>
             </div>
             <!-- Colour Group -->
             <div class="search-filters__group">
-                <div class="select-box">
-                    <div class="select-box__current" tabindex="1">
+                <div class="search-filters__item custom-select">
+                    <label class="search-filters__label" for="colour">Colour</label>
+                    <select name="colour" id="colour" class="search-filters__options">
+                        <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Colour</option>
                         {% for colourFamily in colourFamilies %}
-                            <div class="select-box__value">
-                                <input
-                                    type="radio"
-                                    class="select-box__input"
-                                    id="{{ colourFamily }}"
-                                    name="colour"
-                                    checked="checked"
-                                >
-                                <p class="select-box__input-text">{{ colourFamily }}</p>
-                            </div>
+                            <option
+                                value="{{ colourFamily }}"
+                                class="search-filters__options__item"
+                            >
+                                    {{ colourFamily }}
+                            </option>
                         {% endfor %}
-                        <img
-                            class="select-box__icon"
-                            src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
-                            alt="Arrow Icon"
-                            aria-hidden="true"
-                        >
-                    </div>
-                    <ul class="select-box__list">
-                        {% for colourFamily in colourFamilies %}
-                            <li>
-                                <label
-                                    for="{{ colourFamily }}"
-                                    class="select-box__option"
-                                    aria-hidden="aria-hidden"
-                                >{{ colourFamily }}
-                                </label>
-                            </li>
-                        {% endfor %}
-                    </ul>
+                    </select>
                 </div>
             </div>
+ 
             <!-- Search Query Copy -->
             <input type="hidden" name="search" id="search-copy">
             <!-- Submit -->
@@ -161,27 +124,14 @@
         </div>
         
     </section>
-    
 
 </main>
 
-
-
 {% endblock %}
 
-<!-- <script>
-    xhr = new XMLHttpRequest();
-    xhr.open("GET", "{% url 'search_results' %'}");
-    xhr.onload = function() {
-        if (xhr.status = 200) {
-            alert(xhr.responseText);
-        } else {
-            alert("req failed" + xhr.status);
-        }
-    };
-    xhr.send();
-</script> -->
 
 {% block footer %}
+
+<script src="/static/js/components/dropdown-menu.js"></script>
 
 {% endblock %}
