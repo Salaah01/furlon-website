@@ -550,6 +550,7 @@ svg {
 .search-summary {
   width: 100%;
   padding: 3rem;
+  padding-bottom: 2rem;
   text-align: center; }
   .search-summary__text__num-results {
     margin-bottom: .5rem; }
@@ -559,11 +560,16 @@ svg {
 
 .search-filters {
   display: flex;
-  justify-content: center; }
+  justify-content: center;
+  margin-bottom: 2rem; }
   .search-filters__group {
     border-radius: 1rem; }
     .search-filters__group:not(:last-child) {
       margin-right: 1rem; }
+  .search-filters__label {
+    display: none; }
+  .search-filters__submit-btn {
+    display: none; }
 
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");
@@ -617,15 +623,22 @@ svg {
   /*hide original SELECT element: */ }
 
 .select-selected {
-  background-color: #914652;
-  border-radius: 5px; }
+  background-color: #315B8A;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  width: 12rem;
+  transition: background-color .3s; }
+  .select-selected:hover {
+    background-color: #284e7a; }
+  .select-selected:active {
+    transform: translate(1px, 1px); }
 
 /* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 14px;
-  right: 10px;
+  top: 1.4rem;
+  right: 1rem;
   width: 0;
   height: 0;
   border: 6px solid transparent;
@@ -647,7 +660,7 @@ svg {
 /* Style items (options): */
 .select-items {
   position: absolute;
-  background-color: #914652;
+  background-color: #315B8A;
   top: 100%;
   left: 0;
   right: 0;

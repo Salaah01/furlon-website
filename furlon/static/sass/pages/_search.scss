@@ -12,6 +12,7 @@
     // number of results along with the search query.
     width: 100%;
     padding: 3rem;
+    padding-bottom: 2rem;
     text-align: center;
 
     &__text {
@@ -32,8 +33,7 @@
     // Contains the search filters form
     display: flex;
     justify-content: center;
-
-   
+    margin-bottom: 2rem;
 
     &__group {
         border-radius: 1rem;
@@ -41,6 +41,14 @@
         &:not(:last-child) {
             margin-right: 1rem;
         }
+    }
+
+    &__label {
+        display: none;
+    }
+
+    &__submit-btn {
+        display: none;
     }
 
 }

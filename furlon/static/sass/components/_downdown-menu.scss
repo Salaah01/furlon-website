@@ -9,16 +9,28 @@
 }
 
 .select-selected {
-  background-color: $colour-primary-dark-1;
+  background-color: $colour-secondary-dark-1;
   border-radius: 5px;
+  font-size: 1.4rem;
+  width: 12rem;
+  transition: background-color .3s;
+  
+  &:hover {
+    background-color: $colour-secondary-dark-1-highlighted-1;
+  }
+
+  &:active {
+    transform: translate(1px, 1px);
+  }
+
 }
 
 /* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;
   content: "";
-  top: 14px;
-  right: 10px;
+  top: 1.4rem;
+  right: 1rem;
   width: 0;
   height: 0;
   border: 6px solid transparent;
@@ -43,7 +55,7 @@
 /* Style items (options): */
 .select-items {
   position: absolute;
-  background-color: $colour-primary-dark-1;
+  background-color: $colour-secondary-dark-1;
   top: 100%;
   left: 0;
   right: 0;
