@@ -1,0 +1,18 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Python37_64\\python.exe",
+    "cSpell.words": [
+        "endblock",
+        "furlon"
+    ],
+    "cSpell.ignoreWords": [
+        "divs",
+        "livingroom",
+        "minmax",
+        "pcat",
+        "pcol",
+        "showcase"
+    ]
+}

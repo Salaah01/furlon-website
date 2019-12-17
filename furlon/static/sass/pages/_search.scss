@@ -1,0 +1,46 @@
+// =============================================================================
+// Date Created:   08/12/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the search page.
+// Includes styling for the filter options and the search results.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+.search-summary {
+    // If user has entered a search query, then the top of the DOM will show the
+    // number of results along with the search query.
+    width: 100%;
+    padding: 3rem;
+    text-align: center;
+
+    &__text {
+
+        &__num-results {
+            margin-bottom: .5rem;
+        }
+
+        &__search-str {
+            font-size: 4rem;
+            color: $colour-secondary;
+        }
+    }
+}
+
+// -----------------------------------------------------------------------------
+.search-filters {
+    // Contains the search filters form
+    display: flex;
+    justify-content: center;
+
+   
+
+    &__group {
+        border-radius: 1rem;
+
+        &:not(:last-child) {
+            margin-right: 1rem;
+        }
+    }
+
+}

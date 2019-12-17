@@ -30,16 +30,15 @@ from django.contrib import admin
 from .models import *
 
 
-###############################################################################
+##################################################################################################################################
 class ColourFamiliesAdmin(admin.ModelAdmin):
-    """ Registers Colour Families (products_colourfamilies) table to the
-    admin page """
+    """ Registers Colour Families (products_colourfamilies) table to th admin page """
     list_display = ('name',)
     list_display_links = ('name',)
     search_fields = ('name',)
 
 
-###############################################################################
+##################################################################################################################################
 class ColoursAdmin(admin.ModelAdmin):
     """ Registers Colours (products_colours) table to the admin page """
     list_display = ('col_families', 'name', 'hex_val')
@@ -47,7 +46,7 @@ class ColoursAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-###############################################################################
+##################################################################################################################################
 class RoomsAdmin(admin.ModelAdmin):
     """ Registers Rooms (products_rooms) table to the admin page """
     list_display = ('name',)
@@ -55,7 +54,7 @@ class RoomsAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-###############################################################################
+##################################################################################################################################
 class CategoriesAdmin(admin.ModelAdmin):
     """ Registers Categories (products_categories) table to the admin page """
     list_display = ('name',)
@@ -63,7 +62,7 @@ class CategoriesAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 
-###############################################################################
+##################################################################################################################################
 class SubCategoriesAdmin(admin.ModelAdmin):
     """ Registers Sub Categories (products_subcategories) table to the
     admin page """
@@ -73,7 +72,7 @@ class SubCategoriesAdmin(admin.ModelAdmin):
     list_filter = ('name', 'category',)
 
 
-###############################################################################
+##################################################################################################################################
 class FeaturesAdmin(admin.ModelAdmin):
     """ Registers Features (products_features) table to the admin page """
     list_display = ('name', 'category',)
@@ -94,8 +93,7 @@ class ProductsAdmin(admin.ModelAdmin):
 
 ##################################################################################################################################
 class RelatedProductVarsAdmin(admin.ModelAdmin):
-    """ Registers Related Product Variations (products_relatedproductvars)
-    table to the admin page """
+    """ Registers Related Product Variations (products_relatedproductvars) table to the admin page """
     list_display = ('product', 'linked',)
     list_display_links = ('product',)
     search_fields = ('product__name', 'linked__name',)
@@ -103,8 +101,7 @@ class RelatedProductVarsAdmin(admin.ModelAdmin):
 
 ##################################################################################################################################
 class ProductColourVarsAdmin(admin.ModelAdmin):
-    """ Registers Product Colour Variations (products_productcolourvars) table
-    to the admin page """
+    """ Registers Product Colour Variations (products_productcolourvars) table to the admin page """
     list_display = ('product', 'linked',)
     list_display_links = ('product',)
     search_fields = ('product__name', 'linked__name',)
@@ -112,8 +109,7 @@ class ProductColourVarsAdmin(admin.ModelAdmin):
 
 ##################################################################################################################################
 class ProductReviewsAdmin(admin.ModelAdmin):
-    """ Registers Product Reviews (products_productreviews) table
-    to the admin page """
+    """ Registers Product Reviews (products_productreviews) table to the admin page """
     list_display = ('product', 'store', 'user', 'rating', 'review_date')
     list_display_links = ('product', )
     search_fields = ('product__name', 'store__name', 'store__name', 'user__first_name', 'user__last_name', 'user__email',
