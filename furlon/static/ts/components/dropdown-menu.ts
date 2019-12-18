@@ -133,3 +133,63 @@ function closeAllSelect(elem: any): void {
 /* If the user clicks anywhere outside the select box,
 then close all select boxes: */
 document.addEventListener("click", closeAllSelect)
+
+
+function closeAllSelect2(elem: any): void {
+  /* A function that will close all select boxes in the document,
+  except the current select box: */
+  var x, y, i, arrNo = [];
+  const dropDownMenus = document.getElementsByClassName("dropdown-menu");
+  y = document.getElementsByClassName("select-selected");
+  for (i = 0; i < y.length; i++) {
+    if (elem == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < x.length; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+
+
+const dropdownMenus2 = document.getElementsByClassName("dropdown-menu") as HTMLCollectionOf<HTMLDivElement>
+if (dropdownMenus2.length) {
+  for (let menuIter = 0; menuIter < dropdownMenus2.length; menuIter++) {
+    document.addEventListener("click", closeAllSelect2)
+    buildFilters(dropdownMenus2[menuIter])
+    
+  }
+}
+
+function buildFilters(dropDownMenu: HTMLDivElement) {
+  let optionsBtn = dropDownMenu.getElementsByClassName("dropdown-menu__selected")[0] as HTMLDivElement
+  let optionsListContainer = dropDownMenu.getElementsByClassName("dropdown-menu__options")[0] as HTMLDivElement
+  let optionsListItems = optionsListContainer.getElementsByClassName("dropdown-menu__options__label") as HTMLCollectionOf<HTMLLabelElement>
+  optionsBtn.addEventListener("click", () => {
+    optionsListContainer.classList.toggle("dropdown-menu__options--hide")
+  })
+
+  for (let optionIter = 0; optionIter < optionsListItems.length; optionIter++) {
+    let listItem = optionsListItems[optionIter]
+    listItem.addEventListener("click", () => {
+      
+    // Remove the highlight form all list items and reapply to the selected list item only
+    for (let optionSubIter = 0; optionSubIter < optionsListItems.length; optionSubIter++) {
+      optionsListItems[optionSubIter].classList.remove("dropdown-menu__options__label--selected")
+    }
+    listItem.classList.add("dropdown-menu__options__label--selected")
+
+    // Close the menu
+    optionsListContainer.classList.add("dropdown-menu__options--hide")
+
+    })
+  }
+
+  
+
+
+}

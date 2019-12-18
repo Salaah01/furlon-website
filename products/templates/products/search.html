@@ -92,7 +92,20 @@
                     </select>
                 </div>
             </div>
- 
+            <!-- Colour Group -->
+            <div class="search-filters__group">
+                <div class="search-filters__item dropdown-menu">
+                    <div class="dropdown-menu__selected">
+                        <span>Colour</span>
+                    </div>
+                    <div class="dropdown-menu__options">
+                        {% for colourFamily in colourFamilies %}
+                            <label class="dropdown-menu__options__label" for="colour-{{ colourFamily }}">{{ colourFamily }}</label>
+                            <input class="dropdown-menu__options__radio-btn" type="radio" name="f-colour" id=colour-{{ colourFamily }} value="{{ colourFamily }}">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
             <!-- Search Query Copy -->
             <input type="hidden" name="search" id="search-copy">
             <!-- Submit -->

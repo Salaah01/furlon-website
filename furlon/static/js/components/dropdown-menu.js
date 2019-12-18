@@ -130,4 +130,33 @@ function closeAllSelect(elem) {
 /* If the user clicks anywhere outside the select box,
 then close all select boxes: */
 document.addEventListener("click", closeAllSelect);
+var dropdownMenus2 = document.getElementsByClassName("dropdown-menu");
+if (dropdownMenus2.length) {
+    for (var menuIter = 0; menuIter < dropdownMenus2.length; menuIter++) {
+        buildFilters(dropdownMenus2[menuIter]);
+    }
+}
+function buildFilters(dropDownMenu) {
+    var optionsBtn = dropDownMenu.getElementsByClassName("dropdown-menu__selected")[0];
+    var optionsListContainer = dropDownMenu.getElementsByClassName("dropdown-menu__options")[0];
+    var optionsListItems = optionsListContainer.getElementsByClassName("dropdown-menu__options__label");
+    optionsBtn.addEventListener("click", function () {
+        optionsListContainer.classList.toggle("dropdown-menu__options--hide");
+    });
+    var _loop_1 = function (optionIter) {
+        var listItem = optionsListItems[optionIter];
+        listItem.addEventListener("click", function () {
+            // Remove the highlight form all list items and reapply to the selected list item only
+            for (var optionSubIter = 0; optionSubIter < optionsListItems.length; optionSubIter++) {
+                optionsListItems[optionSubIter].classList.remove("dropdown-menu__options__label--selected");
+            }
+            listItem.classList.add("dropdown-menu__options__label--selected");
+            // Close the menu
+            optionsListContainer.classList.add("dropdown-menu__options--hide");
+        });
+    };
+    for (var optionIter = 0; optionIter < optionsListItems.length; optionIter++) {
+        _loop_1(optionIter);
+    }
+}
 //# sourceMappingURL=dropdown-menu.js.map

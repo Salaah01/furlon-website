@@ -614,25 +614,6 @@ svg {
     transform: rotateY(0); }
 
 /* The container must be positioned relative: */
-.custom-select {
-  position: relative;
-  font-family: Arial; }
-
-.custom-select select {
-  display: none;
-  /*hide original SELECT element: */ }
-
-.select-selected {
-  background-color: #315B8A;
-  border-radius: 5px;
-  font-size: 1.4rem;
-  width: 12rem;
-  transition: background-color .3s; }
-  .select-selected:hover {
-    background-color: #284e7a; }
-  .select-selected:active {
-    transform: translate(1px, 1px); }
-
 /* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;
@@ -649,26 +630,58 @@ svg {
   border-color: transparent transparent #fff transparent;
   top: 7px; }
 
-/* style the items (options), including the selected item: */
-.select-items div, .select-selected {
-  color: #ffffff;
-  padding: 8px 16px;
+/* Style items (options): */
+/* Hide the items when the select box is closed: */
+.select-items div:hover,
+.same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1); }
+
+.dropdown-menu__selected {
+  background-color: #315B8A;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  width: 12rem;
+  transition: background-color 0.3s;
+  color: #fbfbfb;
+  padding: .8rem 1.6rem;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
-  cursor: pointer; }
+  cursor: pointer;
+  position: relative; }
+  .dropdown-menu__selected:hover {
+    background-color: #284e7a; }
+  .dropdown-menu__selected:active {
+    transform: translate(1px, 1px); }
+  .dropdown-menu__selected:after {
+    position: absolute;
+    content: "";
+    top: 1.4rem;
+    right: 1rem;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent; }
 
-/* Style items (options): */
-.select-items {
-  position: absolute;
+.dropdown-menu__options {
+  display: flex;
+  flex-direction: column;
   background-color: #315B8A;
   top: 100%;
   left: 0;
   right: 0;
-  z-index: 99; }
-
-/* Hide the items when the select box is closed: */
-.select-hide {
-  display: none; }
-
-.select-items div:hover, .same-as-selected {
-  background-color: rgba(0, 0, 0, 0.1); }
+  z-index: 99;
+  border-radius: 5px; }
+  .dropdown-menu__options--hide {
+    display: none; }
+  .dropdown-menu__options__label {
+    cursor: pointer;
+    padding: .8rem 1.6rem;
+    color: #fbfbfb;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent; }
+    .dropdown-menu__options__label:hover {
+      background-color: rgba(0, 0, 0, 0.1); }
+    .dropdown-menu__options__label--selected {
+      background-color: rgba(0, 0, 0, 0.1); }
+  .dropdown-menu__options__radio-btn {
+    display: none; }
