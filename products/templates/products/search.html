@@ -17,79 +17,79 @@
 <main class="search-main-content">
     <section class="section-filters">
         <form action="{% url 'search' %}" class="search-filters" method="GET">
-            <!-- Prices Group-->
+            <!-- Min Price -->
             <div class="search-filters__group">
-                <!-- Min Price -->
-                <div class="search-filters__group__item custom-select">
-                    <label class="search-filters__label" for="min-price">Min Price</label>
-                    <select class="search-filters__options" name="minPrice" id="min-price">
-                        <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Min Price</option>
+                <div class="search-filters__group__item dropdown-menu">
+                    <div class="dropdown-menu__selected">
+                        <span>Min Price</span>
+                    </div>
+                    <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for key, price in minPrice.items %}
-                            <option
-                                class="search-filters__options__item"
-                                value= "{{ key }}"
-                                {% if key == userValues.minPrice %}
-                                    selected
-                                {% endif %}
-                            >
-                                    {{ price }}
-                            </option>
+                        <label
+                            class="dropdown-menu__options__label"
+                            for="min-price-{{ key }}"
+                        >
+                                {{ price }}
+                        </label>
+                        <input
+                            class="dropdown-menu__options__radio-btn"
+                            type="radio"
+                            name="f-min-price"
+                            id=min-price-{{ key }}
+                            value="{{ key }}"
+                        >
                         {% endfor %}
-                    </select>
+                    </div>
                 </div>
             </div>
             <!-- Max Price -->
             <div class="search-filters__group">
-                <div class="search-filters__group__item custom-select">
-                    <label class="search-filters__label" for="max-price">Max Price</label>
-                    <select class="search-filters__options" name="maxPrice" id="max-price">
-                        <option class="search-filters__options__item" value="-99" selected="selected" disabled="disabled">Max Price</option>
+                <div class="search-filters__group__item dropdown-menu">
+                    <div class="dropdown-menu__selected">
+                        <span>Max Price</span>
+                    </div>
+                    <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for key, price in maxPrice.items %}
-                            <option
-                                class="search-filters__options__item"
-                                value="{{ price }}"
-                                {% if key == userValues.maxPrice %}
-                                    selected
-                                {% endif %}
-                            >
-                                    {{ price }}
-                            </option>
+                        <label
+                            class="dropdown-menu__options__label"
+                            for="max-price-{{ key }}"
+                        >
+                                {{ price }}
+                        </label>
+                        <input
+                            class="dropdown-menu__options__radio-btn"
+                            type="radio"
+                            name="f-max-price"
+                            id=max-price-{{ key }}
+                            value="{{ key }}"
+                        >
                         {% endfor %}
-                    </select>
+                    </div>
                 </div>
             </div>
             <!-- Categories Group-->
             <div class="search-filters__group">
-                <div class="search-filters__item custom-select">
-                    <label class="search-filters__label" for="category">Category</label>
-                    <select name="category" id="category" class="search-filters__options">
-                        <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Category</option>
+                <div class="search-filters__item dropdown-menu">
+                    <div class="dropdown-menu__selected">
+                        <span>Category</span>
+                    </div>
+                    <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for category in categories %}
-                            <option
-                                value="{{ category.cat_id }}"
-                                class="search-filters__option__item"
-                            >
+                        <label
+                            class="dropdown-menu__options__label"
+                            for="category-{{ category.cat_id }}"
+                        >
                                 {{ category }}
-                            </option>
+                        </label>
+                        <input
+                            class="dropdown-menu__options__radio-btn"
+                            type="radio"
+                            name="f-category"
+                            id=category-{{ category.cat_id }}
+                            value="{{ category }}"
+                        >
                         {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <!-- Colour Group -->
-            <div class="search-filters__group">
-                <div class="search-filters__item custom-select">
-                    <label class="search-filters__label" for="colour">Colour</label>
-                    <select name="colour" id="colour" class="search-filters__options">
-                        <option class="search-filters__options__item" value="-99" selected="true" disabled="disabled">Colour</option>
-                        {% for colourFamily in colourFamilies %}
-                            <option
-                                value="{{ colourFamily }}"
-                                class="search-filters__options__item"
-                            >
-                                    {{ colourFamily }}
-                            </option>
-                        {% endfor %}
-                    </select>
+                    </div>
                 </div>
             </div>
             <!-- Colour Group -->
@@ -98,10 +98,21 @@
                     <div class="dropdown-menu__selected">
                         <span>Colour</span>
                     </div>
-                    <div class="dropdown-menu__options">
+                    <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for colourFamily in colourFamilies %}
-                            <label class="dropdown-menu__options__label" for="colour-{{ colourFamily }}">{{ colourFamily }}</label>
-                            <input class="dropdown-menu__options__radio-btn" type="radio" name="f-colour" id=colour-{{ colourFamily }} value="{{ colourFamily }}">
+                            <label
+                                class="dropdown-menu__options__label"
+                                for="colour-{{ colourFamily }}"
+                            >
+                                    {{ colourFamily }}
+                            </label>
+                            <input
+                                class="dropdown-menu__options__radio-btn"
+                                type="radio"
+                                name="f-colour"
+                                id=colour-{{ colourFamily }}
+                                value="{{ colourFamily }}"
+                            >
                         {% endfor %}
                     </div>
                 </div>
