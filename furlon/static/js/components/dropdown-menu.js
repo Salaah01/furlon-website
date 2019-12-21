@@ -51,7 +51,7 @@ var DropdownMenu = /** @class */ (function () {
     function DropdownMenu() {
         /**
          * No arguments - class uses objects found on the DOM.
-        */
+         */
         /**
          * Sets up the functionality for the custom dropdown menus.
          * These include:
@@ -74,14 +74,41 @@ var DropdownMenu = /** @class */ (function () {
     // ---------------------------------------------------------------------------
     DropdownMenu.prototype.close_menu = function () {
         /**
-         * closes all menus when clicked outside.
+         * Closes all menus when clicked outside on another filter button.
+         * Also carries function to close the nav-menus.
          */
+        var filterBtns = document.getElementsByClassName("dropdown-menu__selected");
         var optionLists = document.getElementsByClassName("dropdown-menu__options");
         document.addEventListener("click", function () {
             for (var idx = 0; idx < optionLists.length; idx++) {
                 optionLists[idx].classList.add("dropdown-menu__options--hide");
             }
         });
+        var navSubMenus = document.querySelectorAll(".nav__option__dropdown-opts");
+        var _loop_1 = function (i) {
+            var selectedBtn = filterBtns[i];
+            selectedBtn.addEventListener("click", function () {
+                var _a;
+                // Close nav menus
+                for (var idx = 0; idx < navSubMenus.length; idx++) {
+                    navSubMenus[idx].classList.replace("nav__option__dropdown-opts--expanded", "nav__option__dropdown-opts--collapse");
+                }
+                // Close all other filters lists
+                for (var j = 0; j < filterBtns.length; j++) {
+                    var targetElem = filterBtns[j];
+                    if (targetElem.getAttribute("filter-for") !=
+                        selectedBtn.getAttribute("filter-for")) {
+                        // Just incase the structure changes, and the next sibling ins not the options list
+                        if (targetElem.nextElementSibling.classList.contains("dropdown-menu__options")) {
+                            (_a = targetElem.nextElementSibling) === null || _a === void 0 ? void 0 : _a.classList.add("dropdown-menu__options--hide");
+                        }
+                    }
+                }
+            });
+        };
+        for (var i = 0; i < filterBtns.length; i++) {
+            _loop_1(i);
+        }
     };
     // ---------------------------------------------------------------------------
     DropdownMenu.prototype.build_menu = function (ddMenu) {
@@ -97,7 +124,7 @@ var DropdownMenu = /** @class */ (function () {
             event.stopPropagation();
             optionsListContainer.classList.toggle("dropdown-menu__options--hide");
         });
-        var _loop_1 = function (optionIter) {
+        var _loop_2 = function (optionIter) {
             var listItem = optionsListItems[optionIter];
             listItem.addEventListener("click", function () {
                 // Remove the highlight from all list items and reapply to the selected
@@ -115,7 +142,7 @@ var DropdownMenu = /** @class */ (function () {
         };
         // Event listener setup for each option
         for (var optionIter = 0; optionIter < optionsListItems.length; optionIter++) {
-            _loop_1(optionIter);
+            _loop_2(optionIter);
         }
     };
     return DropdownMenu;

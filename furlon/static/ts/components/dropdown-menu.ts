@@ -68,7 +68,7 @@ class DropdownMenu {
   constructor() {
     /**
      * No arguments - class uses objects found on the DOM.
-    */
+     */
 
     // Adds function to close all menus when clicking outside of element
     this.close_menu();
@@ -82,16 +82,61 @@ class DropdownMenu {
   // ---------------------------------------------------------------------------
   close_menu() {
     /**
-     * closes all menus when clicked outside.
+     * Closes all menus when clicked outside on another filter button.
+     * Also carries function to close the nav-menus.
      */
+
+    const filterBtns = document.getElementsByClassName(
+      "dropdown-menu__selected"
+    ) as HTMLCollectionOf<HTMLDivElement>;
+
     const optionLists = document.getElementsByClassName(
       "dropdown-menu__options"
     );
+
     document.addEventListener("click", () => {
       for (let idx = 0; idx < optionLists.length; idx++) {
         optionLists[idx].classList.add("dropdown-menu__options--hide");
       }
     });
+
+    const navSubMenus = document.querySelectorAll(
+      ".nav__option__dropdown-opts"
+    );
+    for (let i = 0; i < filterBtns.length; i++) {
+      const selectedBtn = filterBtns[i];
+
+      selectedBtn.addEventListener("click", () => {
+        // Close nav menus
+        for (let idx = 0; idx < navSubMenus.length; idx++) {
+          navSubMenus[idx].classList.replace(
+            "nav__option__dropdown-opts--expanded",
+            "nav__option__dropdown-opts--collapse"
+          );
+        }
+
+        // Close all other filters lists
+        for (let j = 0; j < filterBtns.length; j++) {
+          const targetElem = filterBtns[j];
+
+          if (
+            targetElem.getAttribute("filter-for") !=
+            selectedBtn.getAttribute("filter-for")
+          ) {
+            // Just incase the structure changes, and the next sibling ins not the options list
+            if (
+              targetElem.nextElementSibling!.classList.contains(
+                "dropdown-menu__options"
+              )
+            ) {
+              targetElem.nextElementSibling?.classList.add(
+                "dropdown-menu__options--hide"
+              );
+            }
+          }
+        }
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------

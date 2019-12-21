@@ -35,23 +35,66 @@ class Navigation {
 
     // Build the functions for all menu elements.
     for (const menuBtn of this.menuBtns as any) {
-      menuBtn.addEventListener('click', this.subMenuCtrl);
+      menuBtn.addEventListener("click", this.subMenuCtrl);
     }
   }
 
   // ---------------------------------------------------------------------------
   close_menu() {
     /**
-     * closes all menus when clicked outside.
+     * closes all menus when clicked outside pr another nav menu.
+     * Also will close all filter menus.
      */
-    document.addEventListener('click', () => {
-      for (let idx=0; idx<this.navSubMenus.length; idx++) {
+
+    // Close all nav-menus on click outside
+    document.addEventListener("click", () => {
+      for (let idx = 0; idx < this.navSubMenus.length; idx++) {
         this.navSubMenus[idx].classList.replace(
-          'nav__option__dropdown-opts--expanded',
-          'nav__option__dropdown-opts--collapse'
-        )
+          "nav__option__dropdown-opts--expanded",
+          "nav__option__dropdown-opts--collapse"
+        );
       }
-    }) 
+    });
+
+    const optionLists = document.getElementsByClassName(
+      "dropdown-menu__options"
+    );
+    for (let i = 0; i < this.menuBtns.length; i++) {
+      const menuBtn = this.menuBtns[i];
+
+      menuBtn.addEventListener("click", () => {
+        // Close all dropdown-menus
+        for (const optionList of optionLists as any) {
+          optionList.classList.add("dropdown-menu__options--hide");
+        }
+
+        // Close other navigation menus
+        // Each button and their child elements will contain the attribute
+        // "filter-for".
+        // Likewise, each dropdown menu contain the same attribute
+        // This checks for the button pressed, if its "filter-for" attribute
+        // matches that of its dropdown options. if not, then close.
+        for (let j = 0; j < this.menuBtns.length; j++) {
+          const targetElem = this.menuBtns[j];
+
+          if (
+            targetElem.getAttribute("filter-for") !=
+            menuBtn.getAttribute("filter-for")
+          ) {
+            if (
+              targetElem.nextElementSibling?.classList.contains(
+                "nav__option__dropdown-opts"
+              )
+            ) {
+              targetElem.nextElementSibling.classList.replace(
+                "nav__option__dropdown-opts--expanded",
+                "nav__option__dropdown-opts--collapse"
+              );
+            }
+          }
+        }
+      });
+    }
   }
 
   // ---------------------------------------------------------------------------
@@ -61,14 +104,14 @@ class Navigation {
      * and collapsing the sub-menus.
      */
 
-    event.stopPropagation()
+    event.stopPropagation();
     let target = event.target as HTMLElement;
-  
+
     // Handle click events
     target: HTMLElement;
     const targetClasses = target.classList;
     let subMenu: HTMLDivElement;
-  
+
     if (targetClasses.contains("nav-sub-products")) {
       subMenu = document.querySelector(
         ".nav__option__dropdown-opts.nav-sub-products"
@@ -80,11 +123,11 @@ class Navigation {
     } else {
       throw "Navigation element does not exist.";
     }
-  
+
     let expanded = subMenu.classList.contains(
       "nav__option__dropdown-opts--expanded"
     );
-  
+
     if (expanded) {
       subMenu.classList.add("nav__option__dropdown-opts--collapse");
       subMenu.classList.remove("nav__option__dropdown-opts--expanded");
@@ -93,7 +136,6 @@ class Navigation {
       subMenu.classList.add("nav__option__dropdown-opts--expanded");
     }
   }
-
 }
 
-new Navigation()
+new Navigation();

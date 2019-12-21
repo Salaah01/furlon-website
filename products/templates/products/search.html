@@ -20,8 +20,8 @@
             <!-- Min Price -->
             <div class="search-filters__group">
                 <div class="search-filters__group__item dropdown-menu">
-                    <div class="dropdown-menu__selected">
-                        <span>Min Price</span>
+                    <div class="dropdown-menu__selected" filter-for='min-price'>
+                        <span filter-for='min-price'>Min Price</span>
                     </div>
                     <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for key, price in minPrice.items %}
@@ -45,8 +45,8 @@
             <!-- Max Price -->
             <div class="search-filters__group">
                 <div class="search-filters__group__item dropdown-menu">
-                    <div class="dropdown-menu__selected">
-                        <span>Max Price</span>
+                    <div class="dropdown-menu__selected" filter-for='max-price'>
+                        <span filter-for='max-price'>Max Price</span>
                     </div>
                     <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for key, price in maxPrice.items %}
@@ -70,8 +70,8 @@
             <!-- Categories Group-->
             <div class="search-filters__group">
                 <div class="search-filters__item dropdown-menu">
-                    <div class="dropdown-menu__selected">
-                        <span>Category</span>
+                    <div class="dropdown-menu__selected" filter-for='category'>
+                        <span filter-for='category'>Category</span>
                     </div>
                     <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for category in categories %}
@@ -95,8 +95,8 @@
             <!-- Colour Group -->
             <div class="search-filters__group">
                 <div class="search-filters__item dropdown-menu">
-                    <div class="dropdown-menu__selected">
-                        <span>Colour</span>
+                    <div class="dropdown-menu__selected" filter-for='colour'>
+                        <span filter-for='colour'>Colour</span>
                     </div>
                     <div class="dropdown-menu__options dropdown-menu__options--hide">
                         {% for colourFamily in colourFamilies %}
