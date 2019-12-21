@@ -116,6 +116,11 @@ class DropdownMenu {
         }
 
         // Close all other filters lists
+        // Each button and their child elements contain the attribute
+        // "filter-for".
+        // Likewise, each dropdown option div contain the same attribute
+        // This checks for the button pressed, if its "filter-for" attribute
+        // matches that of its dropdown options. if not, then close.
         for (let j = 0; j < filterBtns.length; j++) {
           const targetElem = filterBtns[j];
 

@@ -94,6 +94,11 @@ var DropdownMenu = /** @class */ (function () {
                     navSubMenus[idx].classList.replace("nav__option__dropdown-opts--expanded", "nav__option__dropdown-opts--collapse");
                 }
                 // Close all other filters lists
+                // Each button and their child elements contain the attribute
+                // "filter-for".
+                // Likewise, each dropdown option div contain the same attribute
+                // This checks for the button pressed, if its "filter-for" attribute
+                // matches that of its dropdown options. if not, then close.
                 for (var j = 0; j < filterBtns.length; j++) {
                     var targetElem = filterBtns[j];
                     if (targetElem.getAttribute("filter-for") !=
