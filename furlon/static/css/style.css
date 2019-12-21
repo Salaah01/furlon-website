@@ -613,7 +613,6 @@ svg {
   .card:hover .card__side--back {
     transform: rotateY(0); }
 
-/* The container must be positioned relative: */
 /* Style the arrow inside the select element: */
 .select-selected:after {
   position: absolute;
@@ -687,3 +686,6 @@ svg {
         background-color: rgba(0, 0, 0, 0.1); }
     .dropdown-menu__options__radio-btn {
       display: none; }
+
+.products {
+  display: grid; }
