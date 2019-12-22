@@ -23,7 +23,10 @@
                     <div class="dropdown-menu__selected" filter-for='min-price'>
                         <span filter-for='min-price'>Min Price</span>
                     </div>
-                    <div class="dropdown-menu__options dropdown-menu__options--hide">
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='min-price'
+                    >
                         {% for key, price in minPrice.items %}
                         <label
                             class="dropdown-menu__options__label"
@@ -44,11 +47,15 @@
             </div>
             <!-- Max Price -->
             <div class="search-filters__group">
-                <div class="search-filters__group__item dropdown-menu">
+                <div
+                    class="search-filters__group__item dropdown-menu">
                     <div class="dropdown-menu__selected" filter-for='max-price'>
                         <span filter-for='max-price'>Max Price</span>
                     </div>
-                    <div class="dropdown-menu__options dropdown-menu__options--hide">
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='max-price'
+                    >
                         {% for key, price in maxPrice.items %}
                         <label
                             class="dropdown-menu__options__label"
@@ -73,7 +80,10 @@
                     <div class="dropdown-menu__selected" filter-for='category'>
                         <span filter-for='category'>Category</span>
                     </div>
-                    <div class="dropdown-menu__options dropdown-menu__options--hide">
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='category'
+                    >
                         {% for category in categories %}
                         <label
                             class="dropdown-menu__options__label"
@@ -98,7 +108,10 @@
                     <div class="dropdown-menu__selected" filter-for='colour'>
                         <span filter-for='colour'>Colour</span>
                     </div>
-                    <div class="dropdown-menu__options dropdown-menu__options--hide">
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='colour'
+                    >
                         {% for colourFamily in colourFamilies %}
                             <label
                                 class="dropdown-menu__options__label"
@@ -123,22 +136,42 @@
             <button type="submit" class="search-filters__submit-btn" id="filters-submit">Apply Filters</button>
         </form> 
     </section>
-    <section class="search-results">
-        
-    </section>
 
-    <section class="results">
-        <div class="products">
+    <section class="search-results">
+        <div class="results">
             {% if products %}
                 {% for product in products %}
                 <div
-                    class="product"
+                    class="results__result"
                     id={{ product.product_id }}
                     price={{ product.price }}
                     category={{ product.category_id }}
                 >
-                    <div class="product__img">
-                        <img src="{{ product.showcase_image }}" alt="Showcase image for {{ product.name }}">
+                    <div class="results__result__img">
+                        <a href="#">
+                            <img src="{{ product.showcase_image }}" alt="Showcase image for {{ product.name }}">
+                        </a>
+                    </div>
+
+                    <div class="results__result__info">
+                        <a href="#" class="results__result__info__name">
+                            <p>{{ product.pp_name }}</p>
+                        </a>
+                        <p class="results__result__info__store">{{ product.ss_name }}</p>
+                        {% if product.length and product.width and product.height %}
+                        <p class="results__result__info__dimensions">{{ product.length|floatformat:1 }} x {{ product.width|floatformat:1 }} x {{ product.height|floatformat:1 }}</p>
+                        {% if products.rating > -1 %}
+                            <div class="results__result__info__ratings ratings">
+                                <div class="ratings__stars">
+
+                                </div>
+                                <div class="ratings__count">
+                                    
+                                </div>
+                            </div>
+                        {% endif %}
+                        <p class="results__result__info__price">&pound;{{ product.price|floatformat:2|intcomma }}</p>
+                        {% endif %}
                     </div>
                 </div>
                 

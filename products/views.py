@@ -25,7 +25,21 @@ from products.models import Products, Categories, ColourFamilies
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def search(request):
     """ Loads the search page """
-    results = Products.objects.order_by('-upload_date').filter(status='Active')
+    # Results need to be queried using raw SQL as the when the user sends a GET request, raw SQL is used to query the database,
+    # during which the variables are renamed.
+    # NOTE: MAIN COLOUR IS SET TO TRUE OR FALSE IN DEV, REMOVE WHEN THERE ARE ENOUGH PRODUCTS
+    results = Products.objects.raw(
+        """
+        SELECT  pp.product_id, pp.name pp_name, pp.height, pp.length, pp.width, pp.features, pp.related,
+                pp.showcase_image, pp.description, pp.price, pp.rating, pp.upload_date, pp.inventory, pp.status,
+                pp.category_id, pp.colour_id, pp.store_id, pp.delivery_available, pp.main_colour, pp.ratings,
+                ss.name ss_name
+        FROM products_products pp, stores_stores ss
+        WHERE pp.main_colour = true OR pp.main_colour = false)
+        AND pp.status = 'Active'
+        AND pp.store_id = ss.store_id
+        """
+    )
 
     # Retrieving results based on the search query.
     if 'search' in request.GET:
@@ -33,30 +47,39 @@ def search(request):
             searchTerms = request.GET['search']
             searchTerms = searchTerms.replace(' ', '').split(',') if ',' in searchTerms else searchTerms.split()
             for searchTerm in searchTerms:
+                # NOTE: MAIN COLOUR IS SET TO TRUE OR FALSE IN DEV, REMOVE WHEN THERE ARE ENOUGH PRODUCTS
                 results = Products.objects.raw(
                     """
-                    SELECT *
-                    FROM products_products pp
-                    WHERE
-                        LOWER(name) like %(search)s
-                    OR  (
-                        SELECT COUNT (*)
-                        FROM stores_stores ss
-                        WHERE pp.store_id = ss.store_id
-                        AND LOWER(ss.name) like %(search)s
-                    ) > 0
-                    OR  (
-                        SELECT COUNT (*)
-                        FROM products_colours pcol
-                        WHERE pp.colour_id = pcol.id
-                        AND (lower(pcol.name) like %(search)s OR lower(pcol.col_families) like %(search)s)
-                    ) > 0
-                    OR (
-                        SELECT COUNT (*)
-                        FROM products_categories pcat
-                        WHERE pp.category_id = pcat.cat_id
-                        AND pcat.name like %(search)s
-                    ) > 0
+                    SELECT
+                        pp.product_id, pp.name pp_name, pp.height, pp.length, pp.width, pp.features, pp.related,
+                        pp.showcase_image, pp.description, pp.price, pp.rating, pp.upload_date, pp.inventory, pp.status,
+                        pp.category_id, pp.colour_id, pp.store_id, pp.delivery_available, pp.main_colour, pp.ratings,
+                        ss.name ss_name
+                    FROM products_products pp, stores_stores ss
+                    WHERE ( pp.main_colour = true OR pp.main_colour = false)
+                    AND pp.status = 'Active'
+                    AND pp.store_id = ss.store_id
+                    AND (
+                            LOWER(pp.name) like %(search)s
+                        OR  (
+                            SELECT COUNT (*)
+                            FROM stores_stores ss
+                            WHERE pp.store_id = ss.store_id
+                            AND LOWER(ss.name) like %(search)s
+                        ) > 0
+                        OR  (
+                            SELECT COUNT (*)
+                            FROM products_colours pcol
+                            WHERE pp.colour_id = pcol.id
+                            AND (lower(pcol.name) like %(search)s OR lower(pcol.col_families) like %(search)s)
+                        ) > 0
+                        OR (
+                            SELECT COUNT (*)
+                            FROM products_categories pcat
+                            WHERE pp.category_id = pcat.cat_id
+                            AND pcat.name like %(search)s
+                        ) > 0
+                    )
                     """,
                     {'search': '%' + searchTerm.lower() + '%'}
                 )
