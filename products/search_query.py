@@ -108,9 +108,14 @@ def search_query(criteria, jsonResponse=False):
         cursor = connection.cursor()
         cursor.execute(fullSQL, bindVars)
         dataRows = cursor.fetchall()
-        results = [dataRow[0] for dataRow in dataRows]
+        keys = ('product_id',)
 
-        return json.dumps(results)
+        results = []
+        for dataRow in dataRows:
+            results.append(dict(zip(keys, dataRow)))
+        jsonData = json.dumps(results)
+
+        return jsonData
     else:
 
         return Products.objects.raw(fullSQL, bindVars)
