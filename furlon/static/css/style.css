@@ -39,7 +39,7 @@ p {
   margin-top: 10rem; }
 
 .hide {
-  display: none; }
+  display: none !important; }
 
 *,
 *::after,

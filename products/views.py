@@ -49,8 +49,13 @@ def search(request):
             query[search] = request.GET['search']
 
         criterion = ['search', 'f-minPrice', 'f-maxPrice', 'f-category', 'f-colour']
-        query = {criteria: request.GET[criteria] for criteria in criterion if request.GET[criteria]}
-        results = search_query(query)
+        # query = {criteria: request.GET[criteria] for criteria in criterion if request.GET[criteria]}
+        query = {}
+        for criteria in criterion:
+            if criteria in request.GET and request.GET[criteria]:
+                query[criteria] = request.GET[criteria]
+
+        results = search_query(query, 20)
 
     # Pagination
     paginator = Paginator(results, 20)
@@ -66,6 +71,7 @@ def search(request):
     colourFamilies = ColourFamilies.objects.order_by('name')
 
     context = {
+        'noResults': len(results),
         'userValues': request.GET,
         'products': pagedListings,
         'minPrice': minPrice,
@@ -85,5 +91,5 @@ def search_results(request):
     criterion = ['search', 'f-minPrice', 'f-maxPrice', 'f-category', 'f-colour']
     query = {criteria: request.GET[criteria] for criteria in criterion if request.GET[criteria]}
 
-    searchResults = search_query(query, True)
+    searchResults = search_query(query, 20, True)
     return HttpResponse(searchResults, content_type="application/json")

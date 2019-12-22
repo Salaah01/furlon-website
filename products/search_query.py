@@ -21,14 +21,15 @@ from .models import Products
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
-def search_query(criteria, jsonResponse=False):
+def search_query(criteria, itemsPerPage, jsonResponse=False):
     """ Given some criteria (from request.GET), the database will be queried, the results of which will be returned. """
+
     # Filter Options
     minPrice = criteria['f-minPrice'] if 'f-minPrice' in criteria else 0
     maxPrice = criteria['f-maxPrice'] if 'f-maxPrice' in criteria else 9999999999
     category = criteria['f-category'] if 'f-category' in criteria else None
     colour = criteria['f-colour'] if 'f-colour' in criteria else None
-    
+
     # Search Option
     # - It is assumed that the delimiter between keywords will be either ', ' or ','.
     # - Each keyword should check the value somewhat matches a value from various fields.
@@ -86,19 +87,40 @@ def search_query(criteria, jsonResponse=False):
         AND pp.store_id = ss.store_id
         """
 
+    # Add category filter if exists
     if category:
-        fullSQL += "AND pp.category_id %s"
-    if colour:
-        fullSQL += "AND pp.colour_id %s"
+        fullSQL += """ AND pp.category_id = (
+            SELECT pcat.cat_id
+            FROM products_categories pcat
+            WHERE pcat.name = %s
+        ) """
 
+    # Add colour filter if exists
+    if colour:
+        fullSQL += """ AND pp.colour_id IN (
+            SELECT pcol.id
+            FROM products_colours pcol
+            WHERE pcol.col_families LIKE %s
+        ) """
+
+    # Add the SQL for the search filter
     fullSQL += searchSQL
 
     bindVars = [float(minPrice), float(maxPrice)]
     if category:
         bindVars.append(category)
     if colour:
-        bindVars.append(colour)
+        bindVars.append('%' + colour + '%')
     bindVars = bindVars + searchBindVars
+
+    # Offset the results.
+    # Number of results generated = number of results to persent on a page. Refer to views' paginator variable.
+    offset = (int(criteria['page'])-1) * itemsPerPage if 'page' in criteria else 0
+    
+    
+    # fullSQL += "FETCH FIRST %s ROWS ONLY OFFSET %s"
+    # bindVars.append(itemsPerPage)
+    # bindVars.append(offset)
 
     cursor = connection.cursor()
     cursor.execute(fullSQL, bindVars)

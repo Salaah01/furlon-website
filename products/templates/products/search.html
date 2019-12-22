@@ -8,7 +8,7 @@
 {% if userValues.search %}
     <header class="search-summary">
         <div class="search-summary__text">
-            <p class="search-summary__text__num-results">{{ products|length }} results found for:</p>
+            <p class="search-summary__text__num-results">{{ noResults|intcomma }} results found for:</p>
             <h2 class="search-summary__text__search-str heading-2">&quot;{{ userValues.search }}&quot;</h2>
         </div>
     </header>
@@ -144,8 +144,6 @@
                 <div
                     class="results__result"
                     id={{ product.product_id }}
-                    price={{ product.price }}
-                    category={{ product.category_id }}
                 >
                     <div class="results__result__img">
                         <a href="#">
