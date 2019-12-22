@@ -93,3 +93,14 @@ def search_results(request):
 
     searchResults = search_query(query, 20, True)
     return HttpResponse(searchResults, content_type="application/json")
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def product(request, pk):
+    """ Results a single product given its private key. """
+    product = get_object_or_404(Products, pk=pk)
+    context = {
+        'product': product
+    }
+
+    return render(request, 'products/product.html', context)

@@ -146,7 +146,7 @@
                     id={{ product.product_id }}
                 >
                     <div class="results__result__img">
-                        <a href="#">
+                        <a href="{% url 'product' product.product_id %}">
                             <img src="{{ product.showcase_image }}" alt="Showcase image for {{ product.name }}">
                         </a>
                     </div>

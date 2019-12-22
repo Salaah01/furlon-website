@@ -21,5 +21,6 @@ from . import views
 
 urlpatterns = [
     path('search/', views.search, name='search'),
-    path('search-results/', views.search_results, name='search_results')
+    path('search-results/', views.search_results, name='search_results'),
+    path('<int:pk>', views.product, name='product')
 ]
