@@ -87,7 +87,7 @@ if DEBUG:
             'ENGINE': 'django.db.backends.postgresql',
             'USER': 'postgres',
             'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon_dummy',
+            'NAME': 'furlon_dummyBACKUP',
         },
 
         'main': {
