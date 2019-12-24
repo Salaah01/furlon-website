@@ -67,7 +67,7 @@
                             <div class="latest-products__product__price-box">
                                 <p class="latest-products__product__price-only">Only</p>
                                 <p class="latest-products__product__price-value">&pound;{{ latest_product.price |floatformat:2|intcomma }}</p>
-                                <a href="#" class="latest-products__product__info-btn btn btn--white">Find Out More</a>
+                                <a href="{% url 'product' latest_product.product_id %}" class="latest-products__product__info-btn btn btn--white">Find Out More</a>
                             </div>
                         </div>
                     </div>

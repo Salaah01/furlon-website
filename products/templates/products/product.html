@@ -5,10 +5,53 @@
 
 {% block content %}
 
+<main class="single-product">
+  <section class="product">
+    <div class="product__img">
+      <div class="product__img__showcase">
+        <img
+          src="{{ product.showcase_image }}"
+          alt="Showcase image of {{ product.name }}"
+        />
+      </div>
+      <div class="product__img__thumbs img__thumbs">
+          {% if product.image_1 %}
+            <div class="img__thumbs__thumb">
+                <img src="{{ product.image_1 }}" alt="Thumbnail of {{ product.name }}">
+            </div>
+          {% endif %}
+          {% if product.image_2 %}
+            <div class="img__thumbs__thumb">
+                <img src="{{ product.image_2 }}" alt="Thumbnail of {{ product.name }}">
+            </div>
+          {% endif %}
+          {% if product.image_3 %}
+            <div class="img__thumbs__thumb">
+                <img src="{{ product.image_3 }}" alt="Thumbnail of {{ product.name }}">
+            </div>
+          {% endif %}
+          {% if product.image_4 %}
+            <div class="img__thumbs__thumb">
+                <img src="{{ product.image_4 }}" alt="Thumbnail of {{ product.name }}">
+            </div>
+          {% endif %}
+          {% if product.image_5 %}
+            <div class="img__thumbs__thumb">
+                <img src="{{ product.image_5 }}" alt="Thumbnail of {{ product.name }}">
+            </div>
+          {% endif %}
+      </div>
+    </div>
+    <div class="product__info">
+        <h1 class="product__info__name">{{ product.name }}</h1>
+        <h2 class="product__info__price">&pound;{{ product.price|floatformat:2|intcomma }}</h2>
+        <h2 class="product__info__category"> {{ product.category_id__name }}</h2>
+        
+    </div>
+  </section>
+</main>
 
 {% endblock %}
 
-
 {% block footer %}
-
 {% endblock %}
