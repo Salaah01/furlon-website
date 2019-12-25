@@ -37,11 +37,12 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
     if 'search' in criteria:
         search = criteria['search']
         search = search.replace(' ', '').split(',') if ',' in search else search.split()
-        searchSQL = 'AND ('
+        searchSQL = ''
         searchBindVars = []
         for keyword in search:
-            searchBindVars += searchBindVars + ['%' + keyword + '%'] * 5
+            searchBindVars += ['%' + keyword + '%'] * 5
             searchSQL += """
+            AND (
                 LOWER(pp.name) like %s
                 OR  (
                     SELECT COUNT (*)
@@ -66,6 +67,8 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
     else:
         searchBindVars = []
         searchSQL = ''
+
+    print(searchBindVars)
 
     # fullSQL consists of an sql build based on the filters and the searchSQL.
     # As a list of bindVars is used as supposed to a dictionary of bindVars, order matters.
