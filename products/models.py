@@ -229,8 +229,7 @@ class Products(models.Model):
     inventory = models.IntegerField()
     delivery_available = models.BooleanField()
     delivery_price = models.FloatField(default=-1)
-    status = models.CharField(max_length=10, default='Active'),
-    
+    status = models.CharField(max_length=10, default='Active')
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):

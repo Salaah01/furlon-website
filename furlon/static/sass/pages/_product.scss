@@ -10,6 +10,8 @@
 // Main tag for the contents on the product page.
 .single-product {
     @include padSection;
+    padding-left: 20rem;
+    padding-right: 20rem;
 }
 
 // -----------------------------------------------------------------------------
@@ -18,13 +20,16 @@
 // User's main focus should be here.
 .product-showcase {
     display: grid;
-    grid-template-columns: 60% 1fr;
-    grid-template-rows: minmax(50rem, 60vh);
+    grid-template-columns: 50% 1fr;
+    grid-template-rows: minmax(50rem, 40vw);
     grid-gap: 7rem;
 
     // -------------------------------------------------------------------------
     // Each of the sections (2 in total) of main showcase containing.
     &__section {
+
+        padding: 7rem 10rem;
+        box-shadow: 0px 0px 12px 1px rgba(0,0,0, .25);
 
         &--lhs {
             // The left hand side of the showcase container (left section)
@@ -68,18 +73,21 @@
         // --------------------------------------------------------------------- 
         // Items on the second of the two sections.
         // These elements are located on the RHS of the page. 
-        &__name {
+        
+        
+        &__name,
+        &__price {
+            color: $colour-primary;
+            border-bottom: 1px solid $colour-primary;
+            padding-bottom: 1rem;
+        }
 
+        &__name {
 
         }
 
         &__price {
-            justify-self: end;
-
-        }
-        
-        &__category {
-            grid-column: 1/-1;
+            text-align: right;
 
         }
 
@@ -124,17 +132,19 @@
     // The thumbnails of other images of the product.
     
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
     
     &__thumb {
 
         object-fit: cover;
-        height: 10rem;
-        width: 13rem;
+        height: 5vw;
+        width: 6vw;
+        padding: .5rem;
 
-        &:not(:last-of-type) {
-            margin-right: 2rem;
-        }
+        // &:not(:last-of-type) {
+        //     margin-right: 2rem;
+        // }
 
         &:hover {
             cursor: pointer;
@@ -143,3 +153,4 @@
     }
 
 }
+
