@@ -17,6 +17,8 @@ This includes the search page and a dedicated page for each product.
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
+from django.db import connection
+
 
 # Local Imports
 from products.models import Products, Categories, ColourFamilies
@@ -102,5 +104,18 @@ def product(request, pk):
     context = {
         'product': product
     }
+
+    # FUTURE DEVELOPMENT
+    # Retrieving the colour families where the product's colours are attached to.
+    # colourFamiliesSQL = """
+    #     SELECT name
+    #     FROM products_colourfamilies
+    #     WHERE (
+    #         SELECT pcol.col_families
+    #         FROM products_products pp, products_colours pcol
+    #         WHERE pp.colour_id = pcol.id
+    #         AND pp.product_id = %s
+    #     ) LIKE '%' || name || '%'
+    #     """
 
     return render(request, 'products/product.html', context)
