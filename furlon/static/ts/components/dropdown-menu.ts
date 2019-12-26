@@ -47,7 +47,8 @@
 // =============================================================================
 
 // =============================================================================
-class DropdownMenu {
+// DropdownMenu Class
+export class DropdownMenu {
   /**
    * Sets up the functionality for the custom dropdown menus.
    * These include:
@@ -197,5 +198,3 @@ class DropdownMenu {
     }
   }
 }
-
-new DropdownMenu();

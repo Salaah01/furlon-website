@@ -13,8 +13,7 @@
 // ============================================================================
 
 // ============================================================================
-
-class Navigation {
+export class Navigation {
   /**
    * Sets up the functions for the navigation.
    * These include:
@@ -137,5 +136,3 @@ class Navigation {
     }
   }
 }
-
-new Navigation();

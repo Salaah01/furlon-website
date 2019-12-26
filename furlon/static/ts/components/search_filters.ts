@@ -13,7 +13,7 @@
 // =============================================================================
 
 // =============================================================================
-class SearchFilters {
+export class SearchFilters {
   /**
    * Will expand the navigation search bar and the form element to allow it to
    * take in the filter options as part of the GET request whenever a user
@@ -190,5 +190,3 @@ class SearchFilters {
     }
   }
 }
-
-new SearchFilters();

@@ -25,7 +25,7 @@
 // =============================================================================
 
 // =============================================================================
-class QuantityComponent {
+export class QuantityComponent {
   /**
    * Builds functionality onto the quantity component thus enabling the +/-
    * buttons to control the number inside the input box.
@@ -163,5 +163,3 @@ class QuantityComponent {
     });
   }
 }
-
-new QuantityComponent();

@@ -1,14 +1,14 @@
 const path = require('path');
+const CleanPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './furlon/static/ts/main',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'furlon/static/js'),
-    publicPath: 'furlon/static/js'
   },
-  devtool: 'inline-source-map',
+  devtool: 'none',
   module: {
     rules: [
       {
@@ -20,5 +20,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['.ts', '.js']
-  }
+  },
+  plugins: [
+    new CleanPlugin.CleanWebpackPlugin()
+  ]
 };
