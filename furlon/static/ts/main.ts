@@ -4,6 +4,7 @@
 // ============================================================================
 // Contains imports of all the main classes.
 // Behaves as the main hub for the js bundle.
+// ============================================================================
 
 import { Navigation } from './components/navigation';
 import { DropdownMenu } from './components/dropdown-menu';
