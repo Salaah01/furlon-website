@@ -7,7 +7,7 @@
 // ------
 // Custom dropdown menu
 //
-// COMPLIMENTARY FILES:
+// RELATED FILES:
 // --------------------
 // _dropdown-menu.scss
 //

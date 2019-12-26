@@ -73,10 +73,9 @@
         // --------------------------------------------------------------------- 
         // Items on the second of the two sections.
         // These elements are located on the RHS of the page. 
-        
-        
         &__name,
         &__price {
+            // Name and price placed in the first row
             color: $colour-primary;
             border-bottom: 1px solid $colour-primary;
             padding-bottom: 1rem;
@@ -92,6 +91,7 @@
         }
 
         &__ratings {
+            // Product ratings, placed on the second row.
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -109,19 +109,55 @@
 
         }
 
-        &__quantity {
+        &__description {
+            // Short description of the product, place in the third row.
             grid-column: 1/-1;
+        }
+
+        &__quantity {
+            // Input element for choosing number of products to add to the
+            // basket. Placed on the fourth row on the first column
+            // alongside the add to basket button.
+
+            &__btn,
+            &__input {
+                border: 1px solid $colour-grey-light-4;
+            }
+
+            &__btn {
+                color: $colour-primary;
+                transition: all .3s ease;
+
+                &:not([disabled='disabled']):hover {
+                    background-color: $colour-primary;
+                    color: #fff;
+                }
+
+            }
+
+            &__input {
+                color: $colour-grey-dark-1;
+            }
+
+        }
+
+        &__basket-add {
+            // button element placed on the 4th row on the 2nd column
+            // next to the quantity input element.
+            
+
+            & > i {
+                margin-right: 1rem;
+            }
 
         }
 
         &__delivery-opts {
+            // Contains delivery options, placed on the final row.
             grid-column: 1/-1;
         }
 
-        &__basket-add {
-            grid-column: 1/-1;
-
-        }
+        
 
     }
 
@@ -141,10 +177,6 @@
         height: 5vw;
         width: 6vw;
         padding: .5rem;
-
-        // &:not(:last-of-type) {
-        //     margin-right: 2rem;
-        // }
 
         &:hover {
             cursor: pointer;

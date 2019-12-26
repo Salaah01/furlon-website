@@ -87,7 +87,7 @@ svg {
     transform: translate(2px, 2px); }
   .btn--primary {
     background-color: #f47c4a;
-    color: white; }
+    color: #fff; }
     .btn--primary:hover {
       background-color: #f56020; }
   .btn--white {
@@ -612,11 +612,21 @@ svg {
       flex-direction: row;
       justify-content: space-between;
       grid-column: 1/-1; }
-    .product-showcase__section__quantity {
+    .product-showcase__section__description {
       grid-column: 1/-1; }
+    .product-showcase__section__quantity__btn, .product-showcase__section__quantity__input {
+      border: 1px solid #f9f9f9; }
+    .product-showcase__section__quantity__btn {
+      color: #f47c4a;
+      transition: all .3s ease; }
+      .product-showcase__section__quantity__btn:not([disabled='disabled']):hover {
+        background-color: #f47c4a;
+        color: #fff; }
+    .product-showcase__section__quantity__input {
+      color: #5A5F6A; }
+    .product-showcase__section__basket-add > i {
+      margin-right: 1rem; }
     .product-showcase__section__delivery-opts {
-      grid-column: 1/-1; }
-    .product-showcase__section__basket-add {
       grid-column: 1/-1; }
 
 .img__thumbs {
@@ -794,3 +804,32 @@ svg {
     -webkit-text-fill-color: transparent; }
   .i-star--checked {
     color: gold; }
+
+.c-quantity {
+  display: flex; }
+  .c-quantity__btn, .c-quantity__input {
+    justify-content: center;
+    padding: 1rem;
+    background-color: #fff;
+    border: 1px solid rgba(146, 122, 122, 0.3); }
+  .c-quantity__btn {
+    width: 4rem;
+    cursor: pointer;
+    outline: none;
+    font-size: 2em;
+    width: 5rem;
+    transition: background-color 0.3s ease, color 0.3s ease; }
+    .c-quantity__btn[disabled="disabled"] {
+      background-color: #e4e4e4;
+      color: #9e9e9e; }
+    .c-quantity__btn:not([disabled="disabled"]):active {
+      transform: translate(1px, 1px); }
+  .c-quantity__input {
+    text-align: center;
+    font-size: 1.5rem;
+    -moz-appearance: textfield; }
+    .c-quantity__input:focus {
+      outline: none; }
+    .c-quantity__input::-webkit-outer-spin-button, .c-quantity__input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
