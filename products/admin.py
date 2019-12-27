@@ -92,28 +92,28 @@ class ProductsAdmin(admin.ModelAdmin):
 
 
 ##################################################################################################################################
-class RelatedProductVarsAdmin(admin.ModelAdmin):
-    """ Registers Related Product Variations (products_relatedproductvars) table to the admin page """
-    list_display = ('product', 'linked',)
-    list_display_links = ('product',)
-    search_fields = ('product__name', 'linked__name',)
-
-
-##################################################################################################################################
-class ProductColourVarsAdmin(admin.ModelAdmin):
-    """ Registers Product Colour Variations (products_productcolourvars) table to the admin page """
-    list_display = ('product', 'linked',)
-    list_display_links = ('product',)
-    search_fields = ('product__name', 'linked__name',)
-
-
-##################################################################################################################################
 class ProductReviewsAdmin(admin.ModelAdmin):
     """ Registers Product Reviews (products_productreviews) table to the admin page """
     list_display = ('product', 'store', 'user', 'rating', 'review_date')
     list_display_links = ('product', )
     search_fields = ('product__name', 'store__name', 'store__name', 'user__first_name', 'user__last_name', 'user__email',
                      'user__username',)
+
+
+##################################################################################################################################
+class RelationTypeAdmin(admin.ModelAdmin):
+    """ Registers Relation Type (products_relationtypes) table to the admin page """
+    list_display = ('relation', )
+    list_display_links = ('relation', )
+    search_fields = ('relation', )
+
+
+##################################################################################################################################
+class LinkedProductsAdmin(admin.ModelAdmin):
+    """ Registers Linked Products (products_linkedproducts) table to the admin page """
+    list_display = ('product', 'related_product', 'relation')
+    link_display_links = ('product', )
+    search_fields = ('product__name', 'related_product__name', 'relation', )
 
 
 admin.site.register(ColourFamilies, ColourFamiliesAdmin)
@@ -123,6 +123,6 @@ admin.site.register(Categories, CategoriesAdmin)
 admin.site.register(SubCategories, SubCategoriesAdmin)
 admin.site.register(Features, FeaturesAdmin)
 admin.site.register(Products, ProductsAdmin)
-admin.site.register(RelatedProductVars, RelatedProductVarsAdmin)
-admin.site.register(ProductColourVars, ProductColourVarsAdmin)
 admin.site.register(ProductReviews, ProductReviewsAdmin)
+admin.site.register(RelationType, RelationTypeAdmin)
+admin.site.register(LinkedProducts, LinkedProductsAdmin)

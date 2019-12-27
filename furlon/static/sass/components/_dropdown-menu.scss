@@ -14,6 +14,8 @@
 //     </div>
 //     <div class="dropdown-menu__options">
 //       <label class="dropdown-menu__options__label" for="colour-red">
+//         colour
+//       </label>
 //       <input
 //         class="dropdown-menu__options__radio-btn"
 //         type="radio"
@@ -52,7 +54,7 @@
 
 .dropdown-menu {
   position: relative;
-  
+
   &__selected {
     background-color: $colour-secondary-dark-1;
     border-radius: 5px;
@@ -64,7 +66,7 @@
     border: 1px solid transparent;
     border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
     cursor: pointer;
-    
+
 
     &:hover {
       background-color: $colour-secondary-dark-1-highlighted-1;
@@ -116,7 +118,7 @@
       &--selected {
         background-color: rgba(0, 0, 0, 0.1);
       }
-      
+
     }
 
     &__radio-btn {

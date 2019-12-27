@@ -23,6 +23,7 @@
     grid-template-columns: 50% 1fr;
     grid-template-rows: minmax(50rem, 40vw);
     grid-gap: 7rem;
+    margin-bottom: 7rem;
 
     // -------------------------------------------------------------------------
     // Each of the sections (2 in total) of main showcase containing.
@@ -70,9 +71,9 @@
 
         }
 
-        // --------------------------------------------------------------------- 
+        // ---------------------------------------------------------------------
         // Items on the second of the two sections.
-        // These elements are located on the RHS of the page. 
+        // These elements are located on the RHS of the page.
         &__name,
         &__price {
             // Name and price placed in the first row
@@ -109,6 +110,7 @@
 
         }
 
+
         &__description {
             // Short description of the product, place in the third row.
             grid-column: 1/-1;
@@ -118,6 +120,10 @@
             // Input element for choosing number of products to add to the
             // basket. Placed on the fourth row on the first column
             // alongside the add to basket button.
+
+            display: flex;
+            justify-content: flex-end;
+            margin-right: 1.25rem;
 
             &__btn,
             &__input {
@@ -141,10 +147,64 @@
 
         }
 
+        &__colours {
+            // Options for user to choose alternative colours
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-left: 1.25rem;
+
+
+            .dropdown-menu {
+                // .dropdown-menu is a component, the purpose of the styling
+                // here is to overwrite the inherited styling.
+
+                > * {
+                    // width = the width of the quantity element
+                    width: 17rem;
+                    font-size: 1.5rem;
+                    border-radius: 0;
+                    background-color: $colour-grey-light-4;
+                    border: 1px solid $colour-grey-light-3;
+                }
+
+                &__selected {
+                    color: $colour-grey-dark-1;
+
+                    &:hover {
+                        background-color: rgba(0, 0, 0, 0.1);
+                    }
+
+                }
+
+                &__options {
+
+                    &__label {
+                        color: $colour-grey-dark-1;
+                    }
+                }
+
+                .sm-colour-box {
+                    width: 1.2rem;
+                    height: 1.2rem;
+                    display: inline-block;
+                    transform: translateY(1.5px);
+                    margin-right: 1rem;
+                    border-radius: 2px;
+
+                }
+            }
+        }
+
         &__basket-add {
             // button element placed on the 4th row on the 2nd column
             // next to the quantity input element.
-            
+
+            margin-top: 2rem;
+            grid-column: 1/-1;
+            width: 60%;
+            justify-self: center;
 
             & > i {
                 margin-right: 1rem;
@@ -157,7 +217,7 @@
             grid-column: 1/-1;
         }
 
-        
+
 
     }
 
@@ -166,11 +226,11 @@
 // -----------------------------------------------------------------------------
 .img__thumbs {
     // The thumbnails of other images of the product.
-    
+
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    
+
     &__thumb {
 
         object-fit: cover;
@@ -181,8 +241,38 @@
         &:hover {
             cursor: pointer;
         }
-        
+
     }
 
 }
 
+// -----------------------------------------------------------------------------
+// The bottom part of the page which contains more detailed information on
+// each product.
+.product-info {
+    // Main container
+    & > * {
+        margin-bottom: 4rem;
+    }
+
+    &__section {
+        // Each sub-section in .product-info.
+
+        &__title {
+            // Title for each sub-section.
+            color: $colour-primary;
+            border-bottom: 1px solid $colour-primary;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+
+        }
+
+        &__text-block {
+            // Contains a block of text at each sub section.
+        }
+
+        &__text {
+            // Text contained within a text block.
+        }
+    }
+}

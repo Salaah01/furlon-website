@@ -68,13 +68,11 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         searchBindVars = []
         searchSQL = ''
 
-    print(searchBindVars)
-
     # fullSQL consists of an sql build based on the filters and the searchSQL.
     # As a list of bindVars is used as supposed to a dictionary of bindVars, order matters.
     # This is done to prevent SQL injection when building the search query.
     # Note: The fields selected are the same as the filters set in the search page.
-    
+
     # NOTE: MAIN COLOUR IS SET TO TRUE OR FALSE IN DEV, REMOVE WHEN THERE ARE ENOUGH PRODUCTS
     fullSQL = """
         SELECT
@@ -119,8 +117,7 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
     # Offset the results.
     # Number of results generated = number of results to persent on a page. Refer to views' paginator variable.
     offset = (int(criteria['page'])-1) * itemsPerPage if 'page' in criteria else 0
-    
-    
+
     # fullSQL += "FETCH FIRST %s ROWS ONLY OFFSET %s"
     # bindVars.append(itemsPerPage)
     # bindVars.append(offset)
@@ -136,7 +133,7 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         keys = ('product_id', 'pp_name', 'height', 'length', 'width', 'features', 'related', 'showcase_image', 'description',
                 'price', 'rating', 'upload_date', 'inventory', 'status', 'category_id', 'colour_id', 'store_id',
                 'delivery_available', 'main_colour', 'ratings', 'ss_name')
-     
+
         results = []
         for dataRow in dataRows:
             results.append(dict(zip(keys, dataRow)))
@@ -144,5 +141,5 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
 
         return jsonData
     else:
-  
+
         return Products.objects.raw(fullSQL, bindVars)

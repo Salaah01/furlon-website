@@ -21,8 +21,9 @@ from django.db import connection
 
 
 # Local Imports
-from products.models import Products, Categories, ColourFamilies
+from products.models import Products, Categories, ColourFamilies, Colours
 from .search_query import search_query
+from .linked_products import LinkedProducts
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
@@ -102,7 +103,7 @@ def product(request, pk):
     """ Results a single product given its private key. """
     product = get_object_or_404(Products, pk=pk)
     context = {
-        'product': product
+        'product': product,
     }
 
     # FUTURE DEVELOPMENT
@@ -119,3 +120,11 @@ def product(request, pk):
     #     """
 
     return render(request, 'products/product.html', context)
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def product_info_api(request, pk):
+    """ API for returning information on a product. These information that will be provided related to that which is avaialble
+    in thelinked product table.
+    """
+    return HttpResponse(LinkedProducts(pk).linkedProducts, content_type="application/json")

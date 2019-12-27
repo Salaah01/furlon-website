@@ -4,7 +4,8 @@
   "description": "Furlon's website",
   "main": "main.js",
   "scripts": {
-    "start": "webpack-dev-server",
+    "start": "start npm run webpack-server && start npm run watch:sass",
+    "webpack-server": "webpack-dev-server",
     "watch:sass": "node-sass furlon/static/sass/main.scss furlon/static/css/style.css -w",
     "compile:sass": "node-sass furlon/static/sass/main.scss furlon/static/css/style.comp.css",
     "concat:css": "concat -o furlon/static/css/style.concat.css furlon/static/css/icons.css furlon/static/css/style.comp.css",

@@ -61,11 +61,14 @@
       </div>
     </div>
     <div class="product-showcase__section product-showcase__section--rhs">
-      
+
+      <!-- Name and Price -->
       <h1 class="product-showcase__section__name">{{ product.name }}</h1>
       <h2 class="product-showcase__section__price">
         &pound;{{ product.price|floatformat:2|intcomma }}
       </h2>
+
+      <!-- Ratings -->
       <div class="product-showcase__section__ratings">
         <div class="product-showcase__section__ratings__stars ratings__stars">
           {% if product.rating < 0.1 %}
@@ -205,6 +208,7 @@
         >
       </div>
 
+      <!-- Description -->
       <div class="product-showcase__section__description">
           <p>
             {{ product.description|truncatechars:200 }}
@@ -215,6 +219,7 @@
 
       </div>
 
+      <!-- Quantity -->
       <div class="product-showcase__section__quantity c-quantity">
         {% if product.inventory %}
         <button
@@ -246,6 +251,33 @@
         {% endif %}
       </div>
 
+      <!-- Alternative Colours -->
+      <div class="product-showcase__section__colours">
+        <div class="dropdown-menu">
+          <div class="dropdown-menu__selected">
+            <span>Colour</span>
+          </div>
+          <div class="dropdown-menu__options">
+            <label
+              for="colour-{{ product.colour.name }}"
+              class="dropdown-menu__options__label"
+            >
+                <span
+                  class="sm-colour-box"
+                  style="background-color: black;"></span>{{product.colour.name }}
+            </label>
+            <input
+              type="radio"
+              class="dropdown-menu__options__radio-btn"
+              name="prod-f-colour"
+              id="colour-{{ product.colour.name }}"
+              value="colour-{{ product.color.name }}"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Add to Basket Button -->
       <button class="product-showcase__section__basket-add btn btn--primary">
         <i class="fas fa-truck"></i>Add to Basket
       </button>
@@ -256,9 +288,11 @@
     </div>
   </section>
 
-  <section class="related-products">
-    <h2 class="heading-2">Related Products</h2>
-  </section>
+  {% if products.related %}
+    <section class="related-products">
+      <h2 class="heading-2">Related Products</h2>
+    </section>
+  {% endif %}
 
   <section class="product-info">
     <div class="product-info__section">
@@ -476,8 +510,9 @@
       </div>
       {% endif %}
     </div>
-    
+
   </section>
+
 </main>
 
 {% endblock %}

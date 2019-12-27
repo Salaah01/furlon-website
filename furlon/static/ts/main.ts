@@ -10,8 +10,10 @@ import { Navigation } from './components/navigation';
 import { DropdownMenu } from './components/dropdown-menu';
 import { QuantityComponent } from './components/quantity';
 import { SearchFilters } from './components/search_filters';
+import { ExtendProductPage } from './pages/products/product';
 
 new Navigation();
 new DropdownMenu();
 new QuantityComponent();
 new SearchFilters();
+new ExtendProductPage();
