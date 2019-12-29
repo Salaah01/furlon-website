@@ -21,4 +21,3 @@ if (window.location.href.includes('/products/')) {
     new ExtendProductPage();
     new QuantityComponent();
 }
-

@@ -22,6 +22,6 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   plugins: [
-    new CleanPlugin.CleanWebpackPlugin()
+    // new CleanPlugin.CleanWebpackPlugin()
   ]
 };
