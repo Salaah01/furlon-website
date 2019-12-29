@@ -9,9 +9,9 @@
 // -----------------------------------------------------------------------------
 // Main tag for the contents on the product page.
 .single-product {
-    @include padSection;
-    padding-left: 20rem;
-    padding-right: 20rem;
+  @include padSection;
+  padding-left: 20rem;
+  padding-right: 20rem;
 }
 
 // -----------------------------------------------------------------------------
@@ -19,260 +19,238 @@
 // and add to basket button.
 // User's main focus should be here.
 .product-showcase {
-    display: grid;
-    grid-template-columns: 50% 1fr;
-    grid-template-rows: minmax(50rem, 40vw);
-    grid-gap: 7rem;
-    margin-bottom: 7rem;
+  display: grid;
+  grid-template-columns: 50% 1fr;
+  grid-template-rows: minmax(50rem, 40vw);
+  grid-gap: 7rem;
+  margin-bottom: 7rem;
 
-    // -------------------------------------------------------------------------
-    // Each of the sections (2 in total) of main showcase containing.
-    &__section {
+  // -------------------------------------------------------------------------
+  // Each of the sections (2 in total) of main showcase containing.
+  &__section {
+    padding: 7rem 10rem;
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.25);
 
-        padding: 7rem 10rem;
-        box-shadow: 0px 0px 12px 1px rgba(0,0,0, .25);
-
-        &--lhs {
-            // The left hand side of the showcase container (left section)
-        }
-
-        &--rhs {
-            // The right hand side of the showcase container (right section)
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            justify-content: center;
-            align-self: center;
-
-            & > * {
-                margin-bottom: 2rem;
-            }
-        }
-
-        // ---------------------------------------------------------------------
-        // Items in the first of the two sections. Located on the LHS.
-        &__img-container {
-            // The image container on the LHS containing the images and the
-            // alternative colour buttons.
-
-            &__img {
-                // Main image on in the section showing an image of the product.
-                object-fit: cover;
-                width: 100%;
-                height: 100%;
-                cursor: pointer;
-            }
-
-            &__alt-colours {
-                // Contains the alternative colours in which a product is
-                // available in.
-                cursor: pointer;
-
-            }
-
-        }
-
-        // ---------------------------------------------------------------------
-        // Items on the second of the two sections.
-        // These elements are located on the RHS of the page.
-        &__name,
-        &__price {
-            // Name and price placed in the first row
-            color: $colour-primary;
-            border-bottom: 1px solid $colour-primary;
-            padding-bottom: 1rem;
-        }
-
-        &__name {
-
-        }
-
-        &__price {
-            text-align: right;
-
-        }
-
-        &__ratings {
-            // Product ratings, placed on the second row.
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            grid-column: 1/-1;
-
-            &__stars {
-
-
-            }
-
-            &__reviews {
-
-
-            }
-
-        }
-
-
-        &__description {
-            // Short description of the product, place in the third row.
-            grid-column: 1/-1;
-        }
-
-        &__quantity {
-            // Input element for choosing number of products to add to the
-            // basket. Placed on the fourth row on the first column
-            // alongside the add to basket button.
-
-            display: flex;
-            justify-content: flex-end;
-            margin-right: 1.25rem;
-
-            &__btn,
-            &__input {
-                border: 1px solid $colour-grey-light-4;
-            }
-
-            &__btn {
-                color: $colour-primary;
-                transition: all .3s ease;
-
-                &:not([disabled='disabled']):hover {
-                    background-color: $colour-primary;
-                    color: #fff;
-                }
-
-            }
-
-            &__input {
-                color: $colour-grey-dark-1;
-            }
-
-        }
-
-        &__colours {
-            // Options for user to choose alternative colours
-
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            margin-left: 1.25rem;
-
-
-            .dropdown-menu {
-                // .dropdown-menu is a component, the purpose of the styling
-                // here is to overwrite the inherited styling.
-
-                > * {
-                    // width = the width of the quantity element
-                    width: 17rem;
-                    font-size: 1.5rem;
-                    border-radius: 0;
-                    background-color: $colour-grey-light-4;
-                    border: 1px solid $colour-grey-light-3;
-                }
-
-                &__selected {
-                    color: $colour-grey-dark-1;
-
-                    &:hover {
-                        background-color: rgba(0, 0, 0, 0.1);
-                    }
-
-                }
-
-                &__options {
-
-                    &__label {
-                        color: $colour-grey-dark-1;
-                    }
-                }
-
-                .sm-colour-box {
-                    width: 1.2rem;
-                    height: 1.2rem;
-                    display: inline-block;
-                    transform: translateY(1.5px);
-                    margin-right: 1rem;
-                    border-radius: 2px;
-
-                }
-            }
-        }
-
-        &__basket-add {
-            // button element placed on the 4th row on the 2nd column
-            // next to the quantity input element.
-
-            margin-top: 2rem;
-            grid-column: 1/-1;
-            width: 60%;
-            justify-self: center;
-
-            & > i {
-                margin-right: 1rem;
-            }
-
-        }
-
-        &__delivery-opts {
-            // Contains delivery options, placed on the final row.
-            grid-column: 1/-1;
-        }
-
-
-
+    &--lhs {
+      // The left hand side of the showcase container (left section)
     }
 
+    &--rhs {
+      // The right hand side of the showcase container (right section)
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-content: center;
+      align-self: center;
+
+      & > * {
+        margin-bottom: 2rem;
+      }
+    }
+
+    // ---------------------------------------------------------------------
+    // Items in the first of the two sections. Located on the LHS.
+    &__img-container {
+      // The image container on the LHS containing the images and the
+      // alternative colour buttons.
+
+      &__img {
+        // Main image on in the section showing an image of the product.
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      &__alt-colours {
+        // Contains the alternative colours in which a product is
+        // available in.
+        cursor: pointer;
+      }
+    }
+
+    // ---------------------------------------------------------------------
+    // Items on the second of the two sections.
+    // These elements are located on the RHS of the page.
+    &__name,
+    &__price {
+      // Name and price placed in the first row
+      color: $colour-primary;
+      border-bottom: 1px solid $colour-primary;
+      padding-bottom: 1rem;
+    }
+
+    &__name {
+    }
+
+    &__price {
+      text-align: right;
+    }
+
+    &__ratings {
+      // Product ratings, placed on the second row.
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      grid-column: 1/-1;
+
+      &__stars {
+      }
+
+      &__reviews {
+      }
+    }
+
+    &__description {
+      // Short description of the product, place in the third row.
+      grid-column: 1/-1;
+    }
+
+    &__quantity {
+      // Input element for choosing number of products to add to the
+      // basket. Placed on the fourth row on the first column
+      // alongside the add to basket button.
+
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 1.25rem;
+
+      &__btn,
+      &__input {
+        border: 1px solid $colour-grey-light-4;
+      }
+
+      &__btn {
+        color: $colour-primary;
+        transition: all 0.3s ease;
+
+        &:not([disabled="disabled"]):hover {
+          background-color: $colour-primary;
+          color: #fff;
+        }
+      }
+
+      &__input {
+        color: $colour-grey-dark-1;
+      }
+    }
+
+    &__colours {
+      // Options for user to choose alternative colours
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin-left: 1.25rem;
+
+      .dropdown-menu {
+        // .dropdown-menu is a component, the purpose of the styling
+        // here is to overwrite the inherited styling.
+
+        > * {
+          // width = the width of the quantity element
+          width: 17rem;
+          font-size: 1.5rem;
+          border-radius: 0;
+          background-color: $colour-grey-light-4;
+          border: 1px solid $colour-grey-light-3;
+        }
+
+        &__selected {
+          color: $colour-grey-dark-1;
+
+          &:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+          }
+        }
+
+        &__options {
+          &__label {
+            // In the main component, label is treated as if it is
+            // added to a "label" tag, however on the product page
+            // it is added to an "a" tag.
+            color: $colour-grey-dark-1;
+            text-decoration: none;
+          }
+        }
+
+        .sm-colour-box {
+          width: 1.2rem;
+          height: 1.2rem;
+          display: inline-block;
+          transform: translateY(1.5px);
+          margin-right: 1rem;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    &__basket-add {
+      // button element placed on the 4th row on the 2nd column
+      // next to the quantity input element.
+
+      margin-top: 2rem;
+      grid-column: 1/-1;
+      width: 60%;
+      justify-self: center;
+
+      & > i {
+        margin-right: 1rem;
+      }
+    }
+
+    &__delivery-opts {
+      // Contains delivery options, placed on the final row.
+      grid-column: 1/-1;
+    }
+  }
 }
 
 // -----------------------------------------------------------------------------
 .img__thumbs {
-    // The thumbnails of other images of the product.
+  // The thumbnails of other images of the product.
 
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
-    &__thumb {
+  &__thumb {
+    object-fit: cover;
+    height: 5vw;
+    width: 6vw;
+    padding: 0.5rem;
 
-        object-fit: cover;
-        height: 5vw;
-        width: 6vw;
-        padding: .5rem;
-
-        &:hover {
-            cursor: pointer;
-        }
-
+    &:hover {
+      cursor: pointer;
     }
-
+  }
 }
 
 // -----------------------------------------------------------------------------
 // The bottom part of the page which contains more detailed information on
 // each product.
 .product-info {
-    // Main container
-    & > * {
-        margin-bottom: 4rem;
+  // Main container
+  & > * {
+    margin-bottom: 4rem;
+  }
+
+  &__section {
+    // Each sub-section in .product-info.
+
+    &__title {
+      // Title for each sub-section.
+      color: $colour-primary;
+      border-bottom: 1px solid $colour-primary;
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
     }
 
-    &__section {
-        // Each sub-section in .product-info.
-
-        &__title {
-            // Title for each sub-section.
-            color: $colour-primary;
-            border-bottom: 1px solid $colour-primary;
-            padding-bottom: 1rem;
-            margin-bottom: 1rem;
-
-        }
-
-        &__text-block {
-            // Contains a block of text at each sub section.
-        }
-
-        &__text {
-            // Text contained within a text block.
-        }
+    &__text-block {
+      // Contains a block of text at each sub section.
     }
+
+    &__text {
+      // Text contained within a text block.
+    }
+  }
 }

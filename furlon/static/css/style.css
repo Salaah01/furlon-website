@@ -623,8 +623,8 @@ svg {
         border: 1px solid #f9f9f9; }
       .product-showcase__section__quantity__btn {
         color: #f47c4a;
-        transition: all .3s ease; }
-        .product-showcase__section__quantity__btn:not([disabled='disabled']):hover {
+        transition: all 0.3s ease; }
+        .product-showcase__section__quantity__btn:not([disabled="disabled"]):hover {
           background-color: #f47c4a;
           color: #fff; }
       .product-showcase__section__quantity__input {
@@ -645,7 +645,8 @@ svg {
         .product-showcase__section__colours .dropdown-menu__selected:hover {
           background-color: rgba(0, 0, 0, 0.1); }
       .product-showcase__section__colours .dropdown-menu__options__label {
-        color: #5A5F6A; }
+        color: #5A5F6A;
+        text-decoration: none; }
       .product-showcase__section__colours .dropdown-menu .sm-colour-box {
         width: 1.2rem;
         height: 1.2rem;
@@ -671,7 +672,7 @@ svg {
     object-fit: cover;
     height: 5vw;
     width: 6vw;
-    padding: .5rem; }
+    padding: 0.5rem; }
     .img__thumbs__thumb:hover {
       cursor: pointer; }
 

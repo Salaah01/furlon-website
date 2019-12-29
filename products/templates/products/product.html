@@ -61,7 +61,6 @@
       </div>
     </div>
     <div class="product-showcase__section product-showcase__section--rhs">
-
       <!-- Name and Price -->
       <h1 class="product-showcase__section__name">{{ product.name }}</h1>
       <h2 class="product-showcase__section__price">
@@ -210,13 +209,12 @@
 
       <!-- Description -->
       <div class="product-showcase__section__description">
-          <p>
-            {{ product.description|truncatechars:200 }}
-            {% if product.description|length > 200 %}
-              <a href="#">Read more</a>.
-            {% endif %}
-          </p>
-
+        <p>
+          {{ product.description|truncatechars:200 }}
+          {% if product.description|length > 200 %}
+            <a href="#">Read more</a>.
+          {% endif %}
+        </p>
       </div>
 
       <!-- Quantity -->
@@ -225,7 +223,7 @@
         <button
           class="product-showcase__section__quantity__btn c-quantity__btn"
           control="quantity-down"
-          disabled='disabled'
+          disabled="disabled"
         >
           <span class="c-quantity__btn__text">&#45;</span>
         </button>
@@ -255,24 +253,28 @@
       <div class="product-showcase__section__colours">
         <div class="dropdown-menu">
           <div class="dropdown-menu__selected">
-            <span>Colour</span>
+            <span>{{ product.colour.name }}</span>
           </div>
           <div class="dropdown-menu__options" id="product-colour-variations">
-            <a href="#"><label
-              for="colour-{{ product.colour.name }}"
-              class="dropdown-menu__options__label"
+            <a
+              href="#"
+              class="dropdown-menu__options__label dropdown-menu__options__label--selected"
             >
+              <label for="colour-{{ product.colour.name }}">
                 <span
                   class="sm-colour-box"
-                  style="background-color: black;"></span>{{product.colour.name }}
-            </label></a>
+                  style="background-color: black;"></span
+                >
+                {{product.colour.name }}
+              </label>
+            </a>
             <input
               type="radio"
               class="dropdown-menu__options__radio-btn"
               name="prod-f-colour"
               id="colour-{{ product.colour.name }}"
-              value="colour-{{ product.color.name }}"
-            >
+              value="colour-{{ product.colour.name }}"
+            />
           </div>
         </div>
       </div>
@@ -289,14 +291,16 @@
   </section>
 
   {% if products.related %}
-    <section class="related-products">
-      <h2 class="heading-2">Related Products</h2>
-    </section>
+  <section class="related-products">
+    <h2 class="heading-2">Related Products</h2>
+  </section>
   {% endif %}
 
   <section class="product-info">
     <div class="product-info__section">
-      <h2 class="product-info__section__title heading-2">Product Information</h2>
+      <h2 class="product-info__section__title heading-2">
+        Product Information
+      </h2>
       <div class="product-info__section__text-block">
         <p class="product-info__section__text">{{ product.description }}</p>
       </div>
@@ -318,10 +322,8 @@
 
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">Store Details</h2>
-      <a
-        class="product-info__section__sub-heading heading-3"
-        href="#"
-      >{{ product.store.name }}
+      <a class="product-info__section__sub-heading heading-3" href="#"
+        >{{ product.store.name }}
       </a>
       <div class="product-info__section__ratings">
         <div class="product-info__section__ratings__stars ratings__stars">
@@ -463,33 +465,32 @@
       </div>
       <div class="product-info__section__text-block">
         {% if product.store.address_line_1 %}
-          <p class="product-info__section__text">{{ product.store.address_line_1 }}</p>
-        {% endif %}
-        {% if product.store.address_line_2 %}
-          <p class="product-info__section__text">{{ product.store.address_line_2 }}</p>
-        {% endif %}
-        {% if product.store.postcode %}
-          <p class="product-info__section__text">{{ product.store.postcode }}</p>
-        {% endif %}
-        {% if product.store.city.name %}
-          <p class="product-info__section__text">{{ product.store.city.name }}</p>
-        {% endif %}
-        {% if product.store.country.name %}
-          <p class="product-info__section__text">{{ product.store.country.name }}</p>
-        {% endif %}
-        {% if product.store.telephone %}
-          <p class="product-info__section__text">
-            <span><i class="fas fa-phone-alt"></i></span>
-            {{ product.store.telephone }}
-          </p>
-        {% endif %}
-        {% if product.store.website and product.store.website != 'NaN' %}
-          <p class="product-info__section__text">
-            <span><i class="fas fa-laptop"></i></span>
-            {{ product.store.website }}
-          </p>
-        {% endif %}
-        {% if product.store.email and product.store.email != 'NaN' %}
+        <p class="product-info__section__text">
+          {{ product.store.address_line_1 }}
+        </p>
+        {% endif %} {% if product.store.address_line_2 %}
+        <p class="product-info__section__text">
+          {{ product.store.address_line_2 }}
+        </p>
+        {% endif %} {% if product.store.postcode %}
+        <p class="product-info__section__text">{{ product.store.postcode }}</p>
+        {% endif %} {% if product.store.city.name %}
+        <p class="product-info__section__text">{{ product.store.city.name }}</p>
+        {% endif %} {% if product.store.country.name %}
+        <p class="product-info__section__text">
+          {{ product.store.country.name }}
+        </p>
+        {% endif %} {% if product.store.telephone %}
+        <p class="product-info__section__text">
+          <span><i class="fas fa-phone-alt"></i></span>
+          {{ product.store.telephone }}
+        </p>
+        {% endif %} {% if product.store.website and product.store.website != 'NaN' %}
+        <p class="product-info__section__text">
+          <span><i class="fas fa-laptop"></i></span>
+          {{ product.store.website }}
+        </p>
+        {% endif %} {% if product.store.email and product.store.email != 'NaN' %}
           <p class="product-info__section__text">
             <span><i class="far fa-envelope"></i></span>
             {{ product.store.email }}
@@ -501,18 +502,18 @@
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">Reviews</h2>
       {% if products.ratings %}
-        <div class="product-info__section__text-block">
-          ratings
-        </div>
+      <div class="product-info__section__text-block">
+        ratings
+      </div>
       {% else %}
       <div class="product-info__section__text-block">
-        <p class="product-info__section__text">No reviews for this product yet.</p>
+        <p class="product-info__section__text">
+          No reviews for this product yet.
+        </p>
       </div>
       {% endif %}
     </div>
-
   </section>
-
 </main>
 
 {% endblock %}

@@ -15,6 +15,10 @@ import { ExtendProductPage } from './pages/products/product';
 
 new Navigation();
 new DropdownMenu();
-new QuantityComponent();
 new SearchFilters();
-new ExtendProductPage();
+
+if (window.location.href.includes('/products/')) {
+    new ExtendProductPage();
+    new QuantityComponent();
+}
+

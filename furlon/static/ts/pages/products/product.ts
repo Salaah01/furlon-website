@@ -27,8 +27,7 @@ export class ExtendProductPage {
   // ---------------------------------------------------------------------------
   constructor() {
     /**
-     * Constructor does not require any arguments and will instead use
-     * elements from the DOM.
+     * Retrieves data from the API and calls methods to build onto the DOM.
      */
 
     const APIPath = window.location.href.replace(
@@ -41,45 +40,72 @@ export class ExtendProductPage {
 
     request.onreadystatechange = () => {
       if (request.readyState == 4 && request.status == 200) {
-
         const data = JSON.parse(request.responseText);
 
         if (data.colours) {
-          this.build_colours(data.colours)
+          this.build_colours(data.colours);
         }
-
       }
     };
-
-
-
-
-
   }
 
   // ---------------------------------------------------------------------------
   private build_colours(attrs: any[]) {
+    /**
+     * Builds onto the dropdown colours dropdown menu and adds more colours
+     * in accordance to how many how many colours were returned from the API.
+     *
+     * The method will append elements onto the element
+     * #product-colour-variations
+     *
+     * For each colour, the following HTML will be appended:
+     *
+     * <a
+     *   href="{link to product}"
+     *   class="dropdown-menu__options__label"
+     *   for="colour-{colour name}"
+     * />
+     *   <label for="colour-{colour name}">
+     *     <span
+     *       class="sm-colour-box"
+     *        style="background-color: {colour hex value};">
+     *     </span>
+     *     {colour-name}
+     *   </label>
+     * </a>
+     * <input
+     *   type="radio"
+     *   class="dropdown-menu__options__radio-btn"
+     *   name="prod-f-colour"
+     *   id="colour-{colour name}"
+     *   value="colour-{colour name}"
+     * />
+     */
     const targetElem = document.getElementById("product-colour-variations");
 
     if (targetElem) {
       for (let a = 0; a < attrs.length; a++) {
+        // Using data retrieved from the API, the related products' href, colour
+        // and hex_value are built.
         const href = "/products/" + attrs[a].product_id;
         const colour = attrs[a].col_name;
         const hex_val = attrs[a].col_hex_val;
 
+        // Creating the "a" tag
         const linkElem = document.createElement("A");
         linkElem.setAttribute("href", href);
+        linkElem.setAttribute("class", "dropdown-menu__options__label");
 
+        // Creating the "label" tag
         const labelElem = document.createElement("LABEL");
         labelElem.setAttribute("for", "colour-" + colour);
-        labelElem.setAttribute("class", "dropdown-menu__options__label");
 
-
-
+        // Creating the "span" tag
         const spanElem = document.createElement("SPAN");
         spanElem.setAttribute("class", "sm-colour-box");
         spanElem.setAttribute("style", "background-color: " + hex_val + ";");
 
+        // Creating the "input" tag
         const inputElem = document.createElement("INPUT");
         inputElem.setAttribute("type", "radio");
         inputElem.setAttribute("class", "dropdown-menu__options__radio-btn");
@@ -87,17 +113,18 @@ export class ExtendProductPage {
         inputElem.setAttribute("id", "colour-" + colour);
         inputElem.setAttribute("value", "colour-" + colour);
 
+        // Appending each tag to their respective parent elements.
         labelElem.appendChild(spanElem);
         labelElem.append(colour);
         linkElem.appendChild(labelElem);
 
+        // Appending the elements to the target element in the DOM.
         targetElem.appendChild(linkElem);
         targetElem.appendChild(inputElem);
-        console.log(targetElem)
       }
     } else {
       console.warn(
-        "#product-colour-variations does not exist, alternative colours cannot be added"
+        "#product-colour-variations does not exist, alternative colours cannot be added."
       );
     }
   }
