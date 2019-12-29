@@ -56,8 +56,8 @@
       &__img {
         // Main image on in the section showing an image of the product.
         object-fit: cover;
-        width: 100%;
-        height: 100%;
+        width: 55rem;
+        height: 35rem;
         cursor: pointer;
       }
 
@@ -212,12 +212,14 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+  margin-top: -28rem;
 
   &__thumb {
     object-fit: cover;
     height: 5vw;
     width: 6vw;
     padding: 0.5rem;
+
 
     &:hover {
       cursor: pointer;
@@ -260,17 +262,12 @@
         height: 20rem;
         border-radius: 5px;
         box-shadow: 2px 3px 10px 1px rgb(102, 102, 102);
-        object-fit: cover;
         transition: all .3s ease;
 
         &:hover {
             filter: brightness(1.2);
             transform: scale(1.02);
         }
-    }
-
-    &__name,
-    &__price {
     }
 
     &__name {

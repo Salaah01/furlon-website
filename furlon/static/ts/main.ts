@@ -11,6 +11,7 @@ import { DropdownMenu } from './components/dropdown-menu';
 import { QuantityComponent } from './components/quantity';
 import { SearchFilters } from './components/search_filters';
 import { ExtendProductPage } from './pages/products/product';
+import { CarouselImgs } from './components/carousel-imgs';
 
 
 new Navigation();
@@ -20,4 +21,5 @@ new SearchFilters();
 if (window.location.href.includes('/products/')) {
     new ExtendProductPage();
     new QuantityComponent();
+    new CarouselImgs();
 }

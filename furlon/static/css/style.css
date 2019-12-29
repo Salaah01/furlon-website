@@ -597,8 +597,8 @@ svg {
         margin-bottom: 2rem; }
     .product-showcase__section__img-container__img {
       object-fit: cover;
-      width: 100%;
-      height: 100%;
+      width: 55rem;
+      height: 35rem;
       cursor: pointer; }
     .product-showcase__section__img-container__alt-colours {
       cursor: pointer; }
@@ -667,7 +667,8 @@ svg {
 .img__thumbs {
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  margin-top: -28rem; }
   .img__thumbs__thumb {
     object-fit: cover;
     height: 5vw;
@@ -699,7 +700,6 @@ svg {
     height: 20rem;
     border-radius: 5px;
     box-shadow: 2px 3px 10px 1px #666666;
-    object-fit: cover;
     transition: all .3s ease; }
     .related-product__img:hover {
       filter: brightness(1.2);
@@ -911,3 +911,49 @@ svg {
     .c-quantity__input::-webkit-outer-spin-button, .c-quantity__input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0; }
+
+@keyframes carouselImgHide {
+  0% {
+    left: 0; }
+  99% {
+    left: -150%; }
+  100% {
+    left: 100%; } }
+
+@keyframes carouselImgReveal {
+  0% {
+    left: 100%;
+    opacity: 0; }
+  100% {
+    left: 0;
+    opacity: 1; } }
+
+.carousel-container {
+  z-index: 1; }
+  .carousel-container__display-section {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3.5rem;
+    height: 100%;
+    z-index: -10; }
+    .carousel-container__display-section__img {
+      position: absolute;
+      object-fit: cover;
+      left: 0;
+      top: 0;
+      z-index: 5;
+      transition: all .4s ease-out;
+      background-color: blue; }
+      .carousel-container__display-section__img[position="init"] {
+        z-index: 1; }
+      .carousel-container__display-section__img[position="hide"] {
+        left: 100%;
+        animation-name: carouselImgHide;
+        animation-duration: 1s;
+        z-index: 0; }
+      .carousel-container__display-section__img[position="show"] {
+        left: 0;
+        animation-name: carouselImgReveal;
+        animation-duration: 1s;
+        animation-fill-mode: initial; }
