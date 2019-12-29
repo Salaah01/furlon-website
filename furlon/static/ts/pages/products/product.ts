@@ -30,35 +30,75 @@ export class ExtendProductPage {
      * Constructor does not require any arguments and will instead use
      * elements from the DOM.
      */
-    const productInfo = this.fetch_product_info() as JSON|null;
 
-    if (productInfo) {
-        if (productInfo.json) {
+    const APIPath = window.location.href.replace(
+      "/products/",
+      "/products/info-api/"
+    );
+    const request = new XMLHttpRequest();
+    request.open("GET", APIPath);
+    request.send();
 
+    request.onreadystatechange = () => {
+      if (request.readyState == 4 && request.status == 200) {
+
+        const data = JSON.parse(request.responseText);
+
+        if (data.colours) {
+          this.build_colours(data.colours)
         }
-    }
+
+      }
+    };
+
+
+
 
 
   }
 
   // ---------------------------------------------------------------------------
-  fetch_product_info() {
-    const APIPath = window.location.href.replace(
-      "/products/",
-      "/products/info-"
-    );
-    const request = new XMLHttpRequest();
-    request.open("GET", APIPath);
-    request.send();
-    request.onreadystatechange = () => {
-      if (request.readyState == 4 && request.status == 200) {
-        return JSON.parse(request.responseText) as JSON;
-      } else {
-          throw 'ExtendProductPage failed to call API'
+  private build_colours(attrs: any[]) {
+    const targetElem = document.getElementById("product-colour-variations");
 
+    if (targetElem) {
+      for (let a = 0; a < attrs.length; a++) {
+        const href = "/products/" + attrs[a].product_id;
+        const colour = attrs[a].col_name;
+        const hex_val = attrs[a].col_hex_val;
+
+        const linkElem = document.createElement("A");
+        linkElem.setAttribute("href", href);
+
+        const labelElem = document.createElement("LABEL");
+        labelElem.setAttribute("for", "colour-" + colour);
+        labelElem.setAttribute("class", "dropdown-menu__options__label");
+
+
+
+        const spanElem = document.createElement("SPAN");
+        spanElem.setAttribute("class", "sm-colour-box");
+        spanElem.setAttribute("style", "background-color: " + hex_val + ";");
+
+        const inputElem = document.createElement("INPUT");
+        inputElem.setAttribute("type", "radio");
+        inputElem.setAttribute("class", "dropdown-menu__options__radio-btn");
+        inputElem.setAttribute("name", "prod-f-colour");
+        inputElem.setAttribute("id", "colour-" + colour);
+        inputElem.setAttribute("value", "colour-" + colour);
+
+        labelElem.appendChild(spanElem);
+        labelElem.append(colour);
+        linkElem.appendChild(labelElem);
+
+        targetElem.appendChild(linkElem);
+        targetElem.appendChild(inputElem);
+        console.log(targetElem)
       }
-    };
-    return null
-
+    } else {
+      console.warn(
+        "#product-colour-variations does not exist, alternative colours cannot be added"
+      );
+    }
   }
 }

@@ -174,7 +174,7 @@ export class SearchFilters {
 
     // const resultsContainer = document.getElementsByClassName('results')[0] as HTMLDivElement;
     const origResults = document.getElementsByClassName('results__result');
-    
+
     let validProducts = [];
     result: JSON;
     for (const result in APIResults) {

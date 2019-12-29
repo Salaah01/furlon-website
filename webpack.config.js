@@ -6,9 +6,9 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'furlon/static/js'),
-    publicPath: 'furlon/static/js'
+    // publicPath: 'furlon/static/js'
   },
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   module: {
     rules: [
       {

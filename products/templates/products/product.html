@@ -257,15 +257,15 @@
           <div class="dropdown-menu__selected">
             <span>Colour</span>
           </div>
-          <div class="dropdown-menu__options">
-            <label
+          <div class="dropdown-menu__options" id="product-colour-variations">
+            <a href="#"><label
               for="colour-{{ product.colour.name }}"
               class="dropdown-menu__options__label"
             >
                 <span
                   class="sm-colour-box"
                   style="background-color: black;"></span>{{product.colour.name }}
-            </label>
+            </label></a>
             <input
               type="radio"
               class="dropdown-menu__options__radio-btn"
