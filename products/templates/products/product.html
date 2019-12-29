@@ -266,10 +266,10 @@
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">Size</h2>
       <div class="product-info__section__text-block">
-        <p class="product-info__section__text">Length: {{ product.length }}</p>
-        <p class="product-info__section__text">Width: {{ product.width }}</p>
-        <p class="product-info__section__text">Height: {{ product.height }}</p>
-        <p class="product-info__section__text">Weight: {{ product.weight }}</p>
+        <p class="product-info__section__text">Length: {{ product.length }} {{ product.length_units }}</p>
+        <p class="product-info__section__text">Width: {{ product.width }} {{ product.width_units }}</p>
+        <p class="product-info__section__text">Height: {{ product.height }} {{ product.height_units }}</p>
+        <p class="product-info__section__text">Weight: {{ product.weight }} {{ product.weight_units }}</p>
       </div>
     </div>
 

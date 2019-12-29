@@ -278,7 +278,7 @@ class RelationType(models.Model):
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
-        verbose_name_plural = "RelationTypes"
+        verbose_name_plural = "Relation Types"
 
 
 ##################################################################################################################################
@@ -297,10 +297,8 @@ class LinkedProducts(models.Model):
     """
 
     id = models.BigAutoField(primary_key=True)
-    product = models.ForeignKey(
-        Products, on_delete=models.CASCADE, related_name='product', default=0)
-    related_product = models.ForeignKey(
-        Products, on_delete=models.CASCADE, related_name='related_product', default=0)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='product', default=0)
+    related_product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='related_product', default=0)
     relation = models.ForeignKey(RelationType, on_delete=models.DO_NOTHING, default=0)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
@@ -309,7 +307,34 @@ class LinkedProducts(models.Model):
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
-        verbose_name_plural = "LinkedProducts"
+        verbose_name_plural = "Linked Products"
+
+
+##################################################################################################################################
+class ProductFeatures(models.Model):
+    """
+    PURPOSE:
+    Contains a list of features a product has.
+
+    DEPENDENCIES:
+    - products_products: product
+    - products_features: feature
+
+    DEPENDANTS:
+    None
+    """
+
+    id = models.BigAutoField(primary_key=True)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, default=0)
+    feature = models.ForeignKey(Features, on_delete=models.DO_NOTHING, default=0)
+
+    # -------------------------------------------------------------------------------------------------------------------------- #
+    def __str__(self):
+        return self.product.name +  ", " + self.feature.name
+
+    # -------------------------------------------------------------------------------------------------------------------------- #
+    class Meta:
+        verbose_name_plural = "Product Features"
 
 
 ##################################################################################################################################

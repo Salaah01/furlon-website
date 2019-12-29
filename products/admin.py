@@ -116,6 +116,14 @@ class LinkedProductsAdmin(admin.ModelAdmin):
     search_fields = ('product__name', 'related_product__name', 'relation', )
 
 
+##################################################################################################################################
+class ProductFeaturesAdmin(admin.ModelAdmin):
+    """ Registers ProductFeatures (products_productfeatures) table onto the admin page """
+    list_display = ('id', 'product', 'feature')
+    link_display_links = ('id', )
+    search_fields = ('id', 'product', 'feature')
+
+
 admin.site.register(ColourFamilies, ColourFamiliesAdmin)
 admin.site.register(Colours, ColoursAdmin)
 admin.site.register(Rooms, RoomsAdmin)
@@ -126,3 +134,4 @@ admin.site.register(Products, ProductsAdmin)
 admin.site.register(ProductReviews, ProductReviewsAdmin)
 admin.site.register(RelationType, RelationTypeAdmin)
 admin.site.register(LinkedProducts, LinkedProductsAdmin)
+admin.site.register(ProductFeatures, ProductFeaturesAdmin)
