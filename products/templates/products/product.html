@@ -254,7 +254,7 @@
 
   <!-- Product Information -->
   <section class="product-info">
-    <div class="product-info__section">
+    <div class="product-info__section product-info__section--3-of-3">
       <h2 class="product-info__section__title heading-2">
         Product Information
       </h2>
@@ -263,7 +263,8 @@
       </div>
     </div>
 
-    <div class="product-info__section">
+    <!-- Size -->
+    <div class="product-info__section product-info__section--1-of-3">
       <h2 class="product-info__section__title heading-2">Size</h2>
       <div class="product-info__section__text-block">
         <p class="product-info__section__text">Length: {{ product.length }} {{ product.length_units }}</p>
@@ -274,12 +275,15 @@
     </div>
 
     <!-- Features -->
-    <div class="product-info__section">
+    <div class="product-info__section product-info__section--1-of-3">
       <h2 class="product-info__section__title heading-2">Features</h2>
+      <div class="product-info__section__text-block" id="product-features">
+
+      </div>
     </div>
 
     <!-- Store Details -->
-    <div class="product-info__section">
+    <div class="product-info__section product-info__section--1-of-3">
       <h2 class="product-info__section__title heading-2">Store Details</h2>
       <a class="product-info__section__sub-heading heading-3" href="#"
         >{{ product.store.name }}
@@ -324,7 +328,7 @@
     </div>
 
     <!-- Product Reviews -->
-    <div class="product-info__section">
+    <div class="product-info__section product-info__section--3-of-3">
       <h2 class="product-info__section__title heading-2">Reviews</h2>
       {% if products.ratings %}
       <div class="product-info__section__text-block">

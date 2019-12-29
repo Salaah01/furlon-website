@@ -5,7 +5,9 @@ Created By:     Salaah Amin
 ================================================================================================================================
 SCRIPT FUNCTION
 
-Queries the database and linked products when given a product key and some parameters to match.
+Queries the database to retrieve additional information realting to a product. This includes related products, features,
+sub-categories and other bits of data where otherwise a one-to-many relationship have to exist between a field in
+products_products and another table.
 ================================================================================================================================
 """
 
@@ -21,8 +23,10 @@ from .models import Products, Colours
 
 
 # ================================================================================================================================
-class LinkedProducts:
-    """ Queries the products_linkedproducts table and retrieves a collection or linked products based on the criterion provided.
+class Productinfo:
+    """ Queries the database to retrieve additional information realting to a product. This includes related products, features,
+        sub-categories and other bits of data where otherwise a one-to-many relationship have to exist between a field in
+        products_products and another table.
     """
 
     # -------------------------------------------------------------------------------------------------------------------------- #
@@ -33,17 +37,18 @@ class LinkedProducts:
         self.pk = pk
 
         self.cursor = connection.cursor()
-        self.linkedProducts = self.get_linked_products()
+        self.productInfo = self.get_product_info()
 
     # -------------------------------------------------------------------------------------------------------------------------- #
-    def get_linked_products(self):
+    def get_product_info(self):
         """ Will decide which method is run based on the relation argument provide. """
 
         return json.dumps(
             {
                 "colours": self.get_colours(),
                 "sets": self.get_sets(),
-                "similar": self.get_similar()
+                "similar": self.get_similar(),
+                "features": self.get_features()
             }
         )
 
@@ -106,6 +111,27 @@ class LinkedProducts:
         """
 
         keys = ('name', 'product_id', 'showcase_image', 'price')
+
+        self.cursor.execute(sql, [self.pk])
+        queryResults = self.cursor.fetchall()
+
+        return self.query_results_to_dict(queryResults, keys)
+
+    # -------------------------------------------------------------------------------------------------------------------------- #
+    def get_features(self):
+        """ Gets a list of feature names for a given product """
+        sql = """
+        SELECT f.name
+        FROM products_features f
+        WHERE f.feature_id = (
+            SELECT pf.feature_id
+            FROM products_productfeatures pf
+            WHERE pf.feature_id = f.feature_id
+            AND pf.product_id = %s
+        )
+        """
+
+        keys = ('name', )
 
         self.cursor.execute(sql, [self.pk])
         queryResults = self.cursor.fetchall()

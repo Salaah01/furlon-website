@@ -41,17 +41,21 @@ export class ExtendProductPage {
     request.onreadystatechange = () => {
       if (request.readyState == 4 && request.status == 200) {
         const data = JSON.parse(request.responseText);
-
+        // Adding colour variations
         if (data.colours) {
           this.build_colours(data.colours);
         }
-
+        // Adding other products of the same set
         if (data.sets) {
           this.build_product_sets(data.sets);
         }
-
+        // Adding similar products
         if (data.similar) {
           this.build_similar_products(data.similar);
+        }
+        // Adding features information
+        if (data.features) {
+          this.build_features(data.features);
         }
       }
     };
@@ -188,8 +192,8 @@ export class ExtendProductPage {
         textPriceElem.setAttribute(
           "class",
           "product-set__price related-product__price"
-        )
-        textPriceElem.textContent = '£' +price;
+        );
+        textPriceElem.textContent = "£" + price;
 
         // Set the image and text elements to become children of the linkElem
         // and append them onto the targetElem in the DOM.
@@ -238,7 +242,10 @@ export class ExtendProductPage {
 
         // "IMG" tag for product image.
         const imgElem = document.createElement("IMG");
-        imgElem.setAttribute("class", "similar-product__img related-product__img");
+        imgElem.setAttribute(
+          "class",
+          "similar-product__img related-product__img"
+        );
         imgElem.setAttribute("src", img);
         imgElem.setAttribute(
           "alt",
@@ -257,8 +264,8 @@ export class ExtendProductPage {
         textPriceElem.setAttribute(
           "class",
           "similar-product__price related-product__price"
-        )
-        textPriceElem.textContent = '£' + price;
+        );
+        textPriceElem.textContent = "£" + price;
 
         // Set the image and text elements to become children of the linkElem
         // and append them onto the targetElem in the DOM.
@@ -270,6 +277,33 @@ export class ExtendProductPage {
     } else {
       console.warn(
         "#similar-products does not exist, similar-products cannot be added."
+      );
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  build_features(attrs: any[]) {
+    /**
+     * Builds the features section of product information based on results
+     * retrieved from the API.
+     * Will create a "P" tag for each filter and append them to the target
+     * element in the DOM.
+     */
+
+    const targetElem = document.getElementById("product-features");
+
+    if (targetElem) {
+      for (let f = 0; f < attrs.length; f++) {
+        const name = attrs[f].name;
+        const newElem = document.createElement("P");
+        newElem.setAttribute("class", "product-info__section__text");
+        newElem.textContent = name;
+
+        targetElem.appendChild(newElem);
+      }
+    } else {
+      console.warn(
+        "#product-features does not exist, similar-products cannot be added."
       );
     }
   }

@@ -23,7 +23,7 @@ from django.db import connection
 # Local Imports
 from products.models import Products, Categories, ColourFamilies, Colours
 from .search_query import search_query
-from .linked_products import LinkedProducts
+from .product_info import Productinfo
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
@@ -127,4 +127,4 @@ def product_info_api(request, pk):
     """ API for returning information on a product. These information that will be provided related to that which is avaialble
     in thelinked product table.
     """
-    return HttpResponse(LinkedProducts(pk).linkedProducts, content_type="application/json")
+    return HttpResponse(Productinfo(pk).productInfo, content_type="application/json")
