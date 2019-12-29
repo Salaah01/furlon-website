@@ -676,6 +676,41 @@ svg {
     .img__thumbs__thumb:hover {
       cursor: pointer; }
 
+.related-products {
+  margin-bottom: 5rem; }
+  .related-products__container {
+    display: flex;
+    flex-wrap: wrap; }
+  .related-products__title {
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem; }
+
+.related-product {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  text-decoration: none; }
+  .related-product:first-of-type {
+    margin-bottom: 4rem; }
+  .related-product__img {
+    width: 30rem;
+    height: 20rem;
+    border-radius: 5px;
+    box-shadow: 0 0 5px 1px black;
+    object-fit: cover;
+    transition: all .3s ease; }
+    .related-product__img:hover {
+      filter: brightness(1.2);
+      transform: scale(1.02); }
+  .related-product__name, .related-product__price {
+    color: #548FCC; }
+  .related-product__name {
+    margin-top: 1rem;
+    font-weight: 600; }
+  .related-product__price {
+    color: #5A5F6A; }
+
 .product-info > * {
   margin-bottom: 4rem; }
 

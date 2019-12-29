@@ -74,7 +74,7 @@ class LinkedProducts:
     def get_sets(self):
         """ Gets linked products that are a set of this product """
         sql = """
-        SELECT pp.product_id, pp.showcase_image
+        SELECT pp.name, pp.product_id, pp.showcase_image, pp.price
         FROM products_products pp
         WHERE pp.product_id IN (
             SELECT plp.related_product_id
@@ -84,7 +84,7 @@ class LinkedProducts:
         )
         """
 
-        keys = ('product_id', 'showcase_image')
+        keys = ('name', 'product_id', 'showcase_image', 'price')
 
         self.cursor.execute(sql, [self.pk])
         queryResults = self.cursor.fetchall()
@@ -95,7 +95,7 @@ class LinkedProducts:
     def get_similar(self):
         """ Gets similar products """
         sql = """
-        SELECT pp.product_id, pp.showcase_image
+        SELECT pp.name, pp.product_id, pp.showcase_image, pp.price
         FROM products_products pp
         WHERE pp.product_id IN (
             SELECT plp.related_product_id
@@ -105,7 +105,7 @@ class LinkedProducts:
         )
         """
 
-        keys = ('product_id', 'showcase_image')
+        keys = ('name', 'product_id', 'showcase_image', 'price')
 
         self.cursor.execute(sql, [self.pk])
         queryResults = self.cursor.fetchall()

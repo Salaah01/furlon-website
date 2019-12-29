@@ -45,6 +45,14 @@ export class ExtendProductPage {
         if (data.colours) {
           this.build_colours(data.colours);
         }
+
+        if (data.sets) {
+          this.build_product_sets(data.sets);
+        }
+
+        if (data.similar) {
+          this.build_similar_products(data.similar);
+        }
       }
     };
   }
@@ -85,8 +93,7 @@ export class ExtendProductPage {
 
     if (targetElem) {
       for (let a = 0; a < attrs.length; a++) {
-        // Using data retrieved from the API, the related products' href, colour
-        // and hex_value are built.
+        // Using data retrieved from the API to build constants
         const href = "/products/" + attrs[a].product_id;
         const colour = attrs[a].col_name;
         const hex_val = attrs[a].col_hex_val;
@@ -125,6 +132,144 @@ export class ExtendProductPage {
     } else {
       console.warn(
         "#product-colour-variations does not exist, alternative colours cannot be added."
+      );
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  private build_product_sets(attrs: any[]) {
+    /**
+     * Builds onto the "product sets" sections.
+     * Will append each product set onto #product-sets.
+     * The method will produce the following HTML for each set:
+     *
+     * <a class="product-set related-product" href="{product url}"
+     *   <img
+     *     class="product-set__img related-product__img"
+     *     alt="Image of a product of which this product is a set. {product name}"
+     *   >
+     *   <span class="product-set__name related-product__name">{product name}</span>
+     *   <span class="product-set__price related-product__price">{product price}</span>
+     * </a>
+     */
+    const targetElem = document.getElementById("product-sets");
+
+    if (targetElem) {
+      for (let a = 0; a < attrs.length; a++) {
+        // Using data retrieved from the API to build constants
+        const href = "/products/" + attrs[a].product_id;
+        const name = attrs[a].name;
+        const img = attrs[a].showcase_image;
+        const price = attrs[a].price;
+
+        // "A" tag which will contain the image and the text.
+        const linkElem = document.createElement("A");
+        linkElem.setAttribute("class", "product-set related-product");
+        linkElem.setAttribute("href", href);
+
+        // "IMG" tag for product image.
+        const imgElem = document.createElement("IMG");
+        imgElem.setAttribute("class", "product-set__img related-product__img");
+        imgElem.setAttribute("src", img);
+        imgElem.setAttribute(
+          "alt",
+          "Image of a product of which this product is a set. (" + name + "}"
+        );
+
+        // "SPAN" tags containing the product name and price
+        const textSpanElem = document.createElement("SPAN");
+        textSpanElem.setAttribute(
+          "class",
+          "product-set__name related-product__name"
+        );
+        textSpanElem.textContent = name;
+
+        const textPriceElem = document.createElement("SPAN");
+        textPriceElem.setAttribute(
+          "class",
+          "product-set__price related-product__price"
+        )
+        textPriceElem.textContent = '£' +price;
+
+        // Set the image and text elements to become children of the linkElem
+        // and append them onto the targetElem in the DOM.
+        linkElem.appendChild(imgElem);
+        linkElem.appendChild(textSpanElem);
+        linkElem.appendChild(textPriceElem);
+        targetElem.appendChild(linkElem);
+      }
+    } else {
+      console.warn(
+        "#product-sets does not exist, product-sets cannot be added."
+      );
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  private build_similar_products(attrs: any[]) {
+    /**
+     * Builds onto the "similar products" sections.
+     * Will append each product set onto #similar-products.
+     * The method will produce the following HTML for each set:
+     *
+     * <a class="product-set related-product" href="{product url}"
+     *   <img
+     *     class="product-set__img related-product__img"
+     *     alt="Image of a product of which this product is a set. {product name}"
+     *   >
+     *   <span class="product-set__name related-product__name">{product name}</span>
+     *   <span class="product-set__price related-product__price">{product price}</span>
+     * </a>
+     */
+    const targetElem = document.getElementById("similar-products");
+
+    if (targetElem) {
+      for (let a = 0; a < attrs.length; a++) {
+        // Using data retrieved from the API to build constants
+        const href = "/products/" + attrs[a].product_id;
+        const name = attrs[a].name;
+        const img = attrs[a].showcase_image;
+        const price = attrs[a].price;
+
+        // "A" tag which will contain the image and the text.
+        const linkElem = document.createElement("A");
+        linkElem.setAttribute("class", "product-set related-product");
+        linkElem.setAttribute("href", href);
+
+        // "IMG" tag for product image.
+        const imgElem = document.createElement("IMG");
+        imgElem.setAttribute("class", "product-set__img related-product__img");
+        imgElem.setAttribute("src", img);
+        imgElem.setAttribute(
+          "alt",
+          "Image of a product of which this product is a set. (" + name + "}"
+        );
+
+        // "SPAN" tags containing the product name and price
+        const textSpanElem = document.createElement("SPAN");
+        textSpanElem.setAttribute(
+          "class",
+          "product-set__name related-product__name"
+        );
+        textSpanElem.textContent = name;
+
+        const textPriceElem = document.createElement("SPAN");
+        textPriceElem.setAttribute(
+          "class",
+          "product-set__price related-product__price"
+        )
+        textPriceElem.textContent = '£' + price;
+
+        // Set the image and text elements to become children of the linkElem
+        // and append them onto the targetElem in the DOM.
+        linkElem.appendChild(imgElem);
+        linkElem.appendChild(textSpanElem);
+        linkElem.appendChild(textPriceElem);
+        targetElem.appendChild(linkElem);
+      }
+    } else {
+      console.warn(
+        "#similar-products does not exist, similar-products cannot be added."
       );
     }
   }

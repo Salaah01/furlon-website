@@ -255,7 +255,10 @@
           <div class="dropdown-menu__selected">
             <span>{{ product.colour.name }}</span>
           </div>
-          <div class="dropdown-menu__options" id="product-colour-variations">
+          <div
+            class="dropdown-menu__options dropdown-menu__options--hide"
+            id="product-colour-variations"
+          >
             <a
               href="#"
               class="dropdown-menu__options__label dropdown-menu__options__label--selected"
@@ -290,12 +293,21 @@
     </div>
   </section>
 
-  {% if products.related %}
+  <!-- Related Products -->
   <section class="related-products">
-    <h2 class="heading-2">Related Products</h2>
-  </section>
-  {% endif %}
 
+    <!-- Product Sets -->
+    <div class="product-sets related-products__container" id="product-sets">
+      <h2 class="product-sets__title related-products__title heading-2">This Will Go Well With...</h2>
+    </div>
+
+     <!-- Similar Products -->
+    <div class="similar-products similar-products__container" id="similar-products">
+      <h2 class="similar-products__title similar-products__title heading-2">Looking for Something Similar&#63;</h2>
+    </div>
+  </section>
+
+  <!-- Product Information -->
   <section class="product-info">
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">
@@ -316,10 +328,12 @@
       </div>
     </div>
 
+    <!-- Features -->
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">Features</h2>
     </div>
 
+    <!-- Store Details -->
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">Store Details</h2>
       <a class="product-info__section__sub-heading heading-3" href="#"
@@ -499,6 +513,7 @@
       </div>
     </div>
 
+    <!-- Product Reviews -->
     <div class="product-info__section">
       <h2 class="product-info__section__title heading-2">Reviews</h2>
       {% if products.ratings %}
@@ -507,7 +522,7 @@
       </div>
       {% else %}
       <div class="product-info__section__text-block">
-        <p class="product-info__section__text">
+        <p class="product-info__section__text u-italics">
           No reviews for this product yet.
         </p>
       </div>
