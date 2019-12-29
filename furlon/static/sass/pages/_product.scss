@@ -276,7 +276,7 @@
 
   &__name {
     color: $colour-secondary;
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-weight: 600;
   }
 
@@ -290,9 +290,10 @@
 // each product.
 .product-info {
   // Main container
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5rem;
+  margin-top: 8rem;
+  padding-left: 20rem;
+  padding-right: 20rem;
+
 
   & > * {
     margin-bottom: 4rem;
@@ -300,9 +301,6 @@
 
   &__section {
     // Each sub-section in .product-info.
-    &--3-of-3 {
-      grid-column: 1 / -1;
-    }
 
     &__title {
       // Title for each sub-section.

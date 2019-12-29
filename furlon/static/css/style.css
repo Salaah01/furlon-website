@@ -712,19 +712,17 @@ svg {
       transform: scale(1.02); }
   .related-product__name {
     color: #548FCC;
-    margin-top: 1rem;
+    margin-top: 2rem;
     font-weight: 600; }
   .related-product__price {
     color: #5A5F6A; }
 
 .product-info {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 5rem; }
+  margin-top: 8rem;
+  padding-left: 20rem;
+  padding-right: 20rem; }
   .product-info > * {
     margin-bottom: 4rem; }
-  .product-info__section--3-of-3 {
-    grid-column: 1 / -1; }
   .product-info__section__title {
     color: #f47c4a;
     border-bottom: 1px solid #f47c4a;
