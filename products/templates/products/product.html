@@ -16,9 +16,6 @@
           src="{{ product.showcase_image }}"
           alt="Showcase image of {{ product.name }}"
         />
-        <div class="product-showcase__section__img-container__alt-colours">
-          Alternative Colours
-        </div>
       </div>
       <div class="product-showcase__section__thumbs img__thumbs">
         {% if product.image_1 %}
@@ -68,144 +65,7 @@
       </h2>
 
       <!-- Ratings -->
-      <div class="product-showcase__section__ratings">
-        <div class="product-showcase__section__ratings__stars ratings__stars">
-          {% if product.rating < 0.1 %}
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.2 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.3 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.4 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.5 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.6 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.7 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.8 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.9 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 1 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          {% else %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          {% endif %} {% if product.ratings %}
-          <p class="product-showcase__section__ratings__rating">
-            {{ product.rating }}
-          </p>
-          {% endif %}
-        </div>
-        <a href="#" class="product-showcase__section__ratings__reviews"
-          >{{ product.ratings }} Reviews</a
-        >
-      </div>
+      {% include 'products/partials/_product-ratings.html' %}
 
       <!-- Description -->
       <div class="product-showcase__section__description">
@@ -253,6 +113,10 @@
       <div class="product-showcase__section__colours">
         <div class="dropdown-menu">
           <div class="dropdown-menu__selected">
+            <span
+                class="sm-colour-box"
+                style="background-color: {{ product.colour.hex_val}};"></span
+              >
             <span>{{ product.colour.name }}</span>
           </div>
           <div
@@ -266,7 +130,7 @@
               <label for="colour-{{ product.colour.name }}">
                 <span
                   class="sm-colour-box"
-                  style="background-color: black;"></span
+                  style="background-color: {{ product.colour.hex_val}};"></span
                 >
                 {{product.colour.name }}
               </label>
@@ -302,8 +166,8 @@
     </div>
 
      <!-- Similar Products -->
-    <div class="similar-products similar-products__container" id="similar-products">
-      <h2 class="similar-products__title similar-products__title heading-2">Looking for Something Similar&#63;</h2>
+    <div class="similar-products related-products__container" id="similar-products">
+      <h2 class="similar-products__title related-products__title heading-2">Looking for Something Similar&#63;</h2>
     </div>
   </section>
 
@@ -339,144 +203,9 @@
       <a class="product-info__section__sub-heading heading-3" href="#"
         >{{ product.store.name }}
       </a>
-      <div class="product-info__section__ratings">
-        <div class="product-info__section__ratings__stars ratings__stars">
-          {% if product.rating < 0.1 %}
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.2 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.3 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.4 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.5 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.6 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.7 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.8 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 0.9 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span class="rating__stars__star fa fa-star i-star"></span>
-          {% elif product.rating < 1 %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--half-checked"
-          ></span>
-          {% else %}
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          <span
-            class="rating__stars__star fa fa-star i-star i-star--checked"
-          ></span>
-          {% endif %} {% if product.ratings %}
-          <p class="product-showcase__section__ratings__rating">
-            {{ product.rating }}
-          </p>
-          {% endif %}
-        </div>
-        <a href="#" class="product-showcase__section__ratings__reviews"
-          >{{ product.ratings }} Reviews</a
-        >
-      </div>
+      <!-- Store Ratings -->
+      {% include 'products/partials/_store-ratings.html' %}
+
       <div class="product-info__section__text-block">
         {% if product.store.address_line_1 %}
         <p class="product-info__section__text">

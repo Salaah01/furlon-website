@@ -233,12 +233,12 @@ export class ExtendProductPage {
 
         // "A" tag which will contain the image and the text.
         const linkElem = document.createElement("A");
-        linkElem.setAttribute("class", "product-set related-product");
+        linkElem.setAttribute("class", "similar-product related-product");
         linkElem.setAttribute("href", href);
 
         // "IMG" tag for product image.
         const imgElem = document.createElement("IMG");
-        imgElem.setAttribute("class", "product-set__img related-product__img");
+        imgElem.setAttribute("class", "similar-product__img related-product__img");
         imgElem.setAttribute("src", img);
         imgElem.setAttribute(
           "alt",
@@ -249,14 +249,14 @@ export class ExtendProductPage {
         const textSpanElem = document.createElement("SPAN");
         textSpanElem.setAttribute(
           "class",
-          "product-set__name related-product__name"
+          "similar-product__name related-product__name"
         );
         textSpanElem.textContent = name;
 
         const textPriceElem = document.createElement("SPAN");
         textPriceElem.setAttribute(
           "class",
-          "product-set__price related-product__price"
+          "similar-product__price related-product__price"
         )
         textPriceElem.textContent = '£' + price;
 
