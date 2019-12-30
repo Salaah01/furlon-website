@@ -176,6 +176,8 @@
           max="{{ product.inventory }}"
           value="1"
           step="1"
+          id='quantity-ctrl'
+          product-id='{{ product.product_id }}'
         />
         <button
           class="product-showcase__section__quantity__btn c-quantity__btn"
@@ -228,7 +230,10 @@
       </div>
 
       <!-- Add to Basket Button -->
-      <button class="product-showcase__section__basket-add btn btn--primary">
+      <button
+        class="product-showcase__section__basket-add btn btn--primary"
+        id="add-to-basket-btn"
+      >
         <i class="fas fa-truck"></i>Add to Basket
       </button>
 

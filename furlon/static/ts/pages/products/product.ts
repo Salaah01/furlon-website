@@ -6,30 +6,41 @@
 // Functionality on the product page.
 //
 // PURPOSE
-// Will build onto the HTML adding onto the colours filter options as well as
-// the product info section.
-// There elements will be added based on what other related products there are
-// to the current page. This information will be retrieved from an API.
+// Will handle the functionality on the product page. These include the
+// following:
+//
+//  - Will build onto the HTML adding onto the colours filter options as well as
+//    the product info section. There elements will be added based on what other
+//    related products there are to the current page. This information will be
+//    retrieved from an API.
+//
+//  - Will build the function for the add to basket button allowing items
+//    to be added to the basket and for the page to be refreshed.
 // =============================================================================
 
-export class ExtendProductPage {
+import { BasketState } from "../../state/basket-items";
+
+export class ExtendProductPage extends BasketState {
   /**
-   * Extends onto the product using the product info API.
+   * Will handle the JS functionality on the product page. These include the
+   * following:
    *
-   * This will be used to retrieve information on what related products there
-   * are looking at similar products, colours variations of the same product
-   * and products which go along with the current product to make a set.
+   *  - Will build onto the HTML adding onto the colours filter options as well as
+   *    the product info section. There elements will be added based on what other
+   *    related products there are to the current page. This information will be
+   *    retrieved from an API.
    *
-   * Using this, the product page will be extended with more HTML elements
-   * being added linking to the related product.
+   *  - Will build the function for the add to basket button allowing items
+   *    to be added to the basket and for the page to be refreshed.
    */
 
   // ---------------------------------------------------------------------------
   constructor() {
     /**
-     * Retrieves data from the API and calls methods to build onto the DOM.
+     * - Retrieves data from the API and calls methods to build onto the DOM.
+     * - Adds functionality onto the "add to basket button".
      */
-
+    super();
     const APIPath = window.location.href.replace(
       "/products/",
       "/products/info-api/"
@@ -59,6 +70,8 @@ export class ExtendProductPage {
         }
       }
     };
+
+    this.add_to_basket();
   }
 
   // ---------------------------------------------------------------------------
@@ -306,5 +319,30 @@ export class ExtendProductPage {
         "#product-features does not exist, similar-products cannot be added."
       );
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  private add_to_basket() {
+    /** Adds products into the basket */
+    const inputElem = document.getElementById(
+      "quantity-ctrl"
+    ) as HTMLInputElement;
+    const productId = Number(inputElem.getAttribute("product-id"));
+
+    const addBtn = document.getElementById(
+      "add-to-basket-btn"
+    ) as HTMLInputElement;
+
+    addBtn.addEventListener("click", () => {
+      const quantity = Number(inputElem.value);
+
+      if (Number.isInteger(quantity)) {
+        super.add_item(productId, quantity);
+      } else {
+        console.warn(
+          "Check the quantity, it is either NaN or a float. Must be a number"
+        );
+      }
+    });
   }
 }

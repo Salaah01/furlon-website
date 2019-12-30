@@ -102,7 +102,6 @@ export class CarouselImgs {
     displayImages: HTMLCollection
   ) {
     for (let im = 0; im < displayImages.length; im++) {
-      console.log(displayImages[im]);
       displayImages[im].addEventListener("click", () => {
         displayImages[im].setAttribute("position", "hide");
 
