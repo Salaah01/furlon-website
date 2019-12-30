@@ -25,7 +25,7 @@
         class="nav__option__btn btn-inline nav-sub-products"
         filter-for="products"
       >
-        Products
+        <span class="nav-sub-products">Products</span>
         <span class="nav__icon nav-sub-products" filter-for="products">
           <i
             class="fas fa-chevron-down nav-sub-products"
@@ -64,7 +64,7 @@
         class="nav__option__btn btn-inline nav-sub-rooms"
         filter-for="rooms"
       >
-        Rooms
+        <span class="nav-sub-rooms">Rooms</span>
         <span class="nav__icon nav-sub-rooms" filter-for="rooms">
           <i class="fas fa-chevron-down nav-sub-rooms" filter-for="rooms"></i
         ></span>
@@ -111,14 +111,9 @@
         class="nav__search__input"
         name="search"
         id="search"
-        {%
-        if
-        userValues.search
-        %}
-        value="{{ userValues.search }}"
-        {%
-        endif
-        %}
+        {% if userValues.search %}
+          value="{{ userValues.search }}"
+        {% endif %}
       />
       <button class="nav__search__btn">
         <span class="nav__search__icon"><i class="fas fa-search"></i></span>
@@ -131,15 +126,15 @@
     <div class="nav__account-basket">
       <!-- Basket -->
       {% if 'profile' in request.path %}
-      <a href="#" class="nav__account-basket__opt nav__active" id="nav-basket"
-        >Basket
+      <a href="#" class="nav__account-basket__opt nav__active" id="nav-basket">
+        <span>Basket</span>
         <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span
       ></a>
       {% else %}
       <a href="#" class="nav__account-basket__opt" id="nav-basket">
-        Basket
-        <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span
-      ></a>
+        <span>Basket</span>
+        <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
+      </a>
       {% endif %} {% if user.is_authenticated %}
 
       <!-- Profile -->

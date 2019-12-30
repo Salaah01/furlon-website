@@ -6,6 +6,9 @@ p {
   font-weight: 300;
   letter-spacing: 1.5px;
   color: #315B8A; }
+  @media only screen and (max-width: 73.125em) {
+    .heading-1 {
+      font-size: 5rem; } }
 
 .heading-2 {
   font-size: 3.5rem;
@@ -16,6 +19,10 @@ p {
   font-size: 2.4rem;
   font-weight: 400;
   color: #5A5F6A; }
+  @media only screen and (max-width: 73.125em) {
+    .heading-3 {
+      font-size: 2.2rem;
+      line-height: 3rem; } }
 
 .u-center-text {
   text-align: center; }
@@ -139,6 +146,16 @@ svg {
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.1); }
+  .nav__icon {
+    padding-left: 1rem; }
+    @media only screen and (max-width: 85em) {
+      .nav__icon {
+        display: none; } }
+    @media only screen and (max-width: 37.5em) {
+      .nav__icon {
+        padding-left: 0;
+        margin-right: 1rem;
+        display: inline-block; } }
   @media only screen and (max-width: 56.25em) {
     .nav {
       flex-wrap: wrap; } }
@@ -148,7 +165,8 @@ svg {
       flex-direction: column;
       flex-wrap: nowrap;
       align-items: flex-start;
-      padding: 2rem 3rem; } }
+      padding: 2rem 3rem;
+      border-bottom: 2px solid #c1c1c1; } }
   .nav__toggle {
     display: none; }
     @media only screen and (max-width: 37.5em) {
@@ -160,8 +178,8 @@ svg {
       background-color: #fbfbfb;
       height: auto;
       width: 8rem;
-      position: fixed;
-      top: .5rem;
+      position: absolute;
+      top: 0.5rem;
       right: 1rem;
       z-index: 2000;
       text-align: center;
@@ -178,11 +196,11 @@ svg {
         content: "";
         position: absolute;
         left: 0;
-        transition: all .2s; }
+        transition: all 0.2s; }
       .nav__toggle__icon::before {
-        top: -.8rem; }
+        top: -0.8rem; }
       .nav__toggle__icon::after {
-        top: .8rem; }
+        top: 0.8rem; }
     .nav__toggle__btn:hover .nav__toggle__icon::before {
       top: -1rem; }
     .nav__toggle__btn:hover .nav__toggle__icon::after {
@@ -204,7 +222,7 @@ svg {
   .nav__logo {
     width: 10rem;
     margin: 1.5rem 2.5rem;
-    transition: filter .5s ease; }
+    transition: filter 0.5s ease; }
     .nav__logo:hover {
       filter: brightness(1.1); }
     @media only screen and (max-width: 37.5em) {
@@ -229,10 +247,12 @@ svg {
     flex-direction: column;
     font-size: 1.6rem;
     align-items: center;
-    position: relative; }
+    position: relative;
+    transition: all 0.3s ease; }
     @media only screen and (max-width: 37.5em) {
       .nav__option {
-        display: none; } }
+        display: none;
+        transition: all 10s ease; } }
     .nav__option__btn {
       padding: 1rem 2rem; }
       .nav__option__btn:hover {
@@ -244,6 +264,10 @@ svg {
       @media only screen and (max-width: 56.25em) {
         .nav__option__btn {
           padding: 1rem 0; } }
+      @media only screen and (max-width: 37.5em) {
+        .nav__option__btn {
+          display: flex;
+          flex-direction: row-reverse; } }
     .nav__option:not(:last-child) {
       margin-right: 1rem; }
     .nav__option__dropdown-opts {
@@ -256,17 +280,24 @@ svg {
       background-color: rgba(90, 95, 106, 0.88);
       text-align: center;
       z-index: 10;
-      transition: all .2s; }
+      transition: all 0.2s; }
       .nav__option__dropdown-opts--expand {
         height: auto;
         opacity: 100%; }
       .nav__option__dropdown-opts--collapse {
         height: 0;
-        opacity: 0; }
+        opacity: 0;
+        padding: 0; }
+        .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt,
         .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:link,
         .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:visited {
           height: 0;
-          padding: 0; }
+          padding: 0;
+          margin: 0; }
+          .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:not(:last-child),
+          .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:link:not(:last-child),
+          .nav__option__dropdown-opts--collapse .nav__option__dropdown-opts__opt:visited:not(:last-child) {
+            margin: 0; }
       .nav__option__dropdown-opts__opt:link, .nav__option__dropdown-opts__opt:visited {
         text-decoration: none;
         color: #fbfbfb;
@@ -293,7 +324,7 @@ svg {
       .nav #nav-mid {
         order: 1;
         flex: 0 0 100%;
-        margin-top: .75rem; } }
+        margin-top: 0.75rem; } }
     @media only screen and (max-width: 37.5em) {
       .nav #nav-mid {
         width: calc(100% + 6rem);
@@ -308,12 +339,12 @@ svg {
       color: inherit;
       background-color: #f0f0f0;
       border: none;
-      padding: .7rem 2rem;
+      padding: 0.7rem 2rem;
       border-radius: 100px;
       width: 90%;
-      transition: all .2s;
+      transition: all 0.2s;
       margin-right: -3.5rem;
-      transition: all .2s; }
+      transition: all 0.2s; }
       @media only screen and (max-width: 90.625em) {
         .nav__search__input {
           width: 95%; } }
@@ -343,27 +374,31 @@ svg {
           right: 2.5%;
           transform: translateY(-50%); } }
     .nav__search__icon {
-      padding-left: .25rem; }
+      padding-left: 0.25rem; }
       @media only screen and (max-width: 76.25em) {
         .nav__search__icon {
           display: none; } }
   .nav #nav-right {
     display: flex;
-    justify-content: space-evenly; }
+    justify-content: space-evenly;
+    transition: all 0.3s ease; }
     @media only screen and (max-width: 56.25em) {
       .nav #nav-right {
         flex: 0 0 50%; } }
-    @media only screen and (max-width: 37.5em) {
-      .nav #nav-right {
-        display: none; } }
   @media only screen and (max-width: 56.25em) {
     .nav__account-basket {
       display: flex;
       justify-content: space-evenly;
-      width: 100%; } }
+      width: 100%;
+      text-transform: uppercase; }
+      .nav__account-basket__opt {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end; } }
   @media only screen and (max-width: 37.5em) {
     .nav__account-basket {
-      flex-direction: column; } }
+      flex-direction: column;
+      display: none; } }
   .nav__account-basket__opt {
     padding: 1rem 2rem;
     font-family: inherit;
@@ -377,11 +412,14 @@ svg {
         padding: 1rem 0; } }
     .nav__account-basket__opt:link, .nav__account-basket__opt:visited {
       color: currentColor;
-      transition: all .2s;
+      transition: all 0.2s;
       border-bottom: 1px solid transparent; }
     .nav__account-basket__opt:hover {
       color: #f47c4a;
       border-bottom: 1px solid #f47c4a; }
+
+.nav-option--show {
+  display: inherit; }
 
 .index-grid {
   display: grid;

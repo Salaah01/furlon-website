@@ -22,6 +22,7 @@ export class Navigation {
    */
   menuBtns = document.getElementsByClassName("nav__option__btn");
   navSubMenus = document.querySelectorAll(".nav__option__dropdown-opts");
+  toggleShowNavBtn = document.querySelector(".nav__toggle__btn");
 
   // ---------------------------------------------------------------------------
   constructor() {
@@ -36,6 +37,9 @@ export class Navigation {
     for (const menuBtn of this.menuBtns as any) {
       menuBtn.addEventListener("click", this.subMenuCtrl);
     }
+
+    // Build the responsive functions for the toggle buttons.
+    this.nav_toggle_btn();
   }
 
   // ---------------------------------------------------------------------------
@@ -134,5 +138,26 @@ export class Navigation {
       subMenu.classList.remove("nav__option__dropdown-opts--collapse");
       subMenu.classList.add("nav__option__dropdown-opts--expanded");
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  private nav_toggle_btn() {
+    /**
+     * Sets the functionality of the navigation toggle button - a responsive
+     * feature viewable when the screen width is small enough.
+     */
+
+    const optionsList = [
+      document.getElementsByClassName("nav__option"),
+      document.getElementsByClassName('nav__account-basket')
+    ];
+
+    this.toggleShowNavBtn?.addEventListener("click", () => {
+      for (let i = 0; i < optionsList.length; i++) {
+        for (let j = 0; j < optionsList[i].length; j++) {
+          optionsList[i][j].classList.toggle("nav-option--show");
+        }
+      }
+    });
   }
 }
