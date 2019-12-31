@@ -128,12 +128,14 @@
       {% if 'profile' in request.path %}
       <a href="#" class="nav__account-basket__opt nav__active" id="nav-basket">
         <span>Basket</span>
-        <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span
-      ></a>
+        <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
+        <span class="nav__account-basket__opt__quantity" id='basket-total-items'></span>1</span>
+      </a>
       {% else %}
       <a href="#" class="nav__account-basket__opt" id="nav-basket">
         <span>Basket</span>
         <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
+        <span class="nav__account-basket__opt__quantity hide" id='basket-total-items'></span>
       </a>
       {% endif %} {% if user.is_authenticated %}
 

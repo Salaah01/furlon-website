@@ -5,7 +5,9 @@ Created By:     Salaah Amin
 ==================================================================================================================================
 SCRIPT FUNCTION
 
-Renders the index page.
+Renders views. These include:
+    - pages/index.html
+    - pages/basket.html
 ==================================================================================================================================
 """
 
@@ -21,3 +23,9 @@ def index(request):
         'latest_products': latest_products
     }
     return render(request, 'pages/index.html', context)
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def basket(request):
+    """ Loads the basket page """
+    return render(request, 'pages/basket.html')

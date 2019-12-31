@@ -1,4 +1,4 @@
 ..\venv\script\activate
 start python manage.py livereload
-SLEEP 2
+timeout 5
 start python manage.py runserver

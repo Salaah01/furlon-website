@@ -385,6 +385,17 @@ svg {
     @media only screen and (max-width: 56.25em) {
       .nav #nav-right {
         flex: 0 0 50%; } }
+  .nav__account-basket__opt {
+    position: relative; }
+    .nav__account-basket__opt__quantity {
+      background-color: #ff0022;
+      color: #fff;
+      border-radius: 50px;
+      padding: 2px;
+      font-size: 1rem;
+      position: absolute;
+      top: 12%;
+      right: 12%; }
   @media only screen and (max-width: 56.25em) {
     .nav__account-basket {
       display: flex;
@@ -394,7 +405,8 @@ svg {
       .nav__account-basket__opt {
         display: flex;
         flex-direction: row-reverse;
-        justify-content: flex-end; } }
+        justify-content: flex-end;
+        position: relative; } }
   @media only screen and (max-width: 37.5em) {
     .nav__account-basket {
       flex-direction: column;

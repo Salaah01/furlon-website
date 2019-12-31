@@ -10,7 +10,8 @@
 // PURPOSE:
 // --------
 // - Manage the basket items
-// - Keep basket data whenever user moves away from the page.
+// - Keep basket data whenever user moves away from the page
+// - Updates the basket items count
 //
 // DESCRIPTION:
 // ------------
@@ -25,7 +26,9 @@ export class BasketState {
   items: any = window.localStorage.getItem("basketItems");
 
   // ---------------------------------------------------------------------------
-  constructor() {}
+  constructor() {
+      this.update_basket_counter(this.totalItems);
+  }
 
   // ---------------------------------------------------------------------------
   private _read_items() {
@@ -50,6 +53,7 @@ export class BasketState {
     /**
      * Converts the local storage items into strings and saves them onto the
      * local storage.
+     * Updates the basket items counter.
      */
 
     if (!this.totalItems) {
@@ -67,6 +71,9 @@ export class BasketState {
       this.items = JSON.stringify(this.items);
       window.localStorage.setItem("basketItems", this.items);
     }
+
+    // Update the basket
+    this.update_basket_counter(this.totalItems);
   }
 
   // ---------------------------------------------------------------------------
@@ -102,5 +109,20 @@ export class BasketState {
     }
 
     this._set_items();
+  }
+
+  // ---------------------------------------------------------------------------
+  update_basket_counter(newNum: string | number | null) {
+    /** Updates the basket counter number */
+    const basketCountElem = document.getElementById(
+      "basket-total-items"
+    ) as HTMLSpanElement;
+
+    if (newNum) {
+      basketCountElem.classList.remove("hide");
+      basketCountElem.textContent = newNum.toString();
+    } else {
+      basketCountElem.classList.add("hide");
+    }
   }
 }
