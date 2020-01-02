@@ -13,6 +13,7 @@ Renders views. These include:
 
 from django.shortcuts import render
 from products.models import Products
+from products import product_info
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #

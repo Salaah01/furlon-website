@@ -124,7 +124,10 @@ def product(request, pk):
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def product_info_api(request, pk):
-    """ API for returning information on a product. These information that will be provided related to that which is avaialble
+    """ API for returning information on a product. These information that will be provided related to that which is available
     in thelinked product table.
     """
-    return HttpResponse(Productinfo(pk).productInfo, content_type="application/json")
+    return HttpResponse(
+        Productinfo(infoList=['colours', 'sets', 'similar', 'features'], pk=pk).productInfo,
+        content_type="application/json"
+    )

@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% load static %}
 {% load humanize %}
 
@@ -7,10 +6,36 @@
 
 {% block content %}
 
-<h1>basket page</h1>
+<header class="basket-nav">
+  <button class="basket-nav__back-to-shopping">Back to Shopping</button>
+  <button class="basket-nav__proceed">Proceed to Payment</button>
+</header>
 
+<main class="basket-table">
+  <section class="table">
+    <div class="table__header">
+      <div class="table__header__title">
+        <h1 class="table__header__title__heading heading-1">Basket Summary</h1>
+        <p class="table__header__title__sub-heading">
+          Please review your items before proceeding
+        </p>
+      </div>
+      <div class="table__header__column-titles">
+        <p field="image" class="table__header__column-titles__title">Image</p>
+        <p field="name" class="table__header__column-titles__title">Name</p>
+        <p field="store" class="table__header__column-titles__title">Store</p>
+        <p field="colour" class="table__header__column-titles__title">Colour</p>
+        <p field="quantity" class="table__header__column-titles__title">Quantity</p>
+        <p field="price" class="table__header__column-titles__title">Price</p>
+      </div>
+      <div class="table__rows" id="basket-summary-data">
 
-{% endblock %}
+      </div>
+    </div>
+  </section>
+</main>
+
+nav {% endblock %}
 
 {% block footer %}
 
