@@ -24,29 +24,31 @@ This will assume the file structure
 Furlon
 │
 └─── venv
-    │   (virual environment files)
-│   
+|   │   
+│   └─── (virtual environment files)
+|
 └─── furlon-website
-    │   (website files)
+    │
+    └─── (website files)
 ```
 ## Quick Start (Development)
-1. Create a working directory and move into that folder**. `mkdir Furlon && cd Furlon`**
-2. Create virual environment **`python -m venv venv`**.
-3. Clone the Furlon repository and move into the respository root directory** `cd furlon-webiste`**.
-4. Install Python dependencies **`pip install requirements.txt`**.
-5. Install nodeJs packages **`npm install`**.
-6. Run batch files to start watch moves for running the Django server on the localhost and watching for changes on SASS and TypeScript files **`start_workspace.bat`**.  Failing this, run each of following commands in their own shell sessions: **`python manage.py livereload`**, **`python manage.py runserver`**, **`npm run watch:sass`**, **`npm run webpack`**.
+1. Create a working directory and move into that folder. `mkdir Furlon && cd Furlon`
+2. Create virtual environment `python -m venv venv`.
+3. Clone the Furlon repository and move into the repository root directory `cd furlon-webiste`.
+4. Install Python dependencies `pip install requirements.txt`.
+5. Install nodeJs packages `npm install`.
+6. Run batch files to start watch moves for running the Django server on the localhost and watching for changes on SASS and TypeScript files `start_workspace.bat`.  Failing this, run each of following commands in their own shell sessions: `python manage.py livereload`, `python manage.py runserver`, `npm run watch:sass`, `npm run webpack`.
 
 ## Quick Start (Production)
-### Compile
-Run all processes from Quick Start (Development) except step 6. Instead, run **`npm run build`**. 
+### Compile SASS and TypeScript
+Run all processes from Quick Start (Development) except step 6. Instead, run `npm run build`. 
 
-This will complie the SASS files to CSS files and will simiarly compile TypeScript files to JavaScript files.
+This will compile the SASS files to CSS files and will similarly compile TypeScript files to JavaScript files.
 
 ### Regenerate Staticfiles
 If running on the live server and not the local host, the server will rely on static files existing within ./furlon-website/static/.
 
-To collect all assets and move them into the directory, run **`python manage.py collectstatic`**. There will be an prompt to check if you would want overwrite existing files, press "y" then the return key.
+To collect all assets and move them into the directory, run `python manage.py collectstatic`. There will be an prompt to check if you would want overwrite existing files, press "y" then the return key.
 
 ## Software
 ### Technologies
