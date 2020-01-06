@@ -27,7 +27,7 @@ export class BasketState {
 
   // ---------------------------------------------------------------------------
   constructor() {
-      this.update_basket_counter(this.totalItems);
+    this.update_basket_counter(this.totalItems);
   }
 
   // ---------------------------------------------------------------------------

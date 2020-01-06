@@ -386,7 +386,8 @@ svg {
       .nav #nav-right {
         flex: 0 0 50%; } }
   .nav__account-basket__opt {
-    position: relative; }
+    position: relative;
+    display: inline-block; }
     .nav__account-basket__opt__quantity {
       background-color: #ff0022;
       color: #fff;

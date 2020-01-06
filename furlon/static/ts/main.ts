@@ -13,6 +13,7 @@ import { SearchFilters } from "./components/search_filters";
 import { ExtendProductPage } from "./pages/products/product";
 import { CarouselImgs } from "./components/carousel-imgs";
 import { BasketState } from "./state/basket-items";
+import { BasketPage } from "./pages/basket/basket";
 
 // Build the navigation
 new Navigation();
@@ -30,4 +31,8 @@ if (window.location.href.includes("/products/")) {
   new ExtendProductPage();
   new QuantityComponent();
   new CarouselImgs();
+}
+
+if (window.location.href.includes("/basket/")) {
+  new BasketPage();
 }

@@ -137,9 +137,10 @@
         <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
         <span class="nav__account-basket__opt__quantity hide" id='basket-total-items'></span>
       </a>
-      {% endif %} {% if user.is_authenticated %}
+      {% endif %}
 
       <!-- Profile -->
+      {% if user.is_authenticated %}
       {% if 'profile' in request.path %}
       <a href="#" class="nav__account-basket__opt nav__active" id="nav-profile"
         >Welcome {{ user.first_name }}

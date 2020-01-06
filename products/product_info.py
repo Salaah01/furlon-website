@@ -84,15 +84,10 @@ class Productinfo:
         if 'features' in self.infoList:
             results['features'] = self.get_features()
 
+        if 'productsInfo' in self.infoList:
+            results['productsInfo'] = self.multiple_products_info()
 
-        return json.dumps(
-            {
-                "colours": self.get_colours(),
-                "sets": self.get_sets(),
-                "similar": self.get_similar(),
-                "features": self.get_features(),
-            }
-        )
+        return json.dumps(results)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def get_colours(self):
@@ -195,12 +190,11 @@ class Productinfo:
             FROM products_products pp, stores_stores ss, products_colours pcol
             WHERE pp.store_id = ss.store_id
             AND pp.colour_id = pcol.id
-            AND pp.product_id in (%s)
+            AND pp.product_id IN %(pks)s
             """
 
         keys = ('productId', 'productName', 'storeId', 'storeName', 'colourName', 'inventory', 'price', 'image')
-
-        self.cursor.execute(sql, tuple(productIDs))
+        self.cursor.execute(sql, {'pks': tuple(productIDs)})
         queryResults = self.cursor.fetchall()
 
         return self.query_results_to_dict(queryResults, keys)

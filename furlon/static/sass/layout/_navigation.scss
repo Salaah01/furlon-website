@@ -412,6 +412,7 @@
 
     &__opt {
       position: relative;
+      display: inline-block;
       &__quantity {
         background-color: $colour-notification;
         color: #fff;

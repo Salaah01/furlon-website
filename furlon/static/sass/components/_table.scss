@@ -1,0 +1,61 @@
+// =============================================================================
+// Date Created:   06/12/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for .table elements and child elements.
+// =============================================================================
+
+// =============================================================================
+.table {
+
+    // -------------------------------------------------------------------------
+    // Table header
+    &__header {
+        // Heading above .table and column headings.
+
+        &__title {
+            // Element is the table title, placed above the table.
+
+            &__heading {
+                // Main heading for the table.
+            }
+
+            &__sub-heading {
+                // Sub-heading for the table.
+
+            }
+        }
+
+        &__column-titles {
+            // Table column titles.
+
+            &__title {
+                // A single table column title.
+            }
+        }
+    }
+
+    // -------------------------------------------------------------------------
+    // Container for all the table data.
+    &__rows {
+
+    }
+
+    // -------------------------------------------------------------------------
+    // A single row of data in the table.
+    &__row {
+
+    }
+
+    // -------------------------------------------------------------------------
+    // A single field in the table.
+    &__field {
+
+        &--img {
+
+        }
+
+    }
+
+
+}
