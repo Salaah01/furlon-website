@@ -11,8 +11,8 @@
   <button class="basket-nav__proceed">Proceed to Payment</button>
 </header>
 
-<main class="basket-table">
-  <section class="table">
+<main class="basket-main">
+  <section class="table basket-summary">
     <div class="table__header">
       <div class="table__header__title">
         <h1 class="table__header__title__heading heading-1">Basket Summary</h1>
@@ -28,10 +28,31 @@
         <p field="quantity" class="table__header__column-titles__title">Quantity</p>
         <p field="price" class="table__header__column-titles__title">Price</p>
       </div>
-      <div class="table__rows" id="basket-summary-data">
+    </div>
+    <div class="table__rows" id="basket-summary-data">
+
+    </div>
+  </section>
+  <section class="totals-summary" id="totals-summary">
+      <div class="totals-summary__row">
+        <p class="totals-summary__label">Sub-Total</p>
+        <p class="totals-summary__value" for='subTotal'>&pound;0.00</p>
+      </div>
+      <div class="totals-summary__row">
+        <p class="totals-summary__label">VAT</p>
+        <p class="totals-summary__value" for='vat'>&pound;0.00</p>
+      </div>
+      <div class="totals-summary__row">
+        <p class="totals-summary__label">Delivery</p>
+        <p class="totals-summary__value" for='deliveryPrice'>&pound;0.00</p>
+      </div>
+      <div class="totals-summary__row">
+        <p class="totals-summary__label">Total</p>
+        <p class="totals-summary__value" for='total'>&pound;0.00</p>
+      </div>
+      <div class="totals-summary__row">
 
       </div>
-    </div>
   </section>
 </main>
 

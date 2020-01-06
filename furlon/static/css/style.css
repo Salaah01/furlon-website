@@ -782,6 +782,11 @@ svg {
   .product-info__section__text {
     line-height: 1.75em; }
 
+.basket-summary {
+  width: 60%;
+  padding: 9.5rem 15rem;
+  padding-right: 4rem; }
+
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");
   background-size: cover;
@@ -1019,3 +1024,40 @@ svg {
         animation-name: carouselImgReveal;
         animation-duration: 1s;
         animation-fill-mode: initial; }
+
+.table__icon[field='remove-item'] {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  transition: all .3s;
+  cursor: pointer; }
+  .table__icon[field='remove-item']:hover {
+    color: red; }
+  .table__icon[field='remove-item']:active {
+    transform: translate(10px 1px); }
+
+.table__header__title {
+  margin-bottom: 7rem; }
+  .table__header__title__heading {
+    margin-bottom: 2rem; }
+
+.table__header__column-titles {
+  display: flex; }
+  .table__header__column-titles__title {
+    width: 20%;
+    text-align: center; }
+
+.table__row {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center; }
+
+.table__field {
+  width: 20%;
+  text-align: center; }
+  .table__field--img {
+    width: 20rem;
+    height: 12rem;
+    object-fit: cover;
+    border-radius: 5px; }
+  .table__field[field='quantity'] {
+    justify-content: center; }

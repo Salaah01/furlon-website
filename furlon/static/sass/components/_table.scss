@@ -7,17 +7,36 @@
 
 // =============================================================================
 .table {
+    // -------------------------------------------------------------------------
+    &__icon {
+        &[field='remove-item'] {
+            padding-left: 1rem;
+            padding-right: 1rem;
+            transition: all .3s;
+            cursor: pointer;
+
+            &:hover {
+                color: rgb(255, 0, 0);
+            }
+
+            &:active {
+                transform: translate(10px 1px);
+            }
+        }
+    }
 
     // -------------------------------------------------------------------------
     // Table header
     &__header {
-        // Heading above .table and column headings.
+        // Heading above .table and column headings.;
 
         &__title {
             // Element is the table title, placed above the table.
+            margin-bottom: 7rem;
 
             &__heading {
                 // Main heading for the table.
+                margin-bottom: 2rem;
             }
 
             &__sub-heading {
@@ -28,9 +47,12 @@
 
         &__column-titles {
             // Table column titles.
+            display: flex;
 
             &__title {
                 // A single table column title.
+                width: 20%;
+                text-align: center;
             }
         }
     }
@@ -44,15 +66,26 @@
     // -------------------------------------------------------------------------
     // A single row of data in the table.
     &__row {
-
+        display: flex;
+        margin-bottom: 2rem;
+        align-items: center;
     }
 
     // -------------------------------------------------------------------------
     // A single field in the table.
     &__field {
+        width: 20%;
+        text-align: center;
 
         &--img {
+            width: 20rem;
+            height: 12rem;
+            object-fit: cover;
+            border-radius: 5px;
+        }
 
+        &[field='quantity'] {
+            justify-content: center;
         }
 
     }

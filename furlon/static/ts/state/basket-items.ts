@@ -106,8 +106,19 @@ export class BasketState {
     if (this.items[id]) {
       this.items[id] = Number(this.items[id]);
       this.items[id] -= quantity;
+      if (this.items[id] == 0) {
+        delete this.items[id];
+      }
     }
 
+    this._set_items();
+  }
+
+  // ---------------------------------------------------------------------------
+  remove_entire_item(id: number) {
+    /** Removes and entire item. */
+    this._read_items();
+    delete this.items[id];
     this._set_items();
   }
 
