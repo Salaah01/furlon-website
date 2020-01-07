@@ -3,6 +3,65 @@
 // Created By:     Salaah Amin
 // =============================================================================
 // Styling for .table elements and child elements.
+//
+// HTML
+// ────
+// The following HTML structure is as such:
+// .table
+// │
+// └───── .table__header
+// │      │
+// │      └───── .table__header__title             
+// │      │      │
+// │      │      └───── .table__header__heading
+// │      │      └───── .table__header__sub-heading
+// │      │
+// │      └───── .table__header__column-titles
+// │             │        
+// │             └───── .table__header__column-titles-title
+// │
+// │
+// └───── .table__rows
+//        │
+//        └───── .table__row
+//               │
+//               └───── .table__field
+//
+// An example HTML is the following:
+//
+// <section class="table">
+//   <div class="table__header">
+//     <div class="table__header__title">
+//       <h1 class="table__header__title__heading">{main table heading}</h1>
+//       <p class="table__header__title__sub-heading">{table sub-heading}</p>
+//     </div>
+//   <div class="table__header__column-titles">
+//     <p
+//       field="{field name}"
+//       class="table__header__column-titles__title"
+//     >
+//       {column title}
+//     </p>
+//     <p
+//       field="{field name 2}"
+//       class="table__header__column-titles__title"
+//     >
+//       {column title 2}
+//     </p>
+//   </div>
+//   <div class="table_rows">
+//   <div class="table__rows>
+//     <div class="table-row">
+//       <{tag} class="table__field" field="{field name}">{text content}</{tag}>
+//   </div>
+// </section>
+//
+// OPTIONAL EXTRAS
+// ───────────────
+// - .table__icon[field="remove-item"]
+//      An element which should ideally belong to SPAN.
+//      On hover, colour will change to red and could be placed inline with
+//      another text element.
 // =============================================================================
 
 // =============================================================================
