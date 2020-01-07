@@ -24,7 +24,6 @@ export class Validation {
       if (typeof item != 'number') {
           return false
       } else if (item >= 0 && item === Math.round(item)) {
-          console.log(item, item >= 0)
           return true
       }
 

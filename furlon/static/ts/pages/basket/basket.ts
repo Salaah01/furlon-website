@@ -139,7 +139,8 @@ export class BasketPage extends BasketState {
         // If the value entered is a positive integer then the certain updates
         // will take place.
         event.stopPropagation();
-        if (Validation.check_if_positive_int(Number(quantityInput.getAttribute("value")))) {
+        console.log(quantityInput.value)
+        if (Validation.check_if_positive_int(Number(quantityInput.value))) {
           // If the value entered is greater than the max, then set it to the max.
           let value = Number(quantityInput.value);
           if (value > Number(quantityInput.max)) {
