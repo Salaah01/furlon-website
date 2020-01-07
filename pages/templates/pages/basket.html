@@ -6,19 +6,24 @@
 
 {% block content %}
 
-<header class="basket-nav">
-  <button class="basket-nav__back-to-shopping">Back to Shopping</button>
-  <button class="basket-nav__proceed">Proceed to Payment</button>
+<header class="basket-head">
+  <div class="basket-head__nav">
+    <button class="basket-head__nav__back-to-shopping">Back to Shopping</button>
+    <button class="basket-head__nav__proceed">Proceed to Payment</button>
+  </div>
+  <div class="basket-head__title">
+    <h1 class="heading-1">Basket Summary</h1>
+    <p class="sub-heading">
+        Please review your items before proceeding
+    </p>
+  </div>
 </header>
 
 <main class="basket-main">
   <section class="table basket-summary">
     <div class="table__header">
       <div class="table__header__title">
-        <h1 class="table__header__title__heading heading-1">Basket Summary</h1>
-        <p class="table__header__title__sub-heading">
-          Please review your items before proceeding
-        </p>
+
       </div>
       <div class="table__header__column-titles">
         <p field="image" class="table__header__column-titles__title">Image</p>

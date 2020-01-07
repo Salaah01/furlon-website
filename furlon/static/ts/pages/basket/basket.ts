@@ -18,10 +18,12 @@
 //   the totals will also update.
 // =============================================================================
 
-// =============================================================================
-import { BasketState } from "./../../state/basket-items";
-import { QuantityComponent } from "./../../components/quantity";
+// IMPORTS
+import { Validation } from "../../utilities/validation";
+import { BasketState } from "../../state/basket-items";
+import { QuantityComponent } from "../../components/quantity";
 
+// =============================================================================
 export class BasketPage extends BasketState {
   /**
    * Will build elements onto basket page using an API to retrieve
@@ -79,42 +81,42 @@ export class BasketPage extends BasketState {
     const productPage = window.location.href.replace(/basket.*/, "products/");
     for (let i = 0; i < allProducts.length; i++) {
       const product = allProducts[i];
-      const container = document.createElement("DIV");
+      const container = document.createElement("div");
       const items = Number(JSON.parse(this.items)[product.productId]);
 
       // Div to contain all product elements, which will then be appended
       // into the parent element.
-      container.setAttribute("class", "table__row");
+      container.className = "table__row";
       container.setAttribute("product-id", product.productId);
 
-      // Product Image
-      const imgATag = document.createElement("A");
-      imgATag.setAttribute("class", "table__field table__field");
-      imgATag.setAttribute("href", productPage + product.productId);
+      // Product Image Embedded in Link Element
+      const imgATag = document.createElement("a");
+      imgATag.className = "table__field table__field";
+      imgATag.href = productPage + product.productId;
       imgATag.setAttribute("field", "product-image");
-      const imgElem = document.createElement("IMG");
-      imgElem.setAttribute("src", product.image);
-      imgElem.setAttribute("alt", "Image of " + product.productName);
-      imgElem.setAttribute("class", "table__field table__field--img");
+      const imgElem = document.createElement("img");
+      imgElem.src = product.image;
+      imgElem.alt = "Image of " + product.productName;
+      imgElem.className = "table__field table__field--img";
       imgATag.appendChild(imgElem);
 
       // Product Name
-      const nameElem = document.createElement("A");
-      nameElem.setAttribute("class", "table__field");
+      const nameElem = document.createElement("a");
+      nameElem.className = "table__field";
+      nameElem.href = productPage + product.productId;
       nameElem.setAttribute("field", "product-name");
-      nameElem.setAttribute("href", productPage + product.productId);
       nameElem.textContent = product.productName;
 
       // Product Store
-      const storeElem = document.createElement("A");
-      storeElem.setAttribute("class", "table__field");
-      storeElem.setAttribute("href", "#");
+      const storeElem = document.createElement("a");
+      storeElem.className = "table__field";
+      storeElem.href = "#";
       storeElem.setAttribute("field", "product-store");
       storeElem.textContent = product.storeName;
 
       // Product Colour
       const colourElem = document.createElement("P");
-      colourElem.setAttribute("class", "table__field");
+      colourElem.className = "table__field";
       colourElem.setAttribute("field", "product-colour");
       colourElem.textContent = product.colourName;
 
@@ -122,20 +124,42 @@ export class BasketPage extends BasketState {
       // NOTE: The HTML format must follow the structure defined in the quantity
       // component.
       const quantityContainerElem = document.createElement("DIV");
-      quantityContainerElem.setAttribute("class", "c-quantity table__field");
+      quantityContainerElem.className = "c-quantity table__field";
+      quantityContainerElem.id = "product-" + product.productId;
       quantityContainerElem.setAttribute("field", "quantity");
-      quantityContainerElem.setAttribute("id", "product-" + product.productId);
 
-      const quantityInput = document.createElement("INPUT");
-      quantityInput.setAttribute("class", "c-quantity__input");
-      quantityInput.setAttribute("min", "0");
-      quantityInput.setAttribute("step", "1");
-      quantityInput.setAttribute("max", product.inventory);
-      quantityInput.setAttribute("value", items.toString());
-      quantityInput.setAttribute("type", "number");
+      const quantityInput = document.createElement("INPUT") as HTMLInputElement;
+      quantityInput.className = "c-quantity__input";
+      quantityInput.min = "0";
+      quantityInput.step = "1";
+      quantityInput.max = product.inventory;
+      quantityInput.value = items.toString();
+      quantityInput.type = "number";
+      quantityInput.addEventListener("focusout", (event) => {
+        // If the value entered is a positive integer then the certain updates
+        // will take place.
+        event.stopPropagation();
+        if (Validation.check_if_positive_int(Number(quantityInput.getAttribute("value")))) {
+          // If the value entered is greater than the max, then set it to the max.
+          let value = Number(quantityInput.value);
+          if (value > Number(quantityInput.max)) {
+            quantityInput.value = quantityInput.max;
+            value = Number(quantityInput.max);
+          }
 
-      const minusBtn = document.createElement("BUTTON");
-      minusBtn.setAttribute("class", "c-quantity__btn");
+          // Update the local storage (user's basket)
+          this.update_single_item(product.productId, value);
+
+          // Update the price
+          priceSpan.textContent = (value * product.price).toString();
+
+          // Update the basket totals
+          this.update_basket_totals();
+        }
+      });
+
+      const minusBtn = document.createElement("button");
+      minusBtn.className = "c-quantity__btn";
       minusBtn.setAttribute("control", "quantity-down");
       minusBtn.addEventListener("click", event => {
         event.stopPropagation();
@@ -143,8 +167,8 @@ export class BasketPage extends BasketState {
         this.update_basket_totals();
       });
 
-      const plusBtn = document.createElement("BUTTON");
-      plusBtn.setAttribute("class", "c-quantity__btn");
+      const plusBtn = document.createElement("button");
+      plusBtn.className = "c-quantity__btn";
       plusBtn.setAttribute("control", "quantity-up");
       plusBtn.addEventListener("click", event => {
         event.stopPropagation();
@@ -153,11 +177,11 @@ export class BasketPage extends BasketState {
       });
 
       const minusBtnSpan = document.createElement("SPAN");
-      minusBtnSpan.setAttribute("class", "c-quantity__btn__text");
+      minusBtnSpan.className = "c-quantity__btn__text";
       minusBtnSpan.textContent = "-";
 
       const plusBtnSpan = document.createElement("SPAN");
-      plusBtnSpan.setAttribute("class", "c-quantity__btn__text");
+      plusBtnSpan.className = "c-quantity__btn__text";
       plusBtnSpan.textContent = "+";
 
       minusBtn.appendChild(minusBtnSpan);
@@ -168,30 +192,31 @@ export class BasketPage extends BasketState {
 
       // Price
       const priceElem = document.createElement("P");
-      priceElem.setAttribute("class", "table__field");
+      priceElem.className = "table__field";
       priceElem.setAttribute("field", "product-price-container");
 
-      const poundI = document.createElement("SPAN");
+      const poundI = document.createElement("span");
       poundI.textContent = "£";
       poundI.setAttribute("field", "product-price-currency");
       priceElem.appendChild(poundI);
 
-      const priceSpan = document.createElement("SPAN");
+      const priceSpan = document.createElement("span");
       priceSpan.setAttribute("field", "product-price-value");
       priceSpan.textContent = (Number(product.price) * items).toString();
       priceElem.appendChild(priceSpan);
 
       // Remove Item Button
       const removeItemSpan = document.createElement("SPAN");
-      removeItemSpan.setAttribute("class", "table__icon");
+      removeItemSpan.className = "table__icon";
       removeItemSpan.setAttribute("field", "remove-item");
       removeItemSpan.addEventListener("click", event => {
+        // On removal, update the DOM and the basket/local storage accordingly.
         event.stopPropagation();
         this.remove_whole_item(product.productId, container);
         this.update_basket_totals();
       });
       const removeItemI = document.createElement("I");
-      removeItemI.setAttribute("class", "fa fa-times");
+      removeItemI.className = "fa fa-times";
       removeItemSpan.appendChild(removeItemI);
       priceElem.appendChild(removeItemSpan);
 

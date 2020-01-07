@@ -24,6 +24,9 @@
 // </div>
 // =============================================================================
 
+// Imports
+import { Validation } from "../utilities/validation";
+
 // =============================================================================
 export class QuantityComponent {
   /**
@@ -37,7 +40,7 @@ export class QuantityComponent {
 
   // ---------------------------------------------------------------------------
   constructor() {
-    /** 
+    /**
      No arguments - class uses objects found on the DOM.
     */
     for (let c = 0; c < this.containers.length; c++) {
@@ -56,7 +59,7 @@ export class QuantityComponent {
   }
 
   // ---------------------------------------------------------------------------
-  _set_elements(container: HTMLDivElement) {
+  private _set_elements(container: HTMLDivElement) {
     /**
      * Given a container, will return the buttons and input elements.
      */
@@ -74,7 +77,7 @@ export class QuantityComponent {
   }
 
   // ---------------------------------------------------------------------------
-  _build_minus_button(
+  private _build_minus_button(
     btnDown: HTMLButtonElement,
     btnUp: HTMLButtonElement,
     inputBox: HTMLInputElement,
@@ -104,7 +107,7 @@ export class QuantityComponent {
   }
 
   // ---------------------------------------------------------------------------
-  _build_plus_button(
+  private _build_plus_button(
     btnDown: HTMLButtonElement,
     btnUp: HTMLButtonElement,
     inputBox: HTMLInputElement,
@@ -134,7 +137,7 @@ export class QuantityComponent {
   }
 
   // ---------------------------------------------------------------------------
-  _build_input_box(
+  private _build_input_box(
     btnDown: HTMLButtonElement,
     btnUp: HTMLButtonElement,
     inputBox: HTMLInputElement,
@@ -147,18 +150,36 @@ export class QuantityComponent {
      * the value is equal to the min/max value or not.
      */
     inputBox.addEventListener("focusout", () => {
-      // Check against the min value
-      if (Number(inputBox.value) <= minValue) {
-        btnDown.setAttribute("disabled", "disabled");
-      } else {
-        btnDown.removeAttribute("disabled");
-      }
+      const value = Number(inputBox.value);
 
-      // Check against btnUp's max value
-      if (Number(inputBox.value) >= maxValue) {
-        btnUp.setAttribute("disabled", "disabled");
-      } else {
+      // Check if the value is valid. If not, update attributes the highlight
+      // this to the user and disable buttons.
+      if (Validation.check_if_positive_int(value)) {
+        // Incase the buttons were previously disabled, reset by re-enabling
+        // everything.
+        btnDown.removeAttribute("disabled");
         btnUp.removeAttribute("disabled");
+        inputBox.parentElement!.removeAttribute('invalid');
+
+        // Check against the min value
+        if (value <= minValue) {
+          btnDown.setAttribute("disabled", "disabled");
+        } else {
+          btnDown.removeAttribute("disabled");
+        }
+
+        // Check against btnUp's max value
+        if (value >= maxValue) {
+          btnUp.setAttribute("disabled", "disabled");
+        } else {
+          btnUp.removeAttribute("disabled");
+        }
+
+      } else {
+        // value is either < 0 or a float.
+        btnDown.setAttribute("disabled", "disabled");
+        btnUp.setAttribute("disabled", "disabled");
+        inputBox.parentElement!.setAttribute('invalid', 'true');
       }
     });
   }

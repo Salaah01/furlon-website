@@ -6,9 +6,45 @@
 // =============================================================================
 
 // =============================================================================
+.basket-head {
+    // The header of the basket page.
+    @include padSection;
+    padding-bottom: 2rem;
+    &__nav {
+        // Navigation buttons at the top of the page.
+    }
+
+    &__title {
+        // Title situated at the top of the DOM.
+    }
+}
+
+// =============================================================================
+.basket-main {
+    // Main container for holding the main content in the basket page.
+    @include padSection;
+    padding-top: 0;
+    display: flex;
+}
+
+// =============================================================================
 .basket-summary {
     // Contains the items in the user's baskets.
     width: 60%;
-    @include padSection;
-    padding-right: 4rem;
+
+    // -------------------------------------------------------------------------
+    // Overrides for the quantity options defined in the quantity component.
+    .c-quantity__btn {
+        background-color: $colour-secondary-dark-1;
+        color: #fff;
+
+        &:not([disabled="disabled"]):hover {
+            background-color:$colour-secondary-dark-1-highlighted-1;
+        }
+    }
+}
+
+// =============================================================================
+.totals-summary {
+    // Contains the totals on the basket page.
 }

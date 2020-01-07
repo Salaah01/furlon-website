@@ -119,7 +119,6 @@ export class BasketState {
     /** Removes and entire item. */
     this._read_items();
     this.totalItems = Number(this.totalItems) - Number(this.items[id]);
-    this.update_basket_counter(this.totalItems);
     delete this.items[id];
     this._set_items();
   }
@@ -137,5 +136,15 @@ export class BasketState {
     } else {
       basketCountElem.classList.add("hide");
     }
+  }
+
+  // ---------------------------------------------------------------------------
+  update_single_item(productId: string | number, newNum: number) {
+    /** Updates the local storage for a single item with a new quantity. */
+    this._read_items();
+    const prevValue = Number(this.items[productId])
+    this.items[productId] = newNum;
+    this.totalItems = Number(this.totalItems) + newNum - prevValue;
+    this._set_items();
   }
 }

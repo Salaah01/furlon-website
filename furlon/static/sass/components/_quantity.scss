@@ -29,6 +29,10 @@
 .c-quantity {
   display: flex;
 
+  &[invalid="true"] {
+    box-shadow: 0 0 2px 2px #ff0001;
+  }
+
   &__btn,
   &__input {
     justify-content: center;
