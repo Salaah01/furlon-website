@@ -89,7 +89,6 @@ export class BasketState {
     } else {
       this.items[id] = quantity;
     }
-
     this._set_items();
   }
 
@@ -102,6 +101,7 @@ export class BasketState {
     if (this.totalItems > 0) {
       this.totalItems -= quantity;
     }
+    this.update_basket_counter(this.totalItems);
 
     if (this.items[id]) {
       this.items[id] = Number(this.items[id]);
@@ -115,9 +115,11 @@ export class BasketState {
   }
 
   // ---------------------------------------------------------------------------
-  remove_entire_item(id: number) {
+  remove_entire_item(id: string) {
     /** Removes and entire item. */
     this._read_items();
+    this.totalItems = Number(this.totalItems) - Number(this.items[id]);
+    this.update_basket_counter(this.totalItems);
     delete this.items[id];
     this._set_items();
   }

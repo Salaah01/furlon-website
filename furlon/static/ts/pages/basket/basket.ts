@@ -11,6 +11,11 @@
 //   basket.
 // - Builds part of the DOM which will display information regarding what is in
 //   basket.
+// - Sets key binders on the quantity option and "x" option so that it updates
+//   the basket.
+// - Updates totals section on load if there is something in the basket.
+// - Set key binders so that whenever there is a change to the basket items,
+//   the totals will also update.
 // =============================================================================
 
 // =============================================================================
@@ -59,6 +64,7 @@ export class BasketPage extends BasketState {
           const APIResponse = JSON.parse(request.responseText);
           if (APIResponse.productsInfo) {
             this.build_basket_summary(APIResponse.productsInfo);
+            this.update_basket_totals();
           }
         }
       };
@@ -134,6 +140,7 @@ export class BasketPage extends BasketState {
       minusBtn.addEventListener("click", event => {
         event.stopPropagation();
         this.remove_an_item(product.productId, product.price, priceSpan);
+        this.update_basket_totals();
       });
 
       const plusBtn = document.createElement("BUTTON");
@@ -142,6 +149,7 @@ export class BasketPage extends BasketState {
       plusBtn.addEventListener("click", event => {
         event.stopPropagation();
         this.add_an_item(product.productId, product.price, priceSpan);
+        this.update_basket_totals();
       });
 
       const minusBtnSpan = document.createElement("SPAN");
@@ -161,13 +169,15 @@ export class BasketPage extends BasketState {
       // Price
       const priceElem = document.createElement("P");
       priceElem.setAttribute("class", "table__field");
-      priceElem.setAttribute("field", "product-price");
+      priceElem.setAttribute("field", "product-price-container");
 
       const poundI = document.createElement("SPAN");
       poundI.textContent = "£";
+      poundI.setAttribute("field", "product-price-currency");
       priceElem.appendChild(poundI);
 
       const priceSpan = document.createElement("SPAN");
+      priceSpan.setAttribute("field", "product-price-value");
       priceSpan.textContent = (Number(product.price) * items).toString();
       priceElem.appendChild(priceSpan);
 
@@ -175,10 +185,11 @@ export class BasketPage extends BasketState {
       const removeItemSpan = document.createElement("SPAN");
       removeItemSpan.setAttribute("class", "table__icon");
       removeItemSpan.setAttribute("field", "remove-item");
-      removeItemSpan.addEventListener('click', (event) => {
+      removeItemSpan.addEventListener("click", event => {
         event.stopPropagation();
-        this.remove_whole_item(product.productId, container)
-      })
+        this.remove_whole_item(product.productId, container);
+        this.update_basket_totals();
+      });
       const removeItemI = document.createElement("I");
       removeItemI.setAttribute("class", "fa fa-times");
       removeItemSpan.appendChild(removeItemI);
@@ -195,6 +206,44 @@ export class BasketPage extends BasketState {
     }
     // Apply the JavaScript to each quantity component.
     new QuantityComponent();
+  }
+
+  // ---------------------------------------------------------------------------
+  private update_basket_totals() {
+    /**
+     * Updates the totals section in the basket page.
+     * The HTML default behavior is to set the loads the elements and set the
+     * values to £0.00 for each element.
+     * The method will update the totals.
+     */
+    // Basket Elements in the DOM
+    const subtotalElem = document.getElementById("basket-subtotal")!
+      .children[1] as HTMLSpanElement;
+    const vatElem = document.getElementById("basket-vat")!
+      .children[1] as HTMLSpanElement;
+    const totalElem = document.getElementById("basket-total")!
+      .children[1] as HTMLSpanElement;
+
+    // Initial Value
+    let totalPrice = 0;
+
+    // Retrieve all elements where there is a price and iteratively update
+    // the total price.
+    const priceElems = document
+      .getElementById("basket-summary-data")!
+      .querySelectorAll('.table__field>[field="product-price-value"]');
+
+    for (let priceIdx = 0; priceIdx < priceElems.length; priceIdx++) {
+      totalPrice += Number(priceElems[priceIdx].textContent);
+    }
+
+    // Update the DOM will the new total figures.
+    const subTotal = totalPrice / 1.2;
+    const vat = totalPrice - subTotal;
+
+    subtotalElem.textContent = subTotal.toFixed(2);
+    vatElem.textContent = vat.toFixed(2);
+    totalElem.textContent = totalPrice.toString();
   }
 
   // ---------------------------------------------------------------------------
@@ -241,8 +290,7 @@ export class BasketPage extends BasketState {
      * Removes an entire item from the basket. In the process, it will update
      * local storage and the DOM.
      */
-    this.remove_entire_item(Number(productId))
+    this.remove_entire_item(productId);
     parentContainer.remove();
-
   }
 }
