@@ -13,6 +13,28 @@
 // The HTML for the styling to work as intended should follow the following
 // structure:
 //
+// .carousel-container
+// │
+// └───── .carousel-container__display-section
+// │      │
+// │      └───── img(.carousel-container__display-section__img
+// │      │          [im="{image identifier}"]
+// │      │          position="init")
+// │      │
+// │      └───── (multiple)
+// │             img(.carousel-container__display-section__img)
+// │             [im="{image identifier}"]
+// │             [position="hide"]
+// │
+// └───── .carousel-container__display-controls
+//        |
+//        └───── (multiple - one for each showcase image)
+//               img (.carousel-container__display-section__img
+//                    im="{image identifier (matches showcase img im attr}"]
+//                    
+//
+// EXAMPLE HTML
+// ------------
 // <div class="carousel-container">
 //   <div class="carousel-container__display-section">
 //     <img
