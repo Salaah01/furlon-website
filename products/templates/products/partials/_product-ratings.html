@@ -1,7 +1,7 @@
 {% load static %}
 <div class="product-showcase__section__ratings">
     <div class="product-showcase__section__ratings__stars ratings__stars">
-      {% if product.rating < 0.1 %}
+      {% if product.rating < 0.1 or not product.rating %}
       <span class="rating__stars__star fa fa-star i-star"></span>
       <span class="rating__stars__star fa fa-star i-star"></span>
       <span class="rating__stars__star fa fa-star i-star"></span>

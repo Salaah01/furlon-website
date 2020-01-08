@@ -2,7 +2,7 @@
 
 <div class="product-info__section__ratings">
     <div class="product-info__section__ratings__stars ratings__stars">
-      {% if store.rating < 0.1 %}
+      {% if store.rating < 0.1  or not store.rating %}
       <span class="rating__stars__star fa fa-star i-star"></span>
       <span class="rating__stars__star fa fa-star i-star"></span>
       <span class="rating__stars__star fa fa-star i-star"></span>
