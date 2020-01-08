@@ -4,8 +4,37 @@
 // =============================================================================
 // Styling for the custom drop-down menus.
 //
+// HTML
+// ────
 // The styling will work for dropdown menus in the following format:
 //
+// form
+// │
+// └───── .dropdown-menu
+//        │
+//        └───── .dropdown-menu__selected
+//        │      │
+//        │      └───── span {drop down menu name (initial option)
+//        │
+//        └───── .dropdown-menu__options
+//               │ (multiple children)
+//               │
+//               └───── label {.dropdown-menu__options__label
+//               │             [for="option 1 identifier (unique)"]} {item name}
+//               │
+//               └───── input {.dropdown__menu__options__radio-btn
+//                             [type="radio"]
+//                             [name="{name for GET request}"]
+//                             [id="{option 1 identifier (unique)"]
+//                             [value="{option value for GET request}"]}
+//       
+// 
+// Repeat the label and input element for each option.
+// The attribute "for" in label must equal to the corresponding id in the input
+// element.
+//
+// EXAMPLE HTML
+// ────────────       
 // <form>
 //   ...
 //   <div class="dropdown-menu">
