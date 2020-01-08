@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Basket{% endblock %}
+
+{% block content %}
+
+<header class="store-heading">
+  <h1 class="store-heading__name heading-1">{{store.name}}</h1>
+  <div class="store-heading__rating">
+    {% include 'partials/_store-ratings.html' %}
+  </div>
+</header>
+
+<main class="store">
+  <!-- Latest Products -->
+  {% if latest_products %}
+  <section class="latest-products">
+    <div class="latest-products__heading">
+      <h2 class="latest-products__heading__title heading-2">
+        Latest Furniture
+      </h2>
+      <p class="latest-products__heading__info">
+        Be the first to check out the latest products for {{ store.name }}
+        today&#33;
+      </p>
+    </div>
+    {% for latest_product in latest_products %}
+    <div class="latest-products__product card">
+      <div class="card__side card__side--front">
+        <img
+          class="latest-products__product__img"
+          src="{{ latest_product.showcase_image }}"
+          alt="Image of {{ latest_product.name }}"
+          class="latest-products__product__img"
+        />
+        <p class="latest-products__product__name">{{ latest_product.name }}</p>
+      </div>
+      <div class="card__side card__side--back">
+        <div class="latest-products__product__price-box">
+          <p class="latest-products__product__price-only">Only</p>
+          <p class="latest-products__product__price-value">
+            &pound;{{ latest_product.price |floatformat:2|intcomma }}
+          </p>
+          <a
+            href="{% url 'product' latest_product.product_id %}"
+            class="latest-products__product__info-btn btn btn--white"
+            >Find Out More</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="store-info">
+    <div class="store-details">
+      <!-- Store Name -->
+      <div class="store-details__detail">
+        <p class="store-details__detail__title">Name</p>
+        <div class="store-details__detail__body">
+          <p>{{ store.name }}</p>
+        </div>
+      </div>
+
+      <!-- Established Date -->
+      {% if store.established %}
+        <div class="store-details__detail">
+            <p class="store-details__detail__title">Established</p>
+            <div class="store-details__detail__body">
+                <p>{{ store.established }}</p>
+            </div>
+        </div>
+      {% endif %}
+
+      <!-- Address -->
+      <div class="store-details__detail">
+        <p class="store-details__detail__title">Address</p>
+        <div class="store-details__detail__body">
+          {% if store.address_line_1 %}
+            <p>{{ store.address_line_1 }}</p>
+          {% endif %}
+          {% if store.address_line_2 %}
+            <p>{{ store.address_line_2 }}</p>
+          {% endif %}
+          {% if store.city %}
+            <p>{{ store.city.name }}</p>
+          {% endif %}
+          {% if store.postcode %}
+            <p>{{ store.postcode }}</p>
+          {% endif %}
+          {% if store.country %}
+            <p>{{ store.country.name }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Description -->
+      {% if store.description %}
+        <div class="store-details__detail">
+            <p class="store-details__detail__title">Description</p>
+            <div class="store-details__detail__body">
+                <p>{{ store.description }}</p>
+            </div>
+        </div>
+      {% endif %}
+
+      
+    </div>
+
+    <!-- Future Development - to include a map -->
+    <div class="store-info__map" style="display: none;"></div>
+  </section>
+</main>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

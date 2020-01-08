@@ -7,16 +7,20 @@
 
 // -----------------------------------------------------------------------------
 .i-star {
+  color: $colour-grey-light-3;
 
-    color: $colour-grey-light-3;
+  &--half-checked {
+    background: linear-gradient(
+      90deg,
+      gold 0%,
+      gold 50%,
+      $colour-grey-light-3 50%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    &--half-checked {
-        background: linear-gradient(90deg, gold 0%, gold 50%, $colour-grey-light-3 50%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    &--checked {
-        color: gold;
-    }
+  &--checked {
+    color: gold;
+  }
 }
