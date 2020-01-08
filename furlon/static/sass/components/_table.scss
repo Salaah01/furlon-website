@@ -11,13 +11,13 @@
 // │
 // └───── .table__header
 // │      │
-// │      └───── .table__header__title             
+// │      └───── .table__header__title
 // │      │      │
 // │      │      └───── .table__header__heading
 // │      │      └───── .table__header__sub-heading
 // │      │
 // │      └───── .table__header__column-titles
-// │             │        
+// │             │
 // │             └───── .table__header__column-titles-title
 // │
 // │
@@ -87,11 +87,11 @@
     // -------------------------------------------------------------------------
     // Table header
     &__header {
-        // Heading above .table and column headings.;
+        // Heading above .table and column headings.
 
         &__title {
             // Element is the table title, placed above the table.
-            margin-bottom: 7rem;
+            margin-bottom: 5rem;
 
             &__heading {
                 // Main heading for the table.
@@ -107,11 +107,15 @@
         &__column-titles {
             // Table column titles.
             display: flex;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid $colour-secondary;
 
             &__title {
                 // A single table column title.
                 width: 20%;
                 text-align: center;
+                text-transform: uppercase;
             }
         }
     }
@@ -141,6 +145,11 @@
             height: 12rem;
             object-fit: cover;
             border-radius: 5px;
+            transition: all .3s ease-out;
+
+            &:hover {
+                transform: scale(1.05);
+            }
         }
 
         &[field='quantity'] {

@@ -20,6 +20,7 @@
 
 // IMPORTS
 import { Validation } from "../../utilities/validation";
+import { NumberFormat } from "../../utilities/number_format";
 import { BasketState } from "../../state/basket-items";
 import { QuantityComponent } from "../../components/quantity";
 
@@ -135,11 +136,11 @@ export class BasketPage extends BasketState {
       quantityInput.max = product.inventory;
       quantityInput.value = items.toString();
       quantityInput.type = "number";
-      quantityInput.addEventListener("focusout", (event) => {
+      quantityInput.addEventListener("focusout", event => {
         // If the value entered is a positive integer then the certain updates
         // will take place.
         event.stopPropagation();
-        console.log(quantityInput.value)
+        console.log(quantityInput.value);
         if (Validation.check_if_positive_int(Number(quantityInput.value))) {
           // If the value entered is greater than the max, then set it to the max.
           let value = Number(quantityInput.value);
@@ -203,7 +204,9 @@ export class BasketPage extends BasketState {
 
       const priceSpan = document.createElement("span");
       priceSpan.setAttribute("field", "product-price-value");
-      priceSpan.textContent = (Number(product.price) * items).toString();
+      priceSpan.textContent = NumberFormat.thousand_separated_2dp(
+        Number(product.price) * items
+      );
       priceElem.appendChild(priceSpan);
 
       // Remove Item Button
@@ -260,7 +263,9 @@ export class BasketPage extends BasketState {
       .querySelectorAll('.table__field>[field="product-price-value"]');
 
     for (let priceIdx = 0; priceIdx < priceElems.length; priceIdx++) {
-      totalPrice += Number(priceElems[priceIdx].textContent);
+      totalPrice += NumberFormat.thousand_sep_to_float(
+        priceElems[priceIdx].textContent
+      );
     }
 
     // Update the DOM will the new total figures.
@@ -269,7 +274,7 @@ export class BasketPage extends BasketState {
 
     subtotalElem.textContent = subTotal.toFixed(2);
     vatElem.textContent = vat.toFixed(2);
-    totalElem.textContent = totalPrice.toString();
+    totalElem.textContent = NumberFormat.thousand_separated_2dp(totalPrice);
   }
 
   // ---------------------------------------------------------------------------

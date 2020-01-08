@@ -50,13 +50,14 @@ svg { width: 10px; height: 10px; fill: black;}
     font-weight: inherit;
     text-decoration: none;
     cursor: pointer;
-    transition: all .2s;
+    transition: background-color .3s ease-out;
 }
 
 .btn {
     position: relative;
     padding: 1rem;
     border-radius: 5px;
+    color: #fff;
 
     &:active {
         transform: translate(2px, 2px);
@@ -64,15 +65,31 @@ svg { width: 10px; height: 10px; fill: black;}
 
     &--primary {
         background-color: $colour-primary;
-        color: #fff;
-        
+
         &:hover {
             background-color: $colour-primary-bright-1;
         }
     }
 
+    &--secondary {
+        background-color: $colour-secondary-dark-1;
+
+        &:hover {
+            background-color: $colour-secondary-high-sat;
+        }
+    }
+
+    &--tertiary {
+        background-color: $colour-tertiary;
+
+        &:hover {
+            background-color: $colour-tertiary-high-sat;
+        }
+    }
+
     &--white {
         background-color: $colour-white-2;
+        color: #000;
 
         &:hover {
             background-color: $colour-white-1;
@@ -144,5 +161,5 @@ svg { width: 10px; height: 10px; fill: black;}
         }
     }
 
-    
+
 }

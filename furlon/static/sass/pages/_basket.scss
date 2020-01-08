@@ -7,44 +7,86 @@
 
 // =============================================================================
 .basket-head {
-    // The header of the basket page.
-    @include padSection;
-    padding-bottom: 2rem;
-    &__nav {
-        // Navigation buttons at the top of the page.
-    }
+  // The header of the basket page.
+  @include padSection;
+  padding-bottom: 6rem;
+  background-color: $colour-grey-light-5;
 
-    &__title {
-        // Title situated at the top of the DOM.
+  &__title {
+    // Title situated at the top of the DOM.
+    margin-bottom: 3rem;
+  }
+
+  &__nav {
+    // Navigation buttons at the top of the page.
+    &__btn {
+      padding: 1rem 2rem;
+
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+      }
     }
+  }
 }
 
 // =============================================================================
 .basket-main {
-    // Main container for holding the main content in the basket page.
-    @include padSection;
-    padding-top: 0;
-    display: flex;
+  // Main container for holding the main content in the basket page.
+  display: flex;
+  padding: 0 4rem;
+  background-color: $colour-grey-light-5;
+  margin-bottom: 10rem;
 }
 
 // =============================================================================
 .basket-summary {
-    // Contains the items in the user's baskets.
-    width: 60%;
+  // Contains the items in the user's baskets.
+  box-shadow: $box-shadow-1;
+  width: 70%;
+  padding: 2rem 10rem;
+  margin-right: 4rem;
+  background-color: #fff;
 
-    // -------------------------------------------------------------------------
-    // Overrides for the quantity options defined in the quantity component.
-    .c-quantity__btn {
-        background-color: $colour-secondary-dark-1;
-        color: #fff;
+  // -------------------------------------------------------------------------
+  // Overrides for the quantity options defined in the quantity component.
+  .c-quantity__btn {
+    background-color: $colour-secondary-dark-1;
+    color: #fff;
 
-        &:not([disabled="disabled"]):hover {
-            background-color:$colour-secondary-dark-1-highlighted-1;
-        }
+    &:not([disabled="disabled"]):hover {
+      background-color: $colour-secondary-dark-1-highlighted-1;
     }
+  }
 }
 
 // =============================================================================
 .totals-summary {
-    // Contains the totals on the basket page.
+  // Contains the totals on the basket page.
+  box-shadow: $box-shadow-1;
+  width: 30%;
+  padding: 7rem 8rem;
+  height: 100%;
+  background-color: #fff;
+
+  &__title {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid $colour-secondary;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1.5px solid $colour-grey-light-2;
+
+    &__label {
+    }
+
+    &__value {
+    }
+  }
 }
