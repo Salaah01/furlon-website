@@ -61,7 +61,7 @@
                             class="dropdown-menu__options__label"
                             for="max-price-{{ key }}"
                         >
-                                {{ price }}
+                                {{ price|intcomma }}
                         </label>
                         <input
                             class="dropdown-menu__options__radio-btn"
@@ -134,7 +134,7 @@
             <input type="hidden" name="search" id="search-copy">
             <!-- Submit -->
             <button type="submit" class="search-filters__submit-btn" id="filters-submit">Apply Filters</button>
-        </form> 
+        </form>
     </section>
 
     <section class="search-results">
@@ -164,7 +164,7 @@
 
                                 </div>
                                 <div class="ratings__count">
-                                    
+
                                 </div>
                             </div>
                         {% endif %}
@@ -172,12 +172,12 @@
                         {% endif %}
                     </div>
                 </div>
-                
+
                 {% endfor %}
 
             {% endif %}
         </div>
-        
+
     </section>
 
 </main>

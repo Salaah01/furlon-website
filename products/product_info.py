@@ -183,7 +183,7 @@ class Productinfo:
         # When building the SQL, if the length of the list is 1, then the tuple equivalent will be (product_id, ).
         # This will not work in the SQL due to the empty item after the comma, so in such cases place a dummy value.
         if len(productIDs) == 1:
-            productIDs.append('dummy')
+            productIDs.append('-1')
 
         sql = """
             SELECT pp.product_id, pp.name, ss.store_id, ss.name, pcol.name, pp.inventory, pp.price, pp.showcase_image

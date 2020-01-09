@@ -838,6 +838,9 @@ svg {
     justify-content: space-between;
     padding: 2rem 0;
     border-bottom: 1.5px solid #ebebeb; }
+  .totals-summary__btns {
+    margin-top: 4rem;
+    text-align: center; }
 
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");

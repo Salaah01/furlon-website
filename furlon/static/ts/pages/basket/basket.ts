@@ -291,9 +291,9 @@ export class BasketPage extends BasketState {
      * Removes an item from the basket.
      */
     this.remove_item(Number(productId), 1);
-    priceElem.textContent = (
-      Number(priceElem.textContent) - Number(price)
-    ).toString();
+    priceElem.textContent = NumberFormat.thousand_separated_2dp(
+      NumberFormat.thousand_sep_to_float(priceElem.textContent) - Number(price)
+    );
   }
 
   // ---------------------------------------------------------------------------
@@ -310,9 +310,9 @@ export class BasketPage extends BasketState {
      * Removes an item from the basket.
      */
     this.add_item(Number(productId), 1);
-    priceElem.textContent = (
-      Number(priceElem.textContent) + Number(price)
-    ).toString();
+    priceElem.textContent = NumberFormat.thousand_separated_2dp(
+      NumberFormat.thousand_sep_to_float(priceElem.textContent) + Number(price)
+    );
   }
 
   // ---------------------------------------------------------------------------

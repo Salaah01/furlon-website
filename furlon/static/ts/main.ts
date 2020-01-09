@@ -27,7 +27,7 @@ new DropdownMenu();
 // Build the search filters
 new SearchFilters();
 
-if (window.location.href.includes("/products/")) {
+if (window.location.href.search(/\/products\/[0-9]{1,}/) != -1) {
   new ExtendProductPage();
   new QuantityComponent();
   new CarouselImgs();
