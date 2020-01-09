@@ -1,1 +1,57 @@
-<h1>Registration Page</h1>
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Register {% endblock %}
+
+{% block content %}
+
+<main class="register-login">
+  <div class="register-login__container">
+    <h1 class="register-login__heading heading-1">Register</h1>
+    <form method="POST" class="register-login__form">
+      {% csrf_token %}
+      <input
+        type="text"
+        name="first_name"
+        class="register-login__form__input"
+        id="first-name"
+        placeholder="First Name"
+      />
+      <input
+        type="text"
+        name="last_name"
+        class="register-login__form__input"
+        id="last-name"
+        placeholder="Last Name"
+      />
+      <input
+        type="email"
+        name="email_name"
+        class="register-login__form__input"
+        id="email-name"
+        placeholder="Email"
+      />
+      <input
+        type="password"
+        name="password"
+        class="register-login__form__input"
+        id="password"
+        placeholder="Password"
+      />
+      <input
+        type="password"
+        name="password_confirm"
+        class="register-login__form__input"
+        id="password-confirm"
+        placeholder="Confirm Password"
+      />
+    </form>
+  </div>
+</main>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

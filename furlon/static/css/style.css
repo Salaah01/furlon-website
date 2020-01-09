@@ -842,6 +842,31 @@ svg {
     margin-top: 4rem;
     text-align: center; }
 
+.register-login {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: blue; }
+  .register-login__container {
+    background-color: black;
+    padding: 5rem 6rem 7rem; }
+  .register-login__heading {
+    margin-bottom: 3rem; }
+  .register-login__form {
+    display: flex;
+    flex-direction: column; }
+    .register-login__form__input {
+      height: 3rem;
+      padding: 2rem;
+      border-radius: 10px;
+      outline: none;
+      border: 1px solid #5A5F6A; }
+      .register-login__form__input:not(:last-of-type) {
+        margin-bottom: 1rem; }
+
 .showcase {
   background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.9) 0%, #fff 35%, transparent 50%), url("../img/pages/index/showcase-cropped.jpg");
   background-size: cover;

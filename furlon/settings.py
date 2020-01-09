@@ -184,6 +184,9 @@ MEDIA_URL = '/media/'
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)
 
+# Messages
+from django.contrib.messages import constants as messages
+
 # Local Settings will turn the website to production mode.
 try:
     from .local_settings import *
