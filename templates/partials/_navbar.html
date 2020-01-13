@@ -125,70 +125,60 @@
   <div class="nav__section" id="nav-right">
     <div class="nav__account-basket">
       <!-- Basket -->
-      {% if 'profile' in request.path %}
-      <a href="{% url 'basket' %}" class="nav__account-basket__opt nav__active" id="nav-basket">
-        <span>Basket</span>
-        <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
-        <span class="nav__account-basket__opt__quantity" id='basket-total-items'></span>1</span>
-      </a>
-      {% else %}
-      <a href="{% url 'basket' %}" class="nav__account-basket__opt" id="nav-basket">
+      <a
+        href="{% url 'basket' %}"
+        class="nav__account-basket__opt {% if 'basket' in request.path %} nav__active {% endif %}"
+        id="nav-basket"
+      >
         <span>Basket</span>
         <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
         <span class="nav__account-basket__opt__quantity hide" id='basket-total-items'></span>
       </a>
-      {% endif %}
 
       <!-- Profile -->
       {% if user.is_authenticated %}
-      {% if 'profile' in request.path %}
-      <a href="#" class="nav__account-basket__opt nav__active" id="nav-profile"
-        >Welcome {{ user.first_name }}
-        <span class="nav__icon"><i class="fas fa-user"></i></span
-      ></a>
-      {% else %}
-      <a href="#" class="nav__account-basket__opt" id="nav-profile"
-        >Welcome {{ user.first_name }}
-        <span class="nav__icon"><i class="fas fa-user"></i></span
-      ></a>
-      {% endif %}
+        <a
+          href="#"
+          class="nav__account-basket__opt {% if 'profile' in request.path %} nav__active {% endif %}"
+          id="nav-profile"
+        >
+          Welcome {{ user.first_name }}
+          <span class="nav__icon"><i class="fas fa-user"></i></span>
+        </a>
 
-      <!-- Logout -->
-      <a
-        href="javascript:{document.getElementById('logout').submit()}"
-        class="nav__account-basket__opt"
-        id="nav-logout"
-        >Logout
-        <span class="nav__icon"><i class="fas fa-sign-out-alt"></i></span
-      ></a>
-      <form action="{% url 'logout' %}" method="POST" id="logout">
-        {% csrf_token %}
-        <input type="hidden" />
-      </form>
+        <!-- Logout -->
+        <a
+          href="javascript:{document.getElementById('logout').submit()}"
+          class="nav__account-basket__opt"
+          id="nav-logout"
+          >Logout
+          <span class="nav__icon"><i class="fas fa-sign-out-alt"></i></span>
+        </a>
+        <form action="{% url 'logout' %}" method="POST" id="logout">
+          {% csrf_token %}
+          <input type="hidden" />
+        </form>
 
       {% else %}
 
       <!-- Register -->
-      {% if 'register' in request.path %}
-      <a href="#" class="nav__account-basket__opt nav__active" id="nav-register"
-        >Register <span class="nav__icon"><i class="fas fa-user-plus"></i></span
-      ></a>
-      {% else %}
-      <a href="#" class="nav__account-basket__opt" id="nav-register"
-        >Register <span class="nav__icon"><i class="fas fa-user-plus"></i></span
-      ></a>
-      {% endif %}
+      <a
+        href="{% url 'register' %}"
+        class="nav__account-basket__opt {% if 'register' in request.path %} nav__active {% endif %}"
+        id="nav-register"
+      >
+        Register <span class="nav__icon"><i class="fas fa-user-plus"></i></span>
+      </a>
 
       <!-- Login -->
-      {% if 'login' in request.path %}
-      <a href="#" class="nav__account-basket__opt nav__active" id="nav-login"
-        >Login <span class="nav__icon"><i class="fas fa-sign-in-alt"></i></span
-      ></a>
-      {% else %}
-      <a href="#" class="nav__account-basket__opt" id="nav-login"
-        >Login <span class="nav__icon"><i class="fas fa-sign-in-alt"></i></span
-      ></a>
-      {% endif %} {% endif %}
+      <a
+        href="{% url 'login' %}"
+        class="nav__account-basket__opt {% if 'login' in request.path %} nav__active {% endif %}"
+        id="nav-login"
+      >
+        Login <span class="nav__icon"><i class="fas fa-sign-in-alt"></i></span>
+      </a>
+    {% endif %}
     </div>
   </div>
 </nav>

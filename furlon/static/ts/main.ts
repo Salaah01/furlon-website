@@ -14,6 +14,7 @@ import { ExtendProductPage } from "./pages/products/product";
 import { CarouselImgs } from "./components/carousel-imgs";
 import { BasketState } from "./state/basket-items";
 import { BasketPage } from "./pages/basket/basket";
+import { RegisterPasswordCheck } from "./components/register-validation";
 
 // Build the navigation
 new Navigation();
@@ -27,12 +28,19 @@ new DropdownMenu();
 // Build the search filters
 new SearchFilters();
 
-if (window.location.href.search(/\/products\/[0-9]{1,}/) != -1) {
+// -----------------------------------------------------------------------------
+// PAGE SPECIFIC JAVASCRIPT
+const CURRENT_URL = window.location.href;
+
+if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
+  // Product Page
   new ExtendProductPage();
   new QuantityComponent();
   new CarouselImgs();
-}
-
-if (window.location.href.includes("/basket/")) {
+} else if (CURRENT_URL.includes("/basket/")) {
+  // Basket Page
   new BasketPage();
+} else if (CURRENT_URL.includes("user/register")) {
+  // Account Registration page
+  new RegisterPasswordCheck();
 }
