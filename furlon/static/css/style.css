@@ -483,6 +483,27 @@ svg {
   gap: 1.5rem 1.5rem;
   padding: 9.5rem 15rem;
   background-color: #f0f0f0; }
+  @media only screen and (max-width: 62.5em) {
+    .index-grid {
+      padding: 8.5rem 10rem; } }
+  @media only screen and (max-width: 40.625em) {
+    .index-grid {
+      padding: 6rem 7.5rem; } }
+  @media only screen and (max-width: 34.375em) {
+    .index-grid {
+      padding: 6rem 5rem; } }
+  @media only screen and (max-width: 28.75em) {
+    .index-grid {
+      padding: 5rem 3.5rem; } }
+  @media only screen and (max-width: 70.625em) {
+    .index-grid {
+      grid-template-rows: 1fr repeat(2, 27rem); } }
+  @media only screen and (max-width: 56.25em) {
+    .index-grid {
+      grid-template-rows: 1fr repeat(2, 24rem); } }
+  @media only screen and (max-width: 43.75em) {
+    .index-grid {
+      grid-template-rows: 1fr repeat(2, 21rem); } }
   .index-grid__description {
     grid-column: 1 / -1; }
     .index-grid__description__heading {
@@ -546,6 +567,22 @@ svg {
   overflow: hidden;
   border-radius: 10px;
   padding: 9.5rem 15rem; }
+  @media only screen and (max-width: 62.5em) {
+    .latest-products {
+      padding: 8.5rem 10rem; } }
+  @media only screen and (max-width: 40.625em) {
+    .latest-products {
+      padding: 6rem 7.5rem; } }
+  @media only screen and (max-width: 34.375em) {
+    .latest-products {
+      padding: 6rem 5rem; } }
+  @media only screen and (max-width: 28.75em) {
+    .latest-products {
+      padding: 5rem 3.5rem; } }
+  @media only screen and (max-width: 81.25em) {
+    .latest-products {
+      grid-template-rows: [head-start] min-content [head-end] repeat(2, [content-row-start-] 17vw [content-row-end-]);
+      grid-template-columns: repeat(3, 19vw); } }
   .latest-products:hover > .latest-products__product__name::before {
     opacity: 0; }
   .latest-products__heading {
@@ -610,6 +647,18 @@ svg {
   padding: 9.5rem 15rem;
   padding-top: 4.5rem;
   background-color: #f9f9f9; }
+  @media only screen and (max-width: 62.5em) {
+    .how-it-works {
+      padding: 8.5rem 10rem; } }
+  @media only screen and (max-width: 40.625em) {
+    .how-it-works {
+      padding: 6rem 7.5rem; } }
+  @media only screen and (max-width: 34.375em) {
+    .how-it-works {
+      padding: 6rem 5rem; } }
+  @media only screen and (max-width: 28.75em) {
+    .how-it-works {
+      padding: 5rem 3.5rem; } }
   .how-it-works__imgs {
     position: relative;
     width: 50%;
@@ -669,11 +718,35 @@ svg {
 
 .search-results {
   padding: 9.5rem 15rem; }
+  @media only screen and (max-width: 62.5em) {
+    .search-results {
+      padding: 8.5rem 10rem; } }
+  @media only screen and (max-width: 40.625em) {
+    .search-results {
+      padding: 6rem 7.5rem; } }
+  @media only screen and (max-width: 34.375em) {
+    .search-results {
+      padding: 6rem 5rem; } }
+  @media only screen and (max-width: 28.75em) {
+    .search-results {
+      padding: 5rem 3.5rem; } }
 
 .single-product {
   padding: 9.5rem 15rem;
   padding-left: 20rem;
   padding-right: 20rem; }
+  @media only screen and (max-width: 62.5em) {
+    .single-product {
+      padding: 8.5rem 10rem; } }
+  @media only screen and (max-width: 40.625em) {
+    .single-product {
+      padding: 6rem 7.5rem; } }
+  @media only screen and (max-width: 34.375em) {
+    .single-product {
+      padding: 6rem 5rem; } }
+  @media only screen and (max-width: 28.75em) {
+    .single-product {
+      padding: 5rem 3.5rem; } }
 
 .product-showcase {
   display: grid;
@@ -828,6 +901,18 @@ svg {
   padding: 9.5rem 15rem;
   padding-bottom: 6rem;
   background-color: #fbfbfb; }
+  @media only screen and (max-width: 62.5em) {
+    .basket-head {
+      padding: 8.5rem 10rem; } }
+  @media only screen and (max-width: 40.625em) {
+    .basket-head {
+      padding: 6rem 7.5rem; } }
+  @media only screen and (max-width: 34.375em) {
+    .basket-head {
+      padding: 6rem 5rem; } }
+  @media only screen and (max-width: 28.75em) {
+    .basket-head {
+      padding: 5rem 3.5rem; } }
   .basket-head__title {
     margin-bottom: 3rem; }
   .basket-head__nav__btn {
