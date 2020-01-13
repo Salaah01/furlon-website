@@ -179,7 +179,6 @@ MEDIA_URL = '/media/'
 
 # Message
 from django.contrib.messages import constants as messages
-MESSAGE_TAGS = {messages.ERROR: 'danger'}
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)

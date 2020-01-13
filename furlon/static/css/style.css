@@ -65,6 +65,18 @@ p {
 .u-italics {
   font-style: initial; }
 
+@keyframes fadeOutRem {
+  0% {
+    opacity: 100%; }
+  99% {
+    opacity: 0; }
+  100% {
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    overflow: hidden; } }
+
 *,
 *::after,
 *::before {
@@ -1203,3 +1215,31 @@ svg {
       transform: scale(1.05); }
   .table__field[field='quantity'] {
     justify-content: center; }
+
+.messages {
+  position: absolute;
+  top: 7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  text-align: center;
+  padding: 2rem;
+  opacity: 100%;
+  animation-name: fadeOutRem;
+  animation-duration: 2s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+  z-index: 9999; }
+
+.message {
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.25rem; }
+  .message--success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb; }
+  .message--error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb; }

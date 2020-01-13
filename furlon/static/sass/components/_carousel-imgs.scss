@@ -31,7 +31,7 @@
 //        └───── (multiple - one for each showcase image)
 //               img (.carousel-container__display-section__img
 //                    im="{image identifier (matches showcase img im attr}"]
-//                    
+//
 //
 // EXAMPLE HTML
 // ------------
@@ -80,17 +80,14 @@
 @keyframes carouselImgHide {
     0% {
         left: 0;
-        // opacity: 1;
     }
 
     99% {
         left: -150%;
-        // opacity: 0;
     }
 
     100% {
         left: 100%;
-        // opacity: 1;
     }
 }
 
@@ -134,7 +131,6 @@
                 left: 100%;
                 animation-name: carouselImgHide;
                 animation-duration: 1s;
-                // animation-fill-mode: backwards;
                 z-index: 0;
             }
 

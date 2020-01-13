@@ -49,7 +49,7 @@ def logout(request):
     ''' Logs the user out '''
     if request.method == 'POST':
         auth.logout(request)
-        messages.success(request, 'You are now logged out.')
+        messages.success(request, 'You are now logged out')
         return redirect('index')
 
 
