@@ -23,6 +23,22 @@
 @mixin padSection {
     // Padding between two sections
     padding: 9.5rem 15rem;
+
+    @include mediaQuery(1000) {
+        padding: 8.5rem 10rem;
+    }
+
+    @include mediaQuery(650) {
+        padding: 6rem 7.5rem;
+    }
+
+    @include mediaQuery(550) {
+        padding: 6rem 5rem;
+    }
+
+    @include mediaQuery(460) {
+        padding: 5rem 3.5rem;
+    }
 }
 
 @mixin margHeadSubHead {

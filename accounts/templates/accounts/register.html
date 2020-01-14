@@ -16,37 +16,57 @@
         type="text"
         name="first_name"
         class="register-login__form__input"
-        id="first-name"
         placeholder="First Name"
+        required
       />
       <input
         type="text"
         name="last_name"
         class="register-login__form__input"
-        id="last-name"
         placeholder="Last Name"
+        required
       />
       <input
         type="email"
-        name="email_name"
+        name="email"
         class="register-login__form__input"
-        id="email-name"
         placeholder="Email"
+        required
       />
       <input
         type="password"
         name="password"
         class="register-login__form__input"
-        id="password"
+        id="register-password"
         placeholder="Password"
+        required
       />
       <input
         type="password"
-        name="password_confirm"
+        name="password-confirm"
         class="register-login__form__input"
-        id="password-confirm"
+        id="register-password-confirm"
         placeholder="Confirm Password"
+        required
       />
+      <span
+        class="register-login__form__input--error alert alert--danger"
+        id="register-errors"
+      >
+      </span>
+      <div class="register-login__form__section">
+        <button
+          type="submit"
+          class="register-login__form__btn btn btn--primary"
+          id="register-submit"
+        >Register
+        </button>
+        <a
+          href="{% url 'login' %}"
+          class="register-login__form__btn btn btn--primary"
+        >Login
+        </a>
+      </div>
     </form>
   </div>
 </main>

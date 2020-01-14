@@ -87,6 +87,13 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
+            'HOST': 'rogue.db.elephantsql.com',
+            'USER': 'rfxumegh',
+            'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
+            'NAME': 'rfxumegh',
+        },
+        'localhost': {
+            'ENGINE': 'django.db.backends.postgresql',
             'USER': 'postgres',
             'PASSWORD': 'Rasel121ne',
             'NAME': 'furlon_dummyBACKUP',
@@ -178,8 +185,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Message
-# from django.contrib.messages import constants as messages
-# MESSAGE_TAGS = {messages.ERROR, 'danger'}
+from django.contrib.messages import constants as messages
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)
