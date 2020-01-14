@@ -39,7 +39,7 @@ Furlon
 5. Install nodeJs packages `npm install`.
 6. Run batch files to start watch moves for running the Django server on the localhost and watching for changes on SASS and TypeScript files `start_workspace.bat`.  Failing this, run each of following commands in their own shell sessions: `python manage.py livereload`, `python manage.py runserver`, `npm run watch:sass`, `npm run webpack`.
 
-## Quick Start (Production)
+## Production
 ### Compile SASS and TypeScript
 Run all processes from Quick Start (Development) except step 6. Instead, run `npm run build`. 
 
