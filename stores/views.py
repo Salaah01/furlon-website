@@ -27,7 +27,7 @@ def store(request, pk):
 
     context = {
         'store': store,
-        'latestProducts': latestProducts
+        'latest_products': latestProducts
     }
 
     return render(request, 'stores/store.html', context)
