@@ -439,6 +439,16 @@ svg {
       position: absolute;
       top: 12%;
       right: 12%; }
+      @media only screen and (max-width: 68.75em) {
+        .nav__account-basket__opt__quantity {
+          right: 3%; } }
+      @media only screen and (max-width: 56.25em) {
+        .nav__account-basket__opt__quantity {
+          right: -10%;
+          top: 8%; } }
+      @media only screen and (max-width: 37.5em) {
+        .nav__account-basket__opt__quantity {
+          right: 75%; } }
   @media only screen and (max-width: 56.25em) {
     .nav__account-basket {
       display: flex;
