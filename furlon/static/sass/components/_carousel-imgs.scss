@@ -77,69 +77,120 @@
 //
 // =============================================================================
 
+// =============================================================================
+// Animations
 @keyframes carouselImgHide {
-    0% {
-        left: 0;
-    }
+  0% {
+    left: 0;
+  }
 
-    99% {
-        left: -150%;
-    }
+  99% {
+    left: -150%;
+  }
 
-    100% {
-        left: 100%;
-    }
+  100% {
+    left: 100%;
+  }
 }
 
 @keyframes carouselImgReveal {
-    0% {
-        left: 100%;
-        opacity: 0;
-    }
+  0% {
+    left: 100%;
+    opacity: 0;
+  }
 
-    100% {
-        left: 0;
-        opacity: 1;
-    }
+  100% {
+    left: 0;
+    opacity: 1;
+  }
 }
 
+// =============================================================================
 .carousel-container {
-    z-index: 1;
+  z-index: 1;
 
-    &__display-section {
-        display: flex;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 3.5rem;
-        height: 100%;
-        z-index: -10;
+  // -------------------------------------------------------------------------
+  // Main images
+  &__display-section {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 3.5rem;
+    height: 100%;
+    z-index: -10;
 
-        &__img {
-            position: absolute;
-            object-fit: cover;
-            left: 0;
-            top: 0;
-            z-index: 5;
-            transition: all .4s ease-out;
-            background-color: blue;
+    // Image size varies depending on how many thumbnails there are.
+    &[totalthumbs='2'],
+    &[totalthumbs='3'],
+    &[totalthumbs='4'] {
 
-            &[position="init"] {
-                z-index: 1;
-            }
-
-            &[position="hide"] {
-                left: 100%;
-                animation-name: carouselImgHide;
-                animation-duration: 1s;
-                z-index: 0;
-            }
-
-            &[position="show"] {
-                left: 0;
-                animation-name: carouselImgReveal;
-                animation-duration: 1s;
-                animation-fill-mode: initial;
-            }
-        }
     }
+
+    &[totalthumbs='5'],
+    &[totalthumbs='6'],
+    &[totalthumbs='7'] {
+        height: 68%;
+    }
+
+    &__img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 5;
+      transition: all 0.4s ease-out;
+      background-color: blue;
+
+      &[position="init"] {
+        z-index: 1;
+      }
+
+      &[position="hide"] {
+        left: 100%;
+        animation-name: carouselImgHide;
+        animation-duration: 1s;
+        z-index: 0;
+      }
+
+      &[position="show"] {
+        left: 0;
+        animation-name: carouselImgReveal;
+        animation-duration: 1s;
+        animation-fill-mode: initial;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Thumbnails of images
+  &__display-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: -14vw;
+
+    &[totalthumbs="1"] {
+      display: none;
+    }
+
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"] {
+      margin-top: -7.5vw;
+      justify-content: flex-start;
+    }
+
+    &__control {
+      object-fit: cover;
+      height: 5vw;
+      width: 6vw;
+      margin: 0.6rem;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
 }

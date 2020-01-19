@@ -134,7 +134,12 @@
       </p>
       {% endif %}
     </div>
-    <a href="#" class="product-showcase__section__ratings__reviews"
-      >{{ store.ratings }} Reviews</a
-    >
+    <a href="#reviews" class="product-showcase__section__ratings__reviews"
+      >
+      {% if store.ratings %}
+        {{ store.ratings }} Reviews
+      {% else %}
+        0 Reviews
+      {% endif %}
+      </a>
   </div>

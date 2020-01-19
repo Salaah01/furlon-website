@@ -7,299 +7,445 @@
 
 // =============================================================================
 .index-grid {
-    // Section containing of 4 images in the index page.
-    // Section is split into 5 sub-section.
-    // The first sub-section sits at the top and spans the entire length of
-    // the div. This is the title sub-section.
-    // The remaining 4 sections are split 2 x 2 with a text overlay.
-    display: grid;
-    grid-template-rows: 1fr repeat(2, 35rem);
-    grid-template-columns: repeat(2, [col-start] minmax(min-content, 1fr) [col-end]);
-    gap: 1.5rem 1.5rem;
-    @include padSection;
-    background-color: $colour-grey-light-1;
+  // Section containing of 4 images in the index page.
+  // Section is split into 5 sub-section.
+  // The first sub-section sits at the top and spans the entire length of
+  // the div. This is the title sub-section.
+  // The remaining 4 sections are split 2 x 2 with a text overlay.
+  //
+  // RESPONSIVENESS:
+  // > 500px:   2 rows containing with 2 images per row with text overlay.
+  // <= 500px   4 rows containing 1 image per row (1st column) and text beside
+  //            each image (2nd column).
+  display: grid;
+  grid-template-rows: 1fr repeat(2, 35rem);
+  grid-template-columns: repeat(
+    2,
+    [col-start] minmax(min-content, 1fr) [col-end]
+  );
+  gap: 1.5rem 1.5rem;
+  @include padSection;
+  background-color: $colour-grey-light-1;
 
-    @include mediaQuery(1130) {
-        grid-template-rows: 1fr repeat(2, 27rem);
+  @include mediaQuery(1130) {
+    grid-template-rows: 1fr repeat(2, 27rem);
+  }
+
+  @include mediaQuery(900) {
+    grid-template-rows: 1fr repeat(2, 24rem);
+  }
+
+  @include mediaQuery(700) {
+    grid-template-rows: 1fr repeat(2, 21rem);
+  }
+
+  @include mediaQuery(600) {
+    grid-template-rows: 1fr repeat((2, 16rem));
+  }
+
+  @include mediaQuery(500) {
+    grid-template-columns: 40% 1fr;
+    grid-template-rows: 1fr repeat((4, min-content));
+  }
+
+  &__description {
+    // Situated at the top of as the title/description of the section.
+    grid-column: 1 / -1;
+
+    &__heading {
+      @include margHeadSubHead;
+      color: $colour-primary;
     }
 
-    @include mediaQuery(900) {
-        grid-template-rows: 1fr repeat(2, 24rem);
+    &__detail {
+      font-size: 2rem;
+    }
+  }
+
+  &__container {
+    // index-grid__container contains an image and text as overlay.
+    // There are 4 containers arranged into a 2 x 2 grid (wide screen).
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: $box-shadow-faint-br;
+
+    @include mediaQuery(500) {
+      grid-column: 1 / -1;
+      padding: 0.75rem 0.9rem;
     }
 
-    @include mediaQuery(700) {
-        grid-template-rows: 1fr repeat(2, 21rem);
+    @include mediaQuery(340) {
+      padding: 0.5rem 1rem;
     }
 
-    &__description {
-        // Situated at the top of as the title/description of the section.
-        grid-column: 1 / -1;
-
-        &__heading {
-            @include margHeadSubHead;
-            color: $colour-primary;
-        }
-
-        &__detail {
-            font-size: 2rem;
-        }
+    & > a {
+      // Contains the image and image text.
+      @include mediaQuery(500) {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: flex-end;
+        text-decoration: none;
+        border: none;
+        outline: none;
+      }
     }
 
-    &__container {
-        // index-grid__container contains an image and text as overlay.
-        // There are 4 containers arranged into a 2 x 2 grid (wide screen).
-        overflow: hidden;
+    &__header {
+      // Text overlay in a container - goes over the images.
+      position: absolute;
+      z-index: 10;
+      padding: 2rem;
+      width: 150%;
+      transform: translateX(-50%);
+      padding-left: calc(75% + 2rem);
+      color: $colour-white-1;
+      transition: transform 0.75s;
+
+      @include mediaQuery(500) {
         position: relative;
-        border-radius: 10px;
-        box-shadow: $box-shadow-faint-br;
+        width: auto;
+        transform: none;
+        color: $colour-grey-dark-1;
+        font-size: 1.6rem;
+        font-weight: 400;
+        padding: 2rem;
+      }
 
-        &__header {
-            // Text overlay in a container - goes over the images.
-            position: absolute;
-            z-index: 10;
-            padding: 2rem;
-            transform: translateX(-50%);
-            padding-left: calc(50% + 2rem);
-            color: $colour-white-1;
-            transition: transform .75s;
+      &::before {
+        // Faint grey background to make the text more visible.
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 6rem;
+        left: -3rem;
+        top: 1.5rem;
+        background-image: linear-gradient(
+          45deg,
+          rgba(0, 0, 0, 0.23),
+          transparent
+        );
+        z-index: -5;
 
-            &::before {
-                // Faint grey background to make the text more visible.
-                content: "";
-                position: absolute;
-                width: 200%;
-                height: 6rem;
-                left: -3rem;
-                top: 1.5rem;
-                background-image: linear-gradient(45deg, rgba(0, 0, 0, 0.23), transparent);
-                z-index: -5;
-
-            }
-
+        @include mediaQuery(500) {
+          display: none;
         }
-
-        &__img {
-            // Main image in a container.
-            position: absolute;
-            z-index: 5;
-            left: 0;
-            top: 0;
-            background-size: cover;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: all .75s ease-out;
-        }
-
-        &:hover > a > &__img {
-            transform: scale(1.05);
-            filter: brightness(0.85) blur(4px);
-        }
-
-        &:hover > a > &__header {
-            padding: 2rem;
-            font-size: 5rem;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 100%;
-
-            &::before {
-                // When the images are hovered, the faint grey background will
-                // disappear. This is implemented as the text enlarges and moves
-                // to the center of the page and the grey background is not
-                // needed as the image loses brightness.
-                background-image: none;
-            }
-        }
-
+      }
     }
+
+    &__img {
+      // Main image in a container.
+      position: absolute;
+      z-index: 5;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      object-fit: cover;
+      display: block;
+      transition: all 0.75s ease-out;
+      border-radius: 5px;
+
+      @include mediaQuery(500) {
+        position: relative;
+        width: 25vw;
+        height: 20vw;
+      }
+
+      @include mediaQuery(340) {
+        width: 30vw;
+        height: 25vw;
+      }
+    }
+
+    &:hover > a > &__img {
+      transform: scale(1.05);
+      filter: brightness(0.85) blur(4px);
+
+      @include mediaQuery(500) {
+        transform: none;
+        filter: none;
+      }
+    }
+
+    &:hover > a > &__header {
+      padding: 2rem;
+      font-size: 5rem;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 100%;
+
+      @include mediaQuery(500) {
+        padding: 2rem;
+        font-size: inherit;
+        text-align: inherit;
+        top: inherit;
+        left: inherit;
+        width: inherit;
+        transform: none;
+      }
+
+      &::before {
+        // When the images are hovered, the faint grey background will
+        // disappear. This is implemented as the text enlarges and moves
+        // to the center of the page and the grey background is not
+        // needed as the image loses brightness.
+        background-image: none;
+      }
+    }
+  }
 }
 
 // =============================================================================
 .latest-products {
-    // Section will contain the last 5 latest products.
-    // Will consist of a header row which spans the length of all columns
-    // and will include 5 images with overlay name and price.
-    display: grid;
-    grid-template-rows: [head-start] min-content [head-end]
-                        repeat(2, [content-row-start-] 15vw [content-row-end-]);
-    grid-template-columns: repeat(3, 15vw);
-    justify-content: center;
-    gap: 4rem;
-    overflow: hidden;
-    border-radius: 10px;
-    @include padSection;
+  // Section will contain the last 5 latest products.
+  // Will consist of a header row which spans the length of all columns
+  // and will include 5 images with overlay name and price.
+  //
+  // RESPONSIVENESS
+  // > 1300px         2 rows of images with 6 images in each row.
+  // 800px - 1300px   3 rows of images with 2 images in each row.
+  // < 800px          6 rows of images with 1 image in each row.
+  display: grid;
+  grid-template-rows:
+    [head-start] min-content [head-end]
+    repeat(2, [content-row-start-] 15vw [content-row-end-]);
+  grid-template-columns: repeat(3, 15vw);
+  justify-content: center;
+  gap: 4rem;
+  overflow: hidden;
+  border-radius: 10px;
+  @include padSection;
 
-    @include mediaQuery(1300) {
-        grid-template-rows: [head-start] min-content [head-end]
-                            repeat(2, [content-row-start-] 17vw [content-row-end-]);
-        grid-template-columns: repeat(3, 19vw);
+  @include mediaQuery(1300) {
+    grid-template-rows:
+      [head-start] min-content [head-end]
+      repeat(2, [content-row-start-] 17vw [content-row-end-]);
+    grid-template-columns: repeat(3, 19vw);
+  }
+
+  @include mediaQuery(800) {
+    grid-template-rows:
+      [head-start] min-content [head-end]
+      repeat(3, [content-row-start-] 20vw [content-row-end-]);
+    grid-template-columns: repeat(2, 30vw);
+    padding-bottom: 5rem;
+    gap: 3rem;
+  }
+
+  @include mediaQuery(600) {
+    grid-template-rows:
+      [head-start] min-content [head-end]
+      repeat(6, [content-row-start-] 35vw [content-row-end-]);
+    grid-template-columns: 60vw;
+  }
+
+  &:hover > &__product__name::before {
+    opacity: 0;
+  }
+
+  &__heading {
+    // Heading will consist of a main heading and a sub-heading.
+    grid-column: 1 / -1;
+
+    @include mediaQuery(600) {
+      margin-bottom: 1rem;
     }
 
-    &:hover > &__product__name::before {
-        opacity: 0;
-    }
-
-    &__heading {
-        // Heading will consist of a main heading and a sub-heading.
-        grid-column: 1 / -1;
-
-        &__title {
-            @include margHeadSubHead;
-            color: $colour-primary;
-        }
-
-        &__info {
-            margin-bottom: -2rem;
-        }
-    }
-
-    &__product {
-        // Works alongside the card component.
-        // On the front size there is the image and name, and on hover the card
-        // will rotate in the y-axis to hide the front-side and review the rear
-        // side which consists of the price and cta button.
-        overflow: hidden;
-        box-shadow: $box-shadow-faint-br-2;
-        background-color: $colour-grey-light-3;
-        border-radius: 1rem;
-
-        &__img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-
-        &__name {
-            text-transform: uppercase;
-            position: absolute;
-            top: .5rem;
-            left: 1rem;
-            font-size: 2rem;
-            padding: .5rem;
-            width: 100%;
-            color: #000;
-
-            &::before {
-                // Faint grey background to make the text more visible.
-                content: "";
-                position: absolute;
-                width: 200%;
-                height: -webkit-fill-available;
-                left: -3rem;
-                background-image: linear-gradient(
-                    45deg,
-                    rgba(255, 172, 32, 0.40) 35%,
-                    transparent 50%
-                );
-                transition: all .7s ease;
-            }
-
-        }
-
-        &__price-box {
-            height: 100%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-image: linear-gradient(
-                180deg,
-                $colour-secondary-high-sat,
-                $colour-secondary-high-sat-dark-1
-            );
-        }
-
-        &__price-only {
-            color: $colour-white-1;
-            text-transform: uppercase;
-        }
-
-        &__price-value {
-            color: $colour-white-1;
-            font-weight: 300;
-            font-size: 4rem;
-            margin-top: 1rem;
-        }
-
-        &__info-btn:link,
-        &__info-btn:visited {
-            margin-top: 1.5rem;
-            color: $colour-secondary;
-        }
-
-        &__info-btn:hover,
-        &__info-btn:active {
-            color: $colour-secondary-high-sat-dark-1;
-        }
-    }
-}
-
-// -----------------------------------------------------------------------------
-.how-it-works {
-    // Section split into two sub-sections.
-    // .how-it-works__imgs shows a image stacked on top of one another.
-    // .how-it-works__info describes the images.
-    display: flex;
-    flex-direction: row;
-    @include padSection;
-    padding-top: 4.5rem;
-    background-color: $colour-grey-light-4;
-
-    &__imgs {
-        position: relative;
-        width: 50%;
-        // Height = height of .how-it-works__imgs__bottom
-        height: 55rem;
-        padding: 5rem 2.5rem;
-
-        & > * {
-            background-size: cover;
-            position: absolute;
-        }
-
-        &__bottom {
-            width: 75%;
-            z-index: 10;
-            filter: saturate(0.45) contrast(.9) blur(1px);
-            border-radius: 7px;
-        }
-
-        &__top {
-            width: 50%;
-            z-index: 20;
-            transform: translate(85%, 15%);
-            filter: hue-rotate(20deg) saturate(1.85) brightness(1.2);
-            border-radius: 10px;
-            box-shadow: $box-shadow-faint-r;
-        }
+    &__title {
+      @include margHeadSubHead;
+      color: $colour-primary;
     }
 
     &__info {
-       padding: 5rem 2.5rem;
-       width: 50%;
-
-        &__heading {
-            @include margHeadSubHead;
-            color: $colour-primary;
-        }
-
-        &__content {
-            & > * {
-                margin-bottom: 1rem;
-            }
-        }
-
-        &__btn {
-            align-self: flex-start;
-            margin-top: 1.25rem;
-            font-weight: 600;
-        }
-
+      margin-bottom: -2rem;
+      text-align: center;
     }
+  }
+
+  &__product {
+    // Works alongside the card component.
+    // On the front size there is the image and name, and on hover the card
+    // will rotate in the y-axis to hide the front-side and review the rear
+    // side which consists of the price and cta button.
+    overflow: hidden;
+    box-shadow: $box-shadow-faint-br-2;
+    background-color: $colour-grey-light-3;
+    border-radius: 1rem;
+
+    &__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    &__name {
+      text-transform: uppercase;
+      position: absolute;
+      top: 0.5rem;
+      left: 1rem;
+      font-size: 2rem;
+      padding: 0.5rem;
+      width: 100%;
+      color: #000;
+
+      &::before {
+        // Faint grey background to make the text more visible.
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: -webkit-fill-available;
+        left: -3rem;
+        background-image: linear-gradient(
+          45deg,
+          rgba(255, 172, 32, 0.4) 35%,
+          transparent 50%
+        );
+        transition: all 0.7s ease;
+      }
+    }
+
+    &__price-box {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      background-image: linear-gradient(
+        180deg,
+        $colour-secondary-high-sat,
+        $colour-secondary-high-sat-dark-1
+      );
+    }
+
+    &__price-only {
+      color: $colour-white-1;
+      text-transform: uppercase;
+    }
+
+    &__price-value {
+      color: $colour-white-1;
+      font-weight: 300;
+      font-size: 4rem;
+      margin-top: 1rem;
+    }
+
+    &__info-btn:link,
+    &__info-btn:visited {
+      margin-top: 1.5rem;
+      color: $colour-secondary;
+    }
+
+    &__info-btn:hover,
+    &__info-btn:active {
+      color: $colour-secondary-high-sat-dark-1;
+    }
+  }
+}
+
+// =============================================================================
+.how-it-works {
+  // Section split into two sub-sections.
+  // .how-it-works__imgs shows a image stacked on top of one another.
+  // .how-it-works__info describes the images.
+  //
+  // RESPONSIVENESS
+  // > 1000px         Images and text aligned side by side.
+  // <= 1000px        Images and text stacked on top of one another.
+
+  display: flex;
+  flex-direction: row;
+  @include padSection;
+  padding-top: 4.5rem;
+  background-color: $colour-grey-light-4;
+
+  @include mediaQuery(1000) {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5rem;
+  }
+
+  &__imgs {
+    position: relative;
+    width: 50%;
+    // Height = height of .how-it-works__imgs__bottom
+    height: 55rem;
+    padding: 5rem 2.5rem;
+
+    @include mediaQuery(1000) {
+      width: 50vw;
+      height: 30vw;
+    }
+
+    @include mediaQuery(800) {
+      padding-top: 0;
+    }
+
+    & > * {
+      background-size: cover;
+      position: absolute;
+    }
+
+    &__bottom {
+      width: 75%;
+      z-index: 10;
+      filter: saturate(0.45) contrast(0.9) blur(1px);
+      border-radius: 7px;
+    }
+
+    &__top {
+      width: 50%;
+      z-index: 20;
+      transform: translate(85%, 15%);
+      filter: hue-rotate(20deg) saturate(1.85) brightness(1.2);
+      border-radius: 10px;
+      box-shadow: $box-shadow-faint-r;
+    }
+  }
+
+  &__info {
+    padding: 5rem 2.5rem;
+    width: 50%;
+
+    @include mediaQuery(1000) {
+      width: auto;
+    }
+
+    @include mediaQuery(800) {
+      padding-top: 1rem;
+    }
+
+    &__heading {
+      @include margHeadSubHead;
+      color: $colour-primary;
+
+      @include mediaQuery(1000) {
+        text-align: center;
+      }
+    }
+
+    &__content {
+      & > * {
+        margin-bottom: 1rem;
+      }
+    }
+
+    &__btn {
+      align-self: flex-start;
+      margin-top: 1.25rem;
+      font-weight: 600;
+      width: max-content;
+
+      @include mediaQuery(1000) {
+        margin-left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
 }

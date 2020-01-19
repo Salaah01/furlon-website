@@ -10,9 +10,14 @@
 // --------
 // On click of a image thumbnails or the current image, the current image should
 // change accordingly.
+//
 // Animations are handled through the CSS, the JS sets up the event listeners to
 // change the attributes of the display images accordingly so as to display the
 // selected image.
+//
+// On each thumbnail, at an attribute will will equal to the number total
+// thumbnails, this will enable the CSS to adjust certain CSS attributes
+// accordingly.
 // =============================================================================
 
 // =============================================================================
@@ -32,6 +37,10 @@ export class CarouselImgs {
      * Locates the elements where an event listeners need to be added and
      * calls methods to add event listeners depending on what the element
      * is.
+     *
+     * Finally, will call a method to update the thumbnails to contain
+     * information on how many thumbnails there are. This will enable to
+     * adjust certain CSS attributes accordingly.
      */
     for (let c = 0; c < this.containers.length; c++) {
       // DOM elements for event listeners to be added.
@@ -42,16 +51,26 @@ export class CarouselImgs {
         "carousel-container__display-section__img"
       );
 
-      const imgThumbsContainer = this.containers[c].getElementsByClassName(
-        "carousel-container__display-controls"
-      )[0];
-      const imgThumbs = imgThumbsContainer.getElementsByClassName(
-        "carousel-container__display-controls-control"
-      );
+      // If there is if only one displayImage, then this suggests that only a
+      // showcase image exists.
+      if (displayImages.length > 1) {
+        const imgThumbsContainer = this.containers[c].getElementsByClassName(
+          "carousel-container__display-controls"
+        )[0];
+        const imgThumbs = imgThumbsContainer.getElementsByClassName(
+          "carousel-container__display-controls__control"
+        );
 
-      //  Methods to add event listeners on each DOM element.
-      this.on_clicking_thumbs(displayImages, imgThumbs);
-      this.on_clicking_display_img(displayImages);
+        //  Methods to add event listeners on each DOM element.
+        this.on_clicking_thumbs(displayImages, imgThumbs);
+        this.on_clicking_display_img(displayImages);
+      }
+      // Sets an attribute on each thumbnail to the total number of thumbnails.
+      this.update_total_thumbs(
+        this.containers[c].getElementsByClassName(
+          "carousel-container__display-controls__control"
+        )
+      );
     }
   }
 
@@ -112,5 +131,29 @@ export class CarouselImgs {
         }
       });
     }
+  }
+
+  // -------------------------------------------------------------------------
+  private update_total_thumbs(thumbs: HTMLCollection) {
+    /**
+     * Sets an attribute on each thumbnail which is the total number of
+     * thumbnails there are. This will allow the CSS to update styling based
+     * on the number of thumbnails.
+     */
+    const total = thumbs.length;
+    for (let t = 0; t < total; t++) {
+      thumbs[t].setAttribute("totalthumbs", total.toString());
+    }
+
+    // Sets the same on other elements where this would be needed.
+    thumbs[0].parentElement!.setAttribute("totalthumbs", total.toString());
+    thumbs[0].parentElement!.previousElementSibling!.setAttribute(
+      "totalthumbs",
+      total.toString()
+    );
+    thumbs[0].parentElement!.parentElement!.parentElement!.setAttribute(
+      "totalthumbs",
+      total.toString()
+    );
   }
 }
