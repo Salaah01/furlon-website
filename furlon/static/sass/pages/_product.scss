@@ -4,12 +4,48 @@
 // =============================================================================
 // Styling for the search page.
 // Includes styling for the individual product pages.
+//
+// RESPONSIVENESS
+// >760px:        .product-showcase containing the showcase image and the
+//                basic product information are placed side by side.
+// <= 760px:      .product-showcase containing the showcase image and the basic
+//                product information are stacked onto top of one another.
 // =============================================================================
 
 // =============================================================================
 header.single-product-header {
   @include padSection;
   padding-bottom: 0;
+  padding-left: 20rem;
+
+  @include mediaQuery(1400) {
+    padding-left: 15rem;
+  }
+
+  @include mediaQuery(1200) {
+    padding-left: 8rem;
+  }
+
+  @include mediaQuery(1000) {
+    padding-bottom: 0;
+  }
+
+  @include mediaQuery(1050) {
+    padding-left: 3rem;
+  }
+
+  .product-store-name {
+    color: $colour-secondary-dark-1;
+    font-size: 2rem;
+    outline: none;
+    text-decoration: none;
+    transition: all .3s ease;
+
+    &:hover {
+      color: $colour-secondary-high-sat;
+    }
+  }
+
 }
 
 // =============================================================================
@@ -19,6 +55,7 @@ header.single-product-header {
   padding-left: 20rem;
   padding-right: 27rem;
   padding-top: 2rem;
+
 
   @include mediaQuery(1400) {
     padding-left: 15rem;
@@ -35,6 +72,12 @@ header.single-product-header {
     // gap in .product-showcase is 2rem.
     padding-left: 3rem;
     padding-right: 5rem;
+  }
+
+  @include mediaQuery(760) {
+    // Gap is 0
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }
 
@@ -66,12 +109,21 @@ header.single-product-header {
     grid-template-columns: 50% 50%;
   }
 
+  @include mediaQuery(760) {
+    grid-template-columns: 100%;
+    grid-template-rows: 45vw;
+    gap: 0;
+  }
+
+  @include mediaQuery(500) {
+    grid-template-rows: 60vw;
+  }
+
   &__name {
     grid-column: 1/-1;
   }
 
   &[totalthumbs="1"] {
-
   }
 
   &[totalthumbs="2"],
@@ -90,15 +142,22 @@ header.single-product-header {
       padding: 2rem 2rem;
     }
 
+    @include mediaQuery(760) {
+      padding: 3rem;
+    }
+
     &--lhs {
       // The left hand side of the showcase container (left section)
+      @include mediaQuery(760) {
+        margin-bottom: 2rem;
+      }
     }
 
     &--rhs {
       // The right hand side of the showcase container (right section)
       height: 100%;
       display: grid;
-      grid-template-columns: repeat(2, 50%);
+      grid-template-columns: repeat(4, 25%);
       justify-content: center;
       align-self: center;
 
@@ -131,54 +190,112 @@ header.single-product-header {
     // ---------------------------------------------------------------------
     // Items on the second of the two sections.
     // These elements are located on the RHS of the page.
-    &__name,
     &__price {
-      // Name and price placed in the first row
       color: $colour-primary;
-      border-bottom: 1px solid $colour-primary;
       padding-bottom: 1rem;
-    }
+      justify-self: start;
+      grid-column: 1/2;
 
-    &__name {
-    }
+      @include mediaQuery(842) {
+        // Spans the entire row so that the ratings are on the line below.
+        grid-column: 1/-1;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
 
-    &__price {
-      text-align: right;
+      @include mediaQuery(760) {
+        // Allows for the ratings to be placed on the same row.
+        grid-column: 1/2;
+        padding-bottom: 1rem;
+      }
+
+      @include mediaQuery(500) {
+        // Spans the entire row so that the ratings are on the line below.
+        grid-column: 1/-1;
+        padding-bottom: 0;
+        margin-bottom: 0;
+      }
     }
 
     &__ratings {
-      // Product ratings, placed on the second row.
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
-      grid-column: 1/-1;
+      justify-self: end;
+      grid-column: 2/5;
 
-      &__stars {
+      @include mediaQuery(842) {
+        // Placed below the product price.
+        grid-column: 1/-1;
+        justify-self: start;
+        margin-bottom: 3rem;
       }
 
-      &__reviews {
+      @include mediaQuery(760) {
+        // Placed beside the product price.
+        grid-column: 2/5;
+        justify-self: end;
+      }
+
+      @include mediaQuery(500) {
+        // Placed below the product price.
+        grid-column: 1/-1;
+        justify-self: start;
+      }
+
+      &__stars {
+        margin-right: 1rem;
       }
     }
 
     &__description {
       // Short description of the product, place in the third row.
       grid-column: 1/-1;
+
+      @include mediaQuery(842) {
+        margin-bottom: 3rem;
+      }
+
+      @include mediaQuery(760) {
+        margin-bottom: 5rem;
+      }
+
+      @include mediaQuery(500) {
+        margin-bottom: 3rem;
+      }
     }
 
     &__quantity {
       // Input element for choosing number of products to add to the
       // basket. Placed on the fourth row on the first column
       // alongside the add to basket button.
-
       display: flex;
       justify-content: flex-end;
       margin-right: 1.25rem;
+      grid-column: 2/3;
 
       @include mediaQuery(842) {
+        // Stacking the quantity and colours option on top of one another.
         margin-right: 0;
         grid-column: 1/-1;
         margin-bottom: 1.5rem;
         justify-self: center;
+      }
+
+      @include mediaQuery(760) {
+        // Placing the quantity and colour options next to one another.
+        grid-column: 2 / span 1;
+        padding-right: 1rem;
+        justify-self: end;
+        margin-bottom: 1rem;
+      }
+
+      @include mediaQuery(500) {
+        // Stacking the quantity and colours option on top of one another.
+        margin-right: 0;
+        grid-column: 1/-1;
+        margin-bottom: 1.5rem;
+        justify-self: center;
+        padding-right: 0;
       }
 
       &__btn,
@@ -210,10 +327,28 @@ header.single-product-header {
       margin-left: 1.25rem;
 
       @include mediaQuery(842) {
+        // Stacking the quantity and colour options on top of another.
         margin-left: 0;
         grid-column: 1/-1;
         justify-self: center;
         margin-bottom: 1.5rem;
+      }
+
+      @include mediaQuery(760) {
+        // Placing the quantity and colour options next to one another.
+        grid-column: 3/ span 1;
+        padding-left: 1rem;
+        justify-self: start;
+        margin-bottom: 1rem;
+      }
+
+      @include mediaQuery(500) {
+        // Stacking the quantity and colour options on top of another.
+        margin-left: 0;
+        grid-column: 1/-1;
+        justify-self: center;
+        margin-bottom: 1.5rem;
+        padding-left: 0;
       }
 
       .dropdown-menu {
@@ -320,8 +455,8 @@ header.single-product-header {
   }
 
   &__img {
-    width: 30rem;
-    height: 20rem;
+    width: 25rem;
+    height: 17rem;
     border-radius: 5px;
     box-shadow: 2px 3px 10px 1px rgb(102, 102, 102);
     transition: all 0.3s ease;
@@ -354,10 +489,32 @@ header.single-product-header {
   padding-left: 20rem;
   padding-right: 20rem;
   gap: 5rem;
+  justify-content: center;
+
+  @include mediaQuery(1400) {
+    padding-left: 15rem;
+    padding-right: 15rem;
+  }
+
+  @include mediaQuery(1200) {
+    padding-left: 8rem;
+    padding-right: 8rem;
+  }
+
+  @include mediaQuery(1000) {
+    padding-bottom: 0;
+  }
+
+  @include mediaQuery(1050) {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
 
   & > * {
     margin-bottom: 4rem;
   }
+
+
 
   &__section {
     // Each sub-section in .product-info.
@@ -388,7 +545,9 @@ header.single-product-header {
           margin-right: 1rem;
         }
       }
+
     }
+
     &__text-block {
       // Contains a block of text at each sub section.
     }
@@ -396,6 +555,19 @@ header.single-product-header {
     &__text {
       // Text contained within a text block.
       line-height: 1.75em;
+    }
+
+    &[for='product-description'],
+    &[for='product-reviews'] {
+      text-align: justify;
+    }
+
+    &[for='product-size'],
+    &[for='product-features'] {
+      @include mediaQuery(500) {
+        text-align: center;
+        grid-column: 1/-1;
+      }
     }
   }
 }

@@ -9,6 +9,7 @@
 
 <header class="single-product-header">
   <h1 class="product-name heading-1">{{ product.name }}</h1>
+  <a href="{% url 'store' product.store.store_id %}"class="product-store-name"> {{ product.store.name }}</a>
 </header>
 
 <main class="single-product">
@@ -143,12 +144,10 @@
       </div>
     </div>
     <div class="product-showcase__section product-showcase__section--rhs">
-      <!-- Name and Price -->
-      <h1 class="product-showcase__section__name">{{ product.name }}</h1>
+      <!-- Name and Ratings -->
       <h2 class="product-showcase__section__price">
         &pound;{{ product.price|floatformat:2|intcomma }}
       </h2>
-
       <!-- Ratings -->
       {% include 'products/partials/_product-ratings.html' %}
 
@@ -257,11 +256,11 @@
     </div>
   </section>
 
-  <!-- Product Information -->
+  <!-- Product Description -->
   <section class="product-info">
-    <div class="product-info__section all-cols">
+    <div class="product-info__section all-cols" for='product-description'>
       <h2 class="product-info__section__title heading-2">
-        Product Information
+        Product Description
       </h2>
       <div class="product-info__section__text-block">
         <p class="product-info__section__text">{{ product.description }}</p>
@@ -269,7 +268,7 @@
     </div>
 
     <!-- Size -->
-    <div class="product-info__section">
+    <div class="product-info__section" for='product-size'>
       <h2 class="product-info__section__title heading-2">Size</h2>
       <div class="product-info__section__text-block">
         <p class="product-info__section__text">Length: {{ product.length }} {{ product.length_units }}</p>
@@ -280,65 +279,15 @@
     </div>
 
     <!-- Features -->
-    <div class="product-info__section">
+    <div class="product-info__section" for='product-features'>
       <h2 class="product-info__section__title heading-2">Features</h2>
       <div class="product-info__section__text-block" id="product-features">
 
       </div>
     </div>
 
-    <!-- Store Details -->
-    <div class="product-info__section all-cols">
-      <h2 class="product-info__section__title heading-2">Store Details</h2>
-
-      <!-- Store Name and Ratings Container -->
-      <div class="product-info__section__sub-heading">
-        <!-- Store Name -->
-        <a class="product-info__section__sub-heading__store-name heading-3" href="{% url 'store' product.store.store_id %}"
-        >{{ product.store.name }}
-        </a>
-        <!-- Store Ratings -->
-        {% include 'partials/_store-ratings.html' %}
-      </div>
-
-      <div class="product-info__section__text-block">
-        {% if product.store.address_line_1 %}
-        <p class="product-info__section__text">
-          {{ product.store.address_line_1 }}
-        </p>
-        {% endif %} {% if product.store.address_line_2 %}
-        <p class="product-info__section__text">
-          {{ product.store.address_line_2 }}
-        </p>
-        {% endif %} {% if product.store.postcode %}
-        <p class="product-info__section__text">{{ product.store.postcode }}</p>
-        {% endif %} {% if product.store.city.name %}
-        <p class="product-info__section__text">{{ product.store.city.name }}</p>
-        {% endif %} {% if product.store.country.name %}
-        <p class="product-info__section__text">
-          {{ product.store.country.name }}
-        </p>
-        {% endif %} {% if product.store.telephone %}
-        <p class="product-info__section__text">
-          <span><i class="fas fa-phone-alt"></i></span>
-          {{ product.store.telephone }}
-        </p>
-        {% endif %} {% if product.store.website and product.store.website != 'NaN' %}
-        <p class="product-info__section__text">
-          <span><i class="fas fa-laptop"></i></span>
-          {{ product.store.website }}
-        </p>
-        {% endif %} {% if product.store.email and product.store.email != 'NaN' %}
-          <p class="product-info__section__text">
-            <span><i class="far fa-envelope"></i></span>
-            {{ product.store.email }}
-          </p>
-        {% endif %}
-      </div>
-    </div>
-
     <!-- Product Reviews -->
-    <div class="product-info__section all-cols"  id="reviews">
+    <div class="product-info__section all-cols" id="reviews" for='product-reviews'>
       <h2 class="product-info__section__title heading-2">Reviews</h2>
       {% if products.ratings %}
       <div class="product-info__section__text-block">
@@ -351,6 +300,7 @@
         </p>
       </div>
       {% endif %}
+
     </div>
   </section>
 </main>
