@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import mimetypes
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'livereload',
     'pages.apps.PagesConfig',
     'sales.apps.SalesConfig',
     'stores.apps.StoresConfig',
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = 'furlon.urls'
@@ -79,29 +83,60 @@ WSGI_APPLICATION = 'furlon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+if DEBUG:
+    DATABASES = {
+        'elephantSQL': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': 'rogue.db.elephantsql.com',
+            'USER': 'rfxumegh',
+            'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
+            'NAME': 'rfxumegh',
+        },
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'PASSWORD': 'Rasel121ne',
+            'NAME': 'furlon_dummyBACKUP',
+        },
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'Rasel121ne',
-        'NAME': 'furlon_dummy',
-    },
+        'main': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'PASSWORD': 'Rasel121ne',
+            'NAME': 'furlon',
+        },
 
-    'main': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'Rasel121ne',
-        'NAME': 'furlon',
-    },
-
-    'test': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'Rasel121ne',
-        'NAME': 'furlon_tests',
+        'test': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'PASSWORD': 'Rasel121ne',
+            'NAME': 'furlon_tests',
+        }
     }
-}
+
+else:
+    DATABASES = {
+        'dummy': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'PASSWORD': 'Rasel121ne',
+            'NAME': 'furlon_dummy',
+        },
+
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'PASSWORD': 'Rasel121ne',
+            'NAME': 'furlon',
+        },
+
+        'test': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'USER': 'postgres',
+            'PASSWORD': 'Rasel121ne',
+            'NAME': 'furlon_tests',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -150,8 +185,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Message
-# from django.contrib.messages import constants as messages
-# MESSAGE_TAGS = {messages.ERROR, 'danger'}
+from django.contrib.messages import constants as messages
+
+mimetypes.add_type("image/svg+xml", ".svg", True)
+mimetypes.add_type("image/svg+xml", ".svgz", True)
+
+# Messages
+from django.contrib.messages import constants as messages
 
 # Local Settings will turn the website to production mode.
 try:

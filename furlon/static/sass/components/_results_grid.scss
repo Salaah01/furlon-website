@@ -1,0 +1,126 @@
+// =============================================================================
+// Date Created:   21/12/2019
+// Created By:     Salaah Amin
+//
+// Styling for results where results are returned as thumbnails with some
+// description/info under each result image.
+//
+// RESPONSIVENESS:
+// > 500px:     Each result contains an image and text and are stacked with the
+//              image on top and the text below.
+// <= 500px:    Each result image and corresponding text are placed
+//              side-by-side.
+// =============================================================================
+
+// =============================================================================
+.results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-auto-rows: 50rem;
+  gap: 7rem;
+
+  @include mediaQuery(500) {
+    grid-template-columns: auto;
+    grid-auto-rows: 35vw;
+    gap: 1rem;
+  }
+
+  @include mediaQuery(350) {
+    grid-auto-rows: 40vw;
+  }
+
+  @include mediaQuery(300) {
+    grid-auto-rows: 50vw;
+  }
+
+  // ---------------------------------------------------------------------------
+  &__result {
+    display: grid;
+    grid-template-rows: [img-start] 55% [img-end info-start] 1fr [info-end];
+    box-shadow: rgba($colour-grey-light-3, 0.42) 2px 4px 10px;
+    border-radius: 1rem;
+    overflow: hidden;
+
+    @include mediaQuery(500) {
+      grid-template-columns: 40vw 1fr;
+      grid-template-rows: 35vw;
+    }
+
+    @include mediaQuery(350) {
+      grid-template-rows: 40vw;
+    }
+
+    @include mediaQuery(300) {
+      grid-template-rows: 50vw;
+      grid-template-columns: 50vw 1fr;
+    }
+
+    &__img {
+      overflow: hidden;
+      border-radius: 1rem;
+      background-color: $colour-grey-light-4;
+      transition: all 0.3s ease;
+
+      @include mediaQuery(500) {
+        padding: 1rem;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &__img:hover {
+      filter: brightness(1.1);
+      transform: scale(1.025);
+    }
+
+    &__img:hover + &__info > &__info__name > p {
+      color: $colour-secondary-high-sat;
+    }
+
+    &__info {
+      background-color: $colour-grey-light-4;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+
+      @include mediaQuery(500) {
+        text-align: left;
+        padding-left: 1rem;
+      }
+
+      & > *:not(:last-child) {
+        margin-bottom: 1rem;
+
+        @include mediaQuery(500) {
+          margin-bottom: .5rem;
+        }
+      }
+
+      &__name:link,
+      &__name:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        font-size: 2rem;
+
+        @include mediaQuery(500) {
+          font-size: 1.6rem;
+          margin-bottom: 1.3rem;
+        }
+
+        @include mediaQuery(500) {
+          margin-bottom: 1rem;
+        }
+
+        & > p {
+          transition: all 0.3s ease;
+          color: $colour-secondary-high-sat-dark-1;
+        }
+      }
+    }
+  }
+}

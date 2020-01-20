@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Basket{% endblock %}
+
+{% block content %}
+
+<header class="basket-head">
+
+  <div class="basket-head__title">
+    <h1 class="heading-1">Basket Summary</h1>
+    <p class="sub-heading">
+        Please review your items before proceeding.
+    </p>
+  </div>
+  <div class="basket-head__nav">
+    <a href="{% url 'search' %}" class="basket-head__nav__btn btn btn--tertiary">Back to Shopping</a>
+    <a class="basket-head__nav__btn btn btn--primary">Proceed to Payment</a>
+  </div>
+</header>
+
+<main class="basket-main">
+  <section class="table basket-summary">
+    <div class="table__header">
+      <div class="table__header__title">
+
+      </div>
+      <div class="table__header__column-titles">
+        <p field="image" class="table__header__column-titles__title">Image</p>
+        <p field="name" class="table__header__column-titles__title">Name</p>
+        <p field="store" class="table__header__column-titles__title">Store</p>
+        <p field="colour" class="table__header__column-titles__title">Colour</p>
+        <p field="quantity" class="table__header__column-titles__title">Quantity</p>
+        <p field="price" class="table__header__column-titles__title">Price</p>
+      </div>
+    </div>
+    <!-- Basket Items -->
+    <div class="table__rows" id="basket-summary-data">
+
+    </div>
+  </section>
+  <!-- Total -->
+  <section class="totals-summary">
+    <h2 class="totals-summary__title">Total</h2>
+    <div class="totals-summary__row">
+      <p class="totals-summary__label">Sub-Total</p>
+      <p class="totals-summary__value"
+          id='basket-subtotal'
+      >
+        <span>&pound;</span><span>0.00</span>
+      </p>
+    </div>
+    <div class="totals-summary__row">
+      <p class="totals-summary__label">VAT</p>
+      <p class="totals-summary__value"
+        id='basket-vat'
+      >
+        <span>&pound;</span><span>0.00</span>
+      </p>
+    </div>
+    <div class="totals-summary__row">
+      <p class="totals-summary__label">Delivery</p>
+      <p class="totals-summary__value"
+          id='basket-delivery-price'
+      >
+        <span>&pound;</span><span>0.00</span>
+      </p>
+    </div>
+    <div class="totals-summary__row">
+      <p class="totals-summary__label">Total</p>
+      <p class="totals-summary__value"
+          id='basket-total'
+      >
+        <span>&pound;</span><span>0.00</span>
+      </p>
+    </div>
+    <div class="totals-summary__btns">
+      <a class="totals-summary__btns__btn btn btn--primary">
+        Proceed to Payment
+      </a>
+    </div>
+  </section>
+</main>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

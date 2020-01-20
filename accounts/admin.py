@@ -26,7 +26,8 @@ from .models import CustomerDetails, StoreRights, StoreUsers
 ##################################################################################################################################
 class CustomerDetailsAdmin(admin.ModelAdmin):
     """ Registers Customer Details (accounts_customerdetails) table to the
-    admin page """
+    admin page.
+    """
     list_display = ('user_id', 'city', 'postcode', 'country', 'status', 'verified', 'opt_in')
     list_display_links = ('user_id', )
     list_filter = ('verified', 'status', 'opt_in', )
@@ -36,7 +37,7 @@ class CustomerDetailsAdmin(admin.ModelAdmin):
 
 ##################################################################################################################################
 class StoreUserAdmin(admin.ModelAdmin):
-    """ Registers Store User (accounts_storeuser) table to the admin page """
+    """ Registers Store User (accounts_storeuser) table to the admin page. """
     list_display = ('user_id', 'store_id', 'title', 'rights', 'status')
     list_display_links = ('user_id', )
     list_filter = ('status', )
@@ -46,9 +47,7 @@ class StoreUserAdmin(admin.ModelAdmin):
 
 ##################################################################################################################################
 class StoreRightsAdmin(admin.ModelAdmin):
-    """
-    Registers Store Rights (accounts_storerights) table to the admin page
-    """
+    """ Registers Store Rights (accounts_storerights) table to the admin page. """
     list_display = ('rights',)
     list_display_links = ('rights',)
     search_fields = ('rights',)

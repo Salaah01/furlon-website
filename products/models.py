@@ -85,8 +85,7 @@ class Rooms(models.Model):
     TABLES DEPENDENT ON MODEL:
     - products_products: room
     """
-
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, unique=True, primary_key=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
@@ -137,7 +136,8 @@ class SubCategories(models.Model):
     """
 
     name = models.CharField(max_length=50)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Categories, on_delete=models.CASCADE, null=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
@@ -159,7 +159,8 @@ class Features(models.Model):
 
     feature_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Categories, on_delete=models.CASCADE, null=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
@@ -199,17 +200,28 @@ class Products(models.Model):
     product_id = models.BigAutoField(primary_key=True)
     store = models.ForeignKey(Stores, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
+
     main_colour = models.BooleanField(default=True)
     room = models.ForeignKey(Rooms, on_delete=models.DO_NOTHING)
+
     category = models.ForeignKey(Categories, on_delete=models.DO_NOTHING)
     sub_categories = models.CharField(max_length=128, blank=True)
+
     colour = models.ForeignKey(Colours, on_delete=models.DO_NOTHING)
+
     height = models.FloatField(blank=True, null=True)
+    height_units = models.CharField(max_length=10, null=True)
     length = models.FloatField(blank=True, null=True)
+    length_units = models.CharField(max_length=10, null=True)
     width = models.FloatField(blank=True, null=True)
+    width_units = models.CharField(max_length=10, null=True)
     weight = models.FloatField(blank=True, null=True)
+    weight_units = models.CharField(max_length=10, null=True)
+
     features = models.CharField(max_length=100, blank=True)
-    related = models.CharField(max_length=100, blank=True)
+
+    related = models.CharField(max_length=100, blank=True, null=True)
+
     showcase_image = models.ImageField(upload_to='products/')
     image_1 = models.ImageField(upload_to='products/', blank=True, null=True)
     image_2 = models.ImageField(upload_to='products/', blank=True, null=True)
@@ -217,18 +229,24 @@ class Products(models.Model):
     image_4 = models.ImageField(upload_to='products/', blank=True, null=True)
     image_5 = models.ImageField(upload_to='products/', blank=True, null=True)
     image_6 = models.ImageField(upload_to='products/', blank=True, null=True)
+
     description = models.CharField(max_length=2048, default='', blank=True)
+
     price = models.FloatField()
-    rating = models.FloatField(blank=True, null=True)
+
+    rating = models.FloatField(default=99)
+    ratings = models.IntegerField(default=0)
+
     upload_date = models.DateTimeField(
         default=datetime.now,
         blank=True,
         null=True
-        )
+    )
     last_purchase_date = models.DateTimeField(blank=True, null=True)
     inventory = models.IntegerField()
+
     delivery_available = models.BooleanField()
-    delivery_price = models.FloatField(blank=True, null=True)
+    delivery_price = models.FloatField(default=-1)
     status = models.CharField(max_length=10, default='Active')
 
     # -------------------------------------------------------------------------------------------------------------------------- #
@@ -241,81 +259,82 @@ class Products(models.Model):
 
 
 ##################################################################################################################################
-class RelatedProductVars(models.Model):
+class RelationType(models.Model):
     """
     PURPOSE:
-    Table contains related products.
-    In the main products table (product_products) can have various other items
-    to it.
-    This table will allow a related items be produced for each product.
-    For each item which has a related item will have a seperate row for that
-    related item.
-    This will act as an one-to-many relationship.
+    Lists the types of relationships between two products can exist.
 
     DEPENDENCIES:
-    - products_products: product
-    - products_products: linked
+    None
 
-    TABLES DEPENDENT ON MODEL:
-    - None
+    DEPENDENTS:
+    - products_linkedproducts
     """
-
-    product = models.ForeignKey(
-        Products,
-        on_delete=models.CASCADE,
-        related_name='main_item'
-        )
-    linked = models.ForeignKey(
-        Products,
-        on_delete=models.CASCADE,
-        related_name='related_product'
-        )
+    relation = models.CharField(max_length=30, unique=True, primary_key=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
-        return self.product
+        return self.relation
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
-        verbose_name_plural = "Related Product Variations"
+        verbose_name_plural = "Relation Types"
 
 
 ##################################################################################################################################
-class ProductColourVars(models.Model):
+class LinkedProducts(models.Model):
     """
     PURPOSE:
-    Table contains products linked to other products which are the same but of
-    a different colour.
-    This table will allow the user to select different colours at the
-    front end.
-    This will act as an one-to-many relationship.
+    Contains a list of products and it's related products where the relation could be a similar type of product, a product that
+    matches and so go wells with the current product, and products which are of the same kind but of a different colour.
 
     DEPENDENCIES:
     - products_products: product
-    - products_products: linked
+    - stores_stores: store
 
-    TABLES DEPENDENT ON MODEL:
-    - None
+    DEPENDENTS:
+    None
     """
 
-    product = models.ForeignKey(
-        Products,
-        on_delete=models.CASCADE,
-        related_name='main_col_prod'
-        )
-    linked = models.ForeignKey(
-        Products,
-        on_delete=models.CASCADE,
-        related_name='related_colour_prod'
-        )
+    id = models.BigAutoField(primary_key=True)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='product', default=0)
+    related_product = models.ForeignKey(Products, on_delete=models.CASCADE, related_name='related_product', default=0)
+    relation = models.ForeignKey(RelationType, on_delete=models.DO_NOTHING, default=0)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
-        return self.product
+        return self.product.name
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
-        verbose_name_plural = "Related Colour Variations"
+        verbose_name_plural = "Linked Products"
+
+
+##################################################################################################################################
+class ProductFeatures(models.Model):
+    """
+    PURPOSE:
+    Contains a list of features a product has.
+
+    DEPENDENCIES:
+    - products_products: product
+    - products_features: feature
+
+    DEPENDANTS:
+    None
+    """
+
+    id = models.BigAutoField(primary_key=True)
+    product = models.ForeignKey(Products, on_delete=models.CASCADE, default=0)
+    feature = models.ForeignKey(Features, on_delete=models.DO_NOTHING, default=0)
+
+    # -------------------------------------------------------------------------------------------------------------------------- #
+    def __str__(self):
+        return self.product.name +  ", " + self.feature.name
+
+    # -------------------------------------------------------------------------------------------------------------------------- #
+    class Meta:
+        verbose_name_plural = "Product Features"
 
 
 ##################################################################################################################################

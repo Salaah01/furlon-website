@@ -2,7 +2,6 @@
 ==================================================================================================================================
 Date Created:   20/09/2019
 Created By:     Salaah Amin
-Last Update:    20/09/2019
 ==================================================================================================================================
 SCRIPT FUNCTION
 
@@ -22,4 +21,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('basket/', views.basket, name='basket'),
+    path('basket-info-API/', views.basket_info_api, name='basketInfoAPI')
 ]

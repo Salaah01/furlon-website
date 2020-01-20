@@ -1,0 +1,94 @@
+// =============================================================================
+// Date Created:   08/01/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the store page.
+// =============================================================================
+
+// =============================================================================
+// The webpage header.
+.store-heading {
+  @include padSection;
+  padding-bottom: 0;
+  text-align: center;
+
+  &__name {
+    letter-spacing: 2px;
+  }
+
+  // Overwriting the ratings component.
+  &__rating {
+     .product-info__section__ratings {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
+     .product-info__section__ratings__stars {
+        padding-right: 1.5rem;
+    }
+  }
+}
+
+// =============================================================================
+// Container for main section of the DOM.
+main.store {
+    @include padSection;
+    padding-top: 0;
+}
+
+// =============================================================================
+// Section containing the latest products.
+.latest-products {
+    padding-top: 5rem;
+
+        &__heading {
+            margin-bottom: 2rem;
+            &__title {
+                margin-bottom: .5rem;
+            }
+        }
+
+    &__product {
+
+        &__img {
+
+        }
+
+        &__name {
+
+        }
+    }
+}
+
+// =============================================================================
+// Store Information
+.store-info {
+    &__title {
+        margin-bottom: 3rem;
+        color: $colour-primary;
+    }
+
+    // -------------------------------------------------------------------------
+    .store-details {
+
+        &__detail {
+            // Contains a set of details.
+            display: flex;
+            width: min-content;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1.5px solid $colour-grey-light-1;
+            letter-spacing: .5px;
+
+            &__title {
+                width: 10vw;
+            }
+
+            &__body {
+                width: 20vw;
+            }
+
+        }
+    }
+}
