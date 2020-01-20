@@ -226,6 +226,10 @@
       @include mediaQuery(1706) {
         height: 69%;
       }
+
+      @include mediaQuery(320) {
+        height: 63%;
+      }
     }
 
     &__img {
@@ -278,6 +282,7 @@
       height: 5vw;
       width: 6vw;
       margin: 0.6rem;
+      margin-bottom: .1rem;
 
       @include mediaQuery(1330) {
         height: 6vw;
