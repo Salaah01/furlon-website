@@ -153,7 +153,15 @@ export class CarouselImgs {
       "totalthumbs",
       total.toString()
     );
+    thumbs[0].parentElement!.parentElement!.setAttribute(
+      "totalthumbs",
+      total.toString()
+    );
     thumbs[0].parentElement!.parentElement!.parentElement!.setAttribute(
+      "totalthumbs",
+      total.toString()
+    );
+    thumbs[0].parentElement!.parentElement!.parentElement!.parentElement!.setAttribute(
       "totalthumbs",
       total.toString()
     );

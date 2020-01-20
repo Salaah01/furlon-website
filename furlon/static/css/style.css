@@ -969,7 +969,11 @@ header.single-product-header {
         grid-template-columns: 55% 45%; } }
     @media only screen and (max-width: 47.5em) {
       .product-showcase[totalthumbs="1"], .product-showcase[totalthumbs="2"], .product-showcase[totalthumbs="3"], .product-showcase[totalthumbs="4"], .product-showcase[totalthumbs="5"], .product-showcase[totalthumbs="6"], .product-showcase[totalthumbs="7"] {
-        grid-template-columns: 100%; } }
+        grid-template-columns: 100%;
+        gap: 1rem; } }
+    @media only screen and (max-width: 33.125em) {
+      .product-showcase[totalthumbs="1"], .product-showcase[totalthumbs="2"], .product-showcase[totalthumbs="3"], .product-showcase[totalthumbs="4"], .product-showcase[totalthumbs="5"], .product-showcase[totalthumbs="6"], .product-showcase[totalthumbs="7"] {
+        gap: .5rem; } }
   .product-showcase[totalthumbs="2"], .product-showcase[totalthumbs="3"], .product-showcase[totalthumbs="4"], .product-showcase[totalthumbs="5"], .product-showcase[totalthumbs="6"], .product-showcase[totalthumbs="7"] {
     grid-template-rows: 125%; }
     @media only screen and (max-width: 47.5em) {
@@ -1686,19 +1690,67 @@ main.store {
 .carousel-container {
   z-index: 1;
   position: relative; }
+  @media only screen and (max-width: 47.5em) {
+    .carousel-container {
+      height: 50vw; } }
   .carousel-container__main {
     position: absolute;
     top: 4rem;
     left: 5rem;
     height: calc(100% - 8rem);
     width: calc(100% - 10rem); }
+    .carousel-container__main[totalthumbs="2"], .carousel-container__main[totalthumbs="3"], .carousel-container__main[totalthumbs="4"], .carousel-container__main[totalthumbs="5"], .carousel-container__main[totalthumbs="6"], .carousel-container__main[totalthumbs="7"] {
+      height: 85%; }
+      @media only screen and (max-width: 47.5em) {
+        .carousel-container__main[totalthumbs="2"], .carousel-container__main[totalthumbs="3"], .carousel-container__main[totalthumbs="4"], .carousel-container__main[totalthumbs="5"], .carousel-container__main[totalthumbs="6"], .carousel-container__main[totalthumbs="7"] {
+          top: 3rem;
+          left: 3rem;
+          height: calc(100% - 6rem);
+          width: calc(100% - 6rem); } }
+      @media only screen and (max-width: 31.25em) {
+        .carousel-container__main[totalthumbs="2"], .carousel-container__main[totalthumbs="3"], .carousel-container__main[totalthumbs="4"], .carousel-container__main[totalthumbs="5"], .carousel-container__main[totalthumbs="6"], .carousel-container__main[totalthumbs="7"] {
+          top: 2rem;
+          left: 2rem;
+          height: calc(100% - 4rem);
+          width: calc(100% - 4rem); } }
   .carousel-container__display-section {
     display: flex;
     position: relative;
     overflow: hidden;
-    margin-bottom: 3.5rem;
     height: 100%;
     z-index: 10; }
+    .carousel-container__display-section[totalthumbs="2"], .carousel-container__display-section[totalthumbs="3"], .carousel-container__display-section[totalthumbs="4"], .carousel-container__display-section[totalthumbs="5"], .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+      height: 85%; }
+      @media only screen and (max-width: 90em) {
+        .carousel-container__display-section[totalthumbs="2"], .carousel-container__display-section[totalthumbs="3"], .carousel-container__display-section[totalthumbs="4"], .carousel-container__display-section[totalthumbs="5"], .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+          height: 90%; } }
+    @media only screen and (max-width: 51.875em) {
+      .carousel-container__display-section[totalthumbs="5"], .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 69%; } }
+    @media only screen and (max-width: 47.5em) {
+      .carousel-container__display-section[totalthumbs="5"], .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 85%; } }
+    @media only screen and (max-width: 24.9375em) {
+      .carousel-container__display-section[totalthumbs="5"], .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 60%; } }
+    @media only screen and (max-width: 83.125em) {
+      .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 69%; } }
+    @media only screen and (max-width: 75em) {
+      .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 85%; } }
+    @media only screen and (max-width: 66.5em) {
+      .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 69%; } }
+    @media only screen and (max-width: 65.625em) {
+      .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 85%; } }
+    @media only screen and (max-width: 60em) {
+      .carousel-container__display-section[totalthumbs="6"], .carousel-container__display-section[totalthumbs="7"] {
+        height: 80%; } }
+    @media only screen and (max-width: 106.625em) {
+      .carousel-container__display-section[totalthumbs="7"] {
+        height: 69%; } }
     .carousel-container__display-section__img {
       position: absolute;
       object-fit: cover;
@@ -1734,6 +1786,10 @@ main.store {
       height: 5vw;
       width: 6vw;
       margin: 0.6rem; }
+      @media only screen and (max-width: 83.125em) {
+        .carousel-container__display-controls__control {
+          height: 6vw;
+          width: 7vw; } }
       .carousel-container__display-controls__control:hover {
         cursor: pointer; }
 

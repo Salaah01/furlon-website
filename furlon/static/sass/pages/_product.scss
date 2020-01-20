@@ -116,6 +116,11 @@ header.single-product-header {
 
     @include mediaQuery(760) {
       grid-template-columns: 100%;
+      gap: 1rem;
+    }
+
+    @include mediaQuery(530) {
+      gap: .5rem;
     }
   }
 

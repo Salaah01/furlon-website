@@ -114,16 +114,49 @@
   z-index: 1;
   position: relative;
 
+  @include mediaQuery(760) {
+    height: 50vw;
+  }
+
   // ---------------------------------------------------------------------------
   &__main {
     // Holds all the elements similarly to the container. This is set as
     // absolute so that all components within align correctly.
     position: absolute;
     // Take into account the padding when setting the position and dimensions.
+    // (padding: 4rem 5rem)
     top: 4rem;
     left: 5rem;
     height: calc(100% - 8rem);
     width: calc(100% - 10rem);
+
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      height: 85%;
+
+      @include mediaQuery(1600) {
+      }
+
+      @include mediaQuery(760) {
+        // padding on the parent element is 3rem.
+        top: 3rem;
+        left: 3rem;
+        height: calc(100% - 6rem);
+        width: calc(100% - 6rem);
+      }
+
+      @include mediaQuery(500) {
+        // padding on the parent element is 3rem.
+        top: 2rem;
+        left: 2rem;
+        height: calc(100% - 4rem);
+        width: calc(100% - 4rem);
+      }
+    }
   }
   // ---------------------------------------------------------------------------
   // Main images
@@ -131,9 +164,69 @@
     display: flex;
     position: relative;
     overflow: hidden;
-    margin-bottom: 3.5rem;
     height: 100%;
     z-index: 10;
+
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      height: 85%;
+
+      @include mediaQuery(1440) {
+        height: 90%;
+      }
+    }
+
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(830) {
+        height: 69%;
+      }
+
+      @include mediaQuery(760) {
+        height: 85%;
+      }
+
+      @include mediaQuery(399) {
+        height: 60%;
+      }
+    }
+
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(1330) {
+        height: 69%;
+      }
+
+      @include mediaQuery(1200) {
+        height: 85%;
+      }
+
+      @include mediaQuery(1064) {
+        height: 69%;
+      }
+
+      @include mediaQuery(1050) {
+        height: 85%;
+      }
+
+      @include mediaQuery(960) {
+        height: 80%;
+      }
+    }
+
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(1706) {
+        height: 69%;
+      }
+    }
 
     &__img {
       position: absolute;
@@ -185,6 +278,11 @@
       height: 5vw;
       width: 6vw;
       margin: 0.6rem;
+
+      @include mediaQuery(1330) {
+        height: 6vw;
+        width: 7vw;
+      }
 
       &:hover {
         cursor: pointer;
