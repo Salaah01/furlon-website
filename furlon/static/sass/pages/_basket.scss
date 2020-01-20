@@ -36,6 +36,10 @@
   padding: 0 4rem;
   background-color: $colour-grey-light-5;
   margin-bottom: 10rem;
+
+  @include mediaQuery(1410) {
+    flex-direction: column;
+  }
 }
 
 // =============================================================================
@@ -43,9 +47,14 @@
   // Contains the items in the user's baskets.
   box-shadow: $box-shadow-1;
   width: 70%;
-  padding: 2rem 10rem;
+  padding: 0 4rem;
   margin-right: 4rem;
   background-color: #fff;
+
+  @include mediaQuery(1410) {
+    width: 100%;
+    margin-right: 0;
+  }
 
   // -------------------------------------------------------------------------
   // Overrides for the quantity options defined in the quantity component.
@@ -64,9 +73,15 @@
   // Contains the totals on the basket page.
   box-shadow: $box-shadow-1;
   width: 30%;
-  padding: 7rem 8rem;
+  padding: 5rem 4rem;
   height: 100%;
   background-color: #fff;
+
+  @include mediaQuery(1410) {
+    align-self: flex-end;
+    width: 40%;
+    margin-top: 3rem;
+  }
 
   &__title {
     margin-bottom: 2rem;
