@@ -34,28 +34,30 @@ header.single-product-header {
     padding-left: 3rem;
   }
 
+  @include mediaQuery(500) {
+    text-align: center;
+  }
+
   .product-store-name {
     color: $colour-secondary-dark-1;
     font-size: 2rem;
     outline: none;
     text-decoration: none;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       color: $colour-secondary-high-sat;
     }
   }
-
 }
 
 // =============================================================================
 // Main tag for the contents on the product page.
 .single-product {
-  // gap in .product-showcase is 7rem.
+  // gap in .product-showcase is 2rem.
   padding-left: 20rem;
-  padding-right: 27rem;
+  padding-right: 22rem;
   padding-top: 2rem;
-
 
   @include mediaQuery(1400) {
     padding-left: 15rem;
@@ -63,21 +65,15 @@ header.single-product-header {
   }
 
   @include mediaQuery(1200) {
-    // gap in .product-showcase is 4rem.
+    // gap in .product-showcase is 2rem.
     padding-left: 8rem;
-    padding-right: 12rem;
+    padding-right: 10rem;
   }
 
   @include mediaQuery(1050) {
     // gap in .product-showcase is 2rem.
     padding-left: 3rem;
     padding-right: 5rem;
-  }
-
-  @include mediaQuery(760) {
-    // Gap is 0
-    padding-left: 2rem;
-    padding-right: 2rem;
   }
 }
 
@@ -87,60 +83,48 @@ header.single-product-header {
 // User's main focus should be here.
 .product-showcase {
   display: grid;
-  grid-template-columns: 50% 50%;
-  grid-template-rows: 1fr;
+  // fallback incase "totalThumbs" attribute does not load.
+  grid-template-columns: 60% 40%;
+  grid-template-rows: max-content;
   grid-auto-rows: auto;
-  gap: 7rem;
+  gap: 2rem;
   margin-bottom: 7rem;
-
-  @include mediaQuery(1200) {
-    gap: 4rem;
-  }
-
-  @include mediaQuery(1200) {
-    gap: 2rem;
-  }
-
-  @include mediaQuery(900) {
-    grid-template-columns: 45% 55%;
-  }
-
-  @include mediaQuery(842) {
-    grid-template-columns: 50% 50%;
-  }
-
-  @include mediaQuery(760) {
-    grid-template-columns: 100%;
-    grid-template-rows: 45vw;
-    gap: 0;
-  }
-
-  @include mediaQuery(500) {
-    grid-template-rows: 60vw;
-  }
 
   &__name {
     grid-column: 1/-1;
   }
 
-  &[totalthumbs="1"] {
-  }
-
+  // This may be repeat of the media queries outlined below. However, this is
+  // a fall back should the JS not work and thus the correct height failing
+  // to apply.
+  &[totalthumbs="1"],
   &[totalthumbs="2"],
   &[totalthumbs="3"],
-  &[totalthumbs="4"] {
-    grid-template-rows: 30vw;
+  &[totalthumbs="4"],
+  &[totalthumbs="5"],
+  &[totalthumbs="6"],
+  &[totalthumbs="7"] {
+    grid-template-columns: 70% 30%;
+
+    @include mediaQuery(960) {
+      grid-template-columns: 60% 40%;
+    }
+
+    @include mediaQuery(800) {
+      grid-template-columns: 55% 45%;
+    }
+
+    @include mediaQuery(760) {
+      grid-template-columns: 100%;
+    }
   }
 
   // -------------------------------------------------------------------------
   // Each of the sections (2 in total) of main showcase containing.
   &__section {
     padding: 4rem 5rem;
-    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.25);
-
-    @include mediaQuery(800) {
-      padding: 2rem 2rem;
-    }
+    box-shadow: $box-shadow-2;
+    border-radius: 5px;
 
     @include mediaQuery(760) {
       padding: 3rem;
@@ -158,12 +142,11 @@ header.single-product-header {
       height: 100%;
       display: grid;
       grid-template-columns: repeat(4, 25%);
+      grid-auto-rows: max-content;
+      gap: 1rem;
       justify-content: center;
       align-self: center;
-
-      & > * {
-        margin-bottom: 2rem;
-      }
+      align-content: center;
     }
 
     // ---------------------------------------------------------------------
@@ -194,62 +177,36 @@ header.single-product-header {
       color: $colour-primary;
       padding-bottom: 1rem;
       justify-self: start;
-      grid-column: 1/2;
-
-      @include mediaQuery(842) {
-        // Spans the entire row so that the ratings are on the line below.
-        grid-column: 1/-1;
-        padding-bottom: 0;
-        margin-bottom: 0;
-      }
-
-      @include mediaQuery(760) {
-        // Allows for the ratings to be placed on the same row.
-        grid-column: 1/2;
-        padding-bottom: 1rem;
-      }
-
-      @include mediaQuery(500) {
-        // Spans the entire row so that the ratings are on the line below.
-        grid-column: 1/-1;
-        padding-bottom: 0;
-        margin-bottom: 0;
-      }
+      grid-column: 1/-1;
+      padding-bottom: 0;
+      margin-bottom: 0;
     }
 
     &__ratings {
       display: flex;
-      flex-direction: row;
-      justify-self: end;
-      grid-column: 2/5;
+      justify-content: space-between;
+      grid-column: 1/-1;
+      margin-bottom: 3rem;
+      margin-top: -1rem;
 
-      @include mediaQuery(842) {
-        // Placed below the product price.
-        grid-column: 1/-1;
-        justify-self: start;
-        margin-bottom: 3rem;
-      }
-
-      @include mediaQuery(760) {
-        // Placed beside the product price.
-        grid-column: 2/5;
-        justify-self: end;
-      }
-
-      @include mediaQuery(500) {
-        // Placed below the product price.
-        grid-column: 1/-1;
-        justify-self: start;
+      @include mediaQuery(1280) {
+        flex-direction: column;
+        justify-content: initial;
       }
 
       &__stars {
         margin-right: 1rem;
+
+        @include mediaQuery(1280) {
+          margin-bottom: 0.5rem;
+        }
       }
     }
 
     &__description {
       // Short description of the product, place in the third row.
       grid-column: 1/-1;
+      margin-bottom: 2rem;
 
       @include mediaQuery(842) {
         margin-bottom: 3rem;
@@ -270,33 +227,9 @@ header.single-product-header {
       // alongside the add to basket button.
       display: flex;
       justify-content: flex-end;
-      margin-right: 1.25rem;
-      grid-column: 2/3;
-
-      @include mediaQuery(842) {
-        // Stacking the quantity and colours option on top of one another.
-        margin-right: 0;
-        grid-column: 1/-1;
-        margin-bottom: 1.5rem;
-        justify-self: center;
-      }
-
-      @include mediaQuery(760) {
-        // Placing the quantity and colour options next to one another.
-        grid-column: 2 / span 1;
-        padding-right: 1rem;
-        justify-self: end;
-        margin-bottom: 1rem;
-      }
-
-      @include mediaQuery(500) {
-        // Stacking the quantity and colours option on top of one another.
-        margin-right: 0;
-        grid-column: 1/-1;
-        margin-bottom: 1.5rem;
-        justify-self: center;
-        padding-right: 0;
-      }
+      margin-right: 0;
+      grid-column: 1/-1;
+      justify-self: center;
 
       &__btn,
       &__input {
@@ -320,40 +253,21 @@ header.single-product-header {
 
     &__colours {
       // Options for user to choose alternative colours
-
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: flex-start;
-      margin-left: 1.25rem;
-
-      @include mediaQuery(842) {
-        // Stacking the quantity and colour options on top of another.
-        margin-left: 0;
-        grid-column: 1/-1;
-        justify-self: center;
-        margin-bottom: 1.5rem;
-      }
-
-      @include mediaQuery(760) {
-        // Placing the quantity and colour options next to one another.
-        grid-column: 3/ span 1;
-        padding-left: 1rem;
-        justify-self: start;
-        margin-bottom: 1rem;
-      }
-
-      @include mediaQuery(500) {
-        // Stacking the quantity and colour options on top of another.
-        margin-left: 0;
-        grid-column: 1/-1;
-        justify-self: center;
-        margin-bottom: 1.5rem;
-        padding-left: 0;
-      }
+      margin-left: 0;
+      grid-column: 1/-1;
+      justify-content: center;
+      justify-self: center;
+      margin-bottom: 1.5rem;
+      width: 50%;
+      padding-top: 0;
 
       .dropdown-menu {
         // .dropdown-menu is a component, the purpose of the styling
         // here is to overwrite the inherited styling.
+        width: 17rem;
 
         > * {
           // width = the width of the quantity element
@@ -398,6 +312,7 @@ header.single-product-header {
       // next to the quantity input element.
       grid-column: 1/-1;
       justify-self: center;
+      align-self: start;
       min-width: 60%;
 
       @include mediaQuery(842) {
@@ -430,6 +345,10 @@ header.single-product-header {
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 10rem;
+
+    @include mediaQuery(500) {
+      justify-content: center;
+    }
   }
 
   &__title {
@@ -450,16 +369,53 @@ header.single-product-header {
   justify-content: stretch;
   margin-right: 2rem;
 
+  @include mediaQuery(500) {
+    margin-bottom: 2rem;
+  }
+
+  @include mediaQuery(400) {
+    width: 40%;
+  }
+
+  @include mediaQuery(300) {
+    width: 100%;
+  }
+
   &:first-of-type {
     margin-bottom: 4rem;
   }
 
   &__img {
-    width: 25rem;
-    height: 17rem;
+    width: 15vw;
+    height: 12vw;
     border-radius: 5px;
     box-shadow: 2px 3px 10px 1px rgb(102, 102, 102);
     transition: all 0.3s ease;
+    object-fit: cover;
+
+    @include mediaQuery(1300) {
+      width: 20vw;
+      height: 15vw;
+    }
+
+    @include mediaQuery(1000) {
+      width: 25vw;
+      height: 17vw;
+    }
+
+    @include mediaQuery(450) {
+      width: 30vw;
+      height: 19vw;
+    }
+
+    @include mediaQuery(400) {
+      width: 100%;
+      height: 23vw;
+    }
+
+    @include mediaQuery(300) {
+      height: 50vw;
+    }
 
     &:hover {
       filter: brightness(1.2);
@@ -514,8 +470,6 @@ header.single-product-header {
     margin-bottom: 4rem;
   }
 
-
-
   &__section {
     // Each sub-section in .product-info.
 
@@ -545,7 +499,6 @@ header.single-product-header {
           margin-right: 1rem;
         }
       }
-
     }
 
     &__text-block {
@@ -557,13 +510,13 @@ header.single-product-header {
       line-height: 1.75em;
     }
 
-    &[for='product-description'],
-    &[for='product-reviews'] {
+    &[for="product-description"],
+    &[for="product-reviews"] {
       text-align: justify;
     }
 
-    &[for='product-size'],
-    &[for='product-features'] {
+    &[for="product-size"],
+    &[for="product-features"] {
       @include mediaQuery(500) {
         text-align: center;
         grid-column: 1/-1;

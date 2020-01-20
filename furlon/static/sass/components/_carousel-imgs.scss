@@ -120,16 +120,30 @@
     z-index: -10;
 
     // Image size varies depending on how many thumbnails there are.
-    &[totalthumbs='2'],
-    &[totalthumbs='3'],
-    &[totalthumbs='4'] {
-
+    &[totalthumbs="1"] {
+      margin-bottom: 0;
+    }
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"] {
+      height: 80%;
     }
 
-    &[totalthumbs='5'],
-    &[totalthumbs='6'],
-    &[totalthumbs='7'] {
-        height: 68%;
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"] {
+      height: 68%;
+    }
+    &[totalthumbs="1"],
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      @include mediaQuery(760) {
+        height: 40vw;
+      }
     }
 
     &__img {
@@ -177,9 +191,54 @@
 
     &[totalthumbs="2"],
     &[totalthumbs="3"],
-    &[totalthumbs="4"] {
-      margin-top: -7.5vw;
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      margin-top: -1.5vw;
       justify-content: flex-start;
+
+      @include mediaQuery(1440) {
+        margin-top: -1.7vw;
+      }
+
+      @include mediaQuery(1200) {
+        margin-top: -2.5vw;
+      }
+
+      @include mediaQuery(1000) {
+        margin-top: -3vw;
+      }
+
+      @include mediaQuery(900) {
+        margin-top: -4vw;
+      }
+
+      @include mediaQuery(650) {
+        margin-top: -5vw;
+      }
+
+      @include mediaQuery(500) {
+        margin-top: -7vw;
+      }
+
+      @include mediaQuery(400) {
+        margin-top: -9vw;
+      }
+
+      @include mediaQuery(350) {
+        margin-top: -10vw;
+      }
+
+      @include mediaQuery(300) {
+        margin-top: -12vw;
+      }
+    }
+
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      margin-top: -1.5vw;
     }
 
     &__control {
