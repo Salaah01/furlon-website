@@ -29,7 +29,7 @@ export class CarouselImgs {
    * add and remove attributes from the elements, so that the animations can
    * be triggered.
    */
-  containers = document.getElementsByClassName("carousel-container");
+  containers = document.getElementsByClassName("carousel-container__main");
 
   // -------------------------------------------------------------------------
   constructor() {
@@ -120,6 +120,8 @@ export class CarouselImgs {
      */
     displayImages: HTMLCollection
   ) {
+    console.log(displayImages)
+    console.log(1)
     for (let im = 0; im < displayImages.length; im++) {
       displayImages[im].addEventListener("click", () => {
         displayImages[im].setAttribute("position", "hide");

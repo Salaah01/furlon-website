@@ -119,6 +119,28 @@ header.single-product-header {
     }
   }
 
+  &[totalthumbs="2"],
+  &[totalthumbs="3"],
+  &[totalthumbs="4"],
+  &[totalthumbs="5"],
+  &[totalthumbs="6"],
+  &[totalthumbs="7"] {
+    grid-template-rows: 125%;
+
+    @include mediaQuery(760) {
+      grid-template-rows: auto;
+    }
+  }
+
+  &[totalthumbs="5"],
+  &[totalthumbs="6"],
+  &[totalthumbs="7"] {
+
+    @include mediaQuery(1706) {
+      grid-template-rows: 140%;
+    }
+  }
+
   // -------------------------------------------------------------------------
   // Each of the sections (2 in total) of main showcase containing.
   &__section {
