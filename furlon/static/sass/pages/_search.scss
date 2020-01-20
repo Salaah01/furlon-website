@@ -6,54 +6,99 @@
 // Includes styling for the filter options and the search results.
 // =============================================================================
 
-// -----------------------------------------------------------------------------
+// =============================================================================
 .search-summary {
-    // If user has entered a search query, then the top of the DOM will show the
-    // number of results along with the search query.
-    width: 100%;
-    padding: 3rem;
-    padding-bottom: 2rem;
-    text-align: center;
+  // If user has entered a search query, then the top of the DOM will show the
+  // number of results along with the search query.
+  width: 100%;
+  padding: 3rem;
+  padding-bottom: 2rem;
+  text-align: center;
 
-    &__text {
+  @include mediaQuery(900) {
+    margin-top: 7rem;
+  }
 
-        &__num-results {
-            margin-bottom: .5rem;
-        }
+  @include mediaQuery(600) {
+    margin-top: 2rem;
+  }
 
-        &__search-str {
-            font-size: 4rem;
-            color: $colour-secondary;
-        }
+  &__text {
+    &__num-results {
+      margin-bottom: 0.5rem;
     }
+
+    &__search-str {
+      font-size: 4rem;
+      color: $colour-secondary;
+    }
+  }
 }
 
-// -----------------------------------------------------------------------------
+// =============================================================================
 .search-filters {
-    // Contains the search filters form
-    display: flex;
-    justify-content: center;
-    margin-bottom: 2rem;
+  // Contains the search filters form
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 
-    &__group {
-        border-radius: 1rem;
+  // Stack the dropdown options.
+  @include mediaQuery(500) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-        &:not(:last-child) {
-            margin-right: 1rem;
-        }
+  &__group {
+    border-radius: 1rem;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
     }
 
-    &__label {
-        display: none;
+    @include mediaQuery(500) {
+      width: 100%;
+      padding-left: 12%;
+      padding-right: 12%;
     }
+  }
 
-    &__submit-btn {
-        display: none;
+  &__label {
+    display: none;
+  }
+
+  &__submit-btn {
+    display: none;
+  }
+
+  // Overrides for the dropdown component.
+  .dropdown-menu__selected {
+    @include mediaQuery(570) {
+      width: 10rem;
+      border-radius: 0;
+      width: 100%;
     }
+  }
+
+  .dropdown-menu__options {
+    @include mediaQuery(500) {
+      border-radius: 0;
+      // Removing the gap between the selected value and the options.
+      top: 4rem;
+    }
+  }
 }
 
-// -----------------------------------------------------------------------------
+// =============================================================================
 .search-results {
-    // Contains the search results
-    @include padSection;
+  // Contains the search results
+  @include padSection;
+
+  @include mediaQuery(500) {
+      padding-top: 1rem;
+  }
+
+  @include mediaQuery(365) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
 }

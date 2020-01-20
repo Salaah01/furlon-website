@@ -7,6 +7,11 @@
 
 {% block content %}
 
+<header class="single-product-header">
+  <h1 class="product-name heading-1">{{ product.name }}</h1>
+  <a href="{% url 'store' product.store.store_id %}"class="product-store-name"> {{ product.store.name }}</a>
+</header>
+
 <main class="single-product">
   <section class="product-showcase">
     <div class="product-showcase__section product-showcase__section--lhs carousel-container">
@@ -22,7 +27,7 @@
         {% if product.image_1 %}
         <img
           class="product-showcase__section__img-container__img slide_img_show carousel-container__display-section__img"
-          src="{{ product.image_1 }}"
+          src="{{ product.image_1 }}"n
           alt="Image 1 of {{ product.name }}"
           img="img-1"
           aria-hidden="true"
@@ -80,9 +85,9 @@
         />
         {% endif %}
       </div>
-      <div class="product-showcase__section__thumbs img__thumbs carousel-container__display-controls">
+      <div class="product-showcase__section__thumbs carousel-container__display-controls">
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.showcase_image }}"
           alt="Thumbnail of {{ product.showcase_image }}"
           aria-hidden="true"
@@ -90,7 +95,7 @@
         />
         {% if product.image_1 %}
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.image_1 }}"
           alt="Thumbnail of {{ product.name }}"
           for="img-1"
@@ -98,7 +103,7 @@
         {% endif %}
         {% if product.image_2 %}
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.image_2 }}"
           alt="Thumbnail of {{ product.name }}"
           for="img-2"
@@ -106,7 +111,7 @@
         {% endif %}
         {% if product.image_3 %}
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.image_3 }}"
           alt="Thumbnail of {{ product.name }}"
           for="img-3"
@@ -114,7 +119,7 @@
         {% endif %}
         {% if product.image_4 %}
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.image_4 }}"
           alt="Thumbnail of {{ product.name }}"
           for="img-4"
@@ -122,7 +127,7 @@
         {% endif %}
         {% if product.image_5 %}
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.image_5 }}"
           alt="Thumbnail of {{ product.name }}"
           for="img-5"
@@ -130,7 +135,7 @@
         {% endif %}
         {% if product.image_6 %}
         <img
-          class="img__thumbs__thumb carousel-container__display-controls-control"
+          class="carousel-container__display-controls__control"
           src="{{ product.image_6 }}"
           alt="Thumbnail of {{ product.name }}"
           for="img-6"
@@ -139,12 +144,10 @@
       </div>
     </div>
     <div class="product-showcase__section product-showcase__section--rhs">
-      <!-- Name and Price -->
-      <h1 class="product-showcase__section__name">{{ product.name }}</h1>
+      <!-- Name and Ratings -->
       <h2 class="product-showcase__section__price">
         &pound;{{ product.price|floatformat:2|intcomma }}
       </h2>
-
       <!-- Ratings -->
       {% include 'products/partials/_product-ratings.html' %}
 
@@ -236,10 +239,6 @@
       >
         <i class="fas fa-truck"></i>Add to Basket
       </button>
-
-      <div class="product-showcase__section__delivery-opts">
-        delivery options
-      </div>
     </div>
   </section>
 
@@ -257,11 +256,11 @@
     </div>
   </section>
 
-  <!-- Product Information -->
+  <!-- Product Description -->
   <section class="product-info">
-    <div class="product-info__section">
+    <div class="product-info__section all-cols" for='product-description'>
       <h2 class="product-info__section__title heading-2">
-        Product Information
+        Product Description
       </h2>
       <div class="product-info__section__text-block">
         <p class="product-info__section__text">{{ product.description }}</p>
@@ -269,7 +268,7 @@
     </div>
 
     <!-- Size -->
-    <div class="product-info__section">
+    <div class="product-info__section" for='product-size'>
       <h2 class="product-info__section__title heading-2">Size</h2>
       <div class="product-info__section__text-block">
         <p class="product-info__section__text">Length: {{ product.length }} {{ product.length_units }}</p>
@@ -280,60 +279,15 @@
     </div>
 
     <!-- Features -->
-    <div class="product-info__section">
+    <div class="product-info__section" for='product-features'>
       <h2 class="product-info__section__title heading-2">Features</h2>
       <div class="product-info__section__text-block" id="product-features">
 
       </div>
     </div>
 
-    <!-- Store Details -->
-    <div class="product-info__section">
-      <h2 class="product-info__section__title heading-2">Store Details</h2>
-      <a class="product-info__section__sub-heading heading-3" href="#"
-        >{{ product.store.name }}
-      </a>
-      <!-- Store Ratings -->
-      {% include 'partials/_store-ratings.html' %}
-
-      <div class="product-info__section__text-block">
-        {% if product.store.address_line_1 %}
-        <p class="product-info__section__text">
-          {{ product.store.address_line_1 }}
-        </p>
-        {% endif %} {% if product.store.address_line_2 %}
-        <p class="product-info__section__text">
-          {{ product.store.address_line_2 }}
-        </p>
-        {% endif %} {% if product.store.postcode %}
-        <p class="product-info__section__text">{{ product.store.postcode }}</p>
-        {% endif %} {% if product.store.city.name %}
-        <p class="product-info__section__text">{{ product.store.city.name }}</p>
-        {% endif %} {% if product.store.country.name %}
-        <p class="product-info__section__text">
-          {{ product.store.country.name }}
-        </p>
-        {% endif %} {% if product.store.telephone %}
-        <p class="product-info__section__text">
-          <span><i class="fas fa-phone-alt"></i></span>
-          {{ product.store.telephone }}
-        </p>
-        {% endif %} {% if product.store.website and product.store.website != 'NaN' %}
-        <p class="product-info__section__text">
-          <span><i class="fas fa-laptop"></i></span>
-          {{ product.store.website }}
-        </p>
-        {% endif %} {% if product.store.email and product.store.email != 'NaN' %}
-          <p class="product-info__section__text">
-            <span><i class="far fa-envelope"></i></span>
-            {{ product.store.email }}
-          </p>
-        {% endif %}
-      </div>
-    </div>
-
     <!-- Product Reviews -->
-    <div class="product-info__section">
+    <div class="product-info__section all-cols" id="reviews" for='product-reviews'>
       <h2 class="product-info__section__title heading-2">Reviews</h2>
       {% if products.ratings %}
       <div class="product-info__section__text-block">
@@ -346,6 +300,7 @@
         </p>
       </div>
       {% endif %}
+
     </div>
   </section>
 </main>

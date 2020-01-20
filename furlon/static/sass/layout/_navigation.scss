@@ -409,7 +409,6 @@
   }
 
   &__account-basket {
-
     &__opt {
       position: relative;
       display: inline-block;
@@ -422,6 +421,19 @@
         position: absolute;
         top: 12%;
         right: 12%;
+
+        @include mediaQuery(1100) {
+          right: 3%;
+        }
+
+        @include mediaQuery(900) {
+          right: -10%;
+          top: 8%;
+        }
+
+        @include mediaQuery(600) {
+          right: 75%;
+        }
       }
     }
 

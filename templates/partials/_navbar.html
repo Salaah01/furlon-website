@@ -14,7 +14,10 @@
       <a href="{% url 'index' %}">
         <img
           class="logo__img"
-          src="{% static 'img/logo/logo_long_colour.png' %}"
+          srcset="{% static 'img/logo/logo_small_colour_60w.png' %} 60w,
+                  {% static 'img/logo/logo_long_colour_100w.png' %} 100w"
+          sizes="(max-width: 600px) 600w, 1000w"
+          src="{% static 'img/logo/logo_small_colour_60w.png' %}"
           alt="Furlon Logo"
         />
       </a>
