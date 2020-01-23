@@ -17,6 +17,7 @@ from datetime import datetime
 
 # Third Party Imports
 from django.db import models
+from django.contrib.auth.models import User
 
 # Local Imports
 from misc.models import Countries, Cities
@@ -40,6 +41,7 @@ class Invoices(models.Model):
     DEPENDENCIES:
     - misc_countries: countries
     - misc_cities: cities
+    - auth_user: user
 
     DEPENDENCIES WITHOUT EXPLICIT RELATIONSHIP FIELD:
     The Following are shown as CharFields where their relationship is actually
@@ -52,6 +54,7 @@ class Invoices(models.Model):
     """
 
     invoice_id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=0)
     sale_IDs = models.CharField(max_length=500)
     order_date = models.DateTimeField(default=datetime.now)
 
@@ -102,24 +105,27 @@ class Sales(models.Model):
     - sales_invoices: invoice
     - stores_stores: store
     - products_products: products
+    - auth_user: user
 
     TABLES DEPENDENT ON MODEL:
-    - none
+    - None
     """
 
     sale_id = models.BigAutoField(primary_key=True)
+    transaction_ref = models.CharField(max_length=1000, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=0)
     store = models.ForeignKey(Stores, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
 
     delivery = models.FloatField(default=0)
-    asembly = models.FloatField(default=0)
+    assembly = models.FloatField(default=0)
     exVat = models.FloatField(default=0)
     vat = models.FloatField(default=0)
     total = models.FloatField(default=0)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
-        return sale_id
+        return f'{self.sale_id}-{self.transaction_ref}'
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:

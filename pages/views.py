@@ -53,7 +53,6 @@ def basket_info_api(request):
     """ API for producing information required by the basket page.
     Expects "pks" in the request, using which JSON will be rendered containing information on each product.
     """
-    print('=============')
     if 'pks' in request.GET:
         pks = request.GET['pks'].split(',')
 
@@ -66,3 +65,9 @@ def basket_info_api(request):
             {"error": "unknown error in GET request"},
             content_type="application/json"
         )
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def help(request):
+    """ View for the help page """
+    return render(request, 'pages/help.html')
