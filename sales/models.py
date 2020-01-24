@@ -112,13 +112,37 @@ class Sales(models.Model):
     """
 
     sale_id = models.BigAutoField(primary_key=True)
+    # Transaction reference should be in the format user-id-ddmmyyyyhhmmss
     transaction_ref = models.CharField(max_length=1000, null=True, blank=True)
+    status = models.CharField(max_length=50)
+    payment_method = models.CharField(max_length=20)
+
+    ordered_on = models.DateTimeField(default=datetime.now)
+    delivered_on = models.DateTimeField(null=True)
+    returned_on = models.DateTimeField(null=True)
+    return_by = models.DateTimeField(null=True)
+    returned_allowed = models.BooleanField()
+
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=0)
     store = models.ForeignKey(Stores, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
+    quantity = models.IntegerField()
 
-    delivery = models.FloatField(default=0)
-    assembly = models.FloatField(default=0)
+    delivery_from = models.DateTimeField(null=True)
+    delivery_to = models.DateTimeField(null=True)
+    delivery_included = models.BooleanField(null=True)
+
+    recipient = models.CharField(max_length=100)
+    address_line_1 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, null=True)
+    postcode = models.CharField(max_length=15, null=True)
+    city = models.ForeignKey(Cities, on_delete=models.DO_NOTHING)
+    country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
+    tracking_ref = models.CharField(max_length=50)
+
+
+    delivery_price = models.FloatField(default=0)
+    assembly_price = models.FloatField(default=0)
     exVat = models.FloatField(default=0)
     vat = models.FloatField(default=0)
     total = models.FloatField(default=0)
