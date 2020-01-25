@@ -118,18 +118,18 @@ class Sales(models.Model):
     payment_method = models.CharField(max_length=20)
 
     ordered_on = models.DateTimeField(default=datetime.now)
-    delivered_on = models.DateTimeField(null=True)
-    returned_on = models.DateTimeField(null=True)
-    return_by = models.DateTimeField(null=True)
+    delivered_on = models.DateTimeField(null=True, blank=True)
+    returned_on = models.DateTimeField(null=True, blank=True)
+    return_by = models.DateTimeField(null=True, blank=True)
     returned_allowed = models.BooleanField()
 
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=0)
     store = models.ForeignKey(Stores, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=0)
 
-    delivery_from = models.DateTimeField(null=True)
-    delivery_to = models.DateTimeField(null=True)
+    delivery_from = models.DateTimeField(null=True, blank=True)
+    delivery_to = models.DateTimeField(null=True, blank=True)
     delivery_included = models.BooleanField(null=True)
 
     recipient = models.CharField(max_length=100)
@@ -138,7 +138,7 @@ class Sales(models.Model):
     postcode = models.CharField(max_length=15, null=True)
     city = models.ForeignKey(Cities, on_delete=models.DO_NOTHING)
     country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
-    tracking_ref = models.CharField(max_length=50)
+    tracking_ref = models.CharField(max_length=50, blank=True, null=True)
 
     delivery_price = models.FloatField(default=0)
     assembly_price = models.FloatField(default=0)
