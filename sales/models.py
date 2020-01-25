@@ -140,7 +140,6 @@ class Sales(models.Model):
     country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
     tracking_ref = models.CharField(max_length=50)
 
-
     delivery_price = models.FloatField(default=0)
     assembly_price = models.FloatField(default=0)
     exVat = models.FloatField(default=0)
@@ -154,3 +153,29 @@ class Sales(models.Model):
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Sales"
+
+
+##################################################################################################################################
+class DeliverAddresses(models.Model):
+    """
+    PURPOSE:
+    Contains a list of delivery addresses stored by the user.
+
+    DEPENDENCIES:
+    - auth_user: user
+    - misc_counties: country
+    - misc_cities: city
+
+    TABLES DEPENDENT ON MODEL:
+    - None
+    """
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    status = models.CharField(max_length=50)
+    last_used = models.DateField(null=True)
+    recipient = models.CharField(max_length=100)
+    address_line_1 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, null=True)
+    postcode = models.CharField(max_length=15, null=True)
+    city = models.ForeignKey(Cities, on_delete=models.DO_NOTHING)
+    country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
