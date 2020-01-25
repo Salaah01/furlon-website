@@ -1,0 +1,40 @@
+// =============================================================================
+// Date Created:   25/01/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the order history page.
+// =============================================================================
+
+// =============================================================================
+.order-hist-main {
+    // Main container for the order history page.
+
+}
+
+// =============================================================================
+.order {
+    // A single order.
+    display: grid;
+
+    &__head {
+        // Contains the top part of a order.
+        display: flex;
+        &__column {
+            padding: 1rem 2rem;
+
+            &__title {
+                margin-bottom: .5rem;
+                text-transform: uppercase;
+            }
+
+            &__body {
+
+            }
+        }
+    }
+
+    &__details {
+        // Main content in any order box.
+    }
+
+}

@@ -2,10 +2,18 @@
 @import "abstracts/functions";
 @import "abstracts/mixins";
 
+@import "components/showcase";
+@import "components/card";
+@import "components/dropdown-menu";
+@import "components/results_grid";
+@import "components/star";
+@import "components/quantity";
+@import "components/carousel-imgs";
+@import "components/messages";
+
 @import "base/typography";
 @import "base/utilities";
 @import "base/animations";
-
 @import "base/base";
 
 @import "layout/navigation";
@@ -16,12 +24,4 @@
 @import "pages/store";
 @import "pages/basket";
 @import "pages/register-login";
-
-@import "components/showcase";
-@import "components/card";
-@import "components/dropdown-menu";
-@import "components/results_grid";
-@import "components/star";
-@import "components/quantity";
-@import "components/carousel-imgs";
-@import "components/messages";
+@import "pages/order-history";

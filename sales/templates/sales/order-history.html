@@ -8,15 +8,64 @@
 {% block content %}
 
 <header class="order-hist-head">
-    <h1 class="heading-1">Order History</h1>
+  <h1 class="heading-1">Order History</h1>
 </header>
 
 <main class="order-hist-main">
+  {% for sale in sales %}
+  <div class="order">
+    <div class="order__head">
+      <div class="order__head__column">
+        <p class="order__head__column__title">Ordered On</p>
+        <p class="order__head__column__body">
+          {{ sale.ordered_on|date:"jS M Y"}}
+        </p>
+      </div>
+      <div class="order__head__column">
+        <p class="order__head__column__title">Total</p>
+        <p class="order__head__column__body">
+          &pound;{{ sale.total|floatformat:2|intcomma }}
+        </p>
+      </div>
+      <div class="order__head__column">
+        <p class="order__head__column__title">Reference Number</p>
+        <p class="order__head__column__body">{{ sale.transaction_ref }}</p>
+      </div>
+    </div>
+    <div class="order__details">
+      <div class="order__details__detail" elem="status" status="{{ sale.status }}">
+        <p class="order__details__detail__text">{{ sale.status }}</p>
 
+        {% if sale.status == 'Processing' or sale.status == 'Scheduled' %}
+          <p class="order__details__detail__text">
+            {% if sale.delivery_from == sale.delivery_to %}
+              Delivery Expected On {{ sale.delivery_to|date:"D jS M Y H:i" }}
+            {% else %}
+              Delivery Scheduled From {{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
+            {% endif %}
+          </p>
+
+        {% elif sale.status == 'Delivered' %}
+          <p class="order__details__detail__text">
+            Delivered on {{ sale.delivered_on|date:"D jS M Y H:i" }}
+          </p>
+
+        {% elif sale.status == 'Returned' %}
+          <p class="order__details__detail__text">
+            Returned on {{ sale.returned_on|date:"D jS M Y H:i" }}
+          </p>
+        {% endif %}
+      </div>
+
+      <div class="order__detail__detail" elem="product-img">
+        <img src="{{ sale.product.showcase_image }}" alt="{{ sale.product }}">
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </main>
 
 {% endblock %}
 
 {% block footer %}
-
 {% endblock %}

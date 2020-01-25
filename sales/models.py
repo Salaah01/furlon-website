@@ -175,7 +175,7 @@ class DeliverAddresses(models.Model):
     last_used = models.DateField(null=True)
     recipient = models.CharField(max_length=100)
     address_line_1 = models.CharField(max_length=100)
-    address_line_2 = models.CharField(max_length=100, null=True)
+    address_line_2 = models.CharField(max_length=100, null=True, blank=True)
     postcode = models.CharField(max_length=15, null=True)
     city = models.ForeignKey(Cities, on_delete=models.DO_NOTHING)
     country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
