@@ -160,9 +160,12 @@
   .results__result {
     display: grid;
     grid-template-rows: [img-start] 55% [img-end info-start] 1fr [info-end];
-    box-shadow: rgba(193, 193, 193, 0.42) 2px 4px 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     border-radius: 1rem;
-    overflow: hidden; }
+    overflow: hidden;
+    transition: all .2s ease; }
+    .results__result:hover {
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23); }
     @media only screen and (max-width: 31.25em) {
       .results__result {
         grid-template-columns: 40vw 1fr;
@@ -413,6 +416,32 @@
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb; }
+
+section.pagination-section {
+  width: 100%;
+  margin-bottom: 3rem; }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  border-radius: 0.25rem; }
+  .pagination__item {
+    display: list-item;
+    border: 1px solid #dee2e6; }
+  .pagination__link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+    text-decoration: none;
+    color: #0b73de; }
+    .pagination__link--selected {
+      color: #fff;
+      background-color: #0b73de; }
+    .pagination__link[disabled="true"] {
+      color: #5A5F6A;
+      background-color: #f0f0f0;
+      cursor: default; }
 
 p {
   color: #5A5F6A; }
@@ -1044,7 +1073,7 @@ svg {
           height: 25vw; } }
     .index-grid__container:hover > a > .index-grid__container__img {
       transform: scale(1.05);
-      filter: brightness(0.85) blur(4px); }
+      filter: brightness(0.65) blur(4px); }
       @media only screen and (max-width: 31.25em) {
         .index-grid__container:hover > a > .index-grid__container__img {
           transform: none;
@@ -1056,7 +1085,20 @@ svg {
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      width: 100%; }
+      width: 100%;
+      font-weight: 300; }
+      @media only screen and (max-width: 83.125em) {
+        .index-grid__container:hover > a > .index-grid__container__header {
+          font-size: 4rem; } }
+      @media only screen and (max-width: 56.25em) {
+        .index-grid__container:hover > a > .index-grid__container__header {
+          font-size: 3.5rem; } }
+      @media only screen and (max-width: 43.75em) {
+        .index-grid__container:hover > a > .index-grid__container__header {
+          font-size: 3rem; } }
+      @media only screen and (max-width: 37.5em) {
+        .index-grid__container:hover > a > .index-grid__container__header {
+          font-size: 2.5rem; } }
       @media only screen and (max-width: 31.25em) {
         .index-grid__container:hover > a > .index-grid__container__header {
           padding: 2rem;
@@ -1115,8 +1157,10 @@ svg {
       margin-bottom: 2rem;
       color: #f47c4a; }
     .latest-products__heading__info {
-      margin-bottom: -2rem;
-      text-align: center; }
+      margin-bottom: -2rem; }
+      @media only screen and (max-width: 31.25em) {
+        .latest-products__heading__info {
+          text-align: center; } }
   .latest-products__product {
     overflow: hidden;
     box-shadow: #828282 5px 1px 11px -5px;
@@ -1246,7 +1290,6 @@ svg {
 .search-summary {
   width: 100%;
   padding: 3rem;
-  padding-bottom: 2rem;
   text-align: center; }
   @media only screen and (max-width: 56.25em) {
     .search-summary {
@@ -1263,6 +1306,7 @@ svg {
 .search-filters {
   display: flex;
   justify-content: center;
+  margin-top: 4rem;
   margin-bottom: 2rem; }
   @media only screen and (max-width: 31.25em) {
     .search-filters {
@@ -1292,7 +1336,9 @@ svg {
       top: 4rem; } }
 
 .search-results {
-  padding: 9.5rem 15rem; }
+  padding: 9.5rem 15rem;
+  padding-top: 5rem;
+  padding-bottom: 6rem; }
   @media only screen and (max-width: 62.5em) {
     .search-results {
       padding: 8.5rem 10rem; } }
@@ -1856,6 +1902,17 @@ main.store {
         .basket-summary__row__data[field='product-image'] > img:hover {
           transform: scale(1.05);
           filter: brightness(1.1); }
+      .basket-summary__row__data[field='product-name'], .basket-summary__row__data[field='product-store'] {
+        text-decoration: none;
+        color: #09539e;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+        width: max-content; }
+        .basket-summary__row__data[field='product-name']:hover, .basket-summary__row__data[field='product-store']:hover {
+          border-bottom: 1px solid #0b73de;
+          color: #0b73de; }
       @media only screen and (max-width: 34.375em) {
         .basket-summary__row__data[field='product-store'] {
           font-size: 1.4rem; } }
@@ -2118,7 +2175,7 @@ main.store {
         width: 100%; }
         @media only screen and (max-width: 18.75em) {
           .order__details__detail[elem="status"] > h2 {
-            margin-bottom: -.5rem; } }
+            margin-bottom: -0.5rem; } }
       @media only screen and (max-width: 25em) {
         .order__details__detail[elem="status"] p {
           font-size: 1.4rem; } }
@@ -2138,8 +2195,21 @@ main.store {
       flex-direction: column; }
     .order__details__detail__text {
       display: inline-table; }
+      .order__details__detail__text[elem="product-name"], .order__details__detail__text[elem="store-name"] {
+        text-decoration: none;
+        color: #09539e;
+        border-bottom: 1px solid transparent;
+        padding-bottom: 0.5rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+        width: max-content; }
+        .order__details__detail__text[elem="product-name"]:hover, .order__details__detail__text[elem="store-name"]:hover {
+          border-bottom: 1px solid #0b73de;
+          color: #0b73de; }
+      .order__details__detail__text[elem="product-name"] {
+        font-size: 1.8rem; }
       .order__details__detail__text[elem="store-name"] {
-        font-size: 1.3rem; }
+        font-size: 1.4rem; }
         @media only screen and (max-width: 18.75em) {
           .order__details__detail__text[elem="store-name"] {
             font-size: 1.2rem; } }

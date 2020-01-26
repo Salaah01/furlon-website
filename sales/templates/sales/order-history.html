@@ -137,6 +137,75 @@
     </div>
   </div>
   {% endfor %}
+
+  {% if sales.has_other_pages %}
+        <section class="pagination-section">
+            <ul class="pagination" id="pagination">
+                <!-- Previous Page -->
+                {% if sales.has_previous %}
+                    <li class="pagination__item">
+                        <a
+                            class="pagination__link"
+                            page="{{ sales.previous_page_number }}"
+                        >
+                            &laquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="pagination__item pagination__item--disabled">
+                        <a
+                            class="pagination__link pagination__link"
+                            aria-disabled="true"
+                            disabled="true"
+                        >
+                            &laquo;
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- Pages in Between -->
+                {% for page in sales.paginator.page_range %}
+                    {% if sales.number == page %}
+                        <li class="pagination__item">
+                            <a
+                              page="{{ page }}"
+                              class="pagination__link pagination__link--selected"
+                            >
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="pagination__item">
+                            <a page="{{ page }}" class="pagination__link">
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <!-- Next Page -->
+                {% if sales.has_next %}
+                    <li class="pagination__item">
+                        <a
+                            page="{{ sales.next_page_number }}"
+                            class="pagination__link"
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="pagination__item">
+                        <a
+                            class="pagination__link"
+                            aria-disabled="true"
+                            disabled="true"
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </section>
+    {% endif %}
+
 </main>
 
 {% endblock %}

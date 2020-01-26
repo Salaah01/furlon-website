@@ -37,9 +37,14 @@
   &__result {
     display: grid;
     grid-template-rows: [img-start] 55% [img-end info-start] 1fr [info-end];
-    box-shadow: rgba($colour-grey-light-3, 0.42) 2px 4px 10px;
+    box-shadow: $box-shadow-1;
     border-radius: 1rem;
     overflow: hidden;
+    transition: all .2s ease;
+
+    &:hover {
+      box-shadow: $box-shadow-2;
+    }
 
     @include mediaQuery(500) {
       grid-template-columns: 40vw 1fr;
