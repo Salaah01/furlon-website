@@ -497,6 +497,10 @@ p {
 .hide {
   display: none !important; }
 
+@media only screen and (max-width: 25em) {
+  .hide-400 {
+    display: none; } }
+
 .u-italics {
   font-style: initial; }
 
@@ -2003,6 +2007,10 @@ main.store {
   margin-bottom: 2rem;
   border: 2px solid #f0f0f0;
   border-radius: 1rem; }
+  @media only screen and (max-width: 29.375em) {
+    .order {
+      display: flex;
+      flex-direction: column-reverse; } }
   .order__head {
     display: flex;
     padding: 1.5rem 4rem 0;
@@ -2035,8 +2043,12 @@ main.store {
       @media only screen and (max-width: 29.375em) {
         .order__head__column {
           display: flex;
-          width: 100%;
-          margin-bottom: .5rem; } }
+          margin: 0;
+          margin-bottom: 0.5rem;
+          border-bottom: 2px solid #ebebeb; } }
+      @media only screen and (max-width: 18.75em) {
+        .order__head__column {
+          justify-content: space-between; } }
       .order__head__column--rhs {
         margin: 0;
         margin-left: auto;
@@ -2050,7 +2062,12 @@ main.store {
         @media only screen and (max-width: 29.375em) {
           .order__head__column--rhs {
             margin: 0;
-            text-align: left; } }
+            text-align: left;
+            align-self: flex-start; } }
+        @media only screen and (max-width: 18.75em) {
+          .order__head__column--rhs {
+            flex-direction: row;
+            width: 100%; } }
         .order__head__column--rhs > a:first-of-type {
           margin-right: 1rem; }
           @media only screen and (max-width: 35em) {
@@ -2058,14 +2075,23 @@ main.store {
               margin-right: 0; } }
           @media only screen and (max-width: 29.375em) {
             .order__head__column--rhs > a:first-of-type {
-              margin-bottom: .5rem; } }
+              margin-bottom: 0.5rem; } }
       .order__head__column__title {
         margin-bottom: 0.5rem;
         text-transform: uppercase; }
+        @media only screen and (max-width: 29.375em) {
+          .order__head__column__title {
+            margin-right: 0.5rem;
+            text-transform: none;
+            font-weight: 700;
+            text-align: left; } }
+        @media only screen and (max-width: 29.375em) {
+          .order__head__column__title::after {
+            content: ":"; } }
   .order__details {
     display: grid;
     grid-template-columns: [img-start] 1fr [img-end info-start] 2fr [info-end btn-start] 20% [btn-end];
-    grid-template-rows: 5rem 1fr;
+    grid-template-rows: min-content 1fr;
     gap: 2rem;
     padding: 1rem 4rem 2rem; }
     @media only screen and (max-width: 75em) {
@@ -2080,11 +2106,22 @@ main.store {
     @media only screen and (max-width: 29.375em) {
       .order__details {
         padding: 1rem 1rem 2rem; } }
+    @media only screen and (max-width: 25em) {
+      .order__details {
+        grid-template-columns: [img-start] 35% [img-end info-start] 65% [info-end];
+        gap: 1.5rem; } }
     .order__details__detail[elem="status"] {
       grid-column: img-start / info-end; }
       .order__details__detail[elem="status"] > h2 {
         margin-bottom: 0.5rem;
-        color: #548FCC; }
+        color: #548FCC;
+        width: 100%; }
+        @media only screen and (max-width: 18.75em) {
+          .order__details__detail[elem="status"] > h2 {
+            margin-bottom: -.5rem; } }
+      @media only screen and (max-width: 25em) {
+        .order__details__detail[elem="status"] p {
+          font-size: 1.4rem; } }
     .order__details__detail[elem="product-img"] {
       width: 100%; }
       .order__details__detail[elem="product-img"] > img {
@@ -2099,6 +2136,13 @@ main.store {
     .order__details__detail[elem="product-info"] {
       display: flex;
       flex-direction: column; }
+    .order__details__detail__text {
+      display: inline-table; }
+      .order__details__detail__text[elem="store-name"] {
+        font-size: 1.3rem; }
+        @media only screen and (max-width: 18.75em) {
+          .order__details__detail__text[elem="store-name"] {
+            font-size: 1.2rem; } }
     .order__details__btns-container {
       grid-row: 1 / span 2;
       justify-self: end;

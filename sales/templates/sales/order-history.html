@@ -32,8 +32,18 @@
         <p class="order__head__column__body">{{ sale.transaction_ref }}</p>
       </div>
       <div class="order__head__column order__head__column--rhs">
-        <a href="#" class="order__head__column__body">Invoice</a>
-        <a href="#" class="order__head__column__body">Order Details</a>
+        <a
+          href="#"
+          class="order__head__column__body btn-inline btn-inline--secondary"
+        >
+          Invoice
+        </a>
+        <a
+          href="#"
+          class="order__head__column__body btn-inline btn-inline--secondary"
+        >
+          Order Details
+        </a>
       </div>
     </div>
     <div class="order__details">
@@ -43,20 +53,20 @@
         {% if sale.status == 'Processing' or sale.status == 'Scheduled' %}
           <p class="order__details__detail__text">
             {% if sale.delivery_from == sale.delivery_to %}
-              Delivery expected on {{ sale.delivery_to|date:"D jS M Y H:i" }}
+              <span class="hide-400">Delivery expected on </span>{{ sale.delivery_to|date:"D jS M Y H:i" }}
             {% else %}
-              Delivery scheduled from {{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
+            <span class="hide-400"> Delivery scheduled from </span>{{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
             {% endif %}
           </p>
 
         {% elif sale.status == 'Delivered' %}
           <p class="order__details__detail__text">
-            Delivered on {{ sale.delivered_on|date:"D jS M Y H:i" }}
+            <span class="hide-400">Delivered on </span>{{ sale.delivered_on|date:"D jS M Y H:i" }}
           </p>
 
         {% elif sale.status == 'Returned' %}
           <p class="order__details__detail__text">
-            Returned on {{ sale.returned_on|date:"D jS M Y H:i" }}
+            <span class="hide-400">Returned on </span>{{ sale.returned_on|date:"D jS M Y H:i" }}
           </p>
         {% endif %}
       </div>
@@ -68,12 +78,14 @@
         <a
           class="order__details__detail__text"
           href="{% url 'product' sale.product.product_id %}"
+          elem='product-name'
         >
           {{ sale.product.name }}
         </a>
         <a
           class="order__details__detail__text"
           href="{% url 'store' sale.store.store_id %}"
+          elem='store-name'
         >
           {{ sale.store.name }}
         </a>
@@ -87,6 +99,7 @@
             Buy Again
           </a>
         </div>
+        {% if sale.tracking_ref and sale.tracking_ref != '' and sale.tracking_ref != '0' %}
         <div class="order__details__btns-container__btn" elem="track-order-btn">
           <a
             class="btn btn--secondary"
@@ -95,6 +108,7 @@
             Track Order
           </a>
         </div>
+        {% endif %}
         <div class="order__details__btns-container__btn" elem="return-btn">
           <a
             class="btn btn--secondary"

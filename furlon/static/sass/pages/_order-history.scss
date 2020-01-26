@@ -49,6 +49,12 @@
   border: 2px solid $colour-grey-light-1;
   border-radius: 1rem;
 
+  @include mediaQuery(470) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  // ---------------------------------------------------------------------------
   &__head {
     // Contains the top part of a order.
     display: flex;
@@ -88,9 +94,14 @@
       }
 
       @include mediaQuery(470) {
-          display: flex;
-          width: 100%;
-          margin-bottom: .5rem
+        display: flex;
+        margin: 0;
+        margin-bottom: 0.5rem;
+        border-bottom: 2px solid $colour-grey-light-2;
+      }
+
+      @include mediaQuery(300) {
+        justify-content: space-between;
       }
 
       &--rhs {
@@ -106,8 +117,14 @@
         }
 
         @include mediaQuery(470) {
-            margin: 0;
-            text-align: left;
+          margin: 0;
+          text-align: left;
+          align-self: flex-start;
+        }
+
+        @include mediaQuery(300) {
+          flex-direction: row;
+          width: 100%;
         }
 
         & > a:first-of-type {
@@ -118,7 +135,7 @@
           }
 
           @include mediaQuery(470) {
-              margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
           }
         }
       }
@@ -126,10 +143,24 @@
       &__title {
         margin-bottom: 0.5rem;
         text-transform: uppercase;
+
+        @include mediaQuery(470) {
+          margin-right: 0.5rem;
+          text-transform: none;
+          font-weight: 700;
+          text-align: left;
+        }
+
+        &::after {
+          @include mediaQuery(470) {
+            content: ":";
+          }
+        }
       }
     }
   }
 
+  // ---------------------------------------------------------------------------
   &__details {
     // Main content in any order box.
     display: grid;
@@ -138,7 +169,7 @@
       [img-end info-start] 2fr
       [info-end btn-start] 20%
       [btn-end];
-    grid-template-rows: 5rem 1fr;
+    grid-template-rows: min-content 1fr;
     gap: 2rem;
     padding: 1rem 4rem 2rem;
 
@@ -165,6 +196,14 @@
       padding: 1rem 1rem 2rem;
     }
 
+    @include mediaQuery(400) {
+      grid-template-columns:
+        [img-start] 35%
+        [img-end info-start] 65%
+        [info-end];
+      gap: 1.5rem;
+    }
+
     &__detail {
       &[elem="status"] {
         grid-column: img-start / info-end;
@@ -172,6 +211,17 @@
         & > h2 {
           margin-bottom: 0.5rem;
           color: $colour-secondary;
+          width: 100%;
+
+          @include mediaQuery(300) {
+            margin-bottom: -0.5rem;
+          }
+        }
+
+        p {
+          @include mediaQuery(400) {
+            font-size: 1.4rem;
+          }
         }
       }
 
@@ -195,6 +245,37 @@
       &[elem="product-info"] {
         display: flex;
         flex-direction: column;
+      }
+      &__text {
+        display: inline-table;
+
+        &[elem="product-name"],
+        &[elem="store-name"] {
+          text-decoration: none;
+          color: $colour-secondary-high-sat-dark-1;
+          border-bottom: 1px solid transparent;
+          padding-bottom: 0.5rem;
+          margin-bottom: 0.5rem;
+          transition: all 0.3s ease;
+          width: max-content;
+
+          &:hover {
+            border-bottom: 1px solid $colour-secondary-high-sat;
+            color: $colour-secondary-high-sat;
+          }
+        }
+
+        &[elem="product-name"] {
+          font-size: 1.8rem;
+        }
+
+        &[elem="store-name"] {
+          font-size: 1.4rem;
+
+          @include mediaQuery(300) {
+            font-size: 1.2rem;
+          }
+        }
       }
     }
 
