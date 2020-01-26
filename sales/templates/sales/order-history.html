@@ -31,17 +31,21 @@
         <p class="order__head__column__title">Reference Number</p>
         <p class="order__head__column__body">{{ sale.transaction_ref }}</p>
       </div>
+      <div class="order__head__column order__head__column--rhs">
+        <a href="#" class="order__head__column__body">Invoice</a>
+        <a href="#" class="order__head__column__body">Order Details</a>
+      </div>
     </div>
     <div class="order__details">
       <div class="order__details__detail" elem="status" status="{{ sale.status }}">
-        <p class="order__details__detail__text">{{ sale.status }}</p>
+        <h2 class="order__details__detail__text">{{ sale.status }}</h2>
 
         {% if sale.status == 'Processing' or sale.status == 'Scheduled' %}
           <p class="order__details__detail__text">
             {% if sale.delivery_from == sale.delivery_to %}
-              Delivery Expected On {{ sale.delivery_to|date:"D jS M Y H:i" }}
+              Delivery expected on {{ sale.delivery_to|date:"D jS M Y H:i" }}
             {% else %}
-              Delivery Scheduled From {{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
+              Delivery scheduled from {{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
             {% endif %}
           </p>
 
@@ -57,8 +61,64 @@
         {% endif %}
       </div>
 
-      <div class="order__detail__detail" elem="product-img">
+      <div class="order__details__detail" elem="product-img">
         <img src="{{ sale.product.showcase_image }}" alt="{{ sale.product }}">
+      </div>
+      <div class="order__details__detail" elem="product-info">
+        <a
+          class="order__details__detail__text"
+          href="{% url 'product' sale.product.product_id %}"
+        >
+          {{ sale.product.name }}
+        </a>
+        <a
+          class="order__details__detail__text"
+          href="{% url 'store' sale.store.store_id %}"
+        >
+          {{ sale.store.name }}
+        </a>
+      </div>
+      <div class="order__details__btns-container" elem='btns'>
+        <div class="order__details__btns-container__btn" elem="buy-again-btn">
+          <a
+            class="btn btn--secondary"
+            href="{% url 'product' sale.product.product_id %}"
+          >
+            Buy Again
+          </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="track-order-btn">
+          <a
+            class="btn btn--secondary"
+            href="#"
+          >
+            Track Order
+          </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="return-btn">
+          <a
+            class="btn btn--secondary"
+            href="#"
+          >
+            Return
+        </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="contact-btn">
+          <a
+            href="#"
+            class="btn btn--secondary"
+          >
+            Contact Seller
+          </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="review-btn">
+        <a
+          href="#"
+          class="btn btn--secondary"
+        >
+          Review
+        </a>
+        </div>
       </div>
     </div>
   </div>
