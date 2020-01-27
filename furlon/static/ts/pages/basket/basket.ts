@@ -78,46 +78,70 @@ export class BasketPage extends BasketState {
   private build_basket_summary(allProducts: any[]) {
     /**
      * Builds each element into the DOM inside the target parent container.
+     * There elements being added will be the product's image, name, store
+     * name , colour, quantity options, price and a button to remove an item
+     * from the basket.
+     *
+     * The arrangement of the HTML is such that the image is on the left hand
+     * side. Product information along with the quantity options are in the
+     * middle. Price and the option to remove an item is on the right hand
+     * side. As such, there will be three sub-containers where each element
+     * will be added to that container.
+     *
+     * Each of those containers will then be added to a main container
+     * representing a row of data which will then be added to the DOM.
      */
     const productPage = window.location.href.replace(/basket.*/, "products/");
     for (let i = 0; i < allProducts.length; i++) {
       const product = allProducts[i];
-      const container = document.createElement("div");
       const items = Number(JSON.parse(this.items)[product.productId]);
+
+      // Main container and sub-container.
+      const mainContainer = document.createElement("div");
+      const imgContainer = document.createElement("div")
+      const infoContainer = document.createElement('div')
+      const priceContainer = document.createElement('div')
 
       // Div to contain all product elements, which will then be appended
       // into the parent element.
-      container.className = "table__row";
-      container.setAttribute("product-id", product.productId);
+      mainContainer.className = "basket-summary__row";
+      mainContainer.setAttribute("product-id", product.productId);
+
+      imgContainer.className = "basket-summary__row__container basket-summary__row__container--img"
+      infoContainer.className = "basket-summary__row__container"
+      priceContainer.className = "basket-summary__row__container"
+
+      imgContainer.setAttribute('contents', 'product-img')
+      infoContainer.setAttribute('contents', 'product-info')
+      priceContainer.setAttribute('contents', 'product-price')
 
       // Product Image Embedded in Link Element
       const imgATag = document.createElement("a");
-      imgATag.className = "table__field table__field";
+      imgATag.className = "basket-summary__row__data";
       imgATag.href = productPage + product.productId;
       imgATag.setAttribute("field", "product-image");
       const imgElem = document.createElement("img");
       imgElem.src = product.image;
       imgElem.alt = "Image of " + product.productName;
-      imgElem.className = "table__field table__field--img";
       imgATag.appendChild(imgElem);
 
       // Product Name
       const nameElem = document.createElement("a");
-      nameElem.className = "table__field";
+      nameElem.className = "basket-summary__row__data";
       nameElem.href = productPage + product.productId;
       nameElem.setAttribute("field", "product-name");
       nameElem.textContent = product.productName;
 
       // Product Store
       const storeElem = document.createElement("a");
-      storeElem.className = "table__field";
-      storeElem.href = "#";
+      storeElem.className = "basket-summary__row__data";
+      storeElem.href = "/stores/" + product.storeId;
       storeElem.setAttribute("field", "product-store");
       storeElem.textContent = product.storeName;
 
       // Product Colour
       const colourElem = document.createElement("P");
-      colourElem.className = "table__field";
+      colourElem.className = "basket-summary__row__data";
       colourElem.setAttribute("field", "product-colour");
       colourElem.textContent = product.colourName;
 
@@ -125,7 +149,7 @@ export class BasketPage extends BasketState {
       // NOTE: The HTML format must follow the structure defined in the quantity
       // component.
       const quantityContainerElem = document.createElement("DIV");
-      quantityContainerElem.className = "c-quantity table__field";
+      quantityContainerElem.className = "c-quantity basket-summary__row__function";
       quantityContainerElem.id = "product-" + product.productId;
       quantityContainerElem.setAttribute("field", "quantity");
 
@@ -177,31 +201,31 @@ export class BasketPage extends BasketState {
         this.add_an_item(product.productId, product.price, priceSpan);
         this.update_basket_totals();
       });
-
+//
       const minusBtnSpan = document.createElement("SPAN");
       minusBtnSpan.className = "c-quantity__btn__text";
       minusBtnSpan.textContent = "-";
-
+//
       const plusBtnSpan = document.createElement("SPAN");
       plusBtnSpan.className = "c-quantity__btn__text";
       plusBtnSpan.textContent = "+";
-
+//
       minusBtn.appendChild(minusBtnSpan);
       plusBtn.appendChild(plusBtnSpan);
       quantityContainerElem.appendChild(minusBtn);
       quantityContainerElem.appendChild(quantityInput);
       quantityContainerElem.appendChild(plusBtn);
-
+//
       // Price
       const priceElem = document.createElement("P");
-      priceElem.className = "table__field";
+      priceElem.className = "basket-summary__row__data";
       priceElem.setAttribute("field", "product-price-container");
 
       const poundI = document.createElement("span");
       poundI.textContent = "£";
       poundI.setAttribute("field", "product-price-currency");
       priceElem.appendChild(poundI);
-
+//
       const priceSpan = document.createElement("span");
       priceSpan.setAttribute("field", "product-price-value");
       priceSpan.textContent = NumberFormat.thousand_separated_2dp(
@@ -211,12 +235,12 @@ export class BasketPage extends BasketState {
 
       // Remove Item Button
       const removeItemSpan = document.createElement("SPAN");
-      removeItemSpan.className = "table__icon";
+      removeItemSpan.className = "basket__icon";
       removeItemSpan.setAttribute("field", "remove-item");
       removeItemSpan.addEventListener("click", event => {
         // On removal, update the DOM and the basket/local storage accordingly.
         event.stopPropagation();
-        this.remove_whole_item(product.productId, container);
+        this.remove_whole_item(product.productId, mainContainer);
         this.update_basket_totals();
       });
       const removeItemI = document.createElement("I");
@@ -224,15 +248,21 @@ export class BasketPage extends BasketState {
       removeItemSpan.appendChild(removeItemI);
       priceElem.appendChild(removeItemSpan);
 
-      // Append elements to target element.
-      container.appendChild(imgATag);
-      container.appendChild(nameElem);
-      container.appendChild(storeElem);
-      container.appendChild(colourElem);
-      container.appendChild(quantityContainerElem);
-      container.appendChild(priceElem);
-      this.summaryItemsParent.appendChild(container);
+      // Append elements to their respective containers, append that container
+      // to the main container and then finally append the main container to the
+      // DOM target element.
+      imgContainer.appendChild(imgATag)
+      infoContainer.appendChild(nameElem)
+      infoContainer.appendChild(storeElem)
+      infoContainer.appendChild(colourElem)
+      infoContainer.appendChild(quantityContainerElem)
+      priceContainer.appendChild(priceElem)
+      mainContainer.appendChild(imgContainer)
+      mainContainer.appendChild(infoContainer)
+      mainContainer.appendChild(priceContainer)
+      this.summaryItemsParent.appendChild(mainContainer)
     }
+
     // Apply the JavaScript to each quantity component.
     new QuantityComponent();
   }
@@ -260,7 +290,7 @@ export class BasketPage extends BasketState {
     // the total price.
     const priceElems = document
       .getElementById("basket-summary-data")!
-      .querySelectorAll('.table__field>[field="product-price-value"]');
+      .querySelectorAll('[field="product-price-value"]');
 
     for (let priceIdx = 0; priceIdx < priceElems.length; priceIdx++) {
       totalPrice += NumberFormat.thousand_sep_to_float(

@@ -15,6 +15,7 @@ import { CarouselImgs } from "./components/carousel-imgs";
 import { BasketState } from "./state/basket-items";
 import { BasketPage } from "./pages/basket/basket";
 import { RegisterPasswordCheck } from "./components/register-validation";
+import { Pagination } from "./components/pagination";
 
 // Build the navigation
 new Navigation();
@@ -27,6 +28,9 @@ new DropdownMenu();
 
 // Build the search filters
 new SearchFilters();
+
+// Build the pagination
+new Pagination();
 
 // -----------------------------------------------------------------------------
 // PAGE SPECIFIC JAVASCRIPT

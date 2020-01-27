@@ -22,5 +22,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('basket/', views.basket, name='basket'),
-    path('basket-info-API/', views.basket_info_api, name='basketInfoAPI')
+    path('basket-info-API/', views.basket_info_api, name='basketInfoAPI'),
+    path('help/', views.help, name='help')
 ]

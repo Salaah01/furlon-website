@@ -17,6 +17,7 @@ from datetime import datetime
 
 # Third Party Imports
 from django.db import models
+from django.contrib.auth.models import User
 
 # Local Imports
 from misc.models import Countries, Cities
@@ -40,6 +41,7 @@ class Invoices(models.Model):
     DEPENDENCIES:
     - misc_countries: countries
     - misc_cities: cities
+    - auth_user: user
 
     DEPENDENCIES WITHOUT EXPLICIT RELATIONSHIP FIELD:
     The Following are shown as CharFields where their relationship is actually
@@ -52,6 +54,7 @@ class Invoices(models.Model):
     """
 
     invoice_id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=0)
     sale_IDs = models.CharField(max_length=500)
     order_date = models.DateTimeField(default=datetime.now)
 
@@ -102,25 +105,77 @@ class Sales(models.Model):
     - sales_invoices: invoice
     - stores_stores: store
     - products_products: products
+    - auth_user: user
 
     TABLES DEPENDENT ON MODEL:
-    - none
+    - None
     """
 
     sale_id = models.BigAutoField(primary_key=True)
+    # Transaction reference should be in the format user-id-ddmmyyyyhhmmss
+    transaction_ref = models.CharField(max_length=1000, null=True, blank=True)
+    status = models.CharField(max_length=50)
+    payment_method = models.CharField(max_length=20)
+
+    ordered_on = models.DateTimeField(default=datetime.now)
+    delivered_on = models.DateTimeField(null=True, blank=True)
+    returned_on = models.DateTimeField(null=True, blank=True)
+    return_by = models.DateTimeField(null=True, blank=True)
+    returned_allowed = models.BooleanField()
+
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, default=0)
     store = models.ForeignKey(Stores, on_delete=models.DO_NOTHING)
     product = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
+    quantity = models.IntegerField(default=0)
 
-    delivery = models.FloatField(default=0)
-    asembly = models.FloatField(default=0)
+    delivery_from = models.DateTimeField(null=True, blank=True)
+    delivery_to = models.DateTimeField(null=True, blank=True)
+    delivery_included = models.BooleanField(null=True)
+
+    recipient = models.CharField(max_length=100)
+    address_line_1 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, null=True)
+    postcode = models.CharField(max_length=15, null=True)
+    city = models.ForeignKey(Cities, on_delete=models.DO_NOTHING)
+    country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)
+    tracking_ref = models.CharField(max_length=50, blank=True, null=True)
+
+    delivery_price = models.FloatField(default=0)
+    assembly_price = models.FloatField(default=0)
     exVat = models.FloatField(default=0)
     vat = models.FloatField(default=0)
     total = models.FloatField(default=0)
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     def __str__(self):
-        return sale_id
+        return f'{self.sale_id}-{self.transaction_ref}'
 
     # -------------------------------------------------------------------------------------------------------------------------- #
     class Meta:
         verbose_name_plural = "Sales"
+
+
+##################################################################################################################################
+class DeliverAddresses(models.Model):
+    """
+    PURPOSE:
+    Contains a list of delivery addresses stored by the user.
+
+    DEPENDENCIES:
+    - auth_user: user
+    - misc_counties: country
+    - misc_cities: city
+
+    TABLES DEPENDENT ON MODEL:
+    - None
+    """
+    id = models.BigAutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    status = models.CharField(max_length=50)
+    last_used = models.DateField(null=True)
+    recipient = models.CharField(max_length=100)
+    address_line_1 = models.CharField(max_length=100)
+    address_line_2 = models.CharField(max_length=100, null=True, blank=True)
+    postcode = models.CharField(max_length=15, null=True)
+    city = models.ForeignKey(Cities, on_delete=models.DO_NOTHING)
+    country = models.ForeignKey(Countries, on_delete=models.DO_NOTHING)

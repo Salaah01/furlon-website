@@ -29,7 +29,7 @@ export class CarouselImgs {
    * add and remove attributes from the elements, so that the animations can
    * be triggered.
    */
-  containers = document.getElementsByClassName("carousel-container");
+  containers = document.getElementsByClassName("carousel-container__main");
 
   // -------------------------------------------------------------------------
   constructor() {
@@ -151,7 +151,15 @@ export class CarouselImgs {
       "totalthumbs",
       total.toString()
     );
+    thumbs[0].parentElement!.parentElement!.setAttribute(
+      "totalthumbs",
+      total.toString()
+    );
     thumbs[0].parentElement!.parentElement!.parentElement!.setAttribute(
+      "totalthumbs",
+      total.toString()
+    );
+    thumbs[0].parentElement!.parentElement!.parentElement!.parentElement!.setAttribute(
       "totalthumbs",
       total.toString()
     );

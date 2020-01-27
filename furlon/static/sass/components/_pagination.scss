@@ -1,0 +1,44 @@
+// =============================================================================
+// Date Created:   26/01/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Pagination Component
+// =============================================================================
+
+// =============================================================================
+section.pagination-section {
+  width: 100%;
+  margin-bottom: 3rem;
+}
+
+// =============================================================================
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  border-radius: 0.25rem;
+
+  &__item {
+    display: list-item;
+    border: 1px solid #dee2e6;
+  }
+
+  &__link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    line-height: 1.25;
+    text-decoration: none;
+    color: $colour-secondary-high-sat;
+
+    &--selected {
+      color: #fff;
+      background-color: $colour-secondary-high-sat;
+    }
+
+    &[disabled="true"] {
+      color: $colour-grey-dark-1;
+      background-color: $colour-grey-light-1;
+      cursor: default;
+    }
+  }
+}

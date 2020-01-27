@@ -16,6 +16,25 @@ Render the following pages:
 
 # Third Party Imports
 from django.shortcuts import render
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Local Imports
+from .models import Sales
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def orderHistory(request):
+    """ View for loading the user's order history. Uses pagination and to split number of results. Sales data is stored in
+    sales_sales.
+    """
+    sales = Sales.objects.filter(user=request.user).order_by('-sale_id')
+
+    # Pagination
+    paginator = Paginator(sales, 20)
+    page = request.GET.get('page')
+    pagedSales = paginator.get_page(page)
+
+    context = {
+        'sales': pagedSales
+    }
+    return render(request, 'sales/order-history.html', context)

@@ -14,50 +14,54 @@
 // structure:
 //
 // .carousel-container
-// │
-// └───── .carousel-container__display-section
-// │      │
-// │      └───── img(.carousel-container__display-section__img
-// │      │          [im="{image identifier}"]
-// │      │          position="init")
-// │      │
-// │      └───── (multiple)
-// │             img(.carousel-container__display-section__img)
-// │             [im="{image identifier}"]
-// │             [position="hide"]
-// │
-// └───── .carousel-container__display-controls
-//        |
-//        └───── (multiple - one for each showcase image)
-//               img (.carousel-container__display-section__img
-//                    im="{image identifier (matches showcase img im attr}"]
+// .
+// └───── .main
+//        │
+//        └───── .carousel-container__display-section
+//        │      │
+//        │      └───── img(.carousel-container__display-section__img
+//        │      │          [im="{image identifier}"]
+//        │      │          position="init")
+//        │      │
+//        │      └───── (multiple)
+//        │             img(.carousel-container__display-section__img)
+//        │             [im="{image identifier}"]
+//        │             [position="hide"]
+//        │
+//        └───── .carousel-container__display-controls
+//               |
+//               └───── (multiple - one for each showcase image)
+//                      img (.carousel-container__display-section__img
+//                           im="{image identifier (matches showcase img im attr}"]
 //
 //
 // EXAMPLE HTML
 // ------------
 // <div class="carousel-container">
-//   <div class="carousel-container__display-section">
-//     <img
-//       class="carousel-container__display-section__img"
-//       im="img-id-1"
-//       position="init"
-//     />
-//     <img
-//       class="carousel-container__display-section__img"
-//       <m="img-id-2"
-//       position="hide"
-//     />
-//   </div>
+//   <div class="carousel-container__main">
+//      <div class="carousel-container__display-section">
+//        <img
+//          class="carousel-container__display-section__img"
+//          im="img-id-1"
+//          position="init"
+//        />
+//        <img
+//          class="carousel-container__display-section__img"
+//          <m="img-id-2"
+//          position="hide"
+//        />
+//      </div>
 //
-//   <div class="carousel-container__display-controls">
-//     <img
-//       class="carousel-container__display-controls-controls"
-//       for="img-id-1">
-//     />
-//     <img
-//       class="carousel-container__display-controls-controls"
-//       for="img-id-2">
-//     />
+//      <div class="carousel-container__display-controls">
+//        <img
+//          class="carousel-container__display-controls-controls"
+//          for="img-id-1">
+//        />
+//        <img
+//          class="carousel-container__display-controls-controls"
+//          for="img-id-2">
+//        />
+//      </div>
 //   </div>
 // </div>
 //
@@ -108,41 +112,123 @@
 // =============================================================================
 .carousel-container {
   z-index: 1;
+  position: relative;
 
-  // -------------------------------------------------------------------------
-  // Main images
-  &__display-section {
-    display: flex;
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 3.5rem;
-    height: 100%;
-    z-index: -10;
+  @include mediaQuery(760) {
+    height: 50vw;
+  }
 
-    // Image size varies depending on how many thumbnails there are.
-    &[totalthumbs="1"] {
-      margin-bottom: 0;
-    }
-    &[totalthumbs="2"],
-    &[totalthumbs="3"],
-    &[totalthumbs="4"] {
-      height: 80%;
-    }
+  // ---------------------------------------------------------------------------
+  &__main {
+    // Holds all the elements similarly to the container. This is set as
+    // absolute so that all components within align correctly.
+    position: absolute;
+    // Take into account the padding when setting the position and dimensions.
+    // (padding: 4rem 5rem)
+    top: 4rem;
+    left: 5rem;
+    height: calc(100% - 8rem);
+    width: calc(100% - 10rem);
 
-    &[totalthumbs="2"],
-    &[totalthumbs="3"],
-    &[totalthumbs="4"] {
-      height: 68%;
-    }
-    &[totalthumbs="1"],
     &[totalthumbs="2"],
     &[totalthumbs="3"],
     &[totalthumbs="4"],
     &[totalthumbs="5"],
     &[totalthumbs="6"],
     &[totalthumbs="7"] {
+      height: 85%;
+
+      @include mediaQuery(1600) {
+      }
+
       @include mediaQuery(760) {
-        height: 40vw;
+        // padding on the parent element is 3rem.
+        top: 3rem;
+        left: 3rem;
+        height: calc(100% - 6rem);
+        width: calc(100% - 6rem);
+      }
+
+      @include mediaQuery(500) {
+        // padding on the parent element is 3rem.
+        top: 2rem;
+        left: 2rem;
+        height: calc(100% - 4rem);
+        width: calc(100% - 4rem);
+      }
+    }
+  }
+  // ---------------------------------------------------------------------------
+  // Main images
+  &__display-section {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    z-index: 10;
+
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      height: 85%;
+
+      @include mediaQuery(1440) {
+        height: 90%;
+      }
+    }
+
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(830) {
+        height: 69%;
+      }
+
+      @include mediaQuery(760) {
+        height: 85%;
+      }
+
+      @include mediaQuery(399) {
+        height: 60%;
+      }
+    }
+
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(1330) {
+        height: 69%;
+      }
+
+      @include mediaQuery(1200) {
+        height: 85%;
+      }
+
+      @include mediaQuery(1064) {
+        height: 69%;
+      }
+
+      @include mediaQuery(1050) {
+        height: 85%;
+      }
+
+      @include mediaQuery(960) {
+        height: 80%;
+      }
+    }
+
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(1706) {
+        height: 69%;
+      }
+
+      @include mediaQuery(320) {
+        height: 63%;
       }
     }
 
@@ -156,9 +242,10 @@
       z-index: 5;
       transition: all 0.4s ease-out;
       background-color: blue;
+      cursor: pointer;
 
       &[position="init"] {
-        z-index: 1;
+        z-index: 10;
       }
 
       &[position="hide"] {
@@ -183,62 +270,11 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    margin-top: -14vw;
+    // margin-top: -14vw;
+    justify-content: flex-start;
 
     &[totalthumbs="1"] {
       display: none;
-    }
-
-    &[totalthumbs="2"],
-    &[totalthumbs="3"],
-    &[totalthumbs="4"],
-    &[totalthumbs="5"],
-    &[totalthumbs="6"],
-    &[totalthumbs="7"] {
-      margin-top: -1.5vw;
-      justify-content: flex-start;
-
-      @include mediaQuery(1440) {
-        margin-top: -1.7vw;
-      }
-
-      @include mediaQuery(1200) {
-        margin-top: -2.5vw;
-      }
-
-      @include mediaQuery(1000) {
-        margin-top: -3vw;
-      }
-
-      @include mediaQuery(900) {
-        margin-top: -4vw;
-      }
-
-      @include mediaQuery(650) {
-        margin-top: -5vw;
-      }
-
-      @include mediaQuery(500) {
-        margin-top: -7vw;
-      }
-
-      @include mediaQuery(400) {
-        margin-top: -9vw;
-      }
-
-      @include mediaQuery(350) {
-        margin-top: -10vw;
-      }
-
-      @include mediaQuery(300) {
-        margin-top: -12vw;
-      }
-    }
-
-    &[totalthumbs="5"],
-    &[totalthumbs="6"],
-    &[totalthumbs="7"] {
-      margin-top: -1.5vw;
     }
 
     &__control {
@@ -246,6 +282,12 @@
       height: 5vw;
       width: 6vw;
       margin: 0.6rem;
+      margin-bottom: .1rem;
+
+      @include mediaQuery(1330) {
+        height: 6vw;
+        width: 7vw;
+      }
 
       &:hover {
         cursor: pointer;

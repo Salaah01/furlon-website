@@ -33,9 +33,9 @@ class InvoicesAdmin(admin.ModelAdmin):
 ##################################################################################################################################
 class SalesAdmin(admin.ModelAdmin):
     """ Registers Sales (sales_sales) table to the admin page """
-    list_display = ('sale_id', 'store', 'product', 'total',)
+    list_display = ('sale_id', 'user', 'status', 'store', 'product', 'total',)
     list_display_links = ('sale_id',)
-    search_fields = ('sale_id', 'store__name', 'store__address_line_1', 'product__name',)
+    search_fields = ('sale_id', 'user', 'store__name', 'store__address_line_1', 'product__name',)
 
 
 admin.site.register(Invoices, InvoicesAdmin)

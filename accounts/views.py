@@ -8,7 +8,9 @@ SCRIPT FUNCTION
 
 Creates the views for the following pages:
 
-index:      /
+login:          /login
+register:       /register
+account:        /account
 =================================================================================================================================
 """
 
@@ -96,14 +98,21 @@ def register(request):
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
-def profile(request):
-    return HttpResponse("<h1>ACCOUNT HTTP RESPONSE</h1>")
+def account(request):
+    """ View for the account page. """
+    user = request.user
+
+    context = {}
+    return render(request, 'accounts/account.html', context)
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
-def help(request):
-    return HttpResponse("<h1>HELP HTTP RESPONSE</h1>")
+def changePassword(request):
+    """ Change password view. """
+    user = request.user
 
+    context = {}
+    return render(request, 'accounts/change-password.html', context)
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def validate_register_passwords(password, confirmedPassword):

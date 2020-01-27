@@ -59,6 +59,13 @@
 .hide {
   display: none !important;
 }
+
+.hide-400 {
+  @include mediaQuery(400) {
+    display: none;
+  }
+}
+
 .u-italics {
   font-style: initial;
 }

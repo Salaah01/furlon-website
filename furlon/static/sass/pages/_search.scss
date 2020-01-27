@@ -12,7 +12,6 @@
   // number of results along with the search query.
   width: 100%;
   padding: 3rem;
-  padding-bottom: 2rem;
   text-align: center;
 
   @include mediaQuery(900) {
@@ -40,6 +39,7 @@
   // Contains the search filters form
   display: flex;
   justify-content: center;
+  margin-top: 4rem;
   margin-bottom: 2rem;
 
   // Stack the dropdown options.
@@ -92,6 +92,8 @@
 .search-results {
   // Contains the search results
   @include padSection;
+  padding-top: 5rem;
+  padding-bottom: 6rem;
 
   @include mediaQuery(500) {
       padding-top: 1rem;

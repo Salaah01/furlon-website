@@ -20,5 +20,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('basket/', views.search, name='basket'),
+    path('order-history/', views.orderHistory, name='order-history')
 ]

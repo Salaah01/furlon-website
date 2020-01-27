@@ -172,48 +172,55 @@ export class ExtendProductPage extends BasketState {
     const targetElem = document.getElementById("product-sets");
 
     if (targetElem) {
-      for (let a = 0; a < attrs.length; a++) {
-        // Using data retrieved from the API to build constants
-        const href = "/products/" + attrs[a].product_id;
-        const name = attrs[a].name;
-        const img = attrs[a].showcase_image;
-        const price = attrs[a].price;
+      if (attrs.length) {
+        for (let a = 0; a < attrs.length; a++) {
+          // Using data retrieved from the API to build constants
+          const href = "/products/" + attrs[a].product_id;
+          const name = attrs[a].name;
+          const img = attrs[a].showcase_image;
+          const price = attrs[a].price;
 
-        // "A" tag which will contain the image and the text.
-        const linkElem = document.createElement("A");
-        linkElem.setAttribute("class", "product-set related-product");
-        linkElem.setAttribute("href", href);
+          // "A" tag which will contain the image and the text.
+          const linkElem = document.createElement("A");
+          linkElem.setAttribute("class", "product-set related-product");
+          linkElem.setAttribute("href", href);
 
-        // "IMG" tag for product image.
-        const imgElem = document.createElement("IMG");
-        imgElem.setAttribute("class", "product-set__img related-product__img");
-        imgElem.setAttribute("src", img);
-        imgElem.setAttribute(
-          "alt",
-          "Image of a product of which this product is a set. (" + name + "}"
-        );
+          // "IMG" tag for product image.
+          const imgElem = document.createElement("IMG");
+          imgElem.setAttribute(
+            "class",
+            "product-set__img related-product__img"
+          );
+          imgElem.setAttribute("src", img);
+          imgElem.setAttribute(
+            "alt",
+            "Image of a product of which this product is a set. (" + name + "}"
+          );
 
-        // "SPAN" tags containing the product name and price
-        const textSpanElem = document.createElement("SPAN");
-        textSpanElem.setAttribute(
-          "class",
-          "product-set__name related-product__name"
-        );
-        textSpanElem.textContent = name;
+          // "SPAN" tags containing the product name and price
+          const textSpanElem = document.createElement("SPAN");
+          textSpanElem.setAttribute(
+            "class",
+            "product-set__name related-product__name"
+          );
+          textSpanElem.textContent = name;
 
-        const textPriceElem = document.createElement("SPAN");
-        textPriceElem.setAttribute(
-          "class",
-          "product-set__price related-product__price"
-        );
-        textPriceElem.textContent = "£" + price;
+          const textPriceElem = document.createElement("SPAN");
+          textPriceElem.setAttribute(
+            "class",
+            "product-set__price related-product__price"
+          );
+          textPriceElem.textContent = "£" + price;
 
-        // Set the image and text elements to become children of the linkElem
-        // and append them onto the targetElem in the DOM.
-        linkElem.appendChild(imgElem);
-        linkElem.appendChild(textSpanElem);
-        linkElem.appendChild(textPriceElem);
-        targetElem.appendChild(linkElem);
+          // Set the image and text elements to become children of the linkElem
+          // and append them onto the targetElem in the DOM.
+          linkElem.appendChild(imgElem);
+          linkElem.appendChild(textSpanElem);
+          linkElem.appendChild(textPriceElem);
+          targetElem.appendChild(linkElem);
+        }
+      } else {
+        targetElem.remove();
       }
     } else {
       console.warn(
@@ -241,51 +248,55 @@ export class ExtendProductPage extends BasketState {
     const targetElem = document.getElementById("similar-products");
 
     if (targetElem) {
-      for (let a = 0; a < attrs.length; a++) {
-        // Using data retrieved from the API to build constants
-        const href = "/products/" + attrs[a].product_id;
-        const name = attrs[a].name;
-        const img = attrs[a].showcase_image;
-        const price = attrs[a].price;
+      if (attrs.length) {
+        for (let a = 0; a < attrs.length; a++) {
+          // Using data retrieved from the API to build constants
+          const href = "/products/" + attrs[a].product_id;
+          const name = attrs[a].name;
+          const img = attrs[a].showcase_image;
+          const price = attrs[a].price;
 
-        // "A" tag which will contain the image and the text.
-        const linkElem = document.createElement("A");
-        linkElem.setAttribute("class", "similar-product related-product");
-        linkElem.setAttribute("href", href);
+          // "A" tag which will contain the image and the text.
+          const linkElem = document.createElement("A");
+          linkElem.setAttribute("class", "similar-product related-product");
+          linkElem.setAttribute("href", href);
 
-        // "IMG" tag for product image.
-        const imgElem = document.createElement("IMG");
-        imgElem.setAttribute(
-          "class",
-          "similar-product__img related-product__img"
-        );
-        imgElem.setAttribute("src", img);
-        imgElem.setAttribute(
-          "alt",
-          "Image of a product of which this product is a set. (" + name + "}"
-        );
+          // "IMG" tag for product image.
+          const imgElem = document.createElement("IMG");
+          imgElem.setAttribute(
+            "class",
+            "similar-product__img related-product__img"
+          );
+          imgElem.setAttribute("src", img);
+          imgElem.setAttribute(
+            "alt",
+            "Image of a product of which this product is a set. (" + name + "}"
+          );
 
-        // "SPAN" tags containing the product name and price
-        const textSpanElem = document.createElement("SPAN");
-        textSpanElem.setAttribute(
-          "class",
-          "similar-product__name related-product__name"
-        );
-        textSpanElem.textContent = name;
+          // "SPAN" tags containing the product name and price
+          const textSpanElem = document.createElement("SPAN");
+          textSpanElem.setAttribute(
+            "class",
+            "similar-product__name related-product__name"
+          );
+          textSpanElem.textContent = name;
 
-        const textPriceElem = document.createElement("SPAN");
-        textPriceElem.setAttribute(
-          "class",
-          "similar-product__price related-product__price"
-        );
-        textPriceElem.textContent = "£" + price;
+          const textPriceElem = document.createElement("SPAN");
+          textPriceElem.setAttribute(
+            "class",
+            "similar-product__price related-product__price"
+          );
+          textPriceElem.textContent = "£" + price;
 
-        // Set the image and text elements to become children of the linkElem
-        // and append them onto the targetElem in the DOM.
-        linkElem.appendChild(imgElem);
-        linkElem.appendChild(textSpanElem);
-        linkElem.appendChild(textPriceElem);
-        targetElem.appendChild(linkElem);
+          // Set the image and text elements to become children of the linkElem
+          // and append them onto the targetElem in the DOM.
+          linkElem.appendChild(imgElem);
+          linkElem.appendChild(textSpanElem);
+          linkElem.appendChild(textPriceElem);
+          targetElem.appendChild(linkElem);
+        }
+      } else {
+        targetElem.remove();
       }
     } else {
       console.warn(

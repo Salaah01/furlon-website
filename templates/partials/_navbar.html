@@ -141,7 +141,7 @@
       <!-- Profile -->
       {% if user.is_authenticated %}
         <a
-          href="#"
+          href="{% url 'account' %}"
           class="nav__account-basket__opt {% if 'profile' in request.path %} nav__active {% endif %}"
           id="nav-profile"
         >
