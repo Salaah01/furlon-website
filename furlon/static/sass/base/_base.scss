@@ -176,3 +176,20 @@ svg {
     }
   }
 }
+
+// -----------------------------------------------------------------------------
+// TEXT LINKS
+.text-link {
+  text-decoration: none;
+  color: $colour-secondary-high-sat-dark-1;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  width: max-content;
+
+  &:hover {
+    border-bottom: 1px solid $colour-secondary-high-sat;
+    color: $colour-secondary-high-sat;
+  }
+}

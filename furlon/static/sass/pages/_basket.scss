@@ -54,7 +54,7 @@
 
         @include mediaQuery(460) {
           margin-right: 5rem;
-          margin-bottom: .5rem;
+          margin-bottom: 0.5rem;
         }
 
         @include mediaQuery(355) {
@@ -119,14 +119,13 @@
         padding: 2rem 1rem;
       }
 
-      &[contents='product-img'] {
-
+      &[contents="product-img"] {
         @include mediaQuery(660) {
           grid-row: 1 / span 2;
         }
       }
 
-      &[contents='product-info'] {
+      &[contents="product-info"] {
         flex-direction: column;
         margin-top: auto;
         margin-bottom: auto;
@@ -134,7 +133,6 @@
         @include mediaQuery(660) {
           margin: 0;
           padding-top: 0;
-
         }
 
         & > * {
@@ -142,7 +140,7 @@
         }
       }
 
-      &[contents='product-price'] {
+      &[contents="product-price"] {
         margin-left: auto;
 
         @include mediaQuery(660) {
@@ -157,7 +155,7 @@
     &__data {
       height: 100%;
 
-      &[field='product-image'] > img {
+      &[field="product-image"] > img {
         height: 100%;
         width: 100%;
         object-fit: cover;
@@ -175,49 +173,30 @@
         }
       }
 
-      &[field='product-name'],
-      &[field='product-store'] {
-        text-decoration: none;
-          color: $colour-secondary-high-sat-dark-1;
-          border-bottom: 1px solid transparent;
-          padding-bottom: 0.5rem;
-          margin-bottom: 0.5rem;
-          transition: all 0.3s ease;
-          width: max-content;
-
-          &:hover {
-            border-bottom: 1px solid $colour-secondary-high-sat;
-            color: $colour-secondary-high-sat;
-          }
-      }
-
-      &[field='product-store'] {
+      &[field="product-store"] {
         @include mediaQuery(550) {
           font-size: 1.4rem;
         }
       }
 
-      &[field='product-colour'] {
+      &[field="product-colour"] {
         @include mediaQuery(550) {
           font-size: 1.2rem;
         }
       }
 
-      &[field='product-price-container'] {
+      &[field="product-price-container"] {
         // A p-tag within which there are two span elements, one for the price
         // and the other for the remove produce icon.
         display: flex;
         align-items: center;
       }
     }
- }
-
+  }
 
   // -------------------------------------------------------------------------
   // Overrides for the quantity options defined in the quantity component.
   .c-quantity {
-
-
     @include mediaQuery(660) {
       margin-bottom: 0;
     }
@@ -228,7 +207,7 @@
 
       @include mediaQuery(1000) {
         width: 3rem;
-        padding: .5rem;
+        padding: 0.5rem;
       }
 
       &:not([disabled="disabled"]):hover {
@@ -238,10 +217,8 @@
 
     &__input {
       @include mediaQuery(660) {
-        padding: .5rem 0;
+        padding: 0.5rem 0;
       }
-
-
     }
   }
 }
@@ -301,16 +278,13 @@
 // MISC
 .basket {
   &__icon {
-
     padding-left: 1rem;
     padding-right: 1rem;
     transition: all 0.3s;
     cursor: pointer;
 
-
     &:hover {
       color: red;
     }
   }
-
 }

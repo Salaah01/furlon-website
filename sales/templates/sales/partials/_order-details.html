@@ -1,0 +1,199 @@
+{% load static %}
+{% load humanize %}
+
+<main class="order-hist-main">
+  {% for sale in sales %}
+  <div class="order">
+    <div class="order__head">
+      <div class="order__head__column">
+        <p class="order__head__column__title">Ordered On</p>
+        <p class="order__head__column__body">
+          {{ sale.ordered_on|date:"jS M Y"}}
+        </p>
+      </div>
+      <div class="order__head__column">
+        <p class="order__head__column__title">Total</p>
+        <p class="order__head__column__body">
+          &pound;{{ sale.total|floatformat:2|intcomma }}
+        </p>
+      </div>
+      <div class="order__head__column">
+        <p class="order__head__column__title">Reference Number</p>
+        <p class="order__head__column__body">{{ sale.transaction_ref }}</p>
+      </div>
+      <div class="order__head__column order__head__column--rhs">
+        <a
+          href="#"
+          class="order__head__column__body btn-inline btn-inline--secondary"
+        >
+          Invoice
+        </a>
+        <a
+          href="#"
+          class="order__head__column__body btn-inline btn-inline--secondary"
+        >
+          Order Details
+        </a>
+      </div>
+    </div>
+    <div class="order__details">
+      <div class="order__details__detail" elem="status" status="{{ sale.status }}">
+        <h2 class="order__details__detail__text">{{ sale.status }}</h2>
+
+        {% if sale.status == 'Processing' or sale.status == 'Scheduled' %}
+          <p class="order__details__detail__text">
+            {% if sale.delivery_from == sale.delivery_to %}
+              <span class="hide-400">Delivery expected on </span>{{ sale.delivery_to|date:"D jS M Y H:i" }}
+            {% else %}
+            <span class="hide-400"> Delivery scheduled from </span>{{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
+            {% endif %}
+          </p>
+
+        {% elif sale.status == 'Delivered' %}
+          <p class="order__details__detail__text">
+            <span class="hide-400">Delivered on </span>{{ sale.delivered_on|date:"D jS M Y H:i" }}
+          </p>
+
+        {% elif sale.status == 'Returned' %}
+          <p class="order__details__detail__text">
+            <span class="hide-400">Returned on </span>{{ sale.returned_on|date:"D jS M Y H:i" }}
+          </p>
+        {% endif %}
+      </div>
+
+      <div class="order__details__detail" elem="product-img">
+        <img src="{{ sale.product.showcase_image }}" alt="{{ sale.product }}">
+      </div>
+      <div class="order__details__detail" elem="product-info">
+        <a
+          class="order__details__detail__text text-link"
+          href="{% url 'product' sale.product.product_id %}"
+          elem='product-name'
+        >
+          {{ sale.product.name }}
+        </a>
+        <a
+          class="order__details__detail__text text-link"
+          href="{% url 'store' sale.store.store_id %}"
+          elem='store-name'
+        >
+          {{ sale.store.name }}
+        </a>
+      </div>
+      <div class="order__details__btns-container" elem='btns'>
+        <div class="order__details__btns-container__btn" elem="buy-again-btn">
+          <a
+            class="btn btn--secondary"
+            href="{% url 'product' sale.product.product_id %}"
+          >
+            Buy Again
+          </a>
+        </div>
+        {% if sale.tracking_ref and sale.tracking_ref != '' and sale.tracking_ref != '0' %}
+        <div class="order__details__btns-container__btn" elem="track-order-btn">
+          <a
+            class="btn btn--secondary"
+            href="#"
+          >
+            Track Order
+          </a>
+        </div>
+        {% endif %}
+        <div class="order__details__btns-container__btn" elem="return-btn">
+          <a
+            class="btn btn--secondary"
+            href="#"
+          >
+            Return
+        </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="contact-btn">
+          <a
+            href="#"
+            class="btn btn--secondary"
+          >
+            Contact Seller
+          </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="review-btn">
+        <a
+          href="#"
+          class="btn btn--secondary"
+        >
+          Review
+        </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+
+  {% if sales.has_other_pages %}
+        <section class="pagination-section">
+            <ul class="pagination" id="pagination">
+                <!-- Previous Page -->
+                {% if sales.has_previous %}
+                    <li class="pagination__item">
+                        <a
+                            class="pagination__link"
+                            page="{{ sales.previous_page_number }}"
+                        >
+                            &laquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="pagination__item pagination__item--disabled">
+                        <a
+                            class="pagination__link pagination__link"
+                            aria-disabled="true"
+                            disabled="true"
+                        >
+                            &laquo;
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- Pages in Between -->
+                {% for page in sales.paginator.page_range %}
+                    {% if sales.number == page %}
+                        <li class="pagination__item">
+                            <a
+                              page="{{ page }}"
+                              class="pagination__link pagination__link--selected"
+                            >
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="pagination__item">
+                            <a page="{{ page }}" class="pagination__link">
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <!-- Next Page -->
+                {% if sales.has_next %}
+                    <li class="pagination__item">
+                        <a
+                            page="{{ sales.next_page_number }}"
+                            class="pagination__link"
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="pagination__item">
+                        <a
+                            class="pagination__link"
+                            aria-disabled="true"
+                            disabled="true"
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </section>
+    {% endif %}
+
+</main>

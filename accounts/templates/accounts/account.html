@@ -3,14 +3,58 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} | {{ user.name }}{% endblock %}
+{% block title %} | Account{{ user.name }}{% endblock %}
 
 {% block content %}
 
-    <h1>Your Account</h1>
+<header class="account-heading">
+  <h1 class="heading-1">Your Account</h1>
+</header>
+
+<main>
+  <div class="account-options">
+    <div class="account-options__option">
+      <img
+        src="{% static 'img/pages/user/account/delivery-truck-96.png' %}"
+        alt="Delivery truck icon"
+        class="account-options__option__img"
+      >
+      <h2 class="heading-2 account-options__option__heading">Your Orders</h2>
+      <div class="account-options__option__links">
+        <a
+          class="account-options__option__link text-link"
+          href="{% url 'pending-orders' %}"
+        >
+          Pending Orders
+        </a>
+        <a
+          class="account-options__option__link text-link"
+          href="{% url 'order-history' %}"
+        >
+          Order History
+        </a>
+      </div>
+    </div>
+
+      <div class="account-options__option">
+      <img
+          src="{% static 'img/pages/user/account/customer-96.png' %}"
+          alt="Customer Icon"
+          class="account-options__option__img"
+      >
+      <h2 class="heading-2 account-options__option__heading">Your Details</h2>
+        <div class="account-options__option__links">
+          <a class="account-options__option__link text-link" href="#">
+            Change Password
+          </a>
+          <a class="account-options__option__link text-link" href="#">
+            Saved Addresses
+          </a>
+        </div>
+      </div>
+    </div>
+</main>
 
 {% endblock %}
 
-{% block footer %}
-
-{% endblock %}
+{% block footer %} {% endblock %}
