@@ -20,5 +20,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('order-history/', views.orderHistory, name='order-history')
+    path('order-history/', views.order_history, name='order-history'),
+    path('pending-orders/', views.pending_orders, name='pending-orders')
 ]

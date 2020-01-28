@@ -127,14 +127,14 @@ export class BasketPage extends BasketState {
 
       // Product Name
       const nameElem = document.createElement("a");
-      nameElem.className = "basket-summary__row__data";
+      nameElem.className = "basket-summary__row__data text-link";
       nameElem.href = productPage + product.productId;
       nameElem.setAttribute("field", "product-name");
       nameElem.textContent = product.productName;
 
       // Product Store
       const storeElem = document.createElement("a");
-      storeElem.className = "basket-summary__row__data";
+      storeElem.className = "basket-summary__row__data text-link";
       storeElem.href = "/stores/" + product.storeId;
       storeElem.setAttribute("field", "product-store");
       storeElem.textContent = product.storeName;

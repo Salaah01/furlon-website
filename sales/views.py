@@ -23,8 +23,8 @@ from .models import Sales
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
-def orderHistory(request):
-    """ View for loading the user's order history. Uses pagination and to split number of results. Sales data is stored in
+def order_history(request):
+    """ View for loading the user's order history. Uses pagination to split number of results. Sales data is stored in
     sales_sales.
     """
     sales = Sales.objects.filter(user=request.user).order_by('-sale_id')
@@ -38,3 +38,21 @@ def orderHistory(request):
         'sales': pagedSales
     }
     return render(request, 'sales/order-history.html', context)
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def pending_orders(request):
+    """ View for loading the user's pending orders. Uses pagination to split number of results. Sales data is stored in
+    sales_sales.
+    """
+    sales = Sales.objects.filter(user=request.user).filter(status='Processing').order_by('-sale_id')
+
+    # Pagination
+    paginator = Paginator(sales, 20)
+    page = request.GET.get('page')
+    pagedSales = paginator.get_page(page)
+
+    context = {
+        'sales': pagedSales
+    }
+    return render(request, 'sales/pending-orders.html', context)

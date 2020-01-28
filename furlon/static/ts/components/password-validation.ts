@@ -17,22 +17,22 @@
 // =============================================================================
 
 // =============================================================================
-export class RegisterPasswordCheck {
+export class PasswordCheck {
   /** Checks if passwords match, if they do not, then update the attribute
    * of the password elements which will in turn update siblings to take on
    * some CSS styling (controlled through CSS).
    */
   private passwordElem = document.getElementById(
-    "register-password"
+    "account-password"
   ) as HTMLInputElement;
   private confirmPassElem = document.getElementById(
-    "register-password-confirm"
+    "account-password-confirm"
   ) as HTMLInputElement;
   private submitBtn = document.getElementById(
-    "register-submit"
+    "account-submit"
   ) as HTMLButtonElement;
   private errorMsgElem = document.getElementById(
-    "register-errors"
+    "account-errors"
   ) as HTMLSpanElement;
 
   // ---------------------------------------------------------------------------
