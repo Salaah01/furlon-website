@@ -73,6 +73,7 @@ def register(request):
 
         if not validationPassed:
             messages.error(request, errMsg)
+            return redirect('register')
 
         # Check if the email address is already in use.
         elif User.objects.filter(email=email).exists():
@@ -109,10 +110,31 @@ def account(request):
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def changePassword(request):
     """ Change password view. """
-    user = request.user
 
-    context = {}
-    return render(request, 'accounts/change-password.html', context)
+    if request.method == 'POST':
+        user = request.user
+        if user.check_password(request.POST['current-password']):
+            password = request.POST['password']
+            passwordConfirm = request.POST['confirm-password']
+
+            validationPassed, errMsg = validate_register_passwords(password, passwordConfirm)
+            if validationPassed:
+                user = User.objects.get(id=user.id)
+                user.set_password(password)
+                user.save()
+                auth.update_session_auth_hash(request, user)
+                messages.success(request, 'Password has been updated')
+                redirect('change-password')
+
+            else:
+                messages.error(request, errMsg)
+                redirect('change-password')
+        else:
+            messages.error(request, "Current password is incorrect")
+            auth.update_session_auth_hash(request, user)
+            return redirect('change-password')
+
+    return render(request, 'accounts/change-password.html')
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def validate_register_passwords(password, confirmedPassword):
@@ -124,7 +146,7 @@ def validate_register_passwords(password, confirmedPassword):
         return [False, 'Passwords do not match.']
 
     criterion = [
-        len(password) >= 6,                          # At least 6 characters
+        len(password) >= 6,                         # At least 6 characters
         re.findall('[0-9]', password),              # At least 1 number
         re.findall('[A-z]', password)               # At least 1 letter
     ]

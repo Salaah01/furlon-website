@@ -14,7 +14,7 @@ import { ExtendProductPage } from "./pages/products/product";
 import { CarouselImgs } from "./components/carousel-imgs";
 import { BasketState } from "./state/basket-items";
 import { BasketPage } from "./pages/basket/basket";
-import { RegisterPasswordCheck } from "./components/register-validation";
+import { PasswordCheck } from "./components/password-validation";
 import { Pagination } from "./components/pagination";
 
 // Build the navigation
@@ -44,7 +44,10 @@ if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
 } else if (CURRENT_URL.includes("/basket/")) {
   // Basket Page
   new BasketPage();
-} else if (CURRENT_URL.includes("user/register")) {
-  // Account Registration page
-  new RegisterPasswordCheck();
+} else if (
+  // Account registration and change password pages
+  CURRENT_URL.includes("user/register") ||
+  CURRENT_URL.includes("user/change-password")
+) {
+  new PasswordCheck();
 }
