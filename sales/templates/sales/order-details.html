@@ -138,6 +138,18 @@
       </div>
     </div>
   {% endfor %}
+
+  <div class="order-total">
+    <h2 class="order-total__heading heading-2">Total</h2>
+    <div class="order-total__details">
+      <p class="order-total__details__key">Sub Total</p>
+      <p class="order-total__details__value">{{ totals.subtotal }}</p>
+      <p class="order-total__details__key">Delivery Charge</p>
+      <p class="order-total__details__value">{{ totals.delivery }}</p>
+      <p class="order-total__details__key">Assembly Fee</p>
+      <p class="order-total__details__value">{{ totals.assembly }}</p>
+    </div>
+  </div>
 </main>
 
 {% endblock %}
