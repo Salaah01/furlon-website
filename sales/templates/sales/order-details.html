@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Order Details{% endblock %}
+
+{% block content %}
+
+<header class="order-details-head">
+  <h1 class="heading-1 order-details-head__title">Order Details</h1>
+  <h2 class="order-details-head__body">
+    Ref: <span>{{ orders.0.transaction_ref }}</span>
+  </h2>
+  <h2 class="order-details-head__body">
+    Ordered On: <span>{{ orders.0.ordered_on|date:"jS M Y" }}</span>
+  </h2>
+  <div class="order-details-head__address">
+    <p class="order-details-head__address__title">
+      Delivery Address
+    </p>
+    <p class="order-details-head__address__line">
+      {{ orders.0.recipient }}
+    </p>
+    <p class="order-details-head__address__line">
+      {{ orders.0.address_line_1 }}
+    </p>
+    {% if orders.0.address_line_2 %}
+    <p class="order-details-head__address__line">
+      {{ orders.0.address_line_2 }}
+    </p>
+    {% endif %}
+    <p class="order-details-head__address__line">
+      {{ orders.0.city }}
+    </p>
+    {% if orders.0.postcode %}
+    <p class="order-details-head__address__line">
+      {{ orders.0.postcode }}
+    </p>
+    {% endif %}
+    <p class="order-details-head__address__line">
+      {{ orders.0.country }}
+    </p>
+  </div>
+</header>
+
+<main class="orders">
+  {% for order in orders %}
+  <div class="order">
+    <div class="order__details">
+      <div
+        class="order__details__detail"
+        elem="status"
+        status="{{ order.status }}"
+      >
+        <h2 class="order__details__detail__text">{{ order.status }}</h2>
+        {% if order.status == 'Processing' or order.status == 'Scheduled' %}
+
+        <p class="order__details__detail__text">
+          {% if order.delivery_from == order.delivery_to %}
+          <span class="hide-400">Delivery expected on </span>{{
+          order.delivery_to|date:"D jS M Y H:i" }} {% else %}
+          <span class="hide-400"> Delivery scheduled from </span>{{
+          order.delivery_from|date:"D jS M Y H:i" }} to {{
+          order.delivery_to|date:"D jS M Y H:i" }} {% endif %}
+        </p>
+        {% elif order.status == 'Delivered' %}
+        <p class="order__details__detail__text">
+          <span class="hide-400">Delivered on </span>{{
+          order.delivered_on|date:"D jS M Y H:i" }}
+        </p>
+        {% elif order.status == 'Returned' %}
+        <p class="order__details__detail__text">
+          <span class="hide-400">Returned on </span>{{ order.returned_on|date:"D
+          jS M Y H:i" }}
+        </p>
+        {% endif %}
+      </div>
+
+      <div class="order__details__detail" elem="product-img">
+        <img
+          src="{{ order.product.showcase_image }}"
+          alt="{{ order.product }}"
+        />
+      </div>
+      <div class="order__details__detail" elem="product-info">
+        <a
+          class="order__details__detail__text text-link"
+          href="{% url 'product' order.product.product_id %}"
+          elem="product-name"
+        >
+          {{ order.product.name }}
+        </a>
+        <a
+          class="order__details__detail__text text-link"
+          href="{% url 'store' order.store.store_id %}"
+          elem="store-name"
+        >
+          {{ order.store.name }}
+        </a>
+      </div>
+
+      <div class="order__details__btns-container" elem="btns">
+        <div class="order__details__btns-container__btn" elem="buy-again-btn">
+          <a
+            class="btn btn--secondary"
+            href="{% url 'product' order.product.product_id %}"
+          >
+            Buy Again
+          </a>
+        </div>
+        {% if order.tracking_ref and order.tracking_ref != '' and order.tracking_ref != '0' %}
+        <div class="order__details__btns-container__btn" elem="track-order-btn">
+          <a class="btn btn--secondary" href="#">
+            Track Order
+          </a>
+        </div>
+        {% endif %}
+        <div class="order__details__btns-container__btn" elem="return-btn">
+          <a class="btn btn--secondary" href="#">
+            Return
+          </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="contact-btn">
+          <a href="#" class="btn btn--secondary">
+            Contact Seller
+          </a>
+        </div>
+        <div class="order__details__btns-container__btn" elem="review-btn">
+          <a href="#" class="btn btn--secondary">
+            Review
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</main>
+
+{% endblock %}
+
+{% block footer %} {% endblock %}

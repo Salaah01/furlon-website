@@ -56,3 +56,14 @@ def pending_orders(request):
         'sales': pagedSales
     }
     return render(request, 'sales/pending-orders.html', context)
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def order_details(request, transactionRef):
+    """ View for details on a single transaction.
+    Queries the """
+    orders = Sales.objects.filter(user=request.user).filter(transaction_ref=transactionRef)
+
+    context = {
+        'orders': orders
+    }
+    return render(request, 'sales/order-details.html', context)
