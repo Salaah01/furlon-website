@@ -2037,28 +2037,28 @@ main.store {
       text-align: center;
       width: 50%; }
 
-.order-hist-head {
+.order-head {
   padding-top: 10rem;
   text-align: center; }
   @media only screen and (max-width: 37.5em) {
-    .order-hist-head {
+    .order-head {
       padding-top: 5rem; } }
-  .order-hist-head > h1 {
+  .order-head > h1 {
     color: #f47c4a; }
 
-.order-hist-main {
+.order-main {
   padding: 5rem 20vw; }
   @media only screen and (max-width: 96.875em) {
-    .order-hist-main {
+    .order-main {
       padding: 5rem 15vw; } }
   @media only screen and (max-width: 62.5em) {
-    .order-hist-main {
+    .order-main {
       padding: 5rem 10vw; } }
   @media only screen and (max-width: 53.125em) {
-    .order-hist-main {
+    .order-main {
       padding: 5rem; } }
   @media only screen and (max-width: 50em) {
-    .order-hist-main {
+    .order-main {
       padding: 3rem 2rem; } }
 
 .order {

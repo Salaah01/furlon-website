@@ -7,7 +7,7 @@
 
 {% block content %}
 
-<header class="order-details-head">
+<header class="order-details-head order-head">
   <h1 class="heading-1 order-details-head__title">Order Details</h1>
   <h2 class="order-details-head__body">
     Ref: <span>{{ orders.0.transaction_ref }}</span>
@@ -44,7 +44,7 @@
   </div>
 </header>
 
-<main class="orders">
+<main class="orders order-main">
   {% for order in orders %}
     <div class="order">
       <div class="order__details">
@@ -65,13 +65,13 @@
                 {{ order.delivery_from|date:"D jS M Y H:i" }} to {{ order.delivery_to|date:"D jS M Y H:i" }}
               {% endif %}
             </p>
-    
+
           {% elif order.status == 'Delivered' %}
             <p class="order__details__detail__text">
               <span class="hide-400">Delivered on </span>
               {{ order.delivered_on|date:"D jS M Y H:i" }}
             </p>
-          
+
           {% elif order.status == 'Returned' %}
             <p class="order__details__detail__text">
               <span class="hide-400">Returned on </span>
