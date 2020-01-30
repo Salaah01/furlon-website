@@ -1,0 +1,20 @@
+{
+  "rooms": {
+    "living room": {
+      "title": "Living Room",
+      "subHeading": "It's the moments together that change us forever",
+      "topSection": [
+          "Whether it be that special spot on the sofa, that fluffy rug that feels great on your feet, or how the coffee table is just at the right height for you, we believe that the living room is a special place.",
+          "Choose from our wonderful selection of living room furniture to add to the comfort."
+      ]
+    },
+    "bedroom": {
+        "title": "Bedroom",
+        "subHeading": "I'm in a needy relationship, I need my bed!",
+        "subSections": {
+            "beds": "Who doesn't know the importance of a good nights sleep? If there is one area you should not compromise, it is with your sleep."
+        }
+    }
+  }
+  
+}

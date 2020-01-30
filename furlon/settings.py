@@ -92,7 +92,7 @@ if DEBUG:
             'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
             'NAME': 'rfxumegh',
         },
-        'default': {
+        'localhost': {
             'ENGINE': 'django.db.backends.postgresql',
             'USER': 'postgres',
             'PASSWORD': 'Rasel121ne',
@@ -111,6 +111,10 @@ if DEBUG:
             'USER': 'postgres',
             'PASSWORD': 'Rasel121ne',
             'NAME': 'furlon_tests',
+        },
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'furlon_db',
         }
     }
 
