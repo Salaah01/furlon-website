@@ -157,29 +157,32 @@
       </div>
     {% endfor %}
   </section>
-
-  <section class="order-total">
-    <h2 class="order-total__heading heading-2">Total</h2>
-    <div class="order-total__details">
-      <p class="order-total__details__key">Sub Total</p>
-      <p class="order-total__details__value">
-        &pound;{{ total_exVat|floatformat:2|intcomma }}
-      </p>
-      <p class="order-total__details__key">Vat</p>
-      <p class="order-total__details__value">
-        &pound;{{ total_vat|floatformat:2|intcomma }}
-      </p>
-      <p class="order-total__details__key">Delivery Charge</p>
-      <p class="order-total__details__value">
-        &pound;{{ total_delivery|floatformat:2|intcomma }}
-      </p>
-      <p class="order-total__details__key">Assembly Fee</p>
-      <p class="order-total__details__value">
-        &pound;{{ total_assembly|floatformat:2|intcomma }}
-      </p>
-      <p class="order-total__details__key">Grand Total</p>
-      <div class="order-total__details__value">
-        &pound;{{ total_total|floatformat:2|intcomma }}
+  <section class="order-main order-total-container">
+    <div class="order">
+      <div class="order-total">
+        <h2 class="order-total__heading heading-2">Total</h2>
+        <div class="order-total__details">
+          <p class="order-total__details__key">Sub Total</p>
+          <p class="order-total__details__value">
+            &pound;{{ total_exVat|floatformat:2|intcomma }}
+          </p>
+          <p class="order-total__details__key">Vat</p>
+          <p class="order-total__details__value">
+            &pound;{{ total_vat|floatformat:2|intcomma }}
+          </p>
+          <p class="order-total__details__key">Delivery Charge</p>
+          <p class="order-total__details__value">
+            &pound;{{ total_delivery|floatformat:2|intcomma }}
+          </p>
+          <p class="order-total__details__key">Assembly Fee</p>
+          <p class="order-total__details__value">
+            &pound;{{ total_assembly|floatformat:2|intcomma }}
+          </p>
+          <p class="order-total__details__key">Grand Total</p>
+          <div class="order-total__details__value">
+            &pound;{{ total_total|floatformat:2|intcomma }}
+          </div>
+        </div>
       </div>
     </div>
   </section>

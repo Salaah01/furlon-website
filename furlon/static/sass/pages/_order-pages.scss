@@ -204,6 +204,10 @@
       gap: 1.5rem;
     }
 
+    & > * {
+      max-width: 100%;
+    }
+
     &__detail {
       &[elem="status"] {
         grid-column: img-start / info-end;

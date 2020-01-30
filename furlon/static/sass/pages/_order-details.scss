@@ -3,6 +3,9 @@
 // Created By:     Salaah Amin
 // =============================================================================
 // Styling for the order details page.
+// The order-details template relies on another CSS. To isolate any
+// changes, overrides will occur within a container element wherever
+// adding an update in a sibling class is not sufficient for the change to occur.
 // =============================================================================
 
 // =============================================================================
@@ -14,8 +17,65 @@
 // =============================================================================
 .order-details-main {
   // Main element
+  // The order-details template relies on another CSS. To isolate any
+  // changes, overrides will happen here.
   @include padSection;
   padding-top: 0;
+  padding-left: 5vw;
+  padding-right: 5vw;
+
+  @include mediaQuery(1100) {
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+
+  @include mediaQuery(900) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @include mediaQuery(800) {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  // .order-main {
+  //   @include mediaQuery(1200) {
+  //     padding: 5rem 5vw;
+  //   }
+  // }
+
+  .order {
+    &__details {
+      @include mediaQuery(1200) {
+        // This element is changed in _order-pages.scss.
+        // Override ensures taht the btns' width stay as max-content.
+        grid-template-columns:
+          [img-start] 1.5fr
+          [img-end info-start] 2fr
+          [info-end btn-start] max-content
+          [btn-end];
+      }
+
+      @include mediaQuery(650) {
+        // Due to the earlier override, it removes all other overrides.
+        // Manually copying the CSS from the inherited CSS.
+        grid-template-columns: [img-start] 30% [img-end info-start] 70% [info-end];
+      }
+
+      &__btns-container {
+        &__btn {
+        }
+      }
+    }
+  }
+
+  .order-main {
+
+    @include mediaQuery(800) {
+      padding-bottom: 1rem;
+    }
+  }
 }
 
 // =============================================================================
@@ -36,7 +96,6 @@
   font-size: 1.6rem;
 
   &__elem {
-
     &[type="title"] {
       justify-self: end;
       font-weight: 600;
@@ -52,57 +111,98 @@
 
 // =============================================================================
 .order-address {
-    // Contains the delivery address.
-    // Located inside order-details-top.
-    text-align: center;
-    margin-bottom: 2rem;
+  // Contains the delivery address.
+  // Located inside order-details-top.
+  text-align: center;
+  margin-bottom: 2rem;
 
-    &__title {
-        margin-bottom: .25rem;
-        text-transform: uppercase;
-        font-weight: 600;
-    }
+  &__title {
+    margin-bottom: 0.25rem;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+// =============================================================================
+.order-total-container {
+  // Container for the totals section.
+  // The order-details template relies on another CSS. To isolate any
+  // changes, overrides will happen here.
+
+  // Set as important to avoid padding-top to be reset when mediaQueries
+  // in the inherited CSS change the padding.
+  padding-top: 0 !important;
+
+  & > .order {
+    // Overwriting order css
+    display: flex;
+    justify-content: flex-end;
+    border: none;
+  }
 }
 
 // =============================================================================
 .order-total {
-    // Order totals.
-    // Located in the main element as the last section.
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: max-content;
-    margin-left: auto;
-    margin-right: 38.4rem;
-    padding: 3rem 5rem;
-    border: 2px solid $colour-grey-light-1;
-    border-radius: 5px;
-    box-shadow: $box-shadow-1;
+  // Order totals.
+  // Located in inside .order where .order-total-container is the parent
+  // of .order.
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: max-content;
+  padding: 3rem 5rem;
+  border: 2px solid $colour-grey-light-1;
+  border-radius: 5px;
+  box-shadow: $box-shadow-1;
 
+  @include mediaQuery(650) {
+    width: 100%;
+  }
 
-    &__heading {
+  @include mediaQuery(450) {
+    padding: 2rem;
+  }
+
+  &__heading {
+    width: 100%;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    color: $colour-secondary;
+    border-bottom: 1px solid $colour-secondary;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+
+    @include mediaQuery(650) {
       width: 100%;
-      margin-bottom: 2rem;
-      padding-bottom: .5rem;
-      color: $colour-secondary;
-      border-bottom: 1px solid $colour-secondary;
-      font-size: 2.2rem;
-      text-transform: uppercase;
+      grid-template-columns: repeat(2, 1fr);
     }
 
-    &__details {
-      display: grid;
-      grid-template-columns: repeat(2, max-content);
+    & > * {
+      border-bottom: 1px solid $colour-grey-light-2;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
 
-      & > * {
-        border-bottom: 1px solid $colour-grey-light-2;
-        width: 100%;
-        margin-bottom: 1rem;
+    &__key {
+      padding-right: 10rem;
+      padding-bottom: 1rem;
+
+      @include mediaQuery(800) {
+        padding-right: 5rem;
       }
 
-      &__key {
-        padding-right: 10rem;
-        padding-bottom: 1rem;
+      @include mediaQuery(650) {
+        padding-right: 0;
       }
     }
+
+    &__value {
+      text-align: right;
+    }
+  }
 }
