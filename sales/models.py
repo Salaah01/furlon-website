@@ -142,7 +142,7 @@ class Sales(models.Model):
 
     delivery_price = models.FloatField(default=0)
     assembly_price = models.FloatField(default=0)
-    exVat = models.FloatField(default=0)
+    ex_vat = models.FloatField(default=0)
     vat = models.FloatField(default=0)
     total = models.FloatField(default=0)
 

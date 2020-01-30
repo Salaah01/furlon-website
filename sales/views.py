@@ -17,6 +17,7 @@ Render the following pages:
 # Third Party Imports
 from django.shortcuts import render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.db import connection
 
 # Local Imports
 from .models import Sales
@@ -63,7 +64,23 @@ def order_details(request, transactionRef):
     Queries the """
     orders = Sales.objects.filter(user=request.user).filter(transaction_ref=transactionRef)
 
+    sql = """
+        SELECT SUM(delivery_price), SUM(assembly_price), SUM(ex_vat), SUM(vat), SUM(total)
+        FROM sales_sales
+        WHERE transaction_ref = %s
+        """
+
+    cursor = connection.cursor()
+    cursor.execute(sql, [transactionRef])
+    totalsArr = cursor.fetchone()
+
     context = {
-        'orders': orders
+        'orders': orders,
+        'total_delivery': totalsArr[0],
+        'total_assembly': totalsArr[1],
+        'total_exVat': totalsArr[2],
+        'total_vat': totalsArr[3],
+        'total_total': totalsArr[4]
     }
+
     return render(request, 'sales/order-details.html', context)

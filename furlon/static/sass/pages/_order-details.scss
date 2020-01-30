@@ -1,0 +1,108 @@
+// =============================================================================
+// Date Created:   29/01/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the order details page.
+// =============================================================================
+
+// =============================================================================
+.order-details-head {
+  // Header element
+  padding-bottom: 0;
+}
+
+// =============================================================================
+.order-details-main {
+  // Main element
+  @include padSection;
+  padding-top: 0;
+}
+
+// =============================================================================
+.order-details-top {
+  // Top element in the main element. Placed at the top.
+}
+
+// =============================================================================
+.order-ref-date {
+  // Contains the order reference and the order date.
+  // Located inside .order-details-top.
+
+  @include padSection;
+  padding-top: 0;
+  padding-bottom: 5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 1.6rem;
+
+  &__elem {
+
+    &[type="title"] {
+      justify-self: end;
+      font-weight: 600;
+      margin-right: 1rem;
+      text-transform: uppercase;
+
+      &::after {
+        content: ":";
+      }
+    }
+  }
+}
+
+// =============================================================================
+.order-address {
+    // Contains the delivery address.
+    // Located inside order-details-top.
+    text-align: center;
+    margin-bottom: 2rem;
+
+    &__title {
+        margin-bottom: .25rem;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+}
+
+// =============================================================================
+.order-total {
+    // Order totals.
+    // Located in the main element as the last section.
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: max-content;
+    margin-left: auto;
+    margin-right: 38.4rem;
+    padding: 3rem 5rem;
+    border: 2px solid $colour-grey-light-1;
+    border-radius: 5px;
+    box-shadow: $box-shadow-1;
+
+
+    &__heading {
+      width: 100%;
+      margin-bottom: 2rem;
+      padding-bottom: .5rem;
+      color: $colour-secondary;
+      border-bottom: 1px solid $colour-secondary;
+      font-size: 2.2rem;
+      text-transform: uppercase;
+    }
+
+    &__details {
+      display: grid;
+      grid-template-columns: repeat(2, max-content);
+
+      & > * {
+        border-bottom: 1px solid $colour-grey-light-2;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      &__key {
+        padding-right: 10rem;
+        padding-bottom: 1rem;
+      }
+    }
+}
