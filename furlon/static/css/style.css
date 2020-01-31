@@ -1100,6 +1100,8 @@ svg {
       .order__details {
         grid-template-columns: [img-start] 35% [img-end info-start] 65% [info-end];
         gap: 1.5rem; } }
+    .order__details > * {
+      max-width: 100%; }
     .order__details__detail[elem="status"] {
       grid-column: img-start / info-end; }
       .order__details__detail[elem="status"] > h2 {
@@ -2298,7 +2300,9 @@ header.account-heading {
 
 .order-details-main {
   padding: 9.5rem 15rem;
-  padding-top: 0; }
+  padding-top: 0;
+  padding-left: 5vw;
+  padding-right: 5vw; }
   @media only screen and (max-width: 62.5em) {
     .order-details-main {
       padding: 8.5rem 10rem; } }
@@ -2311,6 +2315,27 @@ header.account-heading {
   @media only screen and (max-width: 28.75em) {
     .order-details-main {
       padding: 5rem 3.5rem; } }
+  @media only screen and (max-width: 68.75em) {
+    .order-details-main {
+      padding-left: 3vw;
+      padding-right: 3vw; } }
+  @media only screen and (max-width: 56.25em) {
+    .order-details-main {
+      padding-left: 1rem;
+      padding-right: 1rem; } }
+  @media only screen and (max-width: 50em) {
+    .order-details-main {
+      padding-left: 5vw;
+      padding-right: 5vw; } }
+  @media only screen and (max-width: 75em) {
+    .order-details-main .order__details {
+      grid-template-columns: [img-start] 1.5fr [img-end info-start] 2fr [info-end btn-start] max-content [btn-end]; } }
+  @media only screen and (max-width: 40.625em) {
+    .order-details-main .order__details {
+      grid-template-columns: [img-start] 30% [img-end info-start] 70% [info-end]; } }
+  @media only screen and (max-width: 50em) {
+    .order-details-main .order-main {
+      padding-bottom: 1rem; } }
 
 .order-ref-date {
   padding: 9.5rem 15rem;
@@ -2343,25 +2368,36 @@ header.account-heading {
   text-align: center;
   margin-bottom: 2rem; }
   .order-address__title {
-    margin-bottom: .25rem;
+    margin-bottom: 0.25rem;
     text-transform: uppercase;
     font-weight: 600; }
+
+.order-total-container {
+  padding-top: 0 !important; }
+  .order-total-container > .order {
+    display: flex;
+    justify-content: flex-end;
+    border: none; }
 
 .order-total {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   width: max-content;
-  margin-left: auto;
-  margin-right: 38.4rem;
   padding: 3rem 5rem;
   border: 2px solid #f0f0f0;
   border-radius: 5px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  @media only screen and (max-width: 40.625em) {
+    .order-total {
+      width: 100%; } }
+  @media only screen and (max-width: 28.125em) {
+    .order-total {
+      padding: 2rem; } }
   .order-total__heading {
     width: 100%;
     margin-bottom: 2rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
     color: #548FCC;
     border-bottom: 1px solid #548FCC;
     font-size: 2.2rem;
@@ -2369,6 +2405,10 @@ header.account-heading {
   .order-total__details {
     display: grid;
     grid-template-columns: repeat(2, max-content); }
+    @media only screen and (max-width: 40.625em) {
+      .order-total__details {
+        width: 100%;
+        grid-template-columns: repeat(2, 1fr); } }
     .order-total__details > * {
       border-bottom: 1px solid #ebebeb;
       width: 100%;
@@ -2376,3 +2416,11 @@ header.account-heading {
     .order-total__details__key {
       padding-right: 10rem;
       padding-bottom: 1rem; }
+      @media only screen and (max-width: 50em) {
+        .order-total__details__key {
+          padding-right: 5rem; } }
+      @media only screen and (max-width: 40.625em) {
+        .order-total__details__key {
+          padding-right: 0; } }
+    .order-total__details__value {
+      text-align: right; }
