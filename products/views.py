@@ -18,12 +18,14 @@ from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.db import connection
+from django.db.models import Avg
 
 
 # Local Imports
-from products.models import Products, Categories, ColourFamilies, Colours
+from products.models import Products, Categories, ColourFamilies, Colours, ProductReviews
 from .search_query import search_query
 from .product_info import Productinfo
+from django.contrib.auth.models import User
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
@@ -51,7 +53,8 @@ def search(request):
         if 'search' in request.GET:
             query[search] = request.GET['search']
 
-        criterion = ['search', 'f-minPrice', 'f-maxPrice', 'f-category', 'f-colour']
+        criterion = ['search', 'f-minPrice',
+                     'f-maxPrice', 'f-category', 'f-colour']
         # query = {criteria: request.GET[criteria] for criteria in criterion if request.GET[criteria]}
         query = {}
         for criteria in criterion:
@@ -66,7 +69,8 @@ def search(request):
     pagedListings = paginator.get_page(page)
 
     # Filter choices
-    minPrice = {price: price for price in ['0', '20', '50', '100', '150', '200', '300', '450', '600', '750', '1000']}
+    minPrice = {price: price for price in [
+        '0', '20', '50', '100', '150', '200', '300', '450', '600', '750', '1000']}
     maxPrice = {key: value for key, value in minPrice.items() if key != '0'}
     maxPrice['2000'] = '2000'
     maxPrice['-1'] = '2000+'
@@ -91,8 +95,10 @@ def search_results(request):
     """ Returns user's search results as a JSON object.
     The results will be generated based on what has been submitted using the search bar and the filters.
     """
-    criterion = ['search', 'f-minPrice', 'f-maxPrice', 'f-category', 'f-colour']
-    query = {criteria: request.GET[criteria] for criteria in criterion if request.GET[criteria]}
+    criterion = ['search', 'f-minPrice',
+                 'f-maxPrice', 'f-category', 'f-colour']
+    query = {criteria: request.GET[criteria]
+             for criteria in criterion if request.GET[criteria]}
 
     searchResults = search_query(query, 20, True)
     return HttpResponse(searchResults, content_type="application/json")
@@ -102,8 +108,29 @@ def search_results(request):
 def product(request, pk):
     """ Results a single product given its private key. """
     product = get_object_or_404(Products, pk=pk)
+    reviews = ProductReviews.objects.filter(product=pk).order_by('-review_date')
+
+    ratingsCount = reviews.count()
+
+    if ratingsCount:
+        rating = reviews.aggregate(Avg('rating'))
+
+        if request.user.is_authenticated:
+            usersReview = reviews.filter(product=pk)
+            otherReviews = reviews.exclude(user=request.user).order_by('-review_date')
+        else:
+            usersReview = None
+            otherReviews = reviews
+    
+    else:
+        rating = -1
+
     context = {
         'product': product,
+        'userReview': usersReview,
+        'otherReviews': otherReviews,
+        'ratingsCount': ratingsCount,
+        'rating': rating
     }
 
     # FUTURE DEVELOPMENT
@@ -128,6 +155,7 @@ def product_info_api(request, pk):
     in thelinked product table.
     """
     return HttpResponse(
-        Productinfo(infoList=['colours', 'sets', 'similar', 'features'], pk=pk).productInfo,
+        Productinfo(infoList=['colours', 'sets',
+                              'similar', 'features'], pk=pk).productInfo,
         content_type="application/json"
     )
