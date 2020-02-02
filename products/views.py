@@ -114,7 +114,7 @@ def product(request, pk):
 
     # Defaults
     userReview = None
-    otherReviews = reviews
+    otherReviews = reviews[:5]
     rating = -1
 
     ratingsCount = reviews.count()
@@ -124,7 +124,7 @@ def product(request, pk):
 
         # If user is logged in, remove the user's review from
         if request.user.is_authenticated:
-            userReview = reviews.filter(product=pk)
+            userReview = reviews.get(user=request.user)
             otherReviews = reviews.exclude(user=request.user).order_by('-review_date')
 
     context = {

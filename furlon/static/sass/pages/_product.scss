@@ -39,7 +39,6 @@ header.single-product-header {
   }
 
   .product-name {
-
     @include mediaQuery(600) {
       font-size: 4rem;
     }
@@ -148,7 +147,7 @@ header.single-product-header {
     }
 
     @include mediaQuery(530) {
-      gap: .5rem;
+      gap: 0.5rem;
     }
   }
 
@@ -170,7 +169,6 @@ header.single-product-header {
   &[totalthumbs="5"],
   &[totalthumbs="6"],
   &[totalthumbs="7"] {
-
     @include mediaQuery(1706) {
       grid-template-rows: 140%;
       margin-bottom: 24rem;

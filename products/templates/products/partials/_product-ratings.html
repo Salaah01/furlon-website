@@ -1,61 +1,61 @@
 {% load static %}
 <div class="product-showcase__section__ratings">
     <div class="product-showcase__section__ratings__stars ratings__stars">
-      {% if rating.rating__avg < 0.5 or not rating.rating__avg %}
+      {% if rating < 0.5 or not rating %}
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 1 %}
+      {% elif rating < 1 %}
         <span class=".rating__stars__star fa fa-star i-star i-star--half-checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 1.5 %}
+      {% elif rating < 1.5 %}
         <span class.rating__avg="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 2 %}
+      {% elif rating < 2 %}
         <span class=".rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--half-checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 2.5 %}
+      {% elif rating < 2.5 %}
         <span class.rating__avg="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 3 %}
+      {% elif rating < 3 %}
         <span class=".rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--half-checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 3.5 %}
+      {% elif rating < 3.5 %}
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 4 %}
+      {% elif rating < 4 %}
         <span class=".rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--half-checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 4.5 %}
+      {% elif rating < 4.5 %}
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star"></span>
-      {% elif rating.rating__avg < 5 %}
+      {% elif rating < 5 %}
         <span class=".rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
@@ -69,7 +69,8 @@
         <span class="rating__stars__star fa fa-star i-star i-star--checked"></span>
       {% endif %}
 
-      {% if ratingsCount %}
+      {% if ratingsCount == "hide" %}
+      {% elif ratingsCount %}
         <a href='#' class="product-showcase__section__ratings__rating">
           {{ ratingsCount }}
         </a>

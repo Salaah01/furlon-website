@@ -151,7 +151,7 @@
         &pound;{{ product.price|floatformat:2|intcomma }}
       </h2>
       <!-- Ratings -->
-      {% include 'products/partials/_product-ratings.html' %}
+      {% include 'products/partials/_product-ratings.html' with ratingsCount=ratingsCount rating=rating.rating__avg %}
 
       <!-- Description -->
       <div class="product-showcase__section__description">
@@ -291,26 +291,109 @@
     <!-- Product Reviews -->
     <div class="product-info__section all-cols" id="reviews" for='product-reviews'>
       <h2 class="product-info__section__title heading-2">Reviews</h2>
-      {% if products.ratings %}
-      <div class="product-info__section__text-block">
-        ratings
-      </div>
-      {% else %}
-      <div class="product-info__section__text-block">
-        <p class="product-info__section__text u-italics">
-          No reviews for this product yet.
-        </p>
-      </div>
-      {% endif %}
+      {% if ratingsCount %}
+        <div class="product-info__section__text-block">
+          <div class="product-reviews">
+            
+            {% if userReview %}
+              <form
+                class="product-reviews__review"
+                id="product-user-review-form"
+                method="POST"
+              >
+                {% csrf_token %}
+                {% if userReview.review_title %}
+                  <h3 class="product-reviews__review__title">
+                    {{ userReview.review_title }}
+                  </h3>
+                {% endif %}
+                <div class="product-reviews__review__rating">
+                  {% include 'products/partials/_product-ratings.html' with ratingsCount='hide' rating=userReview.rating %}
+                </div>
+                {% if userReview.comments %}
+                  <p class="product-reviews__review__comments">
+                    {{ userReview.comments }}
+                  </p>
+                  <p class="product-reviews__review__user">{{ user.first_name }}</p>
+                  <button
+                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
+                    id="user-review-edit-start"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
+                    id="user-review-delete-start"
+                  >
+                    Delete
+                  </button>
+                  <input
+                    type="text"
+                    name="user-review-title"
+                    class="product__reviews__review__input"
+                    value="{{ userReview.review_title }}"
+                    id="user-review-title"
+                  >
+                  <textarea 
+                    name="user-comments"
+                    id="user-comments"
+                    cols="50"
+                    rows="10"
+                  >{{ userReview.comments }}
+                  </textarea>
+                  <button
+                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
+                    id="user-review-edit-submit"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
+                    id="user-review-edit-cancel"
+                  >
+                    Cancel
+                  </button>
+                {% else %}
+                  <p class="product-reviews__review__user">{{ user.first_name }}</p>
+                {% endif %}
+                <input type="hidden" name="user-review-operation">
+                <input type="hidden" name="user-review-delete-bool" value="false">
+                <button type="submit" class="hide" id="user-review-submit"></button>
+              </form>
+            {% endif %}
+          </div>
 
+          {% for otherReview in otherReviews %}
+            <div class="product-reviews__review">
+              {% if otherReview.review_title %}
+                <h3 class="product-reviews__review__title">
+                  {{ otherReview.review_title }}
+                </h3>
+              {% endif %}
+              <div class="product-reviews__review__rating">
+                {% include 'products/partials/_product-ratings.html' with ratingsCount="hide" rating=otherReview.rating %}
+              </div>
+              {% if otherReview.comments %}
+                <p class="product-reviews__review__comments">
+                  {{ otherReview.comments }}
+                </p>
+              {% endif %}
+              <p class="product-reviews__review__user">
+                  {{ otherReview.user.first_name }}
+                </p>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="product-info__section__text-block">
+          <p class="product-info__section__text u-italics">
+            No reviews for this product yet.
+          </p>
+        </div>
+      {% endif %}
     </div>
   </section>
 </main>
-
-<h1>{{ rating.rating__avg }}</h1>
-<h1>{{ ratingsCount }}</h1>
-<p>{{ userReviews }}</p>
-<p>{{ otherReviews }}</p>
 
 {% endblock %}
 

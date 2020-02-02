@@ -356,7 +356,8 @@ class ProductReviews(models.Model):
     store = models.ForeignKey(Stores, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     rating = models.FloatField()
-    comments = models.CharField(max_length=2048, blank=True)
+    review_title = models.CharField(max_length=50, blank=True, null=True)
+    comments = models.CharField(max_length=2048, blank=True, null=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #

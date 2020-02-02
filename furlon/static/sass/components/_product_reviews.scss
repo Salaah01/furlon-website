@@ -1,0 +1,40 @@
+// =============================================================================
+// Date Created:   02/02/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the product reviews component.
+// =============================================================================
+
+// =============================================================================
+.product-reviews {
+  // Container for all the reviews.
+
+  // -------------------------------------------------------------------------
+  &__review {
+    // A single product review.
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__title {
+      font-size: 2.5rem;
+      font-weight: 400;
+    }
+
+    &__rating {
+      height: 1rem;
+    }
+
+    &__comments {
+    }
+
+    &__user {
+      font-style: italic;
+
+      &::before {
+        content: "- ";
+      }
+    }
+  }
+}
