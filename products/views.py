@@ -107,27 +107,29 @@ def search_results(request):
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def product(request, pk):
     """ Results a single product given its private key. """
+
+    # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
     reviews = ProductReviews.objects.filter(product=pk).order_by('-review_date')
+
+    # Defaults
+    userReview = None
+    otherReviews = reviews
+    rating = -1
 
     ratingsCount = reviews.count()
 
     if ratingsCount:
         rating = reviews.aggregate(Avg('rating'))
 
+        # If user is logged in, remove the user's review from
         if request.user.is_authenticated:
-            usersReview = reviews.filter(product=pk)
+            userReview = reviews.filter(product=pk)
             otherReviews = reviews.exclude(user=request.user).order_by('-review_date')
-        else:
-            usersReview = None
-            otherReviews = reviews
-    
-    else:
-        rating = -1
 
     context = {
         'product': product,
-        'userReview': usersReview,
+        'userReview': userReview,
         'otherReviews': otherReviews,
         'ratingsCount': ratingsCount,
         'rating': rating
