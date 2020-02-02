@@ -85,14 +85,14 @@ WSGI_APPLICATION = 'furlon.wsgi.application'
 
 if DEBUG:
     DATABASES = {
-        'elephantSQL': {
+        'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'HOST': 'rogue.db.elephantsql.com',
             'USER': 'rfxumegh',
             'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
             'NAME': 'rfxumegh',
         },
-        'default': {
+        'localhost': {
             'ENGINE': 'django.db.backends.postgresql',
             'USER': 'postgres',
             'PASSWORD': 'Rasel121ne',
