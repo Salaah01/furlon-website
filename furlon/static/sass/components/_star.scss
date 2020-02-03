@@ -5,9 +5,10 @@
 // Stars component. Used for ratings.
 // =============================================================================
 
-// -----------------------------------------------------------------------------
+// =============================================================================
 .i-star {
   color: $colour-grey-light-3;
+  transition: all 0.2s ease;
 
   &--half-checked {
     background: linear-gradient(
@@ -22,5 +23,17 @@
 
   &--checked {
     color: gold;
+  }
+
+  // ---------------------------------------------------------------------------
+  &--selectable {
+    // Modifier for clickable rating stars.
+    // On hover of a star, javaScript will set an attribute of highlight="true".
+    cursor: pointer;
+
+    &[highlight="true"] {
+      color: gold;
+      font-size: 1.65rem;
+    }
   }
 }

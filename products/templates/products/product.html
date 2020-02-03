@@ -294,70 +294,201 @@
       {% if ratingsCount %}
         <div class="product-info__section__text-block">
           <div class="product-reviews">
-            
+
             {% if userReview %}
+
+              <div class="product-reviews__review__confirm-delete confirm-delete">
+                <div class="confirm-delete__inner-container">
+                  <span>
+                    <i class="confirm-delete__icon fa fa-times"></i>
+                  </span>
+                  <h2 class="confirm-delete__title heading-2">Are You Sure?</h2>
+                  <p class="confirm-delete__text">
+                    You can always update your comments if you are not happy with them. Once you delete, there is no way to retrieve your comments.
+                  </p>
+                  <div class="confirm-delete__btns-container">
+                    <a class="btn btn--grey confirm-delete__btn">Cancel</a>
+                    <a class="btn btn--red confirm-delete__btn">Delete</a>
+                  </div>
+                </div>
+              </div>
               <form
                 class="product-reviews__review"
                 id="product-user-review-form"
                 method="POST"
               >
                 {% csrf_token %}
-                {% if userReview.review_title %}
-                  <h3 class="product-reviews__review__title">
-                    {{ userReview.review_title }}
-                  </h3>
-                {% endif %}
-                <div class="product-reviews__review__rating">
-                  {% include 'products/partials/_product-ratings.html' with ratingsCount='hide' rating=userReview.rating %}
+                <div
+                  class="product-reviews__review__section"
+                  for="title-ratings"
+                  userSection='current-section'
+                >
+                  <div
+                    class="product-reviews__review__rating"
+                    id="product-reviews-user-rating"
+                    userRating="{{ userReview.rating }}"
+                  >
+                    {% include 'products/partials/_product-ratings.html' with ratingsCount='hide' rating=userReview.rating %}
+                  </div>
+                  {% if userReview.review_title %}
+                    <h3 class="product-reviews__review__title">
+                      {{ userReview.review_title }}
+                    </h3>
+                  {% endif %}
                 </div>
+
+                <p class="product-reviews__review__date" userSection='current-section'>
+                  {{ userReview.review_date }}
+                </p>
+
                 {% if userReview.comments %}
-                  <p class="product-reviews__review__comments">
+                  <p class="product-reviews__review__comments" userSection='current-section'>
                     {{ userReview.comments }}
                   </p>
-                  <p class="product-reviews__review__user">{{ user.first_name }}</p>
-                  <button
-                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
-                    id="user-review-edit-start"
+                  <p
+                    class="product-reviews__review__user"
+                    userSection='current-section'
                   >
-                    Edit
-                  </button>
-                  <button
-                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
-                    id="user-review-delete-start"
+                    {{ user.first_name }}
+                  </p>
+                  <div
+                    class="product-reviews__review__btns-container"
+                    userSection='current-section'
                   >
-                    Delete
-                  </button>
-                  <input
-                    type="text"
-                    name="user-review-title"
-                    class="product__reviews__review__input"
-                    value="{{ userReview.review_title }}"
-                    id="user-review-title"
+                    <a
+                      class="product-reviews__review__btn"
+                      id="user-review-edit-start"
+                    >
+                      Edit
+                    </a>
+                    <a
+                      class="product-reviews__review__btn"
+                      id="user-review-delete-start"
+                    >
+                      Delete
+                    </a>
+                  </div>
+                  <div
+                    class="product-reviews__review__update-comments-container hide"
+                    userSection='update-section'
                   >
-                  <textarea 
-                    name="user-comments"
-                    id="user-comments"
-                    cols="50"
-                    rows="10"
-                  >{{ userReview.comments }}
-                  </textarea>
-                  <button
-                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
-                    id="user-review-edit-submit"
+                    <div class="product-reviews__review__form-element">
+                      <label
+                        for="user-review-update-ratings"
+                        class="product-reviews__review__form-label"
+                      >
+                        Rating
+                      </label>
+                      <div class="product-showcase__section__ratings">
+                        <div
+                          class="rating__stars"
+                          id='user-review-ratings-input'
+                          selectable='true'
+                        >
+                          <span
+                            class="rating__stars__star fa fa-star i-star i-star--selectable"
+                            value="1"
+                          >
+                          </span>
+                          <span
+                            class="rating__stars__star fa fa-star i-star i-star--selectable"
+                            value="2"
+                          >
+                          </span>
+                          <span
+                            class="rating__stars__star fa fa-star i-star i-star--selectable"
+                            value="3"
+                          >
+                          </span>
+                          <span
+                            class="rating__stars__star fa fa-star i-star i-star--selectable"
+                            value="4"
+                          >
+                          </span>
+                          <span
+                            class="rating__stars__star fa fa-star i-star i-star--selectable"
+                            value="5"
+                          >
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="product-reviews__review__form-element">
+                      <label
+                        for="user-review-title"
+                        class="product-reviews__review__form-label"
+                      >
+                        Title
+                      </label>
+                      <input
+                        type="text"
+                        name="user-review-title"
+                        class="product-reviews__review__form-input"
+                        value="{{ userReview.review_title }}"
+                        id="user-review-title"
+                        placeholder="Comment Title"
+                      >
+                    </div>
+
+                    <div class="product-reviews__review__form-element">
+                      <label
+                        for="user-comments"
+                        class="product-reviews__review__form-label"
+                      >
+                        Comments
+                      </label>
+                      <textarea
+                        name="user-comments"
+                        id="user-comments"
+                        cols="50"
+                        rows="10"
+                        placeholder="Comments"
+                        class="product-reviews__review__form-textarea"
+                      >{{ userReview.comments }}
+                      </textarea>
+                    </div>
+
+                  </div>
+
+                  <div
+                    class="product-reviews__review__btns-container hide"
+                    for="update-comments-submit-cancel"
+                    userSection='update-section'
                   >
-                    Submit
-                  </button>
-                  <button
-                    class="product__reviews__review__btn btn-inline btn-inline--secondary-b"
-                    id="user-review-edit-cancel"
-                  >
-                    Cancel
-                  </button>
+                    <a
+                      class="product-reviews__review__btn"
+                      id="user-review-edit-submit"
+                    >
+                      Submit
+                    </a>
+                    <a
+                      class="product-reviews__review__btn"
+                      id="user-review-edit-cancel"
+                    >
+                      Cancel
+                    </a>
+                  </div>
+
                 {% else %}
                   <p class="product-reviews__review__user">{{ user.first_name }}</p>
                 {% endif %}
-                <input type="hidden" name="user-review-operation">
-                <input type="hidden" name="user-review-delete-bool" value="false">
+                <input
+                  type="hidden"
+                  name="user-review-operation"
+                  id="user-review-operation"
+                >
+                <input
+                  type="hidden"
+                  name='user-review-rating'
+                  value="{{ userReview.rating }}"
+                  id="user-review-rating"
+                >
+                <input
+                  type="hidden"
+                  name="user-review-delete-bool"
+                  value="false"
+                  id="user-review-delete-bool"
+                >
                 <button type="submit" class="hide" id="user-review-submit"></button>
               </form>
             {% endif %}
@@ -365,14 +496,19 @@
 
           {% for otherReview in otherReviews %}
             <div class="product-reviews__review">
-              {% if otherReview.review_title %}
-                <h3 class="product-reviews__review__title">
-                  {{ otherReview.review_title }}
-                </h3>
-              {% endif %}
-              <div class="product-reviews__review__rating">
-                {% include 'products/partials/_product-ratings.html' with ratingsCount="hide" rating=otherReview.rating %}
+              <div class="product-reviews__review__section" for="title-ratings">
+                <div class="product-reviews__review__rating">
+                  {% include 'products/partials/_product-ratings.html' with ratingsCount="hide" rating=otherReview.rating %}
+                </div>
+                {% if otherReview.review_title %}
+                  <h3 class="product-reviews__review__title">
+                    {{ otherReview.review_title }}
+                  </h3>
+                {% endif %}
               </div>
+              <p class="product-reviews__review__date">
+                {{ userReview.review_date }}
+              </p>
               {% if otherReview.comments %}
                 <p class="product-reviews__review__comments">
                   {{ otherReview.comments }}

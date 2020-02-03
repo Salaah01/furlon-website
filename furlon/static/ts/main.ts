@@ -6,16 +6,23 @@
 // Behaves as the main hub for the js bundle.
 // ============================================================================
 
+// Component Imports
 import { Navigation } from "./components/navigation";
 import { DropdownMenu } from "./components/dropdown-menu";
 import { QuantityComponent } from "./components/quantity";
 import { SearchFilters } from "./components/search_filters";
-import { ExtendProductPage } from "./pages/products/product";
-import { CarouselImgs } from "./components/carousel-imgs";
-import { BasketState } from "./state/basket-items";
-import { BasketPage } from "./pages/basket/basket";
 import { PasswordCheck } from "./components/password-validation";
 import { Pagination } from "./components/pagination";
+import { CarouselImgs } from "./components/carousel-imgs";
+import { Ratings } from "./components/ratings";
+
+// State Imports
+import { BasketState } from "./state/basket-items";
+
+// Pages Imports
+import { ExtendProductPage } from "./pages/products/product";
+import { ProductUserReview } from "./pages/products/products_user_review";
+import { BasketPage } from "./pages/basket/basket";
 
 // Build the navigation
 new Navigation();
@@ -41,6 +48,9 @@ if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
   new ExtendProductPage();
   new QuantityComponent();
   new CarouselImgs();
+  Ratings.getInstance();
+  new ProductUserReview();
+
 } else if (CURRENT_URL.includes("/basket/")) {
   // Basket Page
   new BasketPage();

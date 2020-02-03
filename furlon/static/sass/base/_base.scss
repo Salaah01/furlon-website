@@ -110,6 +110,22 @@ svg {
       background-color: $colour-white-1;
     }
   }
+
+  &--grey {
+    background-color: rgb(194, 191, 191);
+
+    &:hover {
+      background-color: rgb(116, 116, 116);
+    }
+  }
+
+  &--red {
+    background-color: #DC3545;
+
+    &:hover {
+      background-color: #BD2130;
+    }
+  }
 }
 
 .btn-inline {
