@@ -297,7 +297,7 @@
 
             {% if userReview %}
 
-              <div class="product-reviews__review__confirm-delete confirm-delete">
+              <div class="product-reviews__review__confirm-delete confirm-delete hide">
                 <div class="confirm-delete__inner-container">
                   <span>
                     <i class="confirm-delete__icon fa fa-times"></i>
@@ -520,6 +520,12 @@
             </div>
           {% endfor %}
         </div>
+
+        {% if noReviews > 5 %}
+          <a href="#" class="product-reviews__more-reviews">
+            More Reviews
+          </a>
+        {% endif %}
       {% else %}
         <div class="product-info__section__text-block">
           <p class="product-info__section__text u-italics">

@@ -110,7 +110,8 @@ def product(request, pk):
 
     # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
-    reviews = ProductReviews.objects.filter(product=pk).order_by('-review_date')
+    reviews = ProductReviews.objects.filter(
+        product=pk).order_by('-review_date')
 
     # Defaults
     userReview = None
@@ -125,14 +126,16 @@ def product(request, pk):
         # If user is logged in, remove the user's review from
         if request.user.is_authenticated:
             userReview = reviews.get(user=request.user)
-            otherReviews = reviews.exclude(user=request.user).order_by('-review_date')
+            otherReviews = reviews.exclude(
+                user=request.user).order_by('-review_date')
 
     context = {
         'product': product,
         'userReview': userReview,
         'otherReviews': otherReviews,
         'ratingsCount': ratingsCount,
-        'rating': rating
+        'rating': rating,
+        'noReviews': len(reviews)
     }
 
     # FUTURE DEVELOPMENT
@@ -161,3 +164,29 @@ def product_info_api(request, pk):
                               'similar', 'features'], pk=pk).productInfo,
         content_type="application/json"
     )
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def product_reviews(request, pk):
+    """ View for returning the product-reviews template where pk is the primary key of a product. """
+    
+    # Base Querysets - getting the product and the reviews.
+    product = get_object_or_404(Products, pk=pk)
+    reviews = ProductReviews.objects.filter(
+        product=pk).order_by('-review_date')    
+
+    ratingsCount = reviews.count()
+
+    if ratingsCount:
+        rating = reviews.aggregate(Avg('rating'))
+    else:
+        rating = -1
+
+    context = {
+        'product': product,
+        'reviews': reviews,
+        'ratingsCount': ratingsCount,
+        'rating': rating,
+    }
+
+    return render(request, 'products/product-reviews.html', context)

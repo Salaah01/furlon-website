@@ -526,6 +526,16 @@ header.single-product-header {
     padding-right: 3rem;
   }
 
+  @include mediaQuery(500) {
+    gap: 2rem;
+  }
+
+  @include mediaQuery(300) {
+    gap: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   & > * {
     margin-bottom: 4rem;
   }

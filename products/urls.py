@@ -23,5 +23,6 @@ urlpatterns = [
     path('search/', views.search, name='search'),
     path('search-results/', views.search_results, name='search_results'),
     path('<int:pk>', views.product, name='product'),
-    path('info-api/<int:pk>', views.product_info_api, name='product-info-api')
+    path('info-api/<int:pk>', views.product_info_api, name='product-info-api'),
+    path('reviews/<int:pk>', views.product_reviews, name='product-reviews')
 ]

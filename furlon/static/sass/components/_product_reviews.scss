@@ -19,6 +19,10 @@
       // Some elements are grouped together a section. These allow bespoke
       // styling of that particular group by styling the "for" attribute.
       display: flex;
+
+      &[for='title-ratings'] {
+        flex-wrap: wrap;
+      }
     }
 
     display: flex;
@@ -28,6 +32,7 @@
     &__title {
       font-weight: 600;
       margin-bottom: .5rem;
+      text-align: left;
       color: $colour-secondary;
     }
 
@@ -43,6 +48,11 @@
 
     &__comments {
       margin-top: 2rem;
+      text-align: left;
+
+      @include mediaQuery(400) {
+        margin-top: 1rem;
+      }
     }
 
     &__user {
