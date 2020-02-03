@@ -120,10 +120,18 @@ svg {
   }
 
   &--red {
-    background-color: #DC3545;
+    background-color: #dc3545;
 
     &:hover {
-      background-color: #BD2130;
+      background-color: #bd2130;
+    }
+  }
+
+  &--green {
+    background-color: #28a745;
+
+    &:hover {
+      background-color: #218838;
     }
   }
 }

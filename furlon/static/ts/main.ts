@@ -50,7 +50,6 @@ if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
   new CarouselImgs();
   Ratings.getInstance();
   new ProductUserReview();
-
 } else if (CURRENT_URL.includes("/basket/")) {
   // Basket Page
   new BasketPage();
@@ -60,4 +59,6 @@ if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
   CURRENT_URL.includes("user/change-password")
 ) {
   new PasswordCheck();
+} else if (CURRENT_URL.includes("/order-history/")) {
+  Ratings.getInstance();
 }
