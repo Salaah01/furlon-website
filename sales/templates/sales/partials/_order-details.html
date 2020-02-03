@@ -45,7 +45,7 @@
             {% if sale.delivery_from == sale.delivery_to %}
               <span class="hide-400">Delivery expected on </span>{{ sale.delivery_to|date:"D jS M Y H:i" }}
             {% else %}
-            <span class="hide-400"> Delivery scheduled from </span>{{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
+              <span class="hide-400"> Delivery scheduled from </span>{{ sale.delivery_from|date:"D jS M Y H:i" }} to {{ sale.delivery_to|date:"D jS M Y H:i" }}
             {% endif %}
           </p>
 
@@ -90,14 +90,14 @@
           </a>
         </div>
         {% if sale.tracking_ref and sale.tracking_ref != '' and sale.tracking_ref != '0' %}
-        <div class="order__details__btns-container__btn" elem="track-order-btn">
-          <a
-            class="btn btn--secondary"
-            href="#"
-          >
-            Track Order
-          </a>
-        </div>
+          <div class="order__details__btns-container__btn" elem="track-order-btn">
+            <a
+              class="btn btn--secondary"
+              href="#"
+            >
+              Track Order
+            </a>
+          </div>
         {% endif %}
         <div class="order__details__btns-container__btn" elem="return-btn">
           <a
@@ -117,7 +117,7 @@
         </div>
         <div class="order__details__btns-container__btn" elem="review-btn">
         <a
-          href="#"
+          href="{% url 'product-reviews' sale.product.product_id %}"
           class="btn btn--secondary"
         >
           Review

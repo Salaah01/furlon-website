@@ -169,7 +169,7 @@ def product_info_api(request, pk):
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def product_reviews(request, pk):
     """ View for returning the product-reviews template where pk is the primary key of a product. """
-    
+
     # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
     reviews = ProductReviews.objects.filter(

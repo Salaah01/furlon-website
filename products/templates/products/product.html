@@ -515,14 +515,17 @@
                 </p>
               {% endif %}
               <p class="product-reviews__review__user">
-                  {{ otherReview.user.first_name }}
-                </p>
+                {{ otherReview.user.first_name }}
+              </p>
             </div>
           {% endfor %}
         </div>
 
         {% if noReviews > 5 %}
-          <a href="#" class="product-reviews__more-reviews">
+          <a
+            href="{% url 'product-reviews' product.product_id %}"
+            class="product-reviews__more-reviews"
+          >
             More Reviews
           </a>
         {% endif %}

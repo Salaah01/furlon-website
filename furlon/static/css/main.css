@@ -4655,4 +4655,30 @@ header.account-heading > h1 {
 .order-total__details__value {
   text-align: right;
 }
+
+.product-reviews-header {
+  padding: 9.5rem 30rem 0;
+}
+
+.product-reviews-header__title {
+  margin-bottom: 2rem;
+  color: #f47c4a;
+}
+
+.product-reviews-header__product-name {
+  color: #548FCC;
+  margin-bottom: 1.5rem;
+}
+
+.product-reviews-header__price {
+  margin-bottom: 1.5rem;
+}
+
+.product-reviews-main {
+  padding: 2.5rem 30rem 10rem;
+}
+
+.product-reviews-main .product-reviews:first-of-type {
+  border-top: 1px solid #ebebeb;
+}
 /*# sourceMappingURL=main.css.map */
