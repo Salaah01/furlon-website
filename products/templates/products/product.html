@@ -307,8 +307,12 @@
                     You can always update your comments if you are not happy with them. Once you delete, there is no way to retrieve your comments.
                   </p>
                   <div class="confirm-delete__btns-container">
-                    <a class="btn btn--grey confirm-delete__btn">Cancel</a>
-                    <a class="btn btn--red confirm-delete__btn">Delete</a>
+                    <a class="btn btn--grey confirm-delete__btn" for="cancel">
+                      Cancel
+                    </a>
+                    <a class="btn btn--red confirm-delete__btn" for="delete">
+                      Delete
+                    </a>
                   </div>
                 </div>
               </div>
@@ -488,6 +492,11 @@
                   name="user-review-delete-bool"
                   value="false"
                   id="user-review-delete-bool"
+                >
+                <input
+                  type="hidden"
+                  name="user-review-id"
+                  value="{{ userReview.id }}"
                 >
                 <button type="submit" class="hide" id="user-review-submit"></button>
               </form>

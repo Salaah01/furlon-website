@@ -26,7 +26,7 @@ export class Ratings {
 
   // ---------------------------------------------------------------------------
   private constructor() {
-    if (this.containers) {
+    if (this.containers.length) {
       this.userRating = Number(
         document
           .querySelector("#product-reviews-user-rating")!
@@ -53,10 +53,10 @@ export class Ratings {
 
   // ---------------------------------------------------------------------------
   static getInstance(): Ratings {
-      if (!Ratings.instance) {
-          Ratings.instance = new Ratings();
-      }
-      return Ratings.instance;
+    if (!Ratings.instance) {
+      Ratings.instance = new Ratings();
+    }
+    return Ratings.instance;
   }
 
   // ---------------------------------------------------------------------------
@@ -64,6 +64,7 @@ export class Ratings {
     /**
      * Sets the selected class to the stars in accordance to what the
      * user's current rating is.
+     * Will also update a hidden input if it exists with the user's rating.
      */
     // Reset
     this.remove_all_stars(stars);
@@ -88,6 +89,14 @@ export class Ratings {
 
     if (userRating == 5) {
       stars[4].classList.add(this.selectedClass);
+    }
+
+    // Update the hidden input if it exists.
+    const hiddenInput = document.getElementById(
+      "user-review-rating"
+    ) as HTMLInputElement | null;
+    if (hiddenInput) {
+      hiddenInput.value = userRating.toString();
     }
   }
 

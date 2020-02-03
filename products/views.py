@@ -14,7 +14,7 @@ This includes the search page and a dedicated page for each product.
 # Python Core Library
 
 # Third Party Imports
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.db import connection
@@ -106,12 +106,28 @@ def search_results(request):
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def product(request, pk):
-    """ Results a single product given its private key. """
+    """ Results a single product given its private key.
+    View also handles POST requests where user is able to update or delete their review.
+    """
 
     # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
     reviews = ProductReviews.objects.filter(
         product=pk).order_by('-review_date')
+
+    if request.POST:
+        userReview = reviews.get(id=request.POST['user-review-id'])
+
+        if request.POST['user-review-operation'] == 'update':
+            userReview.rating = request.POST['user-review-rating']
+            userReview.review_title = request.POST['user-review-title']
+            userReview.comments = request.POST['user-comments']
+            userReview.save()
+            return redirect('product', pk)
+
+        elif request.POST['user-review-operation'] == 'delete':
+            userReview.delete()
+            return redirect('product', pk)
 
     # Defaults
     userReview = None
@@ -125,7 +141,7 @@ def product(request, pk):
 
         # If user is logged in, remove the user's review from
         if request.user.is_authenticated:
-            userReview = reviews.get(user=request.user)
+            userReview = reviews.filter(user=request.user).first()
             otherReviews = reviews.exclude(
                 user=request.user).order_by('-review_date')
 
@@ -137,19 +153,6 @@ def product(request, pk):
         'rating': rating,
         'noReviews': len(reviews)
     }
-
-    # FUTURE DEVELOPMENT
-    # Retrieving the colour families where the product's colours are attached to.
-    # colourFamiliesSQL = """
-    #     SELECT name
-    #     FROM products_colourfamilies
-    #     WHERE (
-    #         SELECT pcol.col_families
-    #         FROM products_products pp, products_colours pcol
-    #         WHERE pp.colour_id = pcol.id
-    #         AND pp.product_id = %s
-    #     ) LIKE '%' || name || '%'
-    #     """
 
     return render(request, 'products/product.html', context)
 
@@ -173,7 +176,7 @@ def product_reviews(request, pk):
     # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
     reviews = ProductReviews.objects.filter(
-        product=pk).order_by('-review_date')    
+        product=pk).order_by('-review_date')
 
     ratingsCount = reviews.count()
 
