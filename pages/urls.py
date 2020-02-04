@@ -13,7 +13,7 @@ Sets how each path is handled.
 # Python Core Library
 
 # Third Party Imports
-from django.urls import path
+from django.urls import path, include
 
 # Local Imports
 from . import views

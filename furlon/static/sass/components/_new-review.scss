@@ -16,7 +16,7 @@
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +28,27 @@
     background-color: #fff;
     border-radius: 5px;
     box-shadow: $box-shadow-4;
-    width: 50%;
+    width: 60%;
+    max-height: 90%;
+    overflow-y: scroll;
+
+    @include mediaQuery(770) {
+      width: 70%;
+    }
+
+    @include mediaQuery(550) {
+      width: 80%;
+      padding: 4rem 5rem;
+    }
+
+    @include mediaQuery(500) {
+      padding: 4rem 2rem;
+    }
+
+    @include mediaQuery(400) {
+      width: 90%;
+      padding: 2rem;
+    }
   }
 
   &__comment-title.heading-2 {
