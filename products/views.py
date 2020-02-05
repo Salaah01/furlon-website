@@ -15,17 +15,15 @@ This includes the search page and a dedicated page for each product.
 
 # Third Party Imports
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 from django.http import HttpResponse
-from django.db import connection
 from django.db.models import Avg
 
 
 # Local Imports
-from products.models import Products, Categories, ColourFamilies, Colours, ProductReviews
+from products.models import Products, Categories, ColourFamilies, ProductReviews
 from .search_query import search_query
 from .product_info import Productinfo
-from django.contrib.auth.models import User
 
 
 # ------------------------------------------------------------------------------------------------------------------------------ #

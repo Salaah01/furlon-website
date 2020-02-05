@@ -42,7 +42,7 @@ def order_history(request):
         return redirect('order-history')
 
     # A list of the product ids where the user has left review.
-    userReviewListSQL =("""SELECT DISTINCT product_id
+    userReviewListSQL = ("""SELECT DISTINCT product_id
                         FROM products_productreviews
                         WHERE user_id=%s""")
 
@@ -67,7 +67,8 @@ def pending_orders(request):
     """ View for loading the user's pending orders. Uses pagination to split number of results. Sales data is stored in
     sales_sales.
     """
-    sales = Sales.objects.filter(user=request.user).filter(status='Processing').order_by('-sale_id')
+    sales = Sales.objects.filter(user=request.user).filter(
+        status='Processing').order_by('-sale_id')
 
     # Pagination
     paginator = Paginator(sales, 20)
@@ -94,11 +95,11 @@ def order_details(request, transactionRef):
 
         return redirect('order-details', transactionRef)
 
-
-    orders = Sales.objects.filter(user=request.user).filter(transaction_ref=transactionRef)
+    orders = Sales.objects.filter(user=request.user).filter(
+        transaction_ref=transactionRef)
 
     # A list of the product ids where the user has left review.
-    userReviewListSQL =("""SELECT DISTINCT product_id
+    userReviewListSQL = ("""SELECT DISTINCT product_id
                         FROM products_productreviews
                         WHERE user_id=%s""")
 
@@ -147,7 +148,6 @@ def process_new_review(request):
     comments = ''
 
     postRequest = request.POST
-
 
     # VALIDATION
     # Validate product ID

@@ -24,5 +24,5 @@ urlpatterns = [
     path('basket/', views.basket, name='basket'),
     path('basket-info-API/', views.basket_info_api, name='basketInfoAPI'),
     path('help/', views.help, name='help'),
-    path('rooms/bedroom/', views.rooms_bedroom, name='rooms-bedroom')
+    path('categories/beds/', views.categories_beds, name='categories-beds')
 ]
