@@ -15,6 +15,7 @@ import { PasswordCheck } from "./components/password-validation";
 import { Pagination } from "./components/pagination";
 import { CarouselImgs } from "./components/carousel-imgs";
 import { Ratings } from "./components/ratings";
+import { NewReview } from "./components/new_review";
 
 // State Imports
 import { BasketState } from "./state/basket-items";
@@ -60,5 +61,6 @@ if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
 ) {
   new PasswordCheck();
 } else if (CURRENT_URL.includes("/order-history/")) {
+  new NewReview();
   Ratings.getInstance();
 }

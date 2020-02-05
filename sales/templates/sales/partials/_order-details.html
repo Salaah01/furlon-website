@@ -2,6 +2,7 @@
 {% load humanize %}
 
 <main class="order-main">
+  {% include "partials/_new-review.html" %}
   {% for sale in sales %}
   <div class="order">
     <div class="order__head">
@@ -115,14 +116,19 @@
             Contact Seller
           </a>
         </div>
-        <div class="order__details__btns-container__btn" elem="review-btn">
-        <a
-          href="{% url 'product-reviews' sale.product.product_id %}"
-          class="btn btn--secondary"
-        >
-          Review
-        </a>
-        </div>
+        {% if sale.status == 'Delivered' %}
+          {% if sale.product.product_id not in userReviewList or userReviewList == None %}
+            <div class="order__details__btns-container__btn" elem="review-btn">
+            <a
+              newReviewProduct="{{ sale.product.product_id }}"
+              newReviewStore="{{ sale.store.store_id }}"
+              class="btn btn--secondary"
+            >
+              Review
+            </a>
+            </div>
+          {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>

@@ -13,6 +13,12 @@
 // and all preceding starts will highlight.
 // On click of that star, that start will be come selected and so the classes
 // will update accordingly.
+//
+// REQUIREMENTS
+// ------------
+// - Must have a container with #product-reviews-user-rating for all the rating
+//   elements.
+// - for POST request, must have a form element with #user-review-rating.
 // =============================================================================
 
 // =============================================================================

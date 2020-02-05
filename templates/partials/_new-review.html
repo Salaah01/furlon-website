@@ -1,11 +1,11 @@
-<section class="new-review">
+<section class="new-review hide" id="nev-review-pop-up">
   <form method="POST" class="new-review__form">
     {% csrf_token %}
     <h2 class="heading-2 new-review__comment-title">Review</h2>
     <div class="new-review__rating">
       <div
         class="rating__stars"
-        id="user-review-ratings-input"
+        id="product-reviews-user-rating"
         selectable="true"
       >
         <span
@@ -36,9 +36,11 @@
         <input
           type="hidden"
           name="user-review-rating"
-          id="product-reviews-user-rating"
+          id="user-review-rating"
         />
       </div>
+      <input type="hidden" name="product-id" id="new-review-product-id">
+      <input type="hidden" name="store-id" id="new-review-store-id" >
     </div>
     <div class="nav-review__section">
       <label for="new-review-title" class="new-review__label">Title</label>
@@ -65,7 +67,7 @@
     </div>
 
     <div class="new-review__btns-container">
-        <a href class="new-review__btn btn btn--red" for="cancel">Cancel</a>
+        <a class="new-review__btn btn btn--red" for="cancel">Cancel</a>
         <button type="submit" class="new-review__btn btn btn--secondary" for="submit">Submit</button>
     </div>
   </form>

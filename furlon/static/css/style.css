@@ -537,12 +537,19 @@ section.pagination-section {
     border-radius: 5px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     width: 50%; }
+    @media only screen and (max-width: 56.25em) {
+      .confirm-delete__inner-container {
+        width: 75%; } }
   .confirm-delete__icon {
     color: #ff0022;
     font-size: 7rem;
     margin-bottom: .5rem; }
   .confirm-delete__title {
     margin-bottom: 1rem; }
+    @media only screen and (max-width: 37.5em) {
+      .confirm-delete__title {
+        font-size: 3rem;
+        padding: 4rem 2rem; } }
   .confirm-delete__text {
     margin-bottom: 3rem;
     font-size: 1.75rem;
@@ -556,7 +563,7 @@ section.pagination-section {
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 10000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -567,7 +574,23 @@ section.pagination-section {
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    width: 50%; }
+    width: 60%;
+    max-height: 90%;
+    overflow-y: scroll; }
+    @media only screen and (max-width: 48.125em) {
+      .new-review__form {
+        width: 70%; } }
+    @media only screen and (max-width: 34.375em) {
+      .new-review__form {
+        width: 80%;
+        padding: 4rem 5rem; } }
+    @media only screen and (max-width: 31.25em) {
+      .new-review__form {
+        padding: 4rem 2rem; } }
+    @media only screen and (max-width: 25em) {
+      .new-review__form {
+        width: 90%;
+        padding: 2rem; } }
   .new-review__comment-title.heading-2 {
     margin-bottom: 1rem;
     font-size: 5rem;

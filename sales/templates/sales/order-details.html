@@ -12,6 +12,7 @@
 </header>
 
 <main class="order-details-main">
+  {% include "partials/_new-review.html" %}
   <section class="order-details-top">
     <div class="order-ref-date">
       <p class="order-ref-date__elem" type="title" field="ref">
@@ -147,11 +148,16 @@
                 Contact Seller
               </a>
             </div>
+            {% if order.status == 'Delivered' and order.product.product_id not in userReviewList %}
             <div class="order__details__btns-container__btn" elem="review-btn">
-              <a href="{% url 'product-reviews' order.product.product_id %}" class="btn btn--secondary">
+              <a
+                class="btn btn--secondary"
+                newReviewFor="{{ order.product.product_id }}"
+              >
                 Review
               </a>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
