@@ -109,12 +109,14 @@ def product(request, pk):
     """ Results a single product given its private key.
     View also handles POST requests where user is able to update or delete their review.
     """
-
     # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
     reviews = ProductReviews.objects.filter(
         product=pk).order_by('-review_date')
 
+    # POST request is for updating/deleting a review.
+    # Can only be done if the user is authenticated and the review belongs
+    # to the user.
     if request.POST:
         userReview = reviews.get(id=request.POST['user-review-id'])
 
@@ -139,7 +141,8 @@ def product(request, pk):
     if ratingsCount:
         rating = reviews.aggregate(Avg('rating'))
 
-        # If user is logged in, remove the user's review from
+        # If user is logged in, remove the user's review from the otherReviews
+        # object.
         if request.user.is_authenticated:
             userReview = reviews.filter(user=request.user).first()
             otherReviews = reviews.exclude(
@@ -171,25 +174,55 @@ def product_info_api(request, pk):
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def product_reviews(request, pk):
-    """ View for returning the product-reviews template where pk is the primary key of a product. """
-
+    """ View for returning the product-reviews template where pk is the primary key of a product.
+    Also handles POST requests where the user is able to update and/or delete their review.
+    """
     # Base Querysets - getting the product and the reviews.
     product = get_object_or_404(Products, pk=pk)
     reviews = ProductReviews.objects.filter(
         product=pk).order_by('-review_date')
 
+    # POST request is for updating/deleting a review.
+    # Can only be done if the user is authenticated and the review belongs
+    # to the user.
+    if request.POST:
+        userReview = reviews.get(id=request.POST['user-review-id'])
+
+        if request.POST['user-review-operation'] == 'update':
+            userReview.rating = request.POST['user-review-rating']
+            userReview.review_title = request.POST['user-review-title']
+            userReview.comments = request.POST['user-comments']
+            userReview.save()
+            return redirect('product-reviews', pk)
+
+        elif request.POST['user-review-operation'] == 'delete':
+            userReview.delete()
+            return redirect('product', pk)
+
+    # Defaults
+    userReview = None
+    otherReviews = reviews[:5]
+    rating = -1
+
     ratingsCount = reviews.count()
 
     if ratingsCount:
         rating = reviews.aggregate(Avg('rating'))
-    else:
-        rating = -1
+
+    # If user is logged in, remove the user's review from the otherReviews
+        # object.
+        if request.user.is_authenticated:
+            userReview = reviews.filter(user=request.user).first()
+            otherReviews = reviews.exclude(
+                user=request.user).order_by('-review_date')
 
     context = {
         'product': product,
-        'reviews': reviews,
+        'userReview': userReview,
+        'otherReviews': otherReviews,
         'ratingsCount': ratingsCount,
         'rating': rating,
+        'noReviews': len(reviews)
     }
 
     return render(request, 'products/product-reviews.html', context)

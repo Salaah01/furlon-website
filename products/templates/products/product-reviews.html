@@ -24,35 +24,14 @@
 
 <main class="product-reviews-main">
   <section class="product-reviews">
-    {% if reviews %}
-      {% for review in reviews %}
-        <div class="product-reviews__review">
-          <div class="product-reviews__review__section" for="title-ratings">
-            <div class="product-reviews__review__rating">
-              {% include 'products/partials/_product-ratings.html' with ratingsCount="hide" rating=review.rating %}
-            </div>
-            <!-- Review Title -->
-            {% if review.review_title %}
-              <h3 class="product-reviews__review__title">
-                {{ review.review_title }}
-              </h3>
-            {% endif %}
-          </div>
-          <!-- Review Date -->
-          <p class="product-reviews__review__date">
-            {{ review.review_date }}
-          </p>
-          <!-- Review Comments -->
-          {% if review.comments %}
-            <p class="product-reviews__review__comments">
-              {{ review.comments }}
-            </p>
-          {% endif %}
-            <!-- Review User -->
-          <p class="product-reviews__review__user">
-            {{ otherReview.user.first_name }}
-          </p>
-        </div>
+
+    {% if userReview %}
+      {% include 'products/partials/_user-review.html' with user=user userReview=userReview %}
+    {% endif %}
+
+    {% if otherReviews %}
+      {% for otherReview in otherReviews %}
+        {% include 'products/partials/_product-review.html' with review=otherReview %}
       {% endfor %}
     {% else %}
       <p class="product-reviews__review__none">

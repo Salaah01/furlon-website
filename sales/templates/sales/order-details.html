@@ -7,6 +7,8 @@
 
 {% block content %}
 
+{% include 'partials/_messages.html' %}
+
 <header class="order-details-head order-head">
   <h1 class="heading-1 order-details-head__title">Order Details</h1>
 </header>
@@ -150,12 +152,15 @@
             </div>
             {% if order.status == 'Delivered' and order.product.product_id not in userReviewList %}
             <div class="order__details__btns-container__btn" elem="review-btn">
-              <a
-                class="btn btn--secondary"
-                newReviewFor="{{ order.product.product_id }}"
-              >
-                Review
-              </a>
+              <div id="product-reviews-user-rating">
+                <a
+                  class="btn btn--secondary"
+                  newReviewProduct="{{ order.product.product_id }}"
+                  newReviewStore="{{ order.store.store_id }}"
+                >
+                  Review
+                </a>
+              </div>
             </div>
             {% endif %}
           </div>

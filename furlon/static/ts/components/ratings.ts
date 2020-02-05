@@ -18,7 +18,13 @@
 // ------------
 // - Must have a container with #product-reviews-user-rating for all the rating
 //   elements.
-// - for POST request, must have a form element with #user-review-rating.
+//
+// - On review element, must attributes for "newReviewProduct" and
+//   "newReviewStore" which should equal to the product ID and store ID
+//   respectively.
+//
+// - For POST request, must have a form element with #user-review-rating. The
+//   JavaScript will update this input value with the rating selected.
 // =============================================================================
 
 // =============================================================================

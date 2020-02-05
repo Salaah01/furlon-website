@@ -84,6 +84,17 @@ def pending_orders(request):
 def order_details(request, transactionRef):
     """ View for details on a single transaction.
     Queries the """
+
+    if request.POST:
+        reviewResult, reviewMsg = process_new_review(request)
+        if reviewResult == 'success':
+            messages.success(request, reviewMsg)
+        else:
+            messages.error(request, reviewMsg)
+
+        return redirect('order-details', transactionRef)
+
+
     orders = Sales.objects.filter(user=request.user).filter(transaction_ref=transactionRef)
 
     # A list of the product ids where the user has left review.

@@ -63,4 +63,7 @@ if (CURRENT_URL.search(/\/products\/[0-9]{1,}/) != -1) {
 } else if (CURRENT_URL.includes("/order-history/")) {
   new NewReview();
   Ratings.getInstance();
+} else if (CURRENT_URL.includes("/products/reviews/")) {
+  Ratings.getInstance();
+  new ProductUserReview();
 }
