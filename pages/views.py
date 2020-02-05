@@ -71,3 +71,20 @@ def basket_info_api(request):
 def help(request):
     """ View for the help page """
     return render(request, 'pages/help.html')
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def rooms_context_manager(room):
+    """ A generic context manager for handling context for room pages. """
+    if 'room' == 'bedroom':
+        return None
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def rooms_bedroom(request):
+    """ Handles the bedroom view """
+    return render(
+        request,
+        'pages/rooms-bedroom.html',
+        rooms_context_manager('bedroom')
+    )

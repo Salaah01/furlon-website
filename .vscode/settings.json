@@ -2,7 +2,7 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
-    "python.pythonPath": "C:\\Anaconda3\\python.exe",
+    "python.pythonPath": "C:\\Users\\24ran3939\\Python\\python.exe",
     "cSpell.words": [
         "endblock",
         "furlon",
