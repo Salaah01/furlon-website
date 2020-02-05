@@ -116,18 +116,16 @@
             Contact Seller
           </a>
         </div>
-        {% if sale.status == 'Delivered' %}
-          {% if sale.product.product_id not in userReviewList or userReviewList == None %}
-            <div class="order__details__btns-container__btn" elem="review-btn">
-            <a
-              newReviewProduct="{{ sale.product.product_id }}"
-              newReviewStore="{{ sale.store.store_id }}"
-              class="btn btn--secondary"
-            >
-              Review
-            </a>
-            </div>
-          {% endif %}
+        {% if sale.status == 'Delivered' and sale.product.product_id not in userReviewList %}
+          <div class="order__details__btns-container__btn" elem="review-btn">
+          <a
+            newReviewProduct="{{ sale.product.product_id }}"
+            newReviewStore="{{ sale.store.store_id }}"
+            class="btn btn--secondary"
+          >
+            Review
+          </a>
+          </div>
         {% endif %}
       </div>
     </div>

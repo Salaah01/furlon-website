@@ -57,7 +57,7 @@ def order_history(request):
 
     context = {
         'sales': pagedSales,
-        'userReviewList': userReviewList
+        'userReviewList': userReviewList or []
     }
     return render(request, 'sales/order-history.html', context)
 
@@ -114,7 +114,7 @@ def order_details(request, transactionRef):
         'total_exVat': totalsArr[2],
         'total_vat': totalsArr[3],
         'total_total': totalsArr[4],
-        'userReviewList': userReviewList
+        'userReviewList': userReviewList or []
     }
 
     return render(request, 'sales/order-details.html', context)
