@@ -23,12 +23,12 @@
         <p class="order__head__column__body">{{ sale.transaction_ref }}</p>
       </div>
       <div class="order__head__column order__head__column--rhs">
-        <a
+        <!-- <a
           href="#"
           class="order__head__column__body btn-inline btn-inline--secondary"
         >
           Invoice
-        </a>
+        </a> -->
         <a
           href="{% url 'order-details' sale.transaction_ref %}"
           class="order__head__column__body btn-inline btn-inline--secondary"
