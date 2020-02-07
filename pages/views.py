@@ -77,8 +77,8 @@ def help(request):
 def categories_beds(request):
     """ Handles the bedroom view """
     methods = {
-        'subCategories': 'get_category_subcategories',
-        'products': 'get_category_products'
+        'subCategories': 'get_subcategories_details',
+        'products': 'get_products_by_subcategory'
     }
-    context = CategoriesContextManger(methods, category='Beds').context
-    return render(request, 'pages/categories-beds.html',context)
+    context = CategoriesContextManger(methods, categoryName='Beds').context
+    return render(request, 'pages/categories-beds.html', context)

@@ -26,6 +26,7 @@ methods [dict]: A dictionary containing the name of the context item as the key
 """
 
 # Python Library Imports
+import copy
 
 # Third Party Library Imports
 
@@ -48,45 +49,101 @@ class CategoriesContextManger:
 
         self.kwargs = kwargs
 
+        if 'categoryName' in kwargs:
+            self.categoryName = kwargs['categoryName']
+
+        self.queryCache = {}
+
         self.context = {}
         for methodName, method in methods.items():
             self.context.update({methodName: getattr(self, method)()})
 
     # ----------------------------------------------------------------------------------------------------------------------------
-    def get_category_subcategories(self):
-        """ Get all the sub-categories which belong to self.category """
-        sql = """
-        SELECT psc.id, psc.name
-        FROM products_subcategories psc
-        WHERE psc.category_id = (SELECT pcat.cat_id
-                                 FROM products_categories pcat
-                                 WHERE pcat.name = %s)
-        """
+    def get_category_id(self):
+        """ Lazy getter for getting category ID """
+        if not hasattr(self, 'categoryID') and not hasattr(self, 'category'):
+            sql = """
+                SELECT cat_id
+                FROM products_categories
+                WHERE name = %s
+                """
 
-        bindVars = [self.kwargs['category']]
-        keys = ['id', 'name']
+            self.categoryID = corefunctions.DatabaseQuery(
+                sql, self.categoryName)
 
-        return corefunctions.DatabaseQuery(sql, bindVars, keys)
+        return self.categoryID
 
     # ----------------------------------------------------------------------------------------------------------------------------
-    def get_category_products(self):
+    def get_subcategories_details(self):
+        """ Get all the sub-categories which belong to self.category """
+        if not self.queryCache.get('categorySubcategories'):
+
+            sql = """
+            SELECT psc.id, psc.name
+            FROM products_subcategories psc
+            WHERE psc.category_id = %s
+            """
+
+            keys = ['id', 'name']
+
+            self.queryCache['categorySubcategories'] = corefunctions.DatabaseQuery(
+                sql, self.get_category_id(), keys
+            )
+
+        return self.queryCache['categorySubcategories']
+
+    # ----------------------------------------------------------------------------------------------------------------------------
+    def get_product_details(self):
         """ Get all the products that belong to this category.
         Will also retrieve the store_id and store_name.
         """
-        sql = """
-            SELECT pp.product_id, pp.name, pp.height, pp.height_units, pp.length,
-                pp.length_units, pp.width, pp.width_units, pp.features,
-                pp.showcase_image, pp.price, pp.store_id, ss.name
-            FROM products_products pp, stores_stores ss
-            WHERE pp.store_id = ss.store_id
-            AND pp.category_id = (SELECT pcat.cat_id
-                                FROM products_categories pcat
-                                WHERE pcat.name = %s)
-            """
-        bindVars = [self.kwargs['category']]
+        if not self.queryCache.get('categoryProducts'):
+            sql = """
+                SELECT pp.product_id, pp.name, pp.height, pp.height_units,
+                    pp.length, pp.length_units, pp.width, pp.width_units,
+                    pp.sub_categories, pp.features, pp.showcase_image, pp.price,
+                    pp.store_id, ss.name
+                FROM products_products pp, stores_stores ss
+                WHERE pp.store_id = ss.store_id
+                AND pp.category_id = %s
+                """
 
-        keys = ['id', 'name', 'height', 'height_units', 'length', 'length_units'
-                'width', 'width_units', 'features', 'showcase_image', 'price',
-                'store_id', 'store_name']
+            keys = ['id', 'name', 'height', 'height_units', 'length',
+                    'length_units', 'width', 'width_units', 'sub_categories',
+                    'features', 'showcase_image', 'price', 'store_id',
+                    'store_name']
 
-        return corefunctions.DatabaseQuery(sql, bindVars, keys)
+            self.queryCache['categoryProducts'] = corefunctions.DatabaseQuery(
+                sql,
+                self.get_category_id(),
+                keys
+            )
+
+        return self.queryCache['categoryProducts']
+
+    # ----------------------------------------------------------------------------------------------------------------------------
+    def get_products_by_subcategory(self):
+        """ Returns a dictionary of subcategories belonging to a given category
+        with a list of dictionaries as the values where each dictionary is a
+        product of the subcategory.
+        """
+
+        # List of dictionaries containing subcategory ids (id) and names (name).
+        subCats = self.get_subcategories_details()
+
+        # Later, the subCats object will need to iterated over, to avoid this,
+        # will convert the entire object into a dictionary in the format
+        # id: name.
+        subCats = {str(subCat['id']): subCat['name'] for subCat in subCats}
+
+        # products_products has the column "sub_categories" which is a comma
+        # seperated array of sub category IDs.
+        productDetails = copy.deepcopy(self.get_product_details())
+
+        productsBySubCats = []
+        for product in productDetails:
+            if product['sub_categories']:
+                productSubCats = product['sub_categories'].split(',')
+
+
+        return productDetails

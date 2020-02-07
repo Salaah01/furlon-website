@@ -18,11 +18,13 @@ import corefunctions
 
 
 def DatabaseQuery(sql, bindVars=None, keys=None):
-    if not corefunctions.cursor:
-        corefunctions.cursor = connection.cursor()
 
-    corefunctions.cursor.execute(sql, bindVars)
-    results = corefunctions.cursor.fetchall()
+    cursor = connection.cursor()
+    if not isinstance(bindVars, dict) and not isinstance(bindVars, list):
+        bindVars = [bindVars]
+
+    cursor.execute(sql, bindVars)
+    results = cursor.fetchall()
 
     if keys:
         return corefunctions.SQLQueryToDict(results, keys)
