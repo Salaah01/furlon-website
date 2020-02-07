@@ -22,18 +22,24 @@ from .models import Products
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def search_query(criteria, itemsPerPage, jsonResponse=False):
-    """ Given some criteria (from request.GET), the database will be queried, the results of which will be returned. """
+    """ Given some criteria (from request.GET), the database will be queried,
+    the results of which will be returned.
+    """
 
     # Filter Options
     minPrice = criteria['f-minPrice'] if 'f-minPrice' in criteria else 0
-    maxPrice = criteria['f-maxPrice'] if 'f-maxPrice' in criteria else 9999999999
+    maxPrice = criteria['f-maxPrice'] if 'f-maxPrice' in criteria else 999999999
     category = criteria['f-category'] if 'f-category' in criteria else None
     colour = criteria['f-colour'] if 'f-colour' in criteria else None
+    room = criteria['f-room'] if 'f-room' in criteria else None
 
     # Search Option
-    # - It is assumed that the delimiter between keywords will be either ', ' or ','.
-    # - Each keyword should check the value somewhat matches a value from various fields.
-    # - Where the keyword = 'x', the search should be similar to <field> IS LIKE '%x%'.
+    # - It is assumed that the delimiter between keywords will be either ', '
+    #   or ','.
+    # - Each keyword should check the value somewhat matches a value from
+    #   various fields.
+    # - Where the keyword = 'x', the search should be similar to <field> IS LIKE
+    #  '%x%'.
     if 'search' in criteria:
         search = criteria['search']
         search = search.replace(' ', '').split(',') if ',' in search else search.split()
@@ -69,11 +75,14 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         searchSQL = ''
 
     # fullSQL consists of an sql build based on the filters and the searchSQL.
-    # As a list of bindVars is used as supposed to a dictionary of bindVars, order matters.
+    # As a list of bindVars is used as supposed to a dictionary of bindVars,
+    # order matters.
     # This is done to prevent SQL injection when building the search query.
-    # Note: The fields selected are the same as the filters set in the search page.
+    # Note: The fields selected are the same as the filters set in the search
+    # page.
 
-    # NOTE: MAIN COLOUR IS SET TO TRUE OR FALSE IN DEV, REMOVE WHEN THERE ARE ENOUGH PRODUCTS
+    # NOTE: MAIN COLOUR IS SET TO TRUE OR FALSE IN DEV, REMOVE WHEN THERE ARE
+    # ENOUGH PRODUCTS
     fullSQL = """
         SELECT
             pp.product_id, pp.name pp_name, pp.height, pp.length, pp.width, pp.features, pp.related,
@@ -104,6 +113,11 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
             WHERE pcol.col_families LIKE %s
         ) """
 
+    # Add colour filter if exists.
+    # This is used in the nav rooms options.
+    if room:
+        fullSQL += " AND LOWER(pp.room_id) = LOWER(%s) "
+
     # Add the SQL for the search filter
     fullSQL += searchSQL
 
@@ -112,10 +126,13 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         bindVars.append(category)
     if colour:
         bindVars.append('%' + colour + '%')
+    if room:
+        bindVars.append(room)
     bindVars = bindVars + searchBindVars
 
     # Offset the results.
-    # Number of results generated = number of results to persent on a page. Refer to views' paginator variable.
+    # Number of results generated = number of results to persent on a page.
+    # Refer to views' paginator variable.
     offset = (int(criteria['page'])-1) * itemsPerPage if 'page' in criteria else 0
 
     # fullSQL += "FETCH FIRST %s ROWS ONLY OFFSET %s"
@@ -130,9 +147,11 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         cursor = connection.cursor()
         cursor.execute(fullSQL, bindVars)
         dataRows = cursor.fetchall()
-        keys = ('product_id', 'pp_name', 'height', 'length', 'width', 'features', 'related', 'showcase_image', 'description',
-                'price', 'rating', 'upload_date', 'inventory', 'status', 'category_id', 'colour_id', 'store_id',
-                'delivery_available', 'main_colour', 'ratings', 'ss_name')
+        keys = ('product_id', 'pp_name', 'height', 'length', 'width',
+                'features', 'related', 'showcase_image', 'description', 'price',
+                'rating', 'upload_date', 'inventory', 'status', 'category_id',
+                'colour_id', 'store_id', 'delivery_available', 'main_colour',
+                'ratings', 'ss_name', 'room_id')
 
         results = []
         for dataRow in dataRows:
@@ -141,5 +160,4 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
 
         return jsonData
     else:
-
         return Products.objects.raw(fullSQL, bindVars)

@@ -32,34 +32,15 @@ def search(request):
     # Results need to be queried using raw SQL as the when the user sends a GET request, raw SQL is used to query the database,
     # during which the variables are renamed.
     # NOTE: MAIN COLOUR IS SET TO TRUE OR FALSE IN DEV, REMOVE WHEN THERE ARE ENOUGH PRODUCTS
-    results = Products.objects.raw(
-        """
-        SELECT  pp.product_id, pp.name pp_name, pp.height, pp.length, pp.width, pp.features, pp.related,
-                pp.showcase_image, pp.description, pp.price, pp.rating, pp.upload_date, pp.inventory, pp.status,
-                pp.category_id, pp.colour_id, pp.store_id, pp.delivery_available, pp.main_colour, pp.ratings,
-                ss.name ss_name
-        FROM products_products pp, stores_stores ss
-        WHERE (pp.main_colour = true OR pp.main_colour = false)
-        AND pp.status = 'Active'
-        AND pp.store_id = ss.store_id
-        """
-    )
 
-    # Retrieving results based on the search query.
-    if 'search' in request.GET:
-        query = {}
-        if 'search' in request.GET:
-            query[search] = request.GET['search']
+    criterion = ['search', 'f-minPrice', 'f-maxPrice', 'f-category',
+                'f-colour', 'f-room']
+    query = {}
+    for criteria in criterion:
+        if criteria in request.GET and request.GET[criteria]:
+            query[criteria] = request.GET[criteria]
 
-        criterion = ['search', 'f-minPrice',
-                     'f-maxPrice', 'f-category', 'f-colour']
-        # query = {criteria: request.GET[criteria] for criteria in criterion if request.GET[criteria]}
-        query = {}
-        for criteria in criterion:
-            if criteria in request.GET and request.GET[criteria]:
-                query[criteria] = request.GET[criteria]
-
-        results = search_query(query, 20)
+    results = search_query(query, 20)
 
     # Pagination
     paginator = Paginator(results, 20)

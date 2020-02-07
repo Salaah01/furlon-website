@@ -27,7 +27,8 @@ from .categories_context_manager import CategoriesContextManger
 def index(request):
     """ Loads the Index Page """
     latest_products = Products.objects.order_by(
-        '-upload_date').filter(status='Active')[:6]
+        '-upload_date'
+    ).filter(status='Active')[:6]
     context = {
         'latest_products': latest_products
     }

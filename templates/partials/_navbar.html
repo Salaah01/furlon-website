@@ -94,30 +94,54 @@
         filter-for="rooms"
       >
         <a
-          href="#"
+          href="{% url 'search' %}?f-room=bedroom"
           class="nav__option__dropdown-opts__opt"
           id="nav-bedroom"
         >
           Bedroom
         </a>
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-living-room"
-          >Living Room</a
+        <a
+          href="{% url 'search' %}?f-room=living+room"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-living-room"
         >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-kitchen"
-          >Kitchen</a
+          Living Room
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=kitchen"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-kitchen"
         >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-dining-room"
-          >Dining Room</a
+          Kitchen
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=dining+room"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-dining-room"
         >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-bathroom"
-          >Bathroom</a
+          Dining Room
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=dining+room"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-bathroom"
         >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-office"
-          >Office</a
+          Bathroom
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=office"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-office"
         >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-outdoors"
-          >Outdoors</a
+          Office
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=outdoors"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-outdoors"
         >
+          Outdoors
+        </a>
       </div>
     </div>
   </div>
