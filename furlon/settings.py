@@ -83,64 +83,40 @@ WSGI_APPLICATION = 'furlon.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        'elephantSQL': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'HOST': 'rogue.db.elephantsql.com',
-            'USER': 'rfxumegh',
-            'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
-            'NAME': 'rfxumegh',
-        },
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon_dummyBACKUP',
-        },
+DATABASES = {
+    'elephantSQL': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'rogue.db.elephantsql.com',
+        'USER': 'rfxumegh',
+        'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
+        'NAME': 'rfxumegh',
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'Rasel121ne',
+        'NAME': 'furlon_dummyBACKUP',
+    },
 
-        'main': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon',
-        },
+    'main': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'Rasel121ne',
+        'NAME': 'furlon',
+    },
 
-        'test': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon_tests',
-        },
-        'sqlite3': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'furlon_db.sqlite3',
-        }
+    'test': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': 'postgres',
+        'PASSWORD': 'Rasel121ne',
+        'NAME': 'furlon_tests',
+    },
+    'sqlite3': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'furlon_db.sqlite3',
     }
+}
 
-else:
-    DATABASES = {
-        'dummy': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon_dummy',
-        },
-
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon',
-        },
-
-        'test': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'USER': 'postgres',
-            'PASSWORD': 'Rasel121ne',
-            'NAME': 'furlon_tests',
-        }
-    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

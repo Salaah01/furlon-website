@@ -46,6 +46,9 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         searchSQL = ''
         searchBindVars = []
         for keyword in search:
+            # Handling plural cases.
+            if str(keyword[-1]).lower() == 's':
+                keyword = keyword[0:-1]
             searchBindVars += ['%' + keyword + '%'] * 5
             searchSQL += """
             AND (
@@ -133,10 +136,9 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
     # Offset the results.
     # Number of results generated = number of results to persent on a page.
     # Refer to views' paginator variable.
-    offset = (int(criteria['page'])-1) * itemsPerPage if 'page' in criteria else 0
+    # offset = (int(criteria['page'])-1) * itemsPerPage if 'page' in criteria else 0
 
-    # fullSQL += "FETCH FIRST %s ROWS ONLY OFFSET %s"
-    # bindVars.append(itemsPerPage)
+    # fullSQL += "FETCH FIRST 20 ROWS ONLY OFFSET %s"
     # bindVars.append(offset)
 
     cursor = connection.cursor()
