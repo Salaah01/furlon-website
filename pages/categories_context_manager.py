@@ -140,10 +140,34 @@ class CategoriesContextManger:
         # seperated array of sub category IDs.
         productDetails = copy.deepcopy(self.get_product_details())
 
-        productsBySubCats = []
+        productsBySubCats = {}
         for product in productDetails:
+            # Though in theory this should not be the case, some products may
+            # not have a subcategory. Script set to check if the product has
+            # subcategories, not doing this set may cause the script to crash.
+            # TODO: Use such information to build an automated error logger.
             if product['sub_categories']:
                 productSubCats = product['sub_categories'].split(',')
 
+                for productSubCat in productSubCats:
+                    # The subcategory may not be a valid subcategory.
+                    # Therefore, before proceeding, check if it can be found in
+                    # the subCats dictionary.
+                    # TODO: Use such information to build an automated error
+                    # logger.
+                    subCatName = subCats.get(productSubCat)
+                    if subCatName:
+                        # Dynamically build productsBySubCat.
+                        if subCatName not in productsBySubCats:
+                            productsBySubCats.update(
+                                {subCatName: []}
+                            )
 
-        return productDetails
+                        productsBySubCats[subCatName].append(product)
+
+        # Limit the results
+        if 'limitResults' in self.kwargs:
+            for subCats in productsBySubCats:
+                productsBySubCats[subCats] = productsBySubCats[subCats][:self.kwargs['limitResults']]
+
+        return productsBySubCats

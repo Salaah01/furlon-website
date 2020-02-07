@@ -1,0 +1,133 @@
+// =============================================================================
+// Date Created:   07/02/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the pages relating to product grouped by categories..
+// One of partials which use this CSS is _products-by-subcategories.html.
+// That partial uses mainly the styling from the _results-grid components,
+// thus most of the styling in this module is overrides.
+// =============================================================================
+
+// =============================================================================
+.category-head {
+  // Header element.
+  padding: 9.5rem 30rem 0;
+
+  @include mediaQuery(1300) {
+    padding: 9.5rem 15rem 0;
+  }
+
+  @include mediaQuery(850) {
+    padding: 9.5rem 10rem 0;
+  }
+
+  @include mediaQuery(600) {
+    padding: 5rem 5rem 0;
+  }
+
+  @include mediaQuery(450) {
+    padding: 2.5rem 2.5rem 0;
+  }
+
+  &__title {
+    color: $colour-primary;
+    margin-bottom: 1rem;
+  }
+
+  &__subheading {
+    font-weight: 400;
+    font-size: 1.8em;
+    margin-bottom: 0.25rem;
+
+    @include mediaQuery(850) {
+      margin-bottom: 1rem;
+    }
+
+    @include mediaQuery(500) {
+      text-align: left;
+      font-size: 1.6rem;
+      font-style: italic;
+      margin-top: 2rem;
+    }
+  }
+}
+
+// =============================================================================
+.category-main {
+  // Main container.
+  padding: 0 30rem;
+
+  @include mediaQuery(1300) {
+    padding: 0 15rem;
+  }
+
+  @include mediaQuery(850) {
+    padding: 0 10rem;
+  }
+
+  @include mediaQuery(600) {
+    padding: 0 5rem;
+  }
+
+  @include mediaQuery(450) {
+    padding: 0 2.5rem;
+  }
+
+  &__heading {
+    margin-bottom: 5rem;
+  }
+
+  &__text {
+  }
+}
+
+// =============================================================================
+.prods-by-subcats {
+  // Main section container.
+
+  // -------------------------------------------------------------------------
+  &__prods-container {
+    // Subcategory container.
+    margin-bottom: 10rem;
+
+    @include mediaQuery(500) {
+      margin-bottom: 5rem;
+    }
+
+    padding-top: 0;
+    gap: 3rem;
+    grid-auto-rows: auto;
+    // grid-template-columns: repeat(auto-fit, minmax(15vw, 1fr));
+
+    @include mediaQuery(1180) {
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  &__title {
+    // Subcategory title.
+    padding-bottom: 2rem;
+    padding-top: 0;
+    color: $colour-secondary;
+  }
+
+  // -------------------------------------------------------------------------
+  &__product {
+    // A product within the subcategory container.
+    // Contains each product card elements.
+
+    &__img {
+      border-radius: 0;
+    }
+
+    &__info {
+      // Container for the information elements.
+      padding: 2rem 3rem;
+
+      @include mediaQuery(500) {
+        text-align: left;
+        padding-left: 1rem;
+      }
+    }
+  }
+}

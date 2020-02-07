@@ -3,23 +3,26 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} | Bedroom{% endblock %}
+{% block title %} | Tables{% endblock %}
 
 {% block content %}
 
   <header class="category-head">
-    <h1 class="heading-1 category-head__title">Bedroom</h1>
+    <h1 class="heading-1 category-head__title">Tables</h1>
     <h2 class="heading-2 category-head__subheading">
-        I'm in a needy relationship, I need my bed!
+        Where families share stores and dads tell terrible dad jokes.
     </h2>
   </header>
   <main class="category-main">
     <section class="category-main__heading">
       <p class="category-main__text">
-          Who doesn't know the importance of a good nights sleep? If there is one area you should not compromise, it is with your sleep.
+        We understand that the purpose of the table has evolved over the years
+        and where it used to mainly just be place to eat, it's now become
+        a place to do homework, have a chat or even play ping pong!
       </p>
       <p class="category-main__text">
-          Check out our great deals on bedroom furniture below.
+          So whatever you might need a table for, we have a great selection
+          to suit all your needs.
       </p>
     </section>
     {% include "pages/partials/_products-by-subcategories.html" with productsBySubCats=productsBySubCats%}

@@ -3,23 +3,27 @@
 {% load static %}
 {% load humanize %}
 
-{% block title %} | Bedroom{% endblock %}
+{% block title %} | Sofas{% endblock %}
 
 {% block content %}
 
   <header class="category-head">
-    <h1 class="heading-1 category-head__title">Bedroom</h1>
+    <h1 class="heading-1 category-head__title">Sofas</h1>
     <h2 class="heading-2 category-head__subheading">
-        I'm in a needy relationship, I need my bed!
+        Hey, that's my spot!
     </h2>
   </header>
   <main class="category-main">
     <section class="category-main__heading">
       <p class="category-main__text">
-          Who doesn't know the importance of a good nights sleep? If there is one area you should not compromise, it is with your sleep.
+        Cuddling up and watching a movie, or just siting around and being lazy.
       </p>
       <p class="category-main__text">
-          Check out our great deals on bedroom furniture below.
+          Whether you're sitting as a couple or an individual, one thing's for
+          sure.
+      </p>
+      <p class="category-main__text">
+          Your sofa really does need to be comfortable.
       </p>
     </section>
     {% include "pages/partials/_products-by-subcategories.html" with productsBySubCats=productsBySubCats%}

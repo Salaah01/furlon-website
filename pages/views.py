@@ -76,9 +76,57 @@ def help(request):
 # ------------------------------------------------------------------------------------------------------------------------------ #
 def categories_beds(request):
     """ Handles the bedroom view """
-    methods = {
-        'subCategories': 'get_subcategories_details',
-        'products': 'get_products_by_subcategory'
-    }
-    context = CategoriesContextManger(methods, categoryName='Beds').context
+
+    context = CategoriesContextManger(
+        {'productsBySubCats': 'get_products_by_subcategory'},
+        categoryName='Beds',
+        limitResults=4
+    ).context
     return render(request, 'pages/categories-beds.html', context)
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def categories_wardrobes(request):
+    """ Handles the wardrobe view """
+
+    context = CategoriesContextManger(
+        {'productsBySubCats': 'get_products_by_subcategory'},
+        categoryName='Wardrobes',
+        limitResults=4
+    ).context
+    return render(request, 'pages/categories-wardrobes.html', context)
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def categories_tables(request):
+    """ Handles the tables view """
+
+    context = CategoriesContextManger(
+        {'productsBySubCats': 'get_products_by_subcategory'},
+        categoryName='Tables',
+        limitResults=4
+    ).context
+    return render(request, 'pages/categories-tables.html', context)
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def categories_sofas(request):
+    """ Handles the sofas view """
+
+    context = CategoriesContextManger(
+        {'productsBySubCats': 'get_products_by_subcategory'},
+        categoryName='Sofas',
+        limitResults=4
+    ).context
+    return render(request, 'pages/categories-sofas.html', context)
+
+
+# ------------------------------------------------------------------------------------------------------------------------------ #
+def categories_bookcases_shelves(request):
+    """ Handles the bookcases and shelving units view. """
+
+    context = CategoriesContextManger(
+        {'productsBySubCats': 'get_products_by_subcategory'},
+        categoryName='Bookcases & Shelving Units',
+        limitResults=4
+    ).context
+    return render(request, 'pages/categories-bookcases-and-shelves.html', context)

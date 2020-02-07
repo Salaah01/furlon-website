@@ -1,0 +1,37 @@
+{% load humanize %}
+
+<section class="prods-by-subcats">
+  {% if productsBySubCats %}
+    {% for subCat, products in productsBySubCats.items %}
+      <div class="prods-by-subcats__container">
+        <h2 class="heading-2 prods-by-subcats__title">{{ subCat }}</h2>
+        <div class="results prods-by-subcats__prods-container">
+          {% for product in products %}
+            <div class="results__result prods-by-subcats__product">
+              <div class="results__result__img prods-by-subcats__product__img">
+                <a href="{% url 'product' product.id %}">
+                  <img src="{{ product.showcase_image }}" alt="{{ product.name }}">
+                </a>
+              </div>
+              <div class="results__result__info prods-by-subcats__product__info">
+                <a href="{% url 'product' product.id %}"
+                   class="results__result__info__name prods-by-subcats__product__info__name"
+                >
+                  {{ product.name }}
+                </a>
+                <p class="results__result__info__store prods-by-subcats__product__info__store">
+                  {{ product.store_name }}
+                </p>
+                <p class="results__result__info__price prods-by-subcats__product__info__price">
+                  &pound;{{ product.price|floatformat:2|intcomma }}
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+  <p class="prods-by-subcats__text">No products available</p>
+  {% endif %}
+</section>

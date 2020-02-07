@@ -40,24 +40,41 @@
         class="nav__option__dropdown-opts nav__option__dropdown-opts--collapse nav-sub-products"
         filter-for="products"
       >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-wardrobes"
-          >Wardrobes</a
-        >
-        <a href="{% url 'categories-beds' %}" class="nav__option__dropdown-opts__opt" id="nav-beds"
-          >Beds</a
-        >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-tables"
-          >Tables</a
-        >
-        <a href="#" class="nav__option__dropdown-opts__opt" id="nav-sofas"
-          >Sofas</a
-        >
         <a
-          href="#"
+          href="{% url 'categories-wardrobes' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-wardrobes"
+        >
+          Wardrobes
+        </a>
+        <a
+          href="{% url 'categories-beds' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-beds"
+        >
+          Beds
+          </a>
+        <a
+          href="{% url 'categories-tables' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-tables"
+        >
+          Tables
+        </a>
+        <a
+          href="{% url 'categories-sofas' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-sofas"
+        >
+          Sofas
+        </a>
+        <a
+          href="{% url 'categories-bookcases-shelves' %}"
           class="nav__option__dropdown-opts__opt"
           id="nav-bookcases-and-units"
-          >Bookcases and Shelving Units</a
         >
+          Bookcases and Shelving Units
+        </a>
       </div>
     </div>
 
@@ -78,10 +95,11 @@
       >
         <a
           href="#"
-          class="nav__option__dropdown-opts__opt hide"
+          class="nav__option__dropdown-opts__opt"
           id="nav-bedroom"
-          >Bedroom</a
         >
+          Bedroom
+        </a>
         <a href="#" class="nav__option__dropdown-opts__opt" id="nav-living-room"
           >Living Room</a
         >
@@ -93,9 +111,6 @@
         >
         <a href="#" class="nav__option__dropdown-opts__opt" id="nav-bathroom"
           >Bathroom</a
-        >
-        <a href="#'' class="nav__option__dropdown-opts__opt" id="nav-bathroom"
-          >Bedroom</a
         >
         <a href="#" class="nav__option__dropdown-opts__opt" id="nav-office"
           >Office</a
@@ -110,7 +125,6 @@
   <!-- Search Bar -->
   <div class="nav__section" id="nav-mid">
     <form action="{% url 'search' %}" method="GET" class="nav__search">
-      {% csrf_token %}
       <input
         type="text"
         placeholder="Search"
