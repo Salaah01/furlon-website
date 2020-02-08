@@ -91,30 +91,19 @@ DATABASES = {
         'PASSWORD': 'MghhAv_Dspj1Hcz7j-lg_nNmwC01Dkdk',
         'NAME': 'rfxumegh',
     },
-    'default': {
+    'dev': {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',
         'NAME': 'furlon_dummyBACKUP',
     },
 
-    'main': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',
         'NAME': 'furlon',
     },
-
-    'test': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'PASSWORD': 'Rasel121ne',
-        'NAME': 'furlon_tests',
-    },
-    'sqlite3': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'furlon_db.sqlite3',
-    }
 }
 
 

@@ -26,7 +26,7 @@ from .models import Stores, Deliveries, StoreReviews
 ##################################################################################################################################
 class StoresAdmin(admin.ModelAdmin):
     """ Registers Stores (stores_stores) table to the admin page """
-    list_display = ('name', 'postcode', 'city', 'country', 'rating', 'ratings', 'last_activity', 'status', )
+    list_display = ('name', 'postcode', 'city', 'country', 'last_activity', 'status', )
     list_display_links = ('name', )
     search_fields = ('name', 'postcode', 'address_line_1', )
     list_filter = ('status', )

@@ -220,8 +220,6 @@ class Products(models.Model):
 
     features = models.CharField(max_length=100, blank=True)
 
-    related = models.CharField(max_length=100, blank=True, null=True)
-
     showcase_image = models.ImageField(upload_to='products/')
     image_1 = models.ImageField(upload_to='products/', blank=True, null=True)
     image_2 = models.ImageField(upload_to='products/', blank=True, null=True)

@@ -88,7 +88,7 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
     # ENOUGH PRODUCTS
     fullSQL = """
         SELECT
-            pp.product_id, pp.name pp_name, pp.height, pp.length, pp.width, pp.features, pp.related,
+            pp.product_id, pp.name pp_name, pp.height, pp.length, pp.width, pp.features,
             pp.showcase_image, pp.description, pp.price, pp.rating, TO_CHAR(pp.upload_date, 'dd/mm/yyyy'), pp.inventory, pp.status,
             pp.category_id, pp.colour_id, pp.store_id, pp.delivery_available, pp.main_colour, pp.ratings,
             ss.name ss_name
@@ -150,7 +150,7 @@ def search_query(criteria, itemsPerPage, jsonResponse=False):
         cursor.execute(fullSQL, bindVars)
         dataRows = cursor.fetchall()
         keys = ('product_id', 'pp_name', 'height', 'length', 'width',
-                'features', 'related', 'showcase_image', 'description', 'price',
+                'features', 'showcase_image', 'description', 'price',
                 'rating', 'upload_date', 'inventory', 'status', 'category_id',
                 'colour_id', 'store_id', 'delivery_available', 'main_colour',
                 'ratings', 'ss_name', 'room_id')
