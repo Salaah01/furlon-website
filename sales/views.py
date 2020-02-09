@@ -21,6 +21,7 @@ from django.db import connection
 from django.contrib import messages, auth
 
 # Local Imports
+import furlon
 from .models import Sales
 from products.models import ProductReviews
 
@@ -144,46 +145,56 @@ def process_new_review(request):
     """
 
     # DEFAULTS
-    title = ''
-    comments = ''
-
     postRequest = request.POST
+    title = postRequest['user-review-title']
+    comments = postRequest['user-review-comments']
+    productId = postRequest['product-id']
+    storeId = postRequest['store-id']
+    rating = postRequest['user-review-rating']
+
+
 
     # VALIDATION
     # Validate product ID
-    # TODO: Make this validation more strict by testing what should already be on the
-    # page and check if different products have been returned.
-    if not postRequest['product-id']:
+    # TODO: Make this validation more strict by testing what should already
+    # be on the page and check if different products have been returned.
+    if not productId:
         return ('fail', 'Error with submitting your review, please try again.')
-    else:
-        productId = postRequest['product-id']
 
     # Validate store ID
     # TODO: Make this validation more strict by testing what should already be on the
     # page and check if different products have been returned.
-    if not postRequest['store-id']:
+    if not storeId:
         return ('fail', 'Error with submitting your review, please try again.')
-    else:
-        storeId = postRequest['store-id']
 
     # Validate rating
-    if not postRequest['user-review-rating']:
+    if not rating:
         return ('fail', 'Please select a rating.')
     else:
         # Test that the HTML hasn't been amended before POST.
         try:
-            rating = int(postRequest['user-review-rating'])
+            rating = int(rating)
             if rating not in [1, 2, 3, 4, 5]:
                 return ('fail', 'Please select a rating.')
         except ValueError:
             return ('fail', 'Error with submitting your review, please try again.')
 
     # Validate comments title - if there are comments then there must be a title.
-    if postRequest['user-review-comments'] and not postRequest['user-review-title']:
+    if comments and not title:
         return ('fail', 'You have a title if you wish you leave comments.')
-    else:
-        title = postRequest['user-review-title']
-        comments = postRequest['user-review-comments']
+
+    # Check max length
+    if len(title) > furlon.sharedconfig.prodReviewMaxTitleLen:
+        return (
+            'fail',
+            f'Max length of {furlon.sharedconfig.prodReviewMaxTitleLen} on the title'
+        )
+
+    if len(comments) > furlon.sharedconfig.prodReviewMaxCommentsLen:
+        return (
+            'fail',
+            f'Max length of {furlon.sharedconfig.prodReviewMaxCommentsLen} on the comments section'
+        )
 
     newReview = ProductReviews(
         rating=rating,

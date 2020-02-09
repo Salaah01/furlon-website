@@ -112,6 +112,9 @@ export class SearchFilters {
      * This implements the filters within the actual URL.
      */
     let href = window.location.href.replace("/search/", "/search-results/");
+    if (!href.includes('/search-results/?')) {
+      href = href.replace("/search-results/", "/search-results/?search=")
+    }
 
     const hiddenInMinPrice = document.getElementById(
       "f-minPrice"
@@ -125,6 +128,7 @@ export class SearchFilters {
     const hiddenInColour = document.getElementById(
       "f-colour"
     ) as HTMLInputElement;
+
 
     if (hiddenInMinPrice.value) {
       const newStr = "f-minPrice=" + hiddenInMinPrice.value;

@@ -19,6 +19,7 @@ from datetime import datetime
 from django.db import models
 
 # Local Imports
+from furlon import sharedconfig
 from stores.models import Stores
 from django.contrib.auth.models import User
 
@@ -354,8 +355,8 @@ class ProductReviews(models.Model):
     store = models.ForeignKey(Stores, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     rating = models.FloatField()
-    review_title = models.CharField(max_length=50, blank=True, null=True)
-    comments = models.CharField(max_length=2048, blank=True, null=True)
+    review_title = models.CharField(max_length=sharedconfig.prodReviewMaxTitleLen, blank=True, null=True)
+    comments = models.CharField(max_length=sharedconfig.prodReviewMaxCommentsLen, blank=True, null=True)
     review_date = models.DateTimeField(default=datetime.now, blank=True)
 
     # -------------------------------------------------------------------------------------------------------------------------- #

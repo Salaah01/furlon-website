@@ -86,6 +86,8 @@ def categories_beds(request):
     return render(request, 'pages/categories-beds.html', context)
 
 # ------------------------------------------------------------------------------------------------------------------------------ #
+
+
 def categories_wardrobes(request):
     """ Handles the wardrobe view """
 
