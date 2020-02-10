@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'furlon.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'elephantSQL': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'HOST': 'rogue.db.elephantsql.com',
         'USER': 'rfxumegh',
@@ -98,7 +98,7 @@ DATABASES = {
         'NAME': 'furlon_dummyBACKUP',
     },
 
-    'default': {
+    'localhost': {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
         'PASSWORD': 'Rasel121ne',
