@@ -1,0 +1,2 @@
+Sitemap: https://www.furlon.co.uk/sitemap.xml
+User-agent: *
