@@ -1,0 +1,109 @@
+// =============================================================================
+// Date Created:   03/02/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// New review overlay/pop up.
+// A fullscreen div with an inner form for adding a new comment.
+//
+// #TODO: This is very similar to the confirm-delete component, merge into one.
+// #TODO: .new-review__input copies the product_reviews component, refactor.
+// =============================================================================
+
+// =============================================================================
+.new-review {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: rgba($colour-grey-dark-1, 0.75);
+
+  &__form {
+    padding: 7rem 5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: $box-shadow-4;
+    width: 60%;
+    max-height: 90%;
+    overflow-y: scroll;
+
+    @include mediaQuery(770) {
+      width: 70%;
+    }
+
+    @include mediaQuery(550) {
+      width: 80%;
+      padding: 4rem 5rem;
+    }
+
+    @include mediaQuery(500) {
+      padding: 4rem 2rem;
+    }
+
+    @include mediaQuery(400) {
+      width: 90%;
+      padding: 2rem;
+    }
+  }
+
+  &__comment-title.heading-2 {
+    margin-bottom: 1rem;
+    font-size: 5rem;
+    color: $colour-secondary;
+    font-weight: 300;
+  }
+
+  &__rating {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+
+      .i-star--selectable[highlight="true"] {
+          // This has been set on the stars component to change size on hover.
+          // This override will undo that.
+          font-size: 2rem;
+      }
+  }
+
+  &__label {
+    display: inline-block;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+
+  &__input {
+    // # TODO: Copies .product-reviews__review__form-textarea from
+    // product_reviews component. Refactor.
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.7rem;
+    border: 1px solid #c2c2c2;
+    outline: 0;
+    box-shadow: 1px 1px 4px #ebebeb;
+    border-radius: 0.5rem;
+    transition: all 0.1s ease;
+    width: 100%;
+    margin-bottom: 2rem;
+    resize: none;
+
+    &:focus {
+      box-shadow: 1px 1px 4px $colour-secondary;
+      border: 1px solid $colour-secondary;
+    }
+  }
+
+  &__btn {
+      padding: 1rem 1.5rem;
+    &:not(:last-of-type) {
+      margin-right: 0.75rem;
+    }
+  }
+
+}

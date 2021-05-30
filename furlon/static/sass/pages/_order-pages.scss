@@ -1,0 +1,317 @@
+// =============================================================================
+// Date Created:   25/01/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the order related pages.
+// =============================================================================
+
+// =============================================================================
+.order-head {
+  // Main container for the header
+  padding-top: 10rem;
+  text-align: center;
+
+  @include mediaQuery(600) {
+    padding-top: 5rem;
+  }
+
+  & > h1 {
+    color: $colour-primary;
+  }
+}
+
+// =============================================================================
+.order-main {
+  // Main container for the order history page.
+  padding: 5rem 20vw;
+
+  @include mediaQuery(1550) {
+    padding: 5rem 15vw;
+  }
+
+  @include mediaQuery(1000) {
+    padding: 5rem 10vw;
+  }
+
+  @include mediaQuery(850) {
+    padding: 5rem;
+  }
+
+  @include mediaQuery(800) {
+    padding: 3rem 2rem;
+  }
+}
+
+// =============================================================================
+.order {
+  // A single order.
+  margin-bottom: 2rem;
+  border: 2px solid $colour-grey-light-1;
+  border-radius: 1rem;
+
+  @include mediaQuery(470) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  // ---------------------------------------------------------------------------
+  &__head {
+    // Contains the top part of a order.
+    display: flex;
+    padding: 1.5rem 4rem 0;
+    background-color: $colour-grey-light-1;
+    font-size: 1.4rem;
+
+    @include mediaQuery(800) {
+      padding: 1.5rem 2rem 0;
+    }
+
+    @include mediaQuery(630) {
+      font-size: 1.3rem;
+    }
+
+    @include mediaQuery(560) {
+      font-size: 1.2rem;
+    }
+
+    @include mediaQuery(700) {
+      justify-content: space-between;
+      text-align: center;
+    }
+
+    @include mediaQuery(470) {
+      padding: 1.5rem 1rem 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__column {
+      margin-bottom: 2rem;
+      margin-right: 5rem;
+
+      @include mediaQuery(700) {
+        margin-right: 2rem;
+      }
+
+      @include mediaQuery(470) {
+        display: flex;
+        margin: 0;
+        margin-bottom: 0.5rem;
+        border-bottom: 2px solid $colour-grey-light-2;
+      }
+
+      @include mediaQuery(300) {
+        justify-content: space-between;
+      }
+
+      &--rhs {
+        margin: 0;
+        margin-left: auto;
+        align-self: center;
+        padding-bottom: 2rem;
+
+        @include mediaQuery(560) {
+          display: flex;
+          flex-direction: column;
+          text-align: right;
+        }
+
+        @include mediaQuery(470) {
+          margin: 0;
+          text-align: left;
+          align-self: flex-start;
+        }
+
+        @include mediaQuery(300) {
+          flex-direction: row;
+          width: 100%;
+        }
+
+        & > a:first-of-type {
+          margin-right: 1rem;
+
+          @include mediaQuery(560) {
+            margin-right: 0;
+          }
+
+          @include mediaQuery(470) {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+
+      &__title {
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+
+        @include mediaQuery(470) {
+          margin-right: 0.5rem;
+          text-transform: none;
+          font-weight: 700;
+          text-align: left;
+        }
+
+        &::after {
+          @include mediaQuery(470) {
+            content: ":";
+          }
+        }
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------------------
+  &__details {
+    // Main content in any order box.
+    display: grid;
+    grid-template-columns:
+      [img-start] 1fr
+      [img-end info-start] 2fr
+      [info-end btn-start] 20%
+      [btn-end];
+    grid-template-rows: min-content 1fr;
+    gap: 2rem;
+    padding: 1rem 4rem 2rem;
+
+    @include mediaQuery(1200) {
+      grid-template-columns:
+        [img-start] 1.5fr
+        [img-end info-start] 2fr
+        [info-end btn-start] 20%
+        [btn-end];
+    }
+
+    @include mediaQuery(800) {
+      padding: 1rem 2rem 2rem;
+    }
+
+    @include mediaQuery(650) {
+      grid-template-columns:
+        [img-start] 30%
+        [img-end info-start] 70%
+        [info-end];
+    }
+
+    @include mediaQuery(470) {
+      padding: 1rem 1rem 2rem;
+    }
+
+    @include mediaQuery(400) {
+      grid-template-columns:
+        [img-start] 35%
+        [img-end info-start] 65%
+        [info-end];
+      gap: 1.5rem;
+    }
+
+    & > * {
+      max-width: 100%;
+    }
+
+    &__detail {
+      &[elem="status"] {
+        grid-column: img-start / info-end;
+
+        & > h2 {
+          margin-bottom: 0.5rem;
+          color: $colour-secondary;
+          width: 100%;
+
+          @include mediaQuery(300) {
+            margin-bottom: -0.5rem;
+          }
+        }
+
+        p {
+          @include mediaQuery(400) {
+            font-size: 1.4rem;
+          }
+        }
+      }
+
+      &[elem="product-img"] {
+        width: 100%;
+
+        & > img {
+          object-fit: cover;
+          width: 100%;
+          height: 100%;
+          border-radius: 1rem;
+          transition: all 0.3s ease;
+
+          &:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+          }
+        }
+      }
+
+      &[elem="product-info"] {
+        display: flex;
+        flex-direction: column;
+      }
+      &__text {
+        display: inline-table;
+
+        &[elem="product-name"] {
+          font-size: 1.8rem;
+        }
+
+        &[elem="store-name"] {
+          font-size: 1.4rem;
+
+          @include mediaQuery(300) {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+
+    &__btns-container {
+      grid-row: 1 / span 2;
+      justify-self: end;
+      align-self: center;
+      grid-column: btn-start;
+      display: flex;
+      flex-direction: column;
+      width: max-content;
+
+      @include mediaQuery(650) {
+        grid-column: 1/-1;
+        grid-row: 3;
+      }
+
+      @include mediaQuery(650) {
+        justify-self: start;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+      }
+
+      &__btn {
+        @include mediaQuery(650) {
+          margin-right: 0.5rem;
+        }
+
+        .btn {
+          display: inline-block;
+          text-align: center;
+          margin-bottom: 0.25rem;
+          width: 100%;
+
+          @include mediaQuery(800) {
+            font-size: 1.4rem;
+          }
+
+          @include mediaQuery(514) {
+            font-size: 1.3rem;
+          }
+
+          @include mediaQuery(490) {
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}

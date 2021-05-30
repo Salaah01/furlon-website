@@ -1,0 +1,297 @@
+// =============================================================================
+// Date Created:   29/12/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// PURPOSE
+// -------
+// Styling for the carousel style images where there is a main display section
+// below which alternative images where if clicked on will change the main
+// display image.
+//
+// HTML
+// ----
+// The HTML for the styling to work as intended should follow the following
+// structure:
+//
+// .carousel-container
+// .
+// └───── .main
+//        │
+//        └───── .carousel-container__display-section
+//        │      │
+//        │      └───── img(.carousel-container__display-section__img
+//        │      │          [im="{image identifier}"]
+//        │      │          position="init")
+//        │      │
+//        │      └───── (multiple)
+//        │             img(.carousel-container__display-section__img)
+//        │             [im="{image identifier}"]
+//        │             [position="hide"]
+//        │
+//        └───── .carousel-container__display-controls
+//               |
+//               └───── (multiple - one for each showcase image)
+//                      img (.carousel-container__display-section__img
+//                           im="{image identifier (matches showcase img im attr}"]
+//
+//
+// EXAMPLE HTML
+// ------------
+// <div class="carousel-container">
+//   <div class="carousel-container__main">
+//      <div class="carousel-container__display-section">
+//        <img
+//          class="carousel-container__display-section__img"
+//          im="img-id-1"
+//          position="init"
+//        />
+//        <img
+//          class="carousel-container__display-section__img"
+//          <m="img-id-2"
+//          position="hide"
+//        />
+//      </div>
+//
+//      <div class="carousel-container__display-controls">
+//        <img
+//          class="carousel-container__display-controls-controls"
+//          for="img-id-1">
+//        />
+//        <img
+//          class="carousel-container__display-controls-controls"
+//          for="img-id-2">
+//        />
+//      </div>
+//   </div>
+// </div>
+//
+// OVERRIDES
+// ---------
+// - .carousel-container__img:
+//      - Images need be assigned absolute width and height.
+//
+// - .carousel-container__display-section__img:
+//      - Needs to assigned absolute width and height.
+//      - Margin top needs to be set a previous element's position is set to
+//        absolute.
+//
+// JS/TS FILES
+// -----------
+// - carousel-imgs.ts
+//
+// =============================================================================
+
+// =============================================================================
+// Animations
+@keyframes carouselImgHide {
+  0% {
+    left: 0;
+  }
+
+  99% {
+    left: -150%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes carouselImgReveal {
+  0% {
+    left: 100%;
+    opacity: 0;
+  }
+
+  100% {
+    left: 0;
+    opacity: 1;
+  }
+}
+
+// =============================================================================
+.carousel-container {
+  z-index: 1;
+  position: relative;
+
+  @include mediaQuery(760) {
+    height: 50vw;
+  }
+
+  // ---------------------------------------------------------------------------
+  &__main {
+    // Holds all the elements similarly to the container. This is set as
+    // absolute so that all components within align correctly.
+    position: absolute;
+    // Take into account the padding when setting the position and dimensions.
+    // (padding: 4rem 5rem)
+    top: 4rem;
+    left: 5rem;
+    height: calc(100% - 8rem);
+    width: calc(100% - 10rem);
+
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      height: 85%;
+
+      @include mediaQuery(1600) {
+      }
+
+      @include mediaQuery(760) {
+        // padding on the parent element is 3rem.
+        top: 3rem;
+        left: 3rem;
+        height: calc(100% - 6rem);
+        width: calc(100% - 6rem);
+      }
+
+      @include mediaQuery(500) {
+        // padding on the parent element is 3rem.
+        top: 2rem;
+        left: 2rem;
+        height: calc(100% - 4rem);
+        width: calc(100% - 4rem);
+      }
+    }
+  }
+  // ---------------------------------------------------------------------------
+  // Main images
+  &__display-section {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    z-index: 10;
+
+    &[totalthumbs="2"],
+    &[totalthumbs="3"],
+    &[totalthumbs="4"],
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+      height: 85%;
+
+      @include mediaQuery(1440) {
+        height: 90%;
+      }
+    }
+
+    &[totalthumbs="5"],
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(830) {
+        height: 69%;
+      }
+
+      @include mediaQuery(760) {
+        height: 85%;
+      }
+
+      @include mediaQuery(399) {
+        height: 60%;
+      }
+    }
+
+    &[totalthumbs="6"],
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(1330) {
+        height: 69%;
+      }
+
+      @include mediaQuery(1200) {
+        height: 85%;
+      }
+
+      @include mediaQuery(1064) {
+        height: 69%;
+      }
+
+      @include mediaQuery(1050) {
+        height: 85%;
+      }
+
+      @include mediaQuery(960) {
+        height: 80%;
+      }
+    }
+
+    &[totalthumbs="7"] {
+
+      @include mediaQuery(1706) {
+        height: 69%;
+      }
+
+      @include mediaQuery(320) {
+        height: 63%;
+      }
+    }
+
+    &__img {
+      position: absolute;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      z-index: 5;
+      transition: all 0.4s ease-out;
+      background-color: blue;
+      cursor: pointer;
+
+      &[position="init"] {
+        z-index: 10;
+      }
+
+      &[position="hide"] {
+        left: 100%;
+        animation-name: carouselImgHide;
+        animation-duration: 1s;
+        z-index: 0;
+      }
+
+      &[position="show"] {
+        left: 0;
+        animation-name: carouselImgReveal;
+        animation-duration: 1s;
+        animation-fill-mode: initial;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Thumbnails of images
+  &__display-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    // margin-top: -14vw;
+    justify-content: flex-start;
+
+    &[totalthumbs="1"] {
+      display: none;
+    }
+
+    &__control {
+      object-fit: cover;
+      height: 5vw;
+      width: 6vw;
+      margin: 0.6rem;
+      margin-bottom: .1rem;
+
+      @include mediaQuery(1330) {
+        height: 6vw;
+        width: 7vw;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}

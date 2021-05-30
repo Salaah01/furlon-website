@@ -1,0 +1,132 @@
+// =============================================================================
+// Date Created:   02/02/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the product reviews component.
+// =============================================================================
+
+// =============================================================================
+.product-reviews {
+  // Container for all the reviews.
+
+  // -------------------------------------------------------------------------
+  &__review {
+    // A single product review
+    padding: 2rem 0;
+    border-bottom: 1px solid $colour-grey-light-2;
+
+    &__section {
+      // Some elements are grouped together a section. These allow bespoke
+      // styling of that particular group by styling the "for" attribute.
+      display: flex;
+
+      &[for='title-ratings'] {
+        flex-wrap: wrap;
+      }
+    }
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__title {
+      font-weight: 600;
+      margin-bottom: .5rem;
+      text-align: left;
+      color: $colour-secondary;
+    }
+
+    &__date {
+      font-size: 1.4rem;
+      margin-bottom: .25rem;
+    }
+
+    &__rating {
+      height: 1rem;
+      margin-top: 1rem;
+    }
+
+    &__comments {
+      margin-top: 2rem;
+      text-align: left;
+
+      @include mediaQuery(400) {
+        margin-top: 1rem;
+      }
+    }
+
+    &__user {
+      font-style: italic;
+      margin-top: .25rem;
+
+      &::before {
+        content: "- ";
+      }
+    }
+
+    &__btns-container {
+      // Container for buttons. Allows bespoke styling for buttons by targeting
+      // the "for" attribute.
+
+      &[for="update-comments-submit-cancel"] {
+        // Exact margin left so that the buttons are right underneath the input
+        // elements.
+        margin-left: 11.3rem;
+      }
+    }
+
+    &__btn {
+      color: $colour-secondary;
+      outline: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      background-color: transparent;
+      margin-right: 1rem;
+      cursor: pointer;
+      transition: all .3s ease;
+      padding-bottom: .1rem;
+
+      &:hover {
+        border-bottom: 1px solid $colour-secondary;
+      }
+    }
+
+    &__update-comments-container {
+      // Groups the input and textarea elements in its own container.
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__form-element {
+      // Container for an element where the children would be the label and
+      // a kind of interactive element such as an input box.
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    &__form-label {
+      color: $colour-grey-dark-1;
+      display: inline-block;
+      width: 14rem;
+    }
+
+    &__form-input,
+    &__form-textarea {
+      font-family: inherit;
+      font-size: inherit;
+      padding: .7rem;
+      border: 1px solid #c2c2c2;
+      outline: 0;
+      box-shadow: 1px 1px 4px #ebebeb;
+      border-radius: .5rem;
+      transition: all .1s ease;
+      width: 100%;
+
+      &:focus {
+        box-shadow: 1px 1px 4px $colour-secondary;
+        border: 1px solid $colour-secondary;
+
+      }
+    }
+  }
+}

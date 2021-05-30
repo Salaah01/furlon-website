@@ -1,0 +1,290 @@
+// =============================================================================
+// Date Created:   06/12/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the basket page.
+// =============================================================================
+
+// =============================================================================
+.basket-head {
+  // The header of the basket page.
+  @include padSection;
+  padding-bottom: 6rem;
+  background-color: $colour-grey-light-5;
+
+  @include mediaQuery(700) {
+    text-align: center;
+  }
+
+  @include mediaQuery(500) {
+    padding-bottom: 4rem;
+  }
+
+  &__title {
+    // Title situated at the top of the DOM.
+    margin-bottom: 3rem;
+  }
+
+  &__nav {
+    // Navigation buttons at the top of the page.
+
+    @include mediaQuery(700) {
+      display: flex;
+      justify-content: center;
+    }
+
+    @include mediaQuery(460) {
+      flex-direction: column;
+    }
+
+    &__btn {
+      padding: 1rem 2rem;
+      margin: auto;
+
+      @include mediaQuery(460) {
+        margin: 0 5rem;
+      }
+
+      @include mediaQuery(355) {
+        margin: 0;
+      }
+
+      &:not(:last-of-type) {
+        margin-right: 1rem;
+
+        @include mediaQuery(460) {
+          margin-right: 5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        @include mediaQuery(355) {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+// =============================================================================
+.basket-main {
+  // Main container for holding the main content in the basket page.
+  display: flex;
+  padding: 0 4rem;
+  background-color: $colour-grey-light-5;
+  margin-bottom: 10rem;
+
+  @include mediaQuery(1410) {
+    flex-direction: column;
+  }
+
+  @include mediaQuery(550) {
+    padding: 0;
+  }
+}
+
+// =============================================================================
+.basket-summary {
+  // Contains the items in the user's baskets.
+  box-shadow: $box-shadow-1;
+  width: 70%;
+  padding: 0 4rem;
+  margin-right: 4rem;
+  background-color: #fff;
+
+  @include mediaQuery(750) {
+    padding: 0 1rem;
+  }
+
+  @include mediaQuery(1410) {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  // -------------------------------------------------------------------------
+  &__row {
+    // A row in the basket summary
+    display: grid;
+    grid-template-columns: 30% 2fr 1fr;
+
+    @include mediaQuery(660) {
+      grid-template-columns: 35vw 1fr;
+      grid-auto-rows: auto;
+    }
+
+    &__container {
+      display: flex;
+      padding: 2rem;
+
+      @include mediaQuery(750) {
+        padding: 2rem 1rem;
+      }
+
+      &[contents="product-img"] {
+        @include mediaQuery(660) {
+          grid-row: 1 / span 2;
+        }
+      }
+
+      &[contents="product-info"] {
+        flex-direction: column;
+        margin-top: auto;
+        margin-bottom: auto;
+
+        @include mediaQuery(660) {
+          margin: 0;
+          padding-top: 0;
+        }
+
+        & > * {
+          margin-bottom: 1rem;
+        }
+      }
+
+      &[contents="product-price"] {
+        margin-left: auto;
+
+        @include mediaQuery(660) {
+          margin-left: 0;
+          margin-bottom: 1rem;
+          padding-bottom: 0;
+          grid-row: 1;
+        }
+      }
+    }
+
+    &__data {
+      height: 100%;
+
+      &[field="product-image"] > img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        transition: all 0.3s ease;
+
+        @include mediaQuery(700) {
+          // At this point the image becomes smaller than the container so
+          // changed to 100%.
+          height: 100%;
+        }
+
+        &:hover {
+          transform: scale(1.05);
+          filter: brightness(1.1);
+        }
+      }
+
+      &[field="product-store"] {
+        @include mediaQuery(550) {
+          font-size: 1.4rem;
+        }
+      }
+
+      &[field="product-colour"] {
+        @include mediaQuery(550) {
+          font-size: 1.2rem;
+        }
+      }
+
+      &[field="product-price-container"] {
+        // A p-tag within which there are two span elements, one for the price
+        // and the other for the remove produce icon.
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Overrides for the quantity options defined in the quantity component.
+  .c-quantity {
+    @include mediaQuery(660) {
+      margin-bottom: 0;
+    }
+
+    &__btn {
+      background-color: $colour-secondary-dark-1;
+      color: #fff;
+
+      @include mediaQuery(1000) {
+        width: 3rem;
+        padding: 0.5rem;
+      }
+
+      &:not([disabled="disabled"]):hover {
+        background-color: $colour-secondary-dark-1-highlighted-1;
+      }
+    }
+
+    &__input {
+      @include mediaQuery(660) {
+        padding: 0.5rem 0;
+      }
+    }
+  }
+}
+
+// =============================================================================
+.totals-summary {
+  // Contains the totals on the basket page.
+  box-shadow: $box-shadow-1;
+  width: 30%;
+  padding: 5rem 4rem;
+  height: 100%;
+  background-color: #fff;
+
+  @include mediaQuery(1410) {
+    align-self: flex-end;
+    width: 40%;
+    margin-top: 3rem;
+  }
+
+  @include mediaQuery(1000) {
+    width: 50%;
+  }
+
+  @include mediaQuery(850) {
+    width: 100%;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid $colour-secondary;
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    font-weight: 300;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 0;
+    border-bottom: 1.5px solid $colour-grey-light-2;
+
+    &__label {
+    }
+
+    &__value {
+    }
+  }
+
+  &__btns {
+    margin-top: 4rem;
+    text-align: center;
+  }
+}
+
+// =============================================================================
+// MISC
+.basket {
+  &__icon {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      color: red;
+    }
+  }
+}

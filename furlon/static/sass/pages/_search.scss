@@ -1,0 +1,106 @@
+// =============================================================================
+// Date Created:   08/12/2019
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the search page.
+// Includes styling for the filter options and the search results.
+// =============================================================================
+
+// =============================================================================
+.search-summary {
+  // If user has entered a search query, then the top of the DOM will show the
+  // number of results along with the search query.
+  width: 100%;
+  padding: 3rem;
+  text-align: center;
+
+  @include mediaQuery(900) {
+    margin-top: 7rem;
+  }
+
+  @include mediaQuery(600) {
+    margin-top: 2rem;
+  }
+
+  &__text {
+    &__num-results {
+      margin-bottom: 0.5rem;
+    }
+
+    &__search-str {
+      font-size: 4rem;
+      color: $colour-secondary;
+    }
+  }
+}
+
+// =============================================================================
+.search-filters {
+  // Contains the search filters form
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+
+  // Stack the dropdown options.
+  @include mediaQuery(500) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__group {
+    border-radius: 1rem;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    @include mediaQuery(500) {
+      width: 100%;
+      padding-left: 12%;
+      padding-right: 12%;
+    }
+  }
+
+  &__label {
+    display: none;
+  }
+
+  &__submit-btn {
+    display: none;
+  }
+
+  // Overrides for the dropdown component.
+  .dropdown-menu__selected {
+    @include mediaQuery(570) {
+      width: 10rem;
+      border-radius: 0;
+      width: 100%;
+    }
+  }
+
+  .dropdown-menu__options {
+    @include mediaQuery(500) {
+      border-radius: 0;
+      // Removing the gap between the selected value and the options.
+      top: 4rem;
+    }
+  }
+}
+
+// =============================================================================
+.search-results {
+  // Contains the search results
+  @include padSection;
+  padding-top: 5rem;
+  padding-bottom: 6rem;
+
+  @include mediaQuery(500) {
+      padding-top: 1rem;
+  }
+
+  @include mediaQuery(365) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
+}

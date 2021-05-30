@@ -1,0 +1,44 @@
+// =============================================================================
+// Date Created:   03/01/2020
+// Created By:     Salaah Amin
+// =============================================================================
+// Styling for the product reviews page.
+// =============================================================================
+
+// =============================================================================
+.product-reviews-header {
+    // Header element
+    padding: 9.5rem 30rem 0;
+
+    &__title {
+        margin-bottom: 2rem;
+        color: $colour-primary;
+    }
+
+    &__product-name {
+        color: $colour-secondary;
+        margin-bottom: 1.5rem;
+    }
+
+    &__price {
+        margin-bottom: 1.5rem;
+    }
+}
+
+// =============================================================================
+.product-reviews-main {
+    // Main element
+    padding: 2.5rem 30rem 10rem;
+
+    // -------------------------------------------------------------------------
+    .product-reviews {
+        // OVERRIDE
+        // Section element which holds all the product reviews.
+        &:first-of-type {
+            // The border top is the same as border-bottom being used in the
+            // inherited class.
+            border-top: 1px solid #ebebeb;
+        }
+    }
+}
+
