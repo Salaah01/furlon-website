@@ -1,0 +1,228 @@
+{% load static %}
+<nav class="nav">
+  <!-- Navigation Toggle Button -->
+  <div class="nav__toggle">
+    <input type="checkbox" class="nav__toggle__checkbox" id="nav-toggle" />
+    <label for="nav-toggle" class="nav__toggle__btn">
+      <span class="nav__toggle__icon">&nbsp;</span>
+    </label>
+  </div>
+  <!-- LHS of Navigation -->
+  <div class="nav__section" id="nav-left">
+    <!-- Logo -->
+    <div class="nav__logo logo" id="nav-logo">
+      <a href="{% url 'index' %}">
+        <img
+          class="logo__img"
+          srcset="{% static 'img/logo/logo_small_colour_60w.png' %} 60w,
+                  {% static 'img/logo/logo_long_colour_100w.png' %} 100w"
+          sizes="(max-width: 600px) 600w, 1000w"
+          src="{% static 'img/logo/logo_small_colour_60w.png' %}"
+          alt="Furlon Logo"
+        />
+      </a>
+    </div>
+    <!-- Products Button -->
+    <div class="nav__option nav-sub-products">
+      <button
+        class="nav__option__btn btn-inline nav-sub-products"
+        filter-for="products"
+      >
+        <span class="nav-sub-products">Products</span>
+        <span class="nav__icon nav-sub-products" filter-for="products">
+          <i
+            class="fas fa-chevron-down nav-sub-products"
+            filter-for="products"
+          ></i
+        ></span>
+      </button>
+      <div
+        class="nav__option__dropdown-opts nav__option__dropdown-opts--collapse nav-sub-products"
+        filter-for="products"
+      >
+        <a
+          href="{% url 'categories-wardrobes' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-wardrobes"
+        >
+          Wardrobes
+        </a>
+        <a
+          href="{% url 'categories-beds' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-beds"
+        >
+          Beds
+          </a>
+        <a
+          href="{% url 'categories-tables' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-tables"
+        >
+          Tables
+        </a>
+        <a
+          href="{% url 'categories-sofas' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-sofas"
+        >
+          Sofas
+        </a>
+        <a
+          href="{% url 'categories-bookcases-shelves' %}"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-bookcases-and-units"
+        >
+          Bookcases and Shelving Units
+        </a>
+      </div>
+    </div>
+
+    <!--Rooms Button -->
+    <div class="nav__option nav-sub-rooms">
+      <button
+        class="nav__option__btn btn-inline nav-sub-rooms"
+        filter-for="rooms"
+      >
+        <span class="nav-sub-rooms">Rooms</span>
+        <span class="nav__icon nav-sub-rooms" filter-for="rooms">
+          <i class="fas fa-chevron-down nav-sub-rooms" filter-for="rooms"></i
+        ></span>
+      </button>
+      <div
+        class="nav__option__dropdown-opts nav__option__dropdown-opts--collapse nav-sub-rooms"
+        filter-for="rooms"
+      >
+        <a
+          href="{% url 'search' %}?f-room=bedroom"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-bedroom"
+        >
+          Bedroom
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=living+room"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-living-room"
+        >
+          Living Room
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=kitchen"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-kitchen"
+        >
+          Kitchen
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=dining+room"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-dining-room"
+        >
+          Dining Room
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=dining+room"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-bathroom"
+        >
+          Bathroom
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=office"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-office"
+        >
+          Office
+        </a>
+        <a
+          href="{% url 'search' %}?f-room=outdoors"
+          class="nav__option__dropdown-opts__opt"
+          id="nav-outdoors"
+        >
+          Outdoors
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Bar -->
+  <div class="nav__section" id="nav-mid">
+    <form action="{% url 'search' %}" method="GET" class="nav__search">
+      <input
+        type="text"
+        placeholder="Search"
+        class="nav__search__input"
+        name="search"
+        id="search"
+        {% if userValues.search %}
+          value="{{ userValues.search }}"
+        {% endif %}
+      />
+      <button class="nav__search__btn">
+        <span class="nav__search__icon"><i class="fas fa-search"></i></span>
+      </button>
+    </form>
+  </div>
+
+  <!-- Account and Basket Options -->
+  <div class="nav__section" id="nav-right">
+    <div class="nav__account-basket">
+      <!-- Basket -->
+      <a
+        href="{% url 'basket' %}"
+        class="nav__account-basket__opt {% if 'basket' in request.path %} nav__active {% endif %}"
+        id="nav-basket"
+      >
+        <span>Basket</span>
+        <span class="nav__icon"><i class="fas fa-shopping-basket"></i></span>
+        <span class="nav__account-basket__opt__quantity hide" id='basket-total-items'></span>
+      </a>
+
+      <!-- Profile -->
+      {% if user.is_authenticated %}
+        <a
+          href="{% url 'account' %}"
+          class="nav__account-basket__opt {% if 'profile' in request.path %} nav__active {% endif %}"
+          id="nav-profile"
+        >
+          Welcome {{ user.first_name }}
+          <span class="nav__icon"><i class="fas fa-user"></i></span>
+        </a>
+
+        <!-- Logout -->
+        <a
+          href="javascript:{document.getElementById('logout').submit()}"
+          class="nav__account-basket__opt"
+          id="nav-logout"
+          >Logout
+          <span class="nav__icon"><i class="fas fa-sign-out-alt"></i></span>
+        </a>
+        <form action="{% url 'logout' %}" method="POST" id="logout">
+          {% csrf_token %}
+          <input type="hidden" />
+        </form>
+
+      {% else %}
+
+      <!-- Register -->
+      <a
+        href="{% url 'register' %}"
+        class="nav__account-basket__opt {% if 'register' in request.path %} nav__active {% endif %}"
+        id="nav-register"
+      >
+        Register <span class="nav__icon"><i class="fas fa-user-plus"></i></span>
+      </a>
+
+      <!-- Login -->
+      <a
+        href="{% url 'login' %}"
+        class="nav__account-basket__opt {% if 'login' in request.path %} nav__active {% endif %}"
+        id="nav-login"
+      >
+        Login <span class="nav__icon"><i class="fas fa-sign-in-alt"></i></span>
+      </a>
+    {% endif %}
+    </div>
+  </div>
+</nav>

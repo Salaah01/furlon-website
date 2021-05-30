@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Order History{% endblock %}
+
+{% block content %}
+
+{% include 'partials/_messages.html' %}
+
+<header class="order-head">
+  <h1 class="heading-1">Order History</h1>
+</header>
+{% include "sales/partials/_order-details.html" with userReviewList=userReviewList %}
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

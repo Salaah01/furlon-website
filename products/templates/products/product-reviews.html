@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | {{ product.name }}{% endblock %}
+
+{% block content %}
+
+<header class="product-reviews-header">
+  <h1 class="heading-1 product-reviews-header__title">
+    Product Reviews
+  </h1>
+  <h2 class="heading-2 product-reviews-header__product-name">
+    {{ product.name }}
+  </h2>
+  <h2 class="heading-3 product-reviews-header__price">
+    &pound;{{ product.price|floatformat:2|intcomma }}
+  </h2>
+  <div class="product-reviews-header__ratings">
+    {% include 'products/partials/_product-ratings.html' with ratingsCount="hide" rating=review.rating %}
+  </div>
+</header>
+
+<main class="product-reviews-main">
+  <section class="product-reviews">
+
+    {% if userReview %}
+      {% include 'products/partials/_user-review.html' with user=user userReview=userReview %}
+    {% endif %}
+
+    {% if otherReviews %}
+      {% for otherReview in otherReviews %}
+        {% include 'products/partials/_product-review.html' with review=otherReview %}
+      {% endfor %}
+    {% else %}
+      <p class="product-reviews__review__none">
+        No reviews for this product yet.
+      </p>
+    {% endif %}
+  </section>
+</main>
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

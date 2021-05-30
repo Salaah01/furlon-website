@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Welcome{% endblock %}
+
+{% block content %}
+
+{% include 'partials/_messages.html' %}
+
+<header class="header">
+  <div class="showcase">
+    <div class="showcase__heading">
+      <h1 class="showcase__heading__text heading-1">
+        Find Your Perfect Piece of Furniture
+      </h1>
+      <h3 class="showcase__heading__text heading-3">
+        With furniture from a range of stores delivered right to your home, why
+        would you want to search anywhere else?
+      </h3>
+      <a
+        href="{% url 'search' %}"
+        class="showcase__heading__btn btn btn--primary"
+      >
+        Take me there
+        <span class="showcase__heading__btn-icon btn__icon">&gt;&gt;</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <section class="index-grid">
+    <div class="index-grid__description">
+      <h2 class="index-grid__description__heading heading-2">
+        Bringing you Comfort
+      </h2>
+      <p class="index-grid__description__detail">
+        Furlon operates with your comfort in mind. We provide quality products
+        at great prices.
+      </p>
+    </div>
+    <div class="index-grid__container">
+      <a href="{% url 'search' %}?r-room=living+room">
+        <h3 class="index-grid__container__header">
+          What makes a comfy living Room?
+        </h3>
+        <img
+          src="{% static 'img/pages/index/showcase-livingroom1-800.jpg' %}"
+          alt="Family Image in the Living Room"
+          class="index-grid__container__img"
+        />
+      </a>
+    </div>
+    <div class="index-grid__container">
+      <a href="{% url 'search' %}?r-room=bedroom">
+        <h3 class="index-grid__container__header">
+          The bed that is jussst right!
+        </h3>
+        <img
+          src="{% static 'img/pages/index/sleeping-on-bed-800.jpg' %}"
+          alt="Parents and a child in bed with their feet dangling out"
+          class="index-grid__container__img"
+        />
+      </a>
+    </div>
+    <div class="index-grid__container">
+      <a href="{% url 'categories-wardrobes' %}">
+        <h3 class="index-grid__container__header">
+            Too much clothes? Ok that's just a myth!
+        </h3>
+        <img
+          src="{% static 'img/pages/index/open-wardrobe-800.jpg' %}"
+          alt="Open wardrobe full of clothes"
+          class="index-grid__container__img"
+        />
+      </a>
+    </div>
+    <div class="index-grid__container">
+      <a href="{% url 'search' %}?search=desk">
+        <h3 class="index-grid__container__header">
+            A place for great ideas to be born
+        </h3>
+        <img
+          src="{% static 'img/pages/index/desk-800.jpg' %}"
+          alt="Desk with a Mac"
+          class="index-grid__container__img"
+        />
+      </a>
+    </div>
+  </section>
+
+  {% if latest_products %}
+  <section class="latest-products">
+    <div class="latest-products__heading">
+      <h2 class="latest-products__heading__title heading-2">
+        Latest Furniture
+      </h2>
+      <p class="latest-products__heading__info">
+        Be the first to check out the newest and in fashion products available
+        today&#33;
+      </p>
+    </div>
+    {% for latest_product in latest_products %}
+    <div class="latest-products__product card">
+      <div class="card__side card__side--front">
+        <img
+          class="latest-products__product__img"
+          src="{{ latest_product.showcase_image }}"
+          alt="Image of {{ latest_product.name }}"
+          class="latest-products__product__img"
+        />
+        <p class="latest-products__product__name">{{ latest_product.name }}</p>
+      </div>
+      <div class="card__side card__side--back">
+        <div class="latest-products__product__price-box">
+          <p class="latest-products__product__price-only">Only</p>
+          <p class="latest-products__product__price-value">
+            &pound;{{ latest_product.price |floatformat:2|intcomma }}
+          </p>
+          <a
+            href="{% url 'product' latest_product.product_id %}"
+            class="latest-products__product__info-btn btn btn--white"
+            >
+            Find Out More
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  <section class="how-it-works">
+    <div class="how-it-works__imgs">
+      <img
+        class="how-it-works__imgs__bottom"
+        src="{% static 'img/pages/index/shopping-mall-600.jpg' %}"
+        alt="Post with directions to different places"
+      />
+      <img
+        class="how-it-works__imgs__top"
+        src="{% static 'img/pages/index/sitting-with-laptop-410.jpg' %}"
+        alt="Two girls shopping on a laptop"
+      />
+    </div>
+    <div class="how-it-works__info">
+      <h2 class="how-it-works__info__heading heading-2">
+        With a cup of coffee and a charged lappy, shop everywhere from the
+        through Furlon.
+      </h2>
+      <div class="how-it-works__info__content">
+        <p>
+          We understand that furniture can be expensive and making the right
+          choice is important.
+        </p>
+        <p>
+          We also know that going from shop to shop and waiting in queues is not
+          ideal either.
+        </p>
+        <p>
+          Furlon brings together a huge collection of products from a multitude
+          of shops to make your life easier.
+        </p>
+        <p>
+          We encourage shopping around. We encourage finding the best deal. And
+          we help me make this easy.
+        </p>
+        <p>
+          Have you got a cuppa ready? Are you sitting comfortably? Perfect..
+        </p>
+      </div>
+      <a
+        href="#"
+        class="how-it-works__info__btn btn-inline btn-inline--secondary-b"
+      >
+        Let's Get Started
+      </a>
+    </div>
+  </section>
+</main>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

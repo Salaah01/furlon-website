@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Tables{% endblock %}
+
+{% block content %}
+
+  <header class="category-head">
+    <h1 class="heading-1 category-head__title">Tables</h1>
+    <h2 class="heading-2 category-head__subheading">
+        Where families share stores and dads tell terrible dad jokes.
+    </h2>
+  </header>
+  <main class="category-main">
+    <section class="category-main__heading">
+      <p class="category-main__text">
+        We understand that the purpose of the table has evolved over the years
+        and where it used to mainly just be place to eat, it's now become
+        a place to do homework, have a chat or even play ping pong!
+      </p>
+      <p class="category-main__text">
+          So whatever you might need a table for, we have a great selection
+          to suit all your needs.
+      </p>
+    </section>
+    {% include "pages/partials/_products-by-subcategories.html" with productsBySubCats=productsBySubCats%}
+
+  </main>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

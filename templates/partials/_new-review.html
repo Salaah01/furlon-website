@@ -1,0 +1,74 @@
+<section class="new-review hide" id="nev-review-pop-up">
+  <form method="POST" class="new-review__form">
+    {% csrf_token %}
+    <h2 class="heading-2 new-review__comment-title">Review</h2>
+    <div class="new-review__rating">
+      <div
+        class="rating__stars"
+        id="product-reviews-user-rating"
+        selectable="true"
+      >
+        <span
+          class="rating__stars__star fa fa-star i-star i-star--selectable"
+          value="1"
+        >
+        </span>
+        <span
+          class="rating__stars__star fa fa-star i-star i-star--selectable"
+          value="2"
+        >
+        </span>
+        <span
+          class="rating__stars__star fa fa-star i-star i-star--selectable"
+          value="3"
+        >
+        </span>
+        <span
+          class="rating__stars__star fa fa-star i-star i-star--selectable"
+          value="4"
+        >
+        </span>
+        <span
+          class="rating__stars__star fa fa-star i-star i-star--selectable"
+          value="5"
+        >
+        </span>
+        <input
+          type="hidden"
+          name="user-review-rating"
+          id="user-review-rating"
+        />
+      </div>
+      <input type="hidden" name="product-id" id="new-review-product-id">
+      <input type="hidden" name="store-id" id="new-review-store-id" >
+    </div>
+    <div class="nav-review__section">
+      <label for="new-review-title" class="new-review__label">Title</label>
+      <input
+        type="text"
+        name="user-review-title"
+        id="new-review-title"
+        class="new-review__input"
+        placeholder="Title"
+      />
+    </div>
+    <div class="new-review__section">
+      <label for="new-review-comments" class="new-review__label"
+        >Comments</label
+      >
+      <textarea
+        name="user-review-comments"
+        id="new-review-comments"
+        class="new-review__input"
+        cols="30"
+        rows="10"
+        placeholder="Comments"
+      ></textarea>
+    </div>
+
+    <div class="new-review__btns-container">
+        <a class="new-review__btn btn btn--red" for="cancel">Cancel</a>
+        <button type="submit" class="new-review__btn btn btn--secondary" for="submit">Submit</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block title %} | Bookcases and Shelving Units{% endblock %}
+
+{% block content %}
+
+  <header class="category-head">
+    <h1 class="heading-1 category-head__title">
+      Bookcases &amp; Shelving Units
+    </h1>
+    <h2 class="heading-2 category-head__subheading">
+      Is there even a such thing as too much storage space?
+    </h2>
+  </header>
+  <main class="category-main">
+    <section class="category-main__heading">
+      <p class="category-main__text">
+        Whether it's
+      </p>
+      <p class="category-main__text">
+
+      </p>
+      <p class="category-main__text">
+
+      </p>
+    </section>
+    {% include "pages/partials/_products-by-subcategories.html" with productsBySubCats=productsBySubCats%}
+
+  </main>
+
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

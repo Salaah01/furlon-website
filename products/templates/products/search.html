@@ -1,0 +1,254 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %} | Search {% endblock %}
+
+{% block content %}
+
+{% if userValues.search %}
+    <header class="search-summary">
+        <div class="search-summary__text">
+            <p class="search-summary__text__num-results">{{ noResults|intcomma }} results found for:</p>
+            <h2 class="search-summary__text__search-str heading-2">&quot;{{ userValues.search }}&quot;</h2>
+        </div>
+    </header>
+{% endif %}
+
+<main class="search-main-content">
+    <section class="section-filters">
+        <form action="{% url 'search' %}" class="search-filters" method="GET">
+            <!-- Min Price -->
+            <div class="search-filters__group">
+                <div class="search-filters__group__item dropdown-menu">
+                    <div class="dropdown-menu__selected" filter-for='min-price'>
+                        <span filter-for='min-price'>Min Price</span>
+                    </div>
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='min-price'
+                    >
+                        {% for key, price in minPrice.items %}
+                        <label
+                            class="dropdown-menu__options__label"
+                            for="min-price-{{ key }}"
+                        >
+                                {{ price }}
+                        </label>
+                        <input
+                            class="dropdown-menu__options__radio-btn"
+                            type="radio"
+                            name="f-min-price"
+                            id=min-price-{{ key }}
+                            value="{{ key }}"
+                        >
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Max Price -->
+            <div class="search-filters__group">
+                <div
+                    class="search-filters__group__item dropdown-menu">
+                    <div class="dropdown-menu__selected" filter-for='max-price'>
+                        <span filter-for='max-price'>Max Price</span>
+                    </div>
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='max-price'
+                    >
+                        {% for key, price in maxPrice.items %}
+                        <label
+                            class="dropdown-menu__options__label"
+                            for="max-price-{{ key }}"
+                        >
+                                {{ price|intcomma }}
+                        </label>
+                        <input
+                            class="dropdown-menu__options__radio-btn"
+                            type="radio"
+                            name="f-max-price"
+                            id=max-price-{{ key }}
+                            value="{{ key }}"
+                        >
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Categories Group-->
+            <div class="search-filters__group">
+                <div class="search-filters__item dropdown-menu">
+                    <div class="dropdown-menu__selected" filter-for='category'>
+                        <span filter-for='category'>Category</span>
+                    </div>
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='category'
+                    >
+                        {% for category in categories %}
+                        <label
+                            class="dropdown-menu__options__label"
+                            for="category-{{ category.cat_id }}"
+                        >
+                                {{ category }}
+                        </label>
+                        <input
+                            class="dropdown-menu__options__radio-btn"
+                            type="radio"
+                            name="f-category"
+                            id=category-{{ category.cat_id }}
+                            value="{{ category }}"
+                        >
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Colour Group -->
+            <div class="search-filters__group">
+                <div class="search-filters__item dropdown-menu">
+                    <div class="dropdown-menu__selected" filter-for='colour'>
+                        <span filter-for='colour'>Colour</span>
+                    </div>
+                    <div
+                        class="dropdown-menu__options dropdown-menu__options--hide"
+                        filter-for='colour'
+                    >
+                        {% for colourFamily in colourFamilies %}
+                            <label
+                                class="dropdown-menu__options__label"
+                                for="colour-{{ colourFamily }}"
+                            >
+                                    {{ colourFamily }}
+                            </label>
+                            <input
+                                class="dropdown-menu__options__radio-btn"
+                                type="radio"
+                                name="f-colour"
+                                id=colour-{{ colourFamily }}
+                                value="{{ colourFamily }}"
+                            >
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <!-- Search Query Copy -->
+            <input type="hidden" name="search" id="search-copy">
+            <!-- Submit -->
+            <button type="submit" class="search-filters__submit-btn" id="filters-submit">Apply Filters</button>
+        </form>
+    </section>
+
+    <section class="search-results">
+        <div class="results">
+            {% if products %}
+                {% for product in products %}
+                <div
+                    class="results__result"
+                    id={{ product.product_id }}
+                >
+                    <div class="results__result__img">
+                        <a href="{% url 'product' product.product_id %}">
+                            <img src="{{ product.showcase_image }}" alt="Showcase image for {{ product.name }}">
+                        </a>
+                    </div>
+
+                    <div class="results__result__info">
+                        <a href="#" class="results__result__info__name">
+                            <p>{{ product.pp_name }}</p>
+                        </a>
+                        <p class="results__result__info__store">{{ product.ss_name }}</p>
+                        {% if product.length and product.width and product.height %}
+                        <p class="results__result__info__dimensions">{{ product.length|floatformat:1 }} x {{ product.width|floatformat:1 }} x {{ product.height|floatformat:1 }}</p>
+                        {% if products.rating > -1 %}
+                            <div class="results__result__info__ratings ratings">
+                                <div class="ratings__stars">
+
+                                </div>
+                                <div class="ratings__count">
+
+                                </div>
+                            </div>
+                        {% endif %}
+                        <p class="results__result__info__price">&pound;{{ product.price|floatformat:2|intcomma }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </section>
+    {% if products.has_other_pages %}
+        <section class="pagination-section">
+            <ul class="pagination" id="pagination">
+                <!-- Previous Page -->
+                {% if products.has_previous %}
+                    <li class="pagination__item">
+                        <a
+                            class="pagination__link"
+                            page="{{ products.previous_page_number }}"
+                        >
+                            &laquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="pagination__item pagination__item--disabled">
+                        <a
+                            class="pagination__link pagination__link"
+                            aria-disabled="true"
+                            disabled="true"
+                        >
+                            &laquo;
+                        </a>
+                    </li>
+                {% endif %}
+                <!-- Pages in Between -->
+                {% for page in products.paginator.page_range %}
+                    {% if products.number == page %}
+                        <li class="pagination__item">
+                            <a
+                                page="{{ page }}"
+                                class="pagination__link pagination__link--selected"
+                            >
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="pagination__item">
+                            <a page="{{ page }}" class="pagination__link">
+                                {{ page }}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                <!-- Next Page -->
+                {% if products.has_next %}
+                    <li class="pagination__item">
+                        <a
+                            page="{{ products.next_page_number }}"
+                            class="pagination__link"
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="pagination__item">
+                        <a
+                            class="pagination__link"
+                            aria-disabled="true"
+                            disabled="true"
+                        >
+                            &raquo;
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </section>
+    {% endif %}
+</main>
+
+{% endblock %}
+
+
+{% block footer %}
+
+
+{% endblock %}
