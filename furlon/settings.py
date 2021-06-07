@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
+    'django_url_prefixer'
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'livereload.middleware.LiveReloadScript',
+    'django_url_prefixer.middleware.URLPrefixer'
 ]
 
 ROOT_URLCONF = 'furlon.urls'
@@ -143,6 +145,8 @@ MEDIA_URL = '/media/'
 
 mimetypes.add_type("image/svg+xml", ".svg", True)
 mimetypes.add_type("image/svg+xml", ".svgz", True)
+
+URL_PREFIX = os.getenv('URL_PREFIX', '')
 
 # Local Settings will turn the website to production mode.
 try:
