@@ -68,7 +68,7 @@ echo "DB_PASSWORD=${POSTGRES_PASSWORD}" >>$WEB_ENV_FILE
 echo DB_PORT=5432 >>$WEB_ENV_FILE
 echo URL_PREFIX=/projects/dream-homes/site >>$WEB_ENV_FILE
 if [[ $MODE == 'prod' ]]; then
-  echo "ALLOWED_HOSTS=web|iamsalaah.com|www.iamsalaah.com" >>$WEB_ENV_FILE
+  echo "ALLOWED_HOSTS=web|iamsalaah.com|www.iamsalaah.com|localhost|www.localhost" >>$WEB_ENV_FILE
 fi
 
 echo -e "\033[92mEnvironment variables have been set for Furlon.\033[0m"

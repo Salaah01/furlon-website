@@ -1,22 +1,20 @@
 version: "3.8"
 services:
-  web:
+  web: &web
     build: ./web/.
     restart: always
     depends_on:
       - postgres
     volumes:
-      - /var/www/furlon/static/:/static_files
+      - static_files:/static_files
     env_file: ./web/.web.env
     command: >
       bash -c "rm -rf static/
       && python manage.py migrate
       && python manage.py collectstatic --noinput
       && gunicorn furlon.wsgi:application --bind 0.0.0.0:32770"
-    ports:
-      - 32770:32770
 
-  postgres:
+  postgres: &postgres
     build: "./postgres/."
     volumes:
       - database-data:/var/lib/postgresql/data
@@ -29,9 +27,22 @@ services:
       - postgres_db_password
       - postgres_db_name
 
+  nginx: &nginx
+    image: nginx:1.23.1-alpine
+    depends_on:
+      - web
+    restart: always
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s 
+              reload; done & nginx -g \"daemon off;\"'"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_files:/static_files
+    ports:
+      - 32770:80
 
 volumes:
   database-data:
+  static_files:
 
 secrets:
   postgres_db_user:
