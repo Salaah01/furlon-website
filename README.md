@@ -52,12 +52,12 @@ To collect all assets and move them into the directory, run `python manage.py co
 
 ## Software
 ### Technologies
-| Front End | Back End |
-| -------- | ---------|
-| HTML5 | Python |
-| CSS3 | PostgreSQL |
-| SASS | Django |
-| TypeScript | |
+| Front End  | Back End   |
+| ---------- | ---------- |
+| HTML5      | Python     |
+| CSS3       | PostgreSQL |
+| SASS       | Django     |
+| TypeScript |            |
 
 ### Database
 The database is handled through the backend framework Django.

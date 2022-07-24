@@ -1,0 +1,53 @@
+version: "3.8"
+services:
+  web: &web
+    image: public.ecr.aws/d0r4z6q1/furlon:latest
+    restart: always
+    depends_on:
+      - postgres
+    volumes:
+      - static_files:/static_files
+    env_file: ./web/.web.env
+    command: >
+      bash -c "rm -rf static/
+      && python manage.py migrate
+      && python manage.py collectstatic --noinput
+      && gunicorn furlon.wsgi:application --bind 0.0.0.0:32770"
+
+  postgres: &postgres
+    build: "./postgres/."
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER_FILE=/run/secrets/postgres_db_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_db_password
+      - POSTGRES_DB_FILE=/run/secrets/postgres_db_name
+    secrets:
+      - postgres_db_user
+      - postgres_db_password
+      - postgres_db_name
+
+  nginx: &nginx
+    image: nginx:1.23.1-alpine
+    depends_on:
+      - web
+    restart: always
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s 
+              reload; done & nginx -g \"daemon off;\"'"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - static_files:/static_files
+    ports:
+      - 32770:80
+
+volumes:
+  database-data:
+  static_files:
+
+secrets:
+  postgres_db_user:
+    file: postgres/env/.postgres_db_user.env
+  postgres_db_password:
+    file: postgres/env/.postgres_db_password.env
+  postgres_db_name:
+    file: postgres/env/.postgres_db_name.env
